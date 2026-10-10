@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Preface: Before you start · Payroll, from Theory to Odoo Localization</title>
+<meta name="description" content="Gross-to-net in any country, the Odoo salary engine, and how to design, build and review a payroll localization.">
+<link rel="stylesheet" href="css/book.css">
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body class="chapter-page">
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+<button class="nav-toggle" type="button" aria-controls="sidebar" aria-expanded="false"><span aria-hidden="true">&#9776;</span> Contents</button>
+<a class="top-brand" href="index.html">Payroll, from Theory to Odoo Localization</a>
+</header>
+<div class="layout">
+<nav id="sidebar" class="sidebar" aria-label="Book contents">
+<a class="side-brand" href="index.html">Payroll, from Theory to Odoo Localization</a>
+<div class="search" role="search">
+<label for="search-input" class="sr-only">Search the book</label>
+<input id="search-input" type="search" placeholder="Search the book  ( / )" autocomplete="off" spellcheck="false" aria-controls="search-results">
+<div id="search-results" class="search-results" aria-live="polite"></div>
+</div>
+<ol class="nav"><li class='nav-part'><span class='nav-part-title'>Front matter</span><ol><li class='current' aria-current='page'><a href='preface-before-you-start.html'><span class='nav-num'></span><span>Before you start</span></a><ol class='nav-sections'><li><a href='#meet-myvidangecompany'>Meet MyVidangeCompany</a></li><li><a href='#the-missions-on-the-master-runbot'>The missions: on the master runbot</a></li></ol></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part I · Payroll theory</span><ol><li><a href='chapter-01-what-payroll-is-and-why-it-is-hard.html'><span class='nav-num'>1.</span><span>What payroll is, and why it is hard</span></a></li><li><a href='chapter-02-gross-to-net.html'><span class='nav-num'>2.</span><span>Gross to net</span></a></li><li><a href='chapter-03-contributions-employee-and-employer.html'><span class='nav-num'>3.</span><span>Contributions: employee and employer</span></a></li><li><a href='chapter-04-withholding-tax.html'><span class='nav-num'>4.</span><span>Withholding tax</span></a></li><li><a href='chapter-05-time-proration-and-overtime.html'><span class='nav-num'>5.</span><span>Time, proration and overtime</span></a></li><li><a href='chapter-06-irregular-pay-corrections-and-leavers.html'><span class='nav-num'>6.</span><span>Irregular pay, corrections and leavers</span></a></li><li><a href='chapter-07-declarations-and-the-compliance-calendar.html'><span class='nav-num'>7.</span><span>Declarations and the compliance calendar</span></a></li><li><a href='chapter-08-accounting-for-payroll.html'><span class='nav-num'>8.</span><span>Accounting for payroll</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part II · Localization theory</span><ol><li><a href='chapter-09-what-varies-between-countries-and-what-doesnt.html'><span class='nav-num'>9.</span><span>What varies between countries, and what doesn&#x27;t</span></a></li><li><a href='chapter-10-researching-a-new-country.html'><span class='nav-num'>10.</span><span>Researching a new country</span></a></li><li><a href='chapter-11-laws-that-change-over-time.html'><span class='nav-num'>11.</span><span>Laws that change over time</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part III · Odoo payroll, hands-on</span><ol><li><a href='chapter-12-tour-and-setup.html'><span class='nav-num'>12.</span><span>Tour and setup</span></a></li><li><a href='chapter-13-employees-and-versions.html'><span class='nav-num'>13.</span><span>Employees and versions</span></a></li><li><a href='chapter-14-time-schedules-time-off-worked-days.html'><span class='nav-num'>14.</span><span>Time: schedules, time off, worked days</span></a></li><li><a href='chapter-15-pay-runs-and-payslips.html'><span class='nav-num'>15.</span><span>Pay runs and payslips</span></a></li><li><a href='chapter-16-accounting-and-payment.html'><span class='nav-num'>16.</span><span>Accounting and payment</span></a></li><li><a href='chapter-17-reports-declarations-and-a-leaver.html'><span class='nav-num'>17.</span><span>Reports, declarations and a leaver</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part IV · How the payroll engine works</span><ol><li><a href='chapter-18-the-engine-in-one-picture.html'><span class='nav-num'>18.</span><span>The engine in one picture</span></a></li><li><a href='chapter-19-structures-and-rules.html'><span class='nav-num'>19.</span><span>Structures and rules</span></a></li><li><a href='chapter-20-categories-how-rules-talk-to-each-other.html'><span class='nav-num'>20.</span><span>Categories: how rules talk to each other</span></a></li><li><a href='chapter-21-parameters-updates-and-safe-extensions.html'><span class='nav-num'>21.</span><span>Parameters, updates and safe extensions</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part V · Building a localization</span><ol><li><a href='chapter-22-a-template-for-any-localization-and-how-to-review-one.html'><span class='nav-num'>22.</span><span>A template for any localization, and how to review one</span></a></li></ol></li></ol>
+<a class="nav-pdf" href="payroll_book.pdf" download>Download the PDF</a>
+</nav>
+<div class="backdrop" hidden></div>
+<main id="main" class="content">
+<section class='chapter' id='c-01_preface'><div class='opener'><div class='opener-band'><span class='opener-num'>Preface</span><span class='opener-part'>Front matter</span></div><h1>Before you start</h1><p class='opener-sub'>Who you will meet, and how the missions work</p><div class='opener-goals'><div class='goals-title'>After this chapter you can</div><ul><li>Recognise the five people of MyVidangeCompany and what each one teaches</li><li>Open a master database on runbot and play a mission</li></ul></div></div><p>You work on Odoo payroll and may never have run a payroll yourself. This book goes from <strong>theory</strong> (what a payslip is) to <strong>localization</strong> (what changes between countries), then <strong>Odoo</strong> (hands-on, then the engine), and ends with <strong>building and reviewing a localization</strong>.</p>
+<p>One company runs through the book: <strong>MyVidangeCompany</strong>, in Belgium, Odoo's most complete payroll localization. You need no Belgian law: terms are explained where they appear, and the <em>In Belgium</em> boxes can be skipped.</p>
+<h2 id="meet-myvidangecompany">Meet MyVidangeCompany</h2>
+<p><strong>MyVidangeCompany</strong> is a software company in Namur. It pays monthly and its office employees work a 38-hour week. Five of them carry the book:</p>
+<table class='payslip'>
+<thead>
+<tr>
+<th>Person</th>
+<th>Role, monthly gross</th>
+<th>Teaches</th>
+<th style="text-align: right;">Net, Oct 2026: the law</th>
+<th style="text-align: right;">Net, Oct 2026: Odoo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Mélanie</strong></td>
+<td>Developer, 4,000.00 €, single, no children</td>
+<td>the standard case</td>
+<td style="text-align: right;">2,614.26</td>
+<td style="text-align: right;">2,614.27</td>
+</tr>
+<tr>
+<td><strong>Jurgen</strong></td>
+<td>Support agent, 2,300.00 €</td>
+<td>a low wage: contribution relief that fades out as pay rises</td>
+<td style="text-align: right;">2,143.05</td>
+<td style="text-align: right;">2,143.06</td>
+</tr>
+<tr>
+<td><strong>Marie</strong></td>
+<td>Engineering manager, 7,500.00 €, married, two children, company car, meal vouchers</td>
+<td>a high earner, benefits in kind, family situation in the tax</td>
+<td style="text-align: right;">4,663.91</td>
+<td style="text-align: right;">4,684.68</td>
+</tr>
+<tr>
+<td><strong>Yannick</strong></td>
+<td>Designer, 3,600.00 €, joins on <strong>12 March 2026</strong></td>
+<td>proration, the hiring declaration, a first year without holiday rights</td>
+<td style="text-align: right;">2,444.37</td>
+<td style="text-align: right;">2,444.37</td>
+</tr>
+<tr>
+<td><strong>Emma</strong></td>
+<td>Ops lead, 5,000.00 €, hired 1 Oct 2019, dismissed on <strong>31 October 2026</strong></td>
+<td>the leaver: final pay, notice indemnity, exit holiday pay</td>
+<td style="text-align: right;">3,051.72</td>
+<td style="text-align: right;">3,159.73</td>
+</tr>
+</tbody>
+</table>
+
+<p>Every payslip was computed twice.<sup id="fnref:pf-calc"><a class="footnote-ref" href="#fn:pf-calc">1</a></sup><sup>,</sup><sup id="fnref:pf-odoo"><a class="footnote-ref" href="#fn:pf-odoo">2</a></sup> An independent calculator written from the law gives the numbers of Part I; the payslips Odoo master produced give those of Parts II to V. Where they differ, the chapter says why (Chapter 10).</p>
+<div class="admonition key">
+<p class="admonition-title">Key idea</p>
+<p>Two independent computations of the same payslip are the cheapest test a localization can have. Where they agree, the payslip is right. Where they differ, someone learns something about the law or about the code.</p>
+</div>
+<h2 id="the-missions-on-the-master-runbot">The missions: on the master runbot</h2>
+<p>Part III is played, not read. Each chapter ends with <strong>missions</strong>: a short story, a goal, a number to check and a hint. They follow MyVidangeCompany through 2026 on one database you build from an empty Odoo, with only a browser and Odoo's runbot.</p>
+<p>Take the <strong>base</strong> database of an <em>enterprise</em> build: it holds only the base apps, like a new customer. Runbot's "today" is the real date, so mission dates are typed explicitly.</p>
+<table>
+<thead>
+<tr>
+<th>Chapter</th>
+<th>Missions</th>
+<th>What you do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>12 Tour and setup</td>
+<td>12.1–12.4</td>
+<td>install Payroll, create the company, the Belgian localization with its schedule and holidays, the settings, where the law lives</td>
+</tr>
+<tr>
+<td>13 Employees and versions</td>
+<td>13.1–13.4</td>
+<td>hire the first four, Marie's car, the dashboard, Yannick joins and Jurgen's raise</td>
+</tr>
+<tr>
+<td>14 Time</td>
+<td>14.1–14.4</td>
+<td>2026 leave, Jurgen's absences, preview April, Emma's holiday</td>
+</tr>
+<tr>
+<td>15 Pay runs</td>
+<td>15.1–15.4</td>
+<td>January, a late correction, February to April, overtime in May</td>
+</tr>
+<tr>
+<td>16 Accounting and payment</td>
+<td>16.1–16.4</td>
+<td>post January, pay February, what is still owed, June's adjustment line</td>
+</tr>
+<tr>
+<td>17 Declarations</td>
+<td>17.1–17.3</td>
+<td>February's withholding return, summer, Emma's last month</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition mission">
+<p class="admonition-title">Mission 0.1 · Open a master build ★</p>
+<p><strong>Situation.</strong> You have just joined MyVidangeCompany's payroll team. There is no payroll database yet.</p>
+<p><strong>Your goal.</strong> Open a fresh master database on runbot and log in as the administrator.</p>
+<p><strong>Check.</strong> You are logged in as <em>Mitchell Admin</em>; the only company is <em>YourCompany</em>, and the <em>Payroll</em> app is not installed yet.</p>
+<details class="hint" open="open">
+<summary>Hint</summary>
+<p>Take the base database of an enterprise build, not the one with all modules.</p>
+</details>
+</div>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:pf-calc">
+<p>Independent calculator, <code>research/numbers_be_calc.md</code>, section 2 (October 2026), built from the official sources cited in each chapter of Part I.&#160;<a class="footnote-backref" href="#fnref:pf-calc" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:pf-odoo">
+<p>Payslips computed by Odoo master on the demo database <code>payroll_be</code>, <code>research/numbers_be.md</code>, October 2026 summary. Emma's Odoo October payslip includes a pro-rata sectoral bonus and eco-vouchers paid at her exit.&#160;<a class="footnote-backref" href="#fnref:pf-odoo" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></section><nav class='pager' aria-label='Previous and next chapter'><span></span><a class='pager-next' rel='next' href='chapter-01-what-payroll-is-and-why-it-is-hard.html'><small>Next · Chapter 1</small><span>What payroll is, and why it is hard</span></a></nav>
+</main>
+</div>
+<script src="js/site.js"></script>
+
+</body>
+</html>

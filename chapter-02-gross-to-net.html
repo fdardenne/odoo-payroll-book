@@ -1,0 +1,498 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter 2: Gross to net · Payroll, from Theory to Odoo Localization</title>
+<meta name="description" content="Gross-to-net in any country, the Odoo salary engine, and how to design, build and review a payroll localization.">
+<link rel="stylesheet" href="css/book.css">
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body class="chapter-page">
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+<button class="nav-toggle" type="button" aria-controls="sidebar" aria-expanded="false"><span aria-hidden="true">&#9776;</span> Contents</button>
+<a class="top-brand" href="index.html">Payroll, from Theory to Odoo Localization</a>
+</header>
+<div class="layout">
+<nav id="sidebar" class="sidebar" aria-label="Book contents">
+<a class="side-brand" href="index.html">Payroll, from Theory to Odoo Localization</a>
+<div class="search" role="search">
+<label for="search-input" class="sr-only">Search the book</label>
+<input id="search-input" type="search" placeholder="Search the book  ( / )" autocomplete="off" spellcheck="false" aria-controls="search-results">
+<div id="search-results" class="search-results" aria-live="polite"></div>
+</div>
+<ol class="nav"><li class='nav-part'><span class='nav-part-title'>Front matter</span><ol><li><a href='preface-before-you-start.html'><span class='nav-num'></span><span>Before you start</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part I · Payroll theory</span><ol><li><a href='chapter-01-what-payroll-is-and-why-it-is-hard.html'><span class='nav-num'>1.</span><span>What payroll is, and why it is hard</span></a></li><li class='current' aria-current='page'><a href='chapter-02-gross-to-net.html'><span class='nav-num'>2.</span><span>Gross to net</span></a><ol class='nav-sections'><li><a href='#what-gross-and-net-pay-are'>What gross and net pay are</a></li><li><a href='#earnings-two-questions-for-each'>Earnings: two questions for each</a></li><li><a href='#benefits-in-kind-maries-company-car'>Benefits in kind: Marie&#x27;s company car</a></li><li><a href='#exempt-within-limits-meal-vouchers'>Exempt within limits: meal vouchers</a></li><li><a href='#deductions-and-the-order-they-come-in'>Deductions, and the order they come in</a></li><li><a href='#three-bases-three-numbers'>Three bases, three numbers</a></li><li><a href='#employer-cost'>Employer cost</a></li><li><a href='#how-odoo-names-the-bases'>How Odoo names the bases</a></li><li><a href='#summary'>Summary</a></li></ol></li><li><a href='chapter-03-contributions-employee-and-employer.html'><span class='nav-num'>3.</span><span>Contributions: employee and employer</span></a></li><li><a href='chapter-04-withholding-tax.html'><span class='nav-num'>4.</span><span>Withholding tax</span></a></li><li><a href='chapter-05-time-proration-and-overtime.html'><span class='nav-num'>5.</span><span>Time, proration and overtime</span></a></li><li><a href='chapter-06-irregular-pay-corrections-and-leavers.html'><span class='nav-num'>6.</span><span>Irregular pay, corrections and leavers</span></a></li><li><a href='chapter-07-declarations-and-the-compliance-calendar.html'><span class='nav-num'>7.</span><span>Declarations and the compliance calendar</span></a></li><li><a href='chapter-08-accounting-for-payroll.html'><span class='nav-num'>8.</span><span>Accounting for payroll</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part II · Localization theory</span><ol><li><a href='chapter-09-what-varies-between-countries-and-what-doesnt.html'><span class='nav-num'>9.</span><span>What varies between countries, and what doesn&#x27;t</span></a></li><li><a href='chapter-10-researching-a-new-country.html'><span class='nav-num'>10.</span><span>Researching a new country</span></a></li><li><a href='chapter-11-laws-that-change-over-time.html'><span class='nav-num'>11.</span><span>Laws that change over time</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part III · Odoo payroll, hands-on</span><ol><li><a href='chapter-12-tour-and-setup.html'><span class='nav-num'>12.</span><span>Tour and setup</span></a></li><li><a href='chapter-13-employees-and-versions.html'><span class='nav-num'>13.</span><span>Employees and versions</span></a></li><li><a href='chapter-14-time-schedules-time-off-worked-days.html'><span class='nav-num'>14.</span><span>Time: schedules, time off, worked days</span></a></li><li><a href='chapter-15-pay-runs-and-payslips.html'><span class='nav-num'>15.</span><span>Pay runs and payslips</span></a></li><li><a href='chapter-16-accounting-and-payment.html'><span class='nav-num'>16.</span><span>Accounting and payment</span></a></li><li><a href='chapter-17-reports-declarations-and-a-leaver.html'><span class='nav-num'>17.</span><span>Reports, declarations and a leaver</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part IV · How the payroll engine works</span><ol><li><a href='chapter-18-the-engine-in-one-picture.html'><span class='nav-num'>18.</span><span>The engine in one picture</span></a></li><li><a href='chapter-19-structures-and-rules.html'><span class='nav-num'>19.</span><span>Structures and rules</span></a></li><li><a href='chapter-20-categories-how-rules-talk-to-each-other.html'><span class='nav-num'>20.</span><span>Categories: how rules talk to each other</span></a></li><li><a href='chapter-21-parameters-updates-and-safe-extensions.html'><span class='nav-num'>21.</span><span>Parameters, updates and safe extensions</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part V · Building a localization</span><ol><li><a href='chapter-22-a-template-for-any-localization-and-how-to-review-one.html'><span class='nav-num'>22.</span><span>A template for any localization, and how to review one</span></a></li></ol></li></ol>
+<a class="nav-pdf" href="payroll_book.pdf" download>Download the PDF</a>
+</nav>
+<div class="backdrop" hidden></div>
+<main id="main" class="content">
+<section class='chapter' id='c-12_ch02'><div class='opener'><div class='opener-band'><span class='opener-num'>Chapter 2</span><span class='opener-part'>Part I · Payroll theory</span></div><h1>Gross to net</h1><p class='opener-sub'>Why three different numbers are all called 'salary'</p><div class='opener-goals'><div class='goals-title'>After this chapter you can</div><ul><li>Split any payslip into earnings, deductions, employer cost and tax</li><li>Ask the two questions every earning needs: subject to contributions? taxable?</li><li>Value a benefit in kind and treat an allowance that is exempt within limits</li><li>Tell deductions that lower the taxable base from those that do not</li><li>Compute the three bases (gross, contribution base, taxable base) and the employer cost</li></ul></div></div><p>Mélanie's contract says 4,000.00 €. Social security computes on 4,000.00 €, the withholding tax starts from 3,477.20 €, and her bank receives 2,614.26 €. HR, social security and the tax office all say "salary" and mean different amounts. Confusing them is the most common design bug in payroll software.</p>
+<h2 id="what-gross-and-net-pay-are">What gross and net pay are</h2>
+<p><strong>Gross pay</strong> (<em>gross salary</em>, <em>gross wage</em>) is what the employee earns for the period before anything is taken off: the contract salary plus any other earnings. <strong>Net pay</strong> (<em>take-home pay</em>) is what reaches the employee's bank account, after the employee's contributions, the withholding tax and any other deductions. The calculation from one to the other is called <strong>gross to net</strong>, and the payslip is its written record.</p>
+<p>Three things follow from that definition:</p>
+<ul>
+<li><strong>Gross is not what the company pays.</strong> The employer adds its own contributions on top of the gross. They never touch the net: they are a cost <em>on top of</em> the salary, and the two together are the <strong>employer cost</strong>.</li>
+<li><strong>The gap between gross and net is the employee's money.</strong> The employee contributions and the withholding tax are kept back by the employer and passed on to the authorities: the employer is only a collector.</li>
+<li><strong>"Salary" is ambiguous.</strong> Gross, net, and the bases on which contributions and tax are computed are different numbers. This chapter computes each one.</li>
+</ul>
+<p>Whatever the country, one month of salary is one pot of money, paid by the employer and split three ways. Illustrative numbers, to scale:</p>
+<div class="interactive" data-widget="gross-to-net" markdown="0">
+<div class="money" markdown="0">
+<div class="mrow"><div class="mlbl">What the company pays<b>1,200</b>employer cost</div><div class="mbar">
+<span class="seg earn" style="width:83.33%">Gross salary<b>1,000</b></span>
+<span class="seg emp" style="width:16.67%">Employer contributions<b>200</b></span>
+</div></div>
+<div class="mrow"><div class="mlbl">What it becomes</div><div class="mbar">
+<span class="seg net" style="width:54.17%">Net pay<b>650</b></span>
+<span class="seg tax" style="width:16.67%">Withholding tax<b>200</b></span>
+<span class="seg ded narrow" style="width:12.5%">Employee<br>contrib.<b>150</b></span>
+<span class="seg emp" style="width:16.67%">Employer contrib.<b>200</b></span>
+</div></div>
+<div class="mbrace"><span style="width:83.33%">← the gross: 1,000, all of it earned by the employee →</span><span style="width:16.67%">on top of gross</span></div>
+<div class="mrow"><div class="mlbl">Who receives it</div><div class="mbar">
+<span class="seg net" style="width:54.17%">Employee's bank<b>650</b></span>
+<span class="seg tax" style="width:16.67%">Tax authority<b>200</b></span>
+<span class="seg ded" style="width:29.17%">Social security<b>350</b><i>150 employee + 200 employer</i></span>
+</div></div>
+</div>
+</div>
+
+<p>Top bar: the employer cost. Middle bar: the gross splits into the net and the employee's deductions, with the employer contributions beside it. Bottom bar: the authorities receive the tax and both halves of the contributions.</p>
+<p>The shape is the same in every country; what changes is the number of recipients and whether the tax segment exists. Hong Kong is the clearest contrast: the employer withholds <strong>no</strong> income tax. It reports each employee's yearly pay to the tax office, which assesses the tax and collects it from the employee directly (the one exception: an employee leaving Hong Kong for good, whose final payment the employer must hold back). The only mandatory contribution is the pension fund, 5 % from each side. Illustrative numbers again:</p>
+<div class="money" markdown="0">
+<div class="mrow"><div class="mlbl">What the company pays<b>1,050</b>employer cost</div><div class="mbar">
+<span class="seg earn" style="width:84%">Gross salary<b>1,000</b></span>
+<span class="seg emp narrow" style="width:16%">Employer<br>pension<b>50</b></span>
+</div></div>
+<div class="mrow"><div class="mlbl">What it becomes</div><div class="mbar">
+<span class="seg net" style="width:68%">Net pay<b>950</b></span>
+<span class="seg ded narrow" style="width:16%">Employee<br>pension<b>50</b></span>
+<span class="seg emp narrow" style="width:16%">Employer<br>pension<b>50</b></span>
+</div></div>
+<div class="mrow"><div class="mlbl">Who receives it</div><div class="mbar">
+<span class="seg net" style="width:68%">Employee's bank<b>950</b></span>
+<span class="seg ded" style="width:32%">Pension fund<b>100</b><i>50 employee + 50 employer</i></span>
+</div></div>
+<div class="mnote">Not to scale: the pension boxes are enlarged so their numbers fit. No tax segment: nothing goes to the tax authority.</div>
+</div>
+
+<div class="admonition world">
+<p class="admonition-title">Around the world</p>
+<ul>
+<li><strong>Australia</strong>: no employee contribution at all; the employer pays superannuation into the employee's pension fund.</li>
+<li><strong>United States, India</strong>: several recipients instead of one social security office (federal and state tax; separate pension and health funds).</li>
+<li><strong>United Arab Emirates</strong>: no income tax; a pension contribution for nationals only.</li>
+</ul>
+</div>
+<div class="formula">Employer cost = Gross + employer contributions<br>
+Taxable base = Gross − employee contributions + benefits in kind<br>
+Net = Gross − employee contributions − withholding tax − other deductions</div>
+
+<p>Benefits in kind are not paid in cash: they only raise the taxable base, and so the tax.</p>
+<h3 id="case-study-melanies-october">Case study: Mélanie's October</h3>
+<figure>
+<p><img alt="Mélanie's gross to net" src="assets/charts/be_ch2_waterfall_sophie.svg" /></p>
+<figcaption>Mélanie, October 2026: 4,000.00 € gross, three deductions, 2,614.26 € net.</figcaption>
+</figure>
+<div class="admonition example">
+<p class="admonition-title">Worked example: Mélanie, October 2026</p>
+<table>
+<thead>
+<tr>
+<th>Line</th>
+<th style="text-align: right;">Amount (€)</th>
+</tr>
+</thead>
+<tbody>
+<tr class='earn'>
+<td><span class='pill earn'>SALARY</span> Gross salary</td>
+<td style="text-align: right;">4,000.00</td>
+</tr>
+<tr class='ded'>
+<td><span class='pill ded'>ONSS</span> Employee social security 13.07 %</td>
+<td style="text-align: right;">−522.80</td>
+</tr>
+<tr class='tax'>
+<td><span class='pill tax'>GROSS</span> Taxable base</td>
+<td style="text-align: right;">3,477.20</td>
+</tr>
+<tr class='tax'>
+<td><span class='pill tax'>P.P</span> Withholding tax</td>
+<td style="text-align: right;">−826.70</td>
+</tr>
+<tr class='ded'>
+<td><span class='pill ded'>M.ONSS</span> Special social security contribution</td>
+<td style="text-align: right;">−36.24</td>
+</tr>
+<tr class='net'>
+<td><span class='pill net'>NET</span> Net pay</td>
+<td style="text-align: right;">2,614.26</td>
+</tr>
+</tbody>
+</table>
+<p>The codes are the Belgian salary rules in Odoo. The "special contribution" is a second, smaller employee contribution that does <em>not</em> lower the taxable base (Chapter 3).</p>
+</div>
+<h2 id="earnings-two-questions-for-each">Earnings: two questions for each</h2>
+<p>Every earning on a payslip has to answer two questions, because two different laws look at it: social-security law decides what contributions are taken from, tax law decides what is taxed. They often agree, but not always.</p>
+<ol>
+<li><strong>Does social security take its share?</strong> Is it in the <em>contribution base</em>?</li>
+<li><strong>Is it taxed?</strong> Is it in the <em>taxable base</em>, and at which rate?</li>
+</ol>
+<p>Two yes-or-no answers give four boxes, and every earning falls into one of them:</p>
+<div class="quad" markdown="0">
+<div class="qcorner"></div>
+<div class="qcol">Taxed</div>
+<div class="qcol">Not taxed</div>
+<div class="qrow">Social security<br>takes its share</div>
+<div class="qcell both"><b>The usual case</b><ul><li>base salary, overtime, allowances</li><li>bonuses and 13th month, often at a special tax rate</li></ul><i>MyVidangeCompany: everyone's salary</i></div>
+<div class="qcell soc"><b>Rare</b><ul><li>pay set aside in a US 401(k) retirement plan: social security still applies, income tax is deferred</li></ul></div>
+<div class="qrow">No social<br>security</div>
+<div class="qcell tax"><b>Taxed only</b><ul><li>benefits in kind, valued by a legal formula, where the law exempts them from contributions: a company car in Belgium (other countries also take contributions on them)</li></ul><i>MyVidangeCompany: Marie's car</i></div>
+<div class="qcell none"><b>Neither</b><ul><li>meal vouchers, within the legal limits</li><li>expense reimbursements that repay a real cost</li></ul><i>MyVidangeCompany: Marie's meal vouchers</i></div>
+</div>
+
+<p>The same earning can sit in a different box in another country, which is why a localization answers both questions for every earning it ships.</p>
+<div class="admonition key">
+<p class="admonition-title">Key idea</p>
+<p>Design each earning with <strong>both</strong> answers, stored on the rule. A Belgian company car is taxable but not subject to contributions. An "is it taxable?" flag alone is never enough.</p>
+</div>
+<div class="admonition world">
+<p class="admonition-title">Around the world</p>
+<ul>
+<li><strong>Saudi Arabia, UAE</strong>: salary = basic + housing + transport, each fixed on the contract.</li>
+<li><strong>Switzerland</strong>: a catalogue of numbered wage types, each a salary rule.</li>
+<li><strong>India</strong>: the salary is split into components (basic, house rent, travel…) on the contract.</li>
+<li><strong>Kenya, Philippines, Mexico</strong>: some allowances and vouchers are exempt up to a cap; the excess is taxable.</li>
+<li><strong>United States</strong>: pre-tax benefits (retirement, medical) lower the taxable base.</li>
+</ul>
+</div>
+<h2 id="benefits-in-kind-maries-company-car">Benefits in kind: Marie's company car</h2>
+<p>A benefit in kind is pay that never touches a bank account. The law values it with a formula, and payroll adds the value to the taxable base. In Belgium, a car's yearly benefit is catalogue value × age coefficient × 6/7 × a CO2 percentage (4 % for an electric car), with a minimum of 1,690.00 € in 2026.<sup id="fnref:c2-car"><a class="footnote-ref" href="#fn:c2-car">4</a></sup></p>
+<div class="admonition example">
+<p class="admonition-title">Worked example: Marie's electric SUV</p>
+<p>Catalogue value 52,000.00 €, first registered on 5 January 2026 (age coefficient 100 %), 0 g CO2/km.</p>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th style="text-align: right;">Amount (€)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>52,000.00 × 6/7 × 4 % × 100 %</td>
+<td style="text-align: right;">1,782.86 per year</td>
+</tr>
+<tr>
+<td>Minimum for 2026</td>
+<td style="text-align: right;">1,690.00 per year</td>
+</tr>
+<tr class='earn'>
+<td><span class='pill earn'>ATN.CAR</span> Benefit retained, per month</td>
+<td style="text-align: right;">148.57</td>
+</tr>
+</tbody>
+</table>
+<p>The benefit goes into Marie's taxable base, <strong>not</strong> her contribution base; instead the employer pays a monthly CO2 contribution of 42.34 €.<sup id="fnref:c2-co2"><a class="footnote-ref" href="#fn:c2-co2">5</a></sup></p>
+</div>
+<p><strong>In Odoo.</strong> Odoo spreads the same yearly benefit by days instead of twelfths: 151.42 € in October (31/365), not 148.57 €. The year adds up the same.<sup id="fnref:c2-odoo"><a class="footnote-ref" href="#fn:c2-odoo">1</a></sup></p>
+<h2 id="exempt-within-limits-meal-vouchers">Exempt within limits: meal vouchers</h2>
+<p>Many countries exempt a benefit <strong>only within limits</strong>: a cap per day, a minimum employee share, a written policy. Break one condition and the whole amount becomes ordinary pay.</p>
+<div class="admonition example">
+<p class="admonition-title">Worked example: Marie's meal vouchers, October 2026</p>
+<p>Marie gets one 10.00 € voucher per day worked. October 2026 has 22 working days and she works all of them.</p>
+<table>
+<thead>
+<tr>
+<th>Line</th>
+<th style="text-align: right;">Amount (€)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Vouchers credited: 22 × 10.00</td>
+<td style="text-align: right;">220.00</td>
+</tr>
+<tr class='emp'>
+<td><span class='pill emp'>Employer part</span> 22 × 8.91</td>
+<td style="text-align: right;">196.02</td>
+</tr>
+<tr class='ded'>
+<td><span class='pill ded'>MEAL_V_EMP</span> Employee part 22 × 1.09, deducted from net</td>
+<td style="text-align: right;">−23.98</td>
+</tr>
+</tbody>
+</table>
+<p>No voucher is due for a day of sickness or leave, so the count changes every month. The exemption holds only with a written agreement, one voucher per day worked, an employer part of at most 8.91 € and an employee part of at least 1.09 €.<sup id="fnref:c2-meal"><a class="footnote-ref" href="#fn:c2-meal">3</a></sup></p>
+</div>
+<h2 id="deductions-and-the-order-they-come-in">Deductions, and the order they come in</h2>
+<p>The second design question is about deductions: <strong>does it come before tax or after?</strong></p>
+<table>
+<thead>
+<tr>
+<th>Kind of deduction</th>
+<th>Lowers the taxable base?</th>
+<th>Example at MyVidangeCompany</th>
+</tr>
+</thead>
+<tbody>
+<tr class='ded'>
+<td><span class='pill ded'>Compulsory employee contributions</span></td>
+<td>yes, in most countries</td>
+<td>employee social security, 13.07 %</td>
+</tr>
+<tr class='ded'>
+<td><span class='pill ded'>Pre-tax benefits</span> (pension, medical)</td>
+<td>yes, where the law allows</td>
+<td>—</td>
+</tr>
+<tr class='ded'>
+<td><span class='pill ded'>Other contributions after tax</span></td>
+<td>no</td>
+<td>special social security contribution</td>
+</tr>
+<tr class='ded'>
+<td><span class='pill ded'>Employee share of a benefit, garnishment</span></td>
+<td>no</td>
+<td>meal-voucher employee part</td>
+</tr>
+</tbody>
+</table>
+<p>Order matters because each rule reads totals computed before it: the tax needs the contributions; a garnishment ceiling needs the net.</p>
+<div class="admonition pitfall">
+<p class="admonition-title">Common pitfall</p>
+<p>Computing withholding on "gross minus all deductions". At MyVidangeCompany the special contribution and the meal-voucher share come <strong>after</strong> the tax. Tag each deduction with whether it lowers the taxable base.</p>
+</div>
+<h2 id="three-bases-three-numbers">Three bases, three numbers</h2>
+<p>Every contribution and every tax is a percentage <strong>of something</strong>. That something is its <strong>base</strong>. A payslip has three of them, and they are three different sums of the same lines:</p>
+<ul>
+<li><strong>Gross</strong>: what the contract pays. It is the number on the job offer and on the top of the payslip.</li>
+<li><strong>Contribution base</strong>: the part of the pay that social security takes its percentage of. Often the gross; sometimes less (capped, or without exempt items).</li>
+<li><strong>Taxable base</strong>: the part of the pay the withholding tax is computed on. Usually the gross, <strong>minus</strong> the employee contributions (most countries do not tax money you never received), <strong>plus</strong> benefits in kind (pay you received, but not in cash).</li>
+</ul>
+<p>The two questions of the previous sections decide, line by line, which base each payslip line enters. Marie's October payslip shows all three cases:</p>
+<table>
+<thead>
+<tr>
+<th>Payslip line</th>
+<th style="text-align: right;">Amount (€)</th>
+<th style="text-align: center;"><span class='pill earn'>Gross</span></th>
+<th style="text-align: center;"><span class='pill ded'>Contribution base</span></th>
+<th style="text-align: center;"><span class='pill tax'>Taxable base</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class='earn'>
+<td><span class='pill earn'>Salary</span></td>
+<td style="text-align: right;">7,500.00</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+</tr>
+<tr class='earn'>
+<td><span class='pill earn'>Company car</span> (benefit in kind, never paid in cash)</td>
+<td style="text-align: right;">148.57</td>
+<td style="text-align: center;">–</td>
+<td style="text-align: center;">–</td>
+<td style="text-align: center;">✓</td>
+</tr>
+<tr class='ded'>
+<td><span class='pill ded'>Employee contributions</span> 13.07 %</td>
+<td style="text-align: right;">−980.25</td>
+<td style="text-align: center;">–</td>
+<td style="text-align: center;">–</td>
+<td style="text-align: center;">✓ lowers it</td>
+</tr>
+<tr>
+<td><strong>The base</strong></td>
+<td style="text-align: right;"></td>
+<td style="text-align: center;"><strong>7,500.00</strong></td>
+<td style="text-align: center;"><strong>7,500.00</strong></td>
+<td style="text-align: center;"><strong>6,668.32</strong></td>
+</tr>
+<tr>
+<td><strong>What is computed on it</strong></td>
+<td style="text-align: right;"></td>
+<td style="text-align: center;">the contract</td>
+<td style="text-align: center;">contributions: 7,500.00 × 13.07 % = 980.25</td>
+<td style="text-align: center;">withholding tax: 1,770.92</td>
+</tr>
+</tbody>
+</table>
+<p>Read the last two rows: the contributions are computed <strong>first</strong>, on the contribution base; only then is the taxable base known, because it needs the contributions. That is why a payslip has an order, and why "the salary" means three different numbers to HR, to social security and to the tax office.</p>
+<p>Across the cast:</p>
+<table class='payslip'>
+<thead>
+<tr>
+<th>Base</th>
+<th style="text-align: right;">Mélanie</th>
+<th style="text-align: right;">Jurgen</th>
+<th style="text-align: right;">Marie</th>
+</tr>
+</thead>
+<tbody>
+<tr class='earn'>
+<td><span class='pill earn'>Gross</span> = <span class='pill ded'>contribution base</span></td>
+<td style="text-align: right;">4,000.00</td>
+<td style="text-align: right;">2,300.00</td>
+<td style="text-align: right;">7,500.00</td>
+</tr>
+<tr>
+<td>Employee contributions after low-wage reduction</td>
+<td style="text-align: right;">522.80</td>
+<td style="text-align: right;">1.08</td>
+<td style="text-align: right;">980.25</td>
+</tr>
+<tr>
+<td>Benefit in kind (car)</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">148.57</td>
+</tr>
+<tr class='tax'>
+<td><span class='pill tax'>Taxable base</span></td>
+<td style="text-align: right;">3,477.20</td>
+<td style="text-align: right;">2,298.92</td>
+<td style="text-align: right;">6,668.32</td>
+</tr>
+</tbody>
+</table>
+
+<p>A low-wage reduction cancels nearly all Jurgen's contributions (Chapter 3). Marie's taxable base includes the car; her contribution base does not.</p>
+<div class="admonition example">
+<p class="admonition-title">Worked example: Marie, October 2026</p>
+<table>
+<thead>
+<tr>
+<th>Line</th>
+<th style="text-align: right;">Amount (€)</th>
+</tr>
+</thead>
+<tbody>
+<tr class='earn'>
+<td><span class='pill earn'>SALARY</span> Gross salary</td>
+<td style="text-align: right;">7,500.00</td>
+</tr>
+<tr class='ded'>
+<td><span class='pill ded'>ONSS</span> Employee social security 13.07 %</td>
+<td style="text-align: right;">−980.25</td>
+</tr>
+<tr class='earn'>
+<td><span class='pill earn'>ATN.CAR</span> Company car (taxable, not paid)</td>
+<td style="text-align: right;">148.57</td>
+</tr>
+<tr class='tax'>
+<td><span class='pill tax'>GROSS</span> Taxable base</td>
+<td style="text-align: right;">6,668.32</td>
+</tr>
+<tr class='tax'>
+<td><span class='pill tax'>P.P</span> Withholding tax (married, spouse without income, 2 children)</td>
+<td style="text-align: right;">−1,770.92</td>
+</tr>
+<tr class='ded'>
+<td><span class='pill ded'>M.ONSS</span> Special social security contribution</td>
+<td style="text-align: right;">−60.94</td>
+</tr>
+<tr class='ded'>
+<td><span class='pill ded'>MEAL_V_EMP</span> Meal vouchers, employee part</td>
+<td style="text-align: right;">−23.98</td>
+</tr>
+<tr class='net'>
+<td><span class='pill net'>NET</span> Net pay</td>
+<td style="text-align: right;">4,663.91</td>
+</tr>
+</tbody>
+</table>
+<p>The car is in the taxable base but not in the subtraction: it was never paid. (Odoo's net is 4,684.68 €; Chapter 4 explains the gap.)</p>
+</div>
+<h2 id="employer-cost">Employer cost</h2>
+<p>Gross is not what an employee costs the company.</p>
+<div class="formula">Employer cost = gross + employer contributions − employer reductions + employer parts of benefits</div>
+
+<p>Mélanie costs 5,004.80 €, Jurgen 2,502.97 € and Marie 9,622.36 €.<sup id="fnref:c2-calc"><a class="footnote-ref" href="#fn:c2-calc">2</a></sup> Chapter 3 builds each of these line by line.</p>
+<h2 id="how-odoo-names-the-bases">How Odoo names the bases</h2>
+<p>The generic engine has salary-rule categories <code>BASIC</code>, <code>GROSS</code> and <code>NET</code>. A localization adds its own totals and may give the generic codes a local meaning: Belgium adds <span class='pill odoo'>ONSS_BASE</span> and <span class='pill odoo'>WITHHOLDING_BASE</span>, and uses <code>GROSS</code> for the <strong>taxable</strong> salary.</p>
+<table class='payslip'>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Belgian rule code</th>
+<th>Name in Odoo</th>
+<th style="text-align: right;">Mélanie</th>
+</tr>
+</thead>
+<tbody>
+<tr class='earn'>
+<td><span class='pill earn'>Gross before contributions</span></td>
+<td><code>SALARY</code></td>
+<td>Gross Salary</td>
+<td style="text-align: right;">4,000.00</td>
+</tr>
+<tr class='ded'>
+<td><span class='pill ded'>Employee social security</span></td>
+<td><code>ONSS</code></td>
+<td>Social contribution</td>
+<td style="text-align: right;">−522.80</td>
+</tr>
+<tr class='tax'>
+<td><span class='pill tax'>Taxable base</span></td>
+<td><code>GROSS</code></td>
+<td><strong>Taxable Salary</strong></td>
+<td style="text-align: right;">3,477.20</td>
+</tr>
+<tr class='net'>
+<td><span class='pill net'>Net pay</span></td>
+<td><code>NET</code></td>
+<td>Net Salary</td>
+<td style="text-align: right;">2,614.26</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>In Odoo.</strong> A salary rule can belong to several categories (<span class='pill odoo'>category_ids</span> on <span class='pill odoo'>hr.salary.rule</span>), so one line can feed both bases: the "two questions" become data. The car is a rule <code>ATN.CAR</code> that feeds the withholding base, followed by <code>ATN_DED</code> that takes the same amount out of the net.</p>
+<div class="admonition pitfall">
+<p class="admonition-title">Common pitfall</p>
+<p>Assuming <code>GROSS</code> means the same in every localization. In <span class='pill odoo'>l10n_be_hr_payroll</span> it is the taxable salary, so a cross-country "gross salaries" report on <code>GROSS</code> is wrong by 13.07 % for Belgium.</p>
+</div>
+<div class="admonition practice">
+<p class="admonition-title">In practice</p>
+<p>When an accountant says "salary", ask which one: gross, contribution base or taxable. Put the answer in the category or rule name.</p>
+</div>
+<h2 id="summary">Summary</h2>
+<ul>
+<li>Every payslip has earnings, employee deductions, tax, net and employer cost.</li>
+<li>Each earning needs two answers: is it subject to contributions, and is it taxable? They are independent.</li>
+<li>Benefits in kind raise the taxable base but are never paid: Marie's car adds 148.57 € to her taxable base and nothing to her net.</li>
+<li>Some benefits are exempt only within limits. Only some deductions come before tax; tag each one.</li>
+<li>Gross, contribution base and taxable base are three numbers: for Mélanie 4,000.00 €, 4,000.00 € and 3,477.20 €.</li>
+<li>Employer cost = gross + employer contributions − reductions + employer benefits: 5,004.80 € for Mélanie, 9,622.36 € for Marie.</li>
+<li>Localizations name their bases differently: in Belgium, <code>GROSS</code> is the taxable salary.</li>
+</ul>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:c2-odoo">
+<p>Payslips computed by Odoo master on the demo database, <code>research/numbers_be.md</code> (Marie, February 2026, and the October 2026 summary).&#160;<a class="footnote-backref" href="#fnref:c2-odoo" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:c2-calc">
+<p>Independent calculator, <code>research/numbers_be_calc.md</code>, sections 2 and 10.3.&#160;<a class="footnote-backref" href="#fnref:c2-calc" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:c2-meal">
+<p>ONSS, meal vouchers, conditions (employer part 8.91 € from 1 January 2026): <a href="https://www.socialsecurity.be/employer/instructions/dmfa/fr/latest/instructions/salary/particularcases/lunchcheques/salaryfeatures.html">https://www.socialsecurity.be/employer/instructions/dmfa/fr/latest/instructions/salary/particularcases/lunchcheques/salaryfeatures.html</a>.&#160;<a class="footnote-backref" href="#fnref:c2-meal" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:c2-car">
+<p>SPF Finances, FAQ company cars 2026 (formula, reference emissions, minimum 1,690 €): <a href="https://finances.belgium.be/sites/default/files/downloads/121-faq-voitures-de-societe-2026.pdf">https://finances.belgium.be/sites/default/files/downloads/121-faq-voitures-de-societe-2026.pdf</a>.&#160;<a class="footnote-backref" href="#fnref:c2-car" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+<li id="fn:c2-co2">
+<p>ONSS, solidarity contribution on company cars: <a href="https://www.socialsecurity.be/employer/instructions/dmfa/fr/latest/instructions/special_contributions/companycar.html">https://www.socialsecurity.be/employer/instructions/dmfa/fr/latest/instructions/special_contributions/companycar.html</a>.&#160;<a class="footnote-backref" href="#fnref:c2-co2" title="Jump back to footnote 5 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></section><nav class='pager' aria-label='Previous and next chapter'><a class='pager-prev' rel='prev' href='chapter-01-what-payroll-is-and-why-it-is-hard.html'><small>Previous · Chapter 1</small><span>What payroll is, and why it is hard</span></a><a class='pager-next' rel='next' href='chapter-03-contributions-employee-and-employer.html'><small>Next · Chapter 3</small><span>Contributions: employee and employer</span></a></nav>
+</main>
+</div>
+<script src="js/site.js"></script>
+
+<script src="js/widgets.js"></script>
+</body>
+</html>

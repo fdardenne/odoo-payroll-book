@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter 8: Accounting for payroll · Payroll, from Theory to Odoo Localization</title>
+<meta name="description" content="Gross-to-net in any country, the Odoo salary engine, and how to design, build and review a payroll localization.">
+<link rel="stylesheet" href="css/book.css">
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body class="chapter-page">
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+<button class="nav-toggle" type="button" aria-controls="sidebar" aria-expanded="false"><span aria-hidden="true">&#9776;</span> Contents</button>
+<a class="top-brand" href="index.html">Payroll, from Theory to Odoo Localization</a>
+</header>
+<div class="layout">
+<nav id="sidebar" class="sidebar" aria-label="Book contents">
+<a class="side-brand" href="index.html">Payroll, from Theory to Odoo Localization</a>
+<div class="search" role="search">
+<label for="search-input" class="sr-only">Search the book</label>
+<input id="search-input" type="search" placeholder="Search the book  ( / )" autocomplete="off" spellcheck="false" aria-controls="search-results">
+<div id="search-results" class="search-results" aria-live="polite"></div>
+</div>
+<ol class="nav"><li class='nav-part'><span class='nav-part-title'>Front matter</span><ol><li><a href='preface-before-you-start.html'><span class='nav-num'></span><span>Before you start</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part I · Payroll theory</span><ol><li><a href='chapter-01-what-payroll-is-and-why-it-is-hard.html'><span class='nav-num'>1.</span><span>What payroll is, and why it is hard</span></a></li><li><a href='chapter-02-gross-to-net.html'><span class='nav-num'>2.</span><span>Gross to net</span></a></li><li><a href='chapter-03-contributions-employee-and-employer.html'><span class='nav-num'>3.</span><span>Contributions: employee and employer</span></a></li><li><a href='chapter-04-withholding-tax.html'><span class='nav-num'>4.</span><span>Withholding tax</span></a></li><li><a href='chapter-05-time-proration-and-overtime.html'><span class='nav-num'>5.</span><span>Time, proration and overtime</span></a></li><li><a href='chapter-06-irregular-pay-corrections-and-leavers.html'><span class='nav-num'>6.</span><span>Irregular pay, corrections and leavers</span></a></li><li><a href='chapter-07-declarations-and-the-compliance-calendar.html'><span class='nav-num'>7.</span><span>Declarations and the compliance calendar</span></a></li><li class='current' aria-current='page'><a href='chapter-08-accounting-for-payroll.html'><span class='nav-num'>8.</span><span>Accounting for payroll</span></a><ol class='nav-sections'><li><a href='#what-payroll-accounting-is'>What payroll accounting is</a></li><li><a href='#case-study-myvidangecompanys-entry'>Case study: MyVidangeCompany&#x27;s entry</a></li><li><a href='#from-book-to-bank-the-t-accounts'>From book to bank: the T-accounts</a></li><li><a href='#provisions-cost-now-cash-later'>Provisions: cost now, cash later</a></li><li><a href='#payment-files'>Payment files</a></li><li><a href='#summary'>Summary</a></li></ol></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part II · Localization theory</span><ol><li><a href='chapter-09-what-varies-between-countries-and-what-doesnt.html'><span class='nav-num'>9.</span><span>What varies between countries, and what doesn&#x27;t</span></a></li><li><a href='chapter-10-researching-a-new-country.html'><span class='nav-num'>10.</span><span>Researching a new country</span></a></li><li><a href='chapter-11-laws-that-change-over-time.html'><span class='nav-num'>11.</span><span>Laws that change over time</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part III · Odoo payroll, hands-on</span><ol><li><a href='chapter-12-tour-and-setup.html'><span class='nav-num'>12.</span><span>Tour and setup</span></a></li><li><a href='chapter-13-employees-and-versions.html'><span class='nav-num'>13.</span><span>Employees and versions</span></a></li><li><a href='chapter-14-time-schedules-time-off-worked-days.html'><span class='nav-num'>14.</span><span>Time: schedules, time off, worked days</span></a></li><li><a href='chapter-15-pay-runs-and-payslips.html'><span class='nav-num'>15.</span><span>Pay runs and payslips</span></a></li><li><a href='chapter-16-accounting-and-payment.html'><span class='nav-num'>16.</span><span>Accounting and payment</span></a></li><li><a href='chapter-17-reports-declarations-and-a-leaver.html'><span class='nav-num'>17.</span><span>Reports, declarations and a leaver</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part IV · How the payroll engine works</span><ol><li><a href='chapter-18-the-engine-in-one-picture.html'><span class='nav-num'>18.</span><span>The engine in one picture</span></a></li><li><a href='chapter-19-structures-and-rules.html'><span class='nav-num'>19.</span><span>Structures and rules</span></a></li><li><a href='chapter-20-categories-how-rules-talk-to-each-other.html'><span class='nav-num'>20.</span><span>Categories: how rules talk to each other</span></a></li><li><a href='chapter-21-parameters-updates-and-safe-extensions.html'><span class='nav-num'>21.</span><span>Parameters, updates and safe extensions</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part V · Building a localization</span><ol><li><a href='chapter-22-a-template-for-any-localization-and-how-to-review-one.html'><span class='nav-num'>22.</span><span>A template for any localization, and how to review one</span></a></li></ol></li></ol>
+<a class="nav-pdf" href="payroll_book.pdf" download>Download the PDF</a>
+</nav>
+<div class="backdrop" hidden></div>
+<main id="main" class="content">
+<section class='chapter' id='c-18_ch08'><div class='opener'><div class='opener-band'><span class='opener-num'>Chapter 8</span><span class='opener-part'>Part I · Payroll theory</span></div><h1>Accounting for payroll</h1><p class='opener-sub'>One payslip, one balanced entry, and liabilities that wait to be paid</p><div class='opener-goals'><div class='goals-title'>After this chapter you can</div><ul><li>Build the journal entry of a payslip: costs on one side, liabilities on the other</li><li>Explain why employee deductions are liabilities, and only the employer charges add cost</li><li>Follow MyVidangeCompany's October 2026 through T-accounts until every liability is paid</li><li>Explain provisions for holiday pay, 13th months and gratuities</li><li>Describe how Odoo creates the entry and the payment file</li></ul></div></div><p>At month end the accountant wants one thing from payroll: a journal entry. The salary and the employer's charges are costs. Everything withheld is money owed to someone else until it is paid. Payroll accounting is mostly the story of those debts. The shape is the same in every country; only the account numbers change.</p>
+<h2 id="what-payroll-accounting-is">What payroll accounting is</h2>
+<p><strong>Payroll accounting</strong> (<em>payroll bookkeeping</em>, <em>booking the payroll</em>) records the pay run in the company's books. Each period it posts one balanced <strong>journal entry</strong>: the cost of the period on the debit side, and on the credit side what the company now owes, and to whom. Later payments close those debts one by one.</p>
+<p>Three things follow from that definition:</p>
+<ul>
+<li><strong>The cost is the employer cost.</strong> Gross wages plus the employer's own charges; nothing withheld from the employee adds to it.</li>
+<li><strong>Withheld money is a debt, not a cost.</strong> Until it is paid, the tax and contributions kept back sit on liability accounts, like the net pay not yet transferred.</li>
+<li><strong>The entry is a sum of payslip lines.</strong> Each salary rule says which account it goes to; the entry adds them up.</li>
+</ul>
+<figure>
+<p><img alt="A payroll entry: debit costs, credit liabilities" src="assets/charts/gen_ch8_payroll_entry.svg" /></p>
+<figcaption>Illustrative numbers: the payslip of Chapter 2's figure (1,000 gross, 200 employer contributions). 1,200 of cost on the debit side; on the credit side, 650 owed to the employee, 350 to social security and 200 to the tax authority.</figcaption>
+</figure>
+<h2 id="case-study-myvidangecompanys-entry">Case study: MyVidangeCompany's entry</h2>
+<p>Belgian companies use a standard chart of accounts (legal text not retrieved, <code>UNVERIFIED</code>): 6202 remuneration, 621 employer social security, 623 other personnel costs, and the liabilities 453 (tax withheld), 454 (social security), 455 (net pay due) and 440 (suppliers).</p>
+<div class="admonition example">
+<p class="admonition-title">Worked example: Mélanie and Marie, October 2026</p>
+<table>
+<thead>
+<tr>
+<th>Account</th>
+<th style="text-align: right;">Mélanie debit</th>
+<th style="text-align: right;">Mélanie credit</th>
+<th style="text-align: right;">Marie debit</th>
+<th style="text-align: right;">Marie credit</th>
+</tr>
+</thead>
+<tbody>
+<tr class='emp'>
+<td><span class='pill emp'>6202</span> Gross wages</td>
+<td style="text-align: right;">4,000.00</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">7,500.00</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class='emp'>
+<td><span class='pill emp'>621</span> Employer contributions (− reduction + CO2)</td>
+<td style="text-align: right;">1,004.80</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">1,926.34</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class='emp'>
+<td><span class='pill emp'>623</span> Meal vouchers, employer part</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">196.02</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class='ded'>
+<td><span class='pill ded'>454</span> Social security due</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">1,563.84</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">2,967.53</td>
+</tr>
+<tr class='tax'>
+<td><span class='pill tax'>453</span> Tax withheld due</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">826.70</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">1,770.92</td>
+</tr>
+<tr class='net'>
+<td><span class='pill net'>455</span> Net pay due</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">2,614.26</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">4,663.91</td>
+</tr>
+<tr class='earn'>
+<td><span class='pill earn'>440</span> Meal-voucher issuer</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">220.00</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td style="text-align: right;"><strong>5,004.80</strong></td>
+<td style="text-align: right;"><strong>5,004.80</strong></td>
+<td style="text-align: right;"><strong>9,622.36</strong></td>
+<td style="text-align: right;"><strong>9,622.36</strong></td>
+</tr>
+</tbody>
+</table>
+<p>For Mélanie, 454 collects the employee, special and employer contributions. Marie's car benefit does not appear at all: no money moves for it. Each total equals the employer cost of Chapter 3.<sup id="fnref2:c8-calc"><a class="footnote-ref" href="#fn:c8-calc">1</a></sup></p>
+</div>
+<p>The five regular payslips of October 2026 make one entry of 27,849.02 € on each side: 14,917.31 € of net pay due, 8,065.22 € of social security, 4,646.49 € of tax withheld and 220.00 € to the voucher issuer.<sup id="fnref:c8-calc"><a class="footnote-ref" href="#fn:c8-calc">1</a></sup> The debit side is the month's employer cost; the credit side says where the money will go.</p>
+<p><strong>In Odoo.</strong> The demo database books the same accounts with six digits (620200, 454000…); its February 2026 entry balances at 23,426.76 €. It books only the employee part of the meal vouchers, so agree with the customer's accountant how vouchers are booked.<sup id="fnref:c8-odoo"><a class="footnote-ref" href="#fn:c8-odoo">2</a></sup></p>
+<h2 id="from-book-to-bank-the-t-accounts">From book to bank: the T-accounts</h2>
+<p>Accountants follow each account with a <strong>T-account</strong>: the account drawn as a large T, its name on top. Amounts that increase the account go on one side, amounts that decrease it on the other, and the difference between the two sides, the <strong>balance</strong>, is what the account holds. For a debt such as <em>net pay due</em>, the right side (credit) records what the company comes to owe and the left side (debit) what it pays off, so the balance is what is <strong>still owed</strong>.</p>
+<p>Take account 455, the net pay MyVidangeCompany owes its employees for October 2026:</p>
+<div class="tfig" markdown="0">
+<div class="tacc">
+<div class="tan">455 Net pay due</div>
+<div class="tacols">
+<div class="taside"><div class="tah">Debit <span>(paid off)</span></div><div class="tae down"><span>Transfer, early Nov</span><b>14,917.31</b></div></div>
+<div class="taside"><div class="tah">Credit <span>(now owed)</span></div><div class="tae up"><span>Payroll entry, 31 Oct</span><b>14,917.31</b></div></div>
+</div>
+<div class="tabal"><span>Balance: still owed</span><span>0.00</span></div>
+</div>
+<div class="tstory">
+<div class="tsb owed">After the payroll entry<b>14,917.31 owed</b></div>
+<div class="tsa">↓ the bank pays the employees</div>
+<div class="tsb">After the salary transfer<b>0.00 owed</b></div>
+</div>
+</div>
+
+<p>The payroll entry fills the account; the bank payment empties it, and books the same amount as money leaving the bank account (550). The three other debts of the entry work the same way, each emptied on its own date:</p>
+<table>
+<thead>
+<tr>
+<th>Account</th>
+<th>Emptied by</th>
+<th>When</th>
+</tr>
+</thead>
+<tbody>
+<tr class='tax'>
+<td><span class='pill tax'>453</span> Tax withheld, 4,646.49 €</td>
+<td>payment with the withholding return</td>
+<td>by 13 November</td>
+</tr>
+<tr class='ded'>
+<td><span class='pill ded'>454</span> Social security, 8,065.22 €</td>
+<td>monthly advances, then the balance</td>
+<td>balance by 31 January</td>
+</tr>
+<tr class='earn'>
+<td><span class='pill earn'>440</span> Voucher issuer, 220.00 €</td>
+<td>payment of its invoice</td>
+<td>on the invoice terms</td>
+</tr>
+</tbody>
+</table>
+<p>A balance left on a payroll liability after its due date is the first thing an accountant checks: a payment that did not happen, or a line booked on the wrong account.</p>
+<div class="admonition pitfall">
+<p class="admonition-title">Common pitfall</p>
+<p>Booking the employee contributions and the withholding as expenses. They are liabilities; the cost is already in the gross wages. Booking them as expenses counts them twice.</p>
+</div>
+<h2 id="provisions-cost-now-cash-later">Provisions: cost now, cash later</h2>
+<p>A <strong>provision</strong> is a debt the company records before the bill arrives: it knows it will have to pay an amount later, so it books the cost now, a little each month. Take a 13<sup>th</sup> month of 1,200, earned over the year and paid in December (illustrative numbers, contributions left out):</p>
+<table class='payslip'>
+<thead>
+<tr>
+<th>Month</th>
+<th style="text-align: right;">Cost booked</th>
+<th style="text-align: right;">Provision (owed so far)</th>
+<th style="text-align: right;">Cash paid</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>January</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td>February</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">200</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td>…</td>
+<td style="text-align: right;">…</td>
+<td style="text-align: right;">…</td>
+<td style="text-align: right;">…</td>
+</tr>
+<tr>
+<td>December, before payment</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">1,200</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td>December, payment</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1,200</td>
+</tr>
+</tbody>
+</table>
+
+<p>Without the provision, December would carry 1,200 of cost and the other months none. With it, each month carries its share, and the December payment simply pays off the debt already recorded.</p>
+<div class="formula">Each month: debit provision cost / credit provision liability. On payment: debit provision liability / credit net pay due</div>
+
+<p>Saudi Arabia and the UAE provision the gratuity, Mexico and the Philippines the bonuses (Chapter 6). Many Belgian employers provision holiday pay (account 625 against 456), an accounting policy the book does not compute.</p>
+<h2 id="payment-files">Payment files</h2>
+<p>The net pay leaves the company as one bank file with a line per employee; the legal payment date applies (Chapter 1).<sup id="fnref:c8-pay"><a class="footnote-ref" href="#fn:c8-pay">3</a></sup> Tax and contributions are paid separately, each with its own reference.<sup id="fnref:c8-274"><a class="footnote-ref" href="#fn:c8-274">4</a></sup> MyVidangeCompany uses a SEPA credit-transfer file.</p>
+<div class="admonition world">
+<p class="admonition-title">Around the world</p>
+<ul>
+<li><strong>Belgium, Netherlands, Luxembourg</strong>: SEPA credit transfer.</li>
+<li><strong>United States</strong>: a NACHA (ACH) file.</li>
+<li><strong>Australia</strong>: an ABA bank file.</li>
+<li><strong>UAE, Saudi Arabia</strong>: a Wage Protection System salary file, checked by the labour ministry.</li>
+<li><strong>India</strong>: a payment advice and a bank e-NET file.</li>
+</ul>
+</div>
+<p><strong>In Odoo.</strong> <span class='pill odoo'>hr_payroll_account</span> gives each salary rule an <span class='pill odoo'>account_debit</span> and <span class='pill odoo'>account_credit</span>, and each structure a journal; each localization's <code>_account</code> module sets them for its chart. At validation Odoo builds the entry from the lines and groups them by account. If they do not balance (a rule without an account), Odoo adds an <em>Adjustment Entry</em> line instead of refusing: the entry posts and looks fine, and it is wrong. <span class='pill odoo'>hr_payroll_account_iso20022</span> exports the SEPA file. Chapter 16 posts and pays February 2026.</p>
+<div class="admonition practice">
+<p class="admonition-title">In practice</p>
+<p>Before go-live, validate one payslip per structure and read each entry against the chart of accounts. Agree the accounts with the accountant before the first pay run; changing them later means reversing entries.</p>
+</div>
+<h2 id="summary">Summary</h2>
+<ul>
+<li>A payslip becomes one balanced entry: costs (gross wages, employer contributions, other personnel costs) against liabilities (net pay, social security, tax withheld, third parties).</li>
+<li>Employee deductions are liabilities held for third parties; only employer charges add cost.</li>
+<li>MyVidangeCompany's October 2026: 27,849.02 € on each side. Each liability is closed by a payment on its own date.</li>
+<li>A benefit in kind moves no money and has no line in the entry.</li>
+<li>Pay earned monthly but paid later (holiday pay, 13<sup>th</sup> month, gratuity) is provisioned each month.</li>
+<li>Odoo books the entry at validation from the accounts on the salary rules, and balances any gap with an <em>Adjustment Entry</em> line that you should treat as a bug.</li>
+</ul>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:c8-calc">
+<p>Independent calculator, <code>research/numbers_be_calc.md</code>, sections 10.1 and 10.12.&#160;<a class="footnote-backref" href="#fnref:c8-calc" title="Jump back to footnote 1 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:c8-calc" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:c8-odoo">
+<p>Journal entry of the February 2026 pay run on the demo database, <code>research/numbers_be.md</code>, section 7.&#160;<a class="footnote-backref" href="#fnref:c8-odoo" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:c8-pay">
+<p>SPF Emploi, time and date of payment: <a href="https://emploi.belgique.be/fr/themes/remuneration/protection-de-la-remuneration/epoque-et-date-de-paiement">https://emploi.belgique.be/fr/themes/remuneration/protection-de-la-remuneration/epoque-et-date-de-paiement</a>.&#160;<a class="footnote-backref" href="#fnref:c8-pay" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:c8-274">
+<p>SPF Finances, withholding tax return and payment account: <a href="https://finances.belgium.be/fr/entreprises/personnel_et_remuneration/precompte_professionnel/declaration">https://finances.belgium.be/fr/entreprises/personnel_et_remuneration/precompte_professionnel/declaration</a>.&#160;<a class="footnote-backref" href="#fnref:c8-274" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></section><nav class='pager' aria-label='Previous and next chapter'><a class='pager-prev' rel='prev' href='chapter-07-declarations-and-the-compliance-calendar.html'><small>Previous · Chapter 7</small><span>Declarations and the compliance calendar</span></a><a class='pager-next' rel='next' href='chapter-09-what-varies-between-countries-and-what-doesnt.html'><small>Next · Chapter 9</small><span>What varies between countries, and what doesn&#x27;t</span></a></nav>
+</main>
+</div>
+<script src="js/site.js"></script>
+
+</body>
+</html>

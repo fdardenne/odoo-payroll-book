@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter 7: Declarations and the compliance calendar · Payroll, from Theory to Odoo Localization</title>
+<meta name="description" content="Gross-to-net in any country, the Odoo salary engine, and how to design, build and review a payroll localization.">
+<link rel="stylesheet" href="css/book.css">
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body class="chapter-page">
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+<button class="nav-toggle" type="button" aria-controls="sidebar" aria-expanded="false"><span aria-hidden="true">&#9776;</span> Contents</button>
+<a class="top-brand" href="index.html">Payroll, from Theory to Odoo Localization</a>
+</header>
+<div class="layout">
+<nav id="sidebar" class="sidebar" aria-label="Book contents">
+<a class="side-brand" href="index.html">Payroll, from Theory to Odoo Localization</a>
+<div class="search" role="search">
+<label for="search-input" class="sr-only">Search the book</label>
+<input id="search-input" type="search" placeholder="Search the book  ( / )" autocomplete="off" spellcheck="false" aria-controls="search-results">
+<div id="search-results" class="search-results" aria-live="polite"></div>
+</div>
+<ol class="nav"><li class='nav-part'><span class='nav-part-title'>Front matter</span><ol><li><a href='preface-before-you-start.html'><span class='nav-num'></span><span>Before you start</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part I · Payroll theory</span><ol><li><a href='chapter-01-what-payroll-is-and-why-it-is-hard.html'><span class='nav-num'>1.</span><span>What payroll is, and why it is hard</span></a></li><li><a href='chapter-02-gross-to-net.html'><span class='nav-num'>2.</span><span>Gross to net</span></a></li><li><a href='chapter-03-contributions-employee-and-employer.html'><span class='nav-num'>3.</span><span>Contributions: employee and employer</span></a></li><li><a href='chapter-04-withholding-tax.html'><span class='nav-num'>4.</span><span>Withholding tax</span></a></li><li><a href='chapter-05-time-proration-and-overtime.html'><span class='nav-num'>5.</span><span>Time, proration and overtime</span></a></li><li><a href='chapter-06-irregular-pay-corrections-and-leavers.html'><span class='nav-num'>6.</span><span>Irregular pay, corrections and leavers</span></a></li><li class='current' aria-current='page'><a href='chapter-07-declarations-and-the-compliance-calendar.html'><span class='nav-num'>7.</span><span>Declarations and the compliance calendar</span></a><ol class='nav-sections'><li><a href='#what-a-payroll-declaration-is'>What a payroll declaration is</a></li><li><a href='#who-receives-which-filing'>Who receives which filing</a></li><li><a href='#four-kinds-of-filing'>Four kinds of filing</a></li><li><a href='#case-study-myvidangecompanys-filings'>Case study: MyVidangeCompany&#x27;s filings</a></li><li><a href='#what-must-match'>What must match</a></li><li><a href='#the-payslip-and-the-records-to-keep'>The payslip and the records to keep</a></li><li><a href='#the-calendar'>The calendar</a></li><li><a href='#summary'>Summary</a></li></ol></li><li><a href='chapter-08-accounting-for-payroll.html'><span class='nav-num'>8.</span><span>Accounting for payroll</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part II · Localization theory</span><ol><li><a href='chapter-09-what-varies-between-countries-and-what-doesnt.html'><span class='nav-num'>9.</span><span>What varies between countries, and what doesn&#x27;t</span></a></li><li><a href='chapter-10-researching-a-new-country.html'><span class='nav-num'>10.</span><span>Researching a new country</span></a></li><li><a href='chapter-11-laws-that-change-over-time.html'><span class='nav-num'>11.</span><span>Laws that change over time</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part III · Odoo payroll, hands-on</span><ol><li><a href='chapter-12-tour-and-setup.html'><span class='nav-num'>12.</span><span>Tour and setup</span></a></li><li><a href='chapter-13-employees-and-versions.html'><span class='nav-num'>13.</span><span>Employees and versions</span></a></li><li><a href='chapter-14-time-schedules-time-off-worked-days.html'><span class='nav-num'>14.</span><span>Time: schedules, time off, worked days</span></a></li><li><a href='chapter-15-pay-runs-and-payslips.html'><span class='nav-num'>15.</span><span>Pay runs and payslips</span></a></li><li><a href='chapter-16-accounting-and-payment.html'><span class='nav-num'>16.</span><span>Accounting and payment</span></a></li><li><a href='chapter-17-reports-declarations-and-a-leaver.html'><span class='nav-num'>17.</span><span>Reports, declarations and a leaver</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part IV · How the payroll engine works</span><ol><li><a href='chapter-18-the-engine-in-one-picture.html'><span class='nav-num'>18.</span><span>The engine in one picture</span></a></li><li><a href='chapter-19-structures-and-rules.html'><span class='nav-num'>19.</span><span>Structures and rules</span></a></li><li><a href='chapter-20-categories-how-rules-talk-to-each-other.html'><span class='nav-num'>20.</span><span>Categories: how rules talk to each other</span></a></li><li><a href='chapter-21-parameters-updates-and-safe-extensions.html'><span class='nav-num'>21.</span><span>Parameters, updates and safe extensions</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part V · Building a localization</span><ol><li><a href='chapter-22-a-template-for-any-localization-and-how-to-review-one.html'><span class='nav-num'>22.</span><span>A template for any localization, and how to review one</span></a></li></ol></li></ol>
+<a class="nav-pdf" href="payroll_book.pdf" download>Download the PDF</a>
+</nav>
+<div class="backdrop" hidden></div>
+<main id="main" class="content">
+<section class='chapter' id='c-17_ch07'><div class='opener'><div class='opener-band'><span class='opener-num'>Chapter 7</span><span class='opener-part'>Part I · Payroll theory</span></div><h1>Declarations and the compliance calendar</h1><p class='opener-sub'>Who gets which report, how often, and what must match</p><div class='opener-goals'><div class='goals-title'>After this chapter you can</div><ul><li>Name the four kinds of payroll filing every country has, and the newer per-payslip and per-pay-run models</li><li>Explain why every declaration is a sum or a list of validated payslip lines</li><li>Say which filings must agree with each other</li><li>Place filings, payments and yearly events on one calendar</li><li>Name the Odoo models that produce each of MyVidangeCompany's filings</li></ul></div></div><p>Payroll does not end at the bank transfer. MyVidangeCompany notifies each hire before the first hour, reports the tax withheld every month, the contributions every quarter, and each employee's yearly totals every February. All must agree with the payslips and with each other. The form names are Belgian; the four kinds of filing exist almost everywhere.</p>
+<h2 id="what-a-payroll-declaration-is">What a payroll declaration is</h2>
+<p>A <strong>payroll declaration</strong> (<em>payroll return</em>, <em>filing</em>, <em>payroll report</em>) is a report the employer sends to an authority about its payroll: who works for it, what they earned, and what was withheld or is owed. Most declarations come with a payment, or are checked against one. They go to the social security office, the tax authority, and sometimes the employee.</p>
+<p>Three things follow from that definition:</p>
+<ul>
+<li><strong>It is built from the payslips.</strong> Every declaration is a <strong>filtered sum or list</strong> of validated payslip lines. If a declaration needs a number the payslips do not have, the payslips are missing a rule.</li>
+<li><strong>It runs on the authority's calendar,</strong> not the payroll's: at each hire or exit, each month or quarter, each year (the four clocks of Chapter 1).</li>
+<li><strong>Declarations must agree</strong> with each other and with the payments. An authority that receives two numbers compares them.</li>
+</ul>
+<figure>
+<p><img alt="A declaration is a sum or a list of payslip lines" src="assets/charts/gen_ch7_declaration.svg" /></p>
+<figcaption>Illustrative numbers, three employees. The tax return adds up the tax withheld on the three payslips and comes with the payment. The contribution return lists each employee's base and contributions. Nothing in either return is typed by hand.</figcaption>
+</figure>
+<h2 id="who-receives-which-filing">Who receives which filing</h2>
+<p>Three parties receive payroll reports, and each needs them for a different reason. <strong>Social security</strong> must know who is insured and on what pay: it collects the contributions, and it computes each worker's pension, unemployment and sick pay from what the employer declared. The <strong>tax authority</strong> collects the tax withheld, which is the employee's income tax paid in advance, and must credit it to the right person. The <strong>employee</strong> needs his yearly totals to file his own tax return.</p>
+<div class="sorter" markdown="0">
+<div class="sq">Who receives what, and why</div>
+<div class="scols">
+<div class="scol c-ded"><div class="if">Social security</div><div class="then">Hire and exit notices<br>Contribution return, per worker</div><i>To collect the contributions and to compute each worker's rights.</i></div>
+<div class="scol c-tax"><div class="if">Tax authority</div><div class="then">Withholding return, with the payment<br>Annual certificate per employee</div><i>To collect the tax withheld and credit it to each employee.</i></div>
+<div class="scol c-earn"><div class="if">Employee</div><div class="then">The payslip, every period<br>A copy of his annual certificate</div><i>To check his pay and file his own tax return.</i></div>
+</div>
+<div class="sfoot">All of them are built from the same validated payslips.</div>
+</div>
+
+<h2 id="four-kinds-of-filing">Four kinds of filing</h2>
+<table>
+<thead>
+<tr>
+<th>Kind</th>
+<th>Purpose</th>
+<th>Frequency</th>
+<th>MyVidangeCompany (Belgium)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Hire and exit notification</strong></td>
+<td>tells the state someone works, before anything is paid</td>
+<td>at each event</td>
+<td>Dimona</td>
+</tr>
+<tr>
+<td><strong>Periodic contribution return</strong></td>
+<td>per worker: pay, working time, contributions</td>
+<td>monthly or quarterly</td>
+<td>DmfA, quarterly</td>
+</tr>
+<tr>
+<td><strong>Periodic withholding return</strong></td>
+<td>total tax withheld, paid with the return</td>
+<td>monthly</td>
+<td>form 274</td>
+</tr>
+<tr>
+<td><strong>Annual employee certificate</strong></td>
+<td>per employee: the year's taxable pay and tax withheld</td>
+<td>yearly</td>
+<td>tax slip 281.10</td>
+</tr>
+</tbody>
+</table>
+<p>Newer models report <strong>every payslip or every pay run</strong>, so a correction is a resend rather than an amendment. Some countries add <strong>payment-control files</strong>, where the salary transfer itself is reported.</p>
+<div class="admonition world">
+<p class="admonition-title">Around the world</p>
+<ul>
+<li><strong>United States</strong>: quarterly withholding return (941), annual wage statement per employee (W-2).</li>
+<li><strong>Mexico</strong>: one signed electronic payslip (CFDI) per payslip, sent to the tax office.</li>
+<li><strong>Australia</strong>: a pay-event report every pay run (Single Touch Payroll).</li>
+<li><strong>UAE</strong>: a Wage Protection System salary file; no tax filing.</li>
+<li><strong>Hong Kong</strong>: employer's returns at year end, hire and exit.</li>
+</ul>
+</div>
+<h2 id="case-study-myvidangecompanys-filings">Case study: MyVidangeCompany's filings</h2>
+<h3 id="the-hire-and-exit-notice">The hire and exit notice</h3>
+<p>Belgium's <strong>Dimona</strong> is due at the latest when the worker starts, and the exit notice on the first working day after the end.<sup id="fnref:c7-dimona"><a class="footnote-ref" href="#fn:c7-dimona">1</a></sup> Yannick's is due on 12 March 2026; Emma's exit notice on Monday 2 November.</p>
+<h3 id="the-monthly-withholding-return">The monthly withholding return</h3>
+<p>MyVidangeCompany files <strong>form 274</strong> monthly and pays the tax with it, around the 15<sup>th</sup> of the next month.<sup id="fnref:c7-274"><a class="footnote-ref" href="#fn:c7-274">3</a></sup><sup>,</sup><sup id="fnref:c7-cal"><a class="footnote-ref" href="#fn:c7-cal">4</a></sup></p>
+<div class="admonition example">
+<p class="admonition-title">Worked example: the withholding return for October 2026</p>
+<p>In a standard month the five regular payslips withhold 4,646.49 €. October 2026 is not standard: Emma's final pay replaces her regular payslip.<sup id="fnref:c7-calc"><a class="footnote-ref" href="#fn:c7-calc">6</a></sup></p>
+<table>
+<thead>
+<tr>
+<th>Withholding, October 2026</th>
+<th style="text-align: right;">Amount (€)</th>
+</tr>
+</thead>
+<tbody>
+<tr class='tax'>
+<td><span class='pill tax'>Mélanie, Jurgen, Marie, Yannick</span></td>
+<td style="text-align: right;">3,401.22</td>
+</tr>
+<tr class='tax'>
+<td><span class='pill tax'>Emma's final pay</span> (salary, premium, exit holiday pay, indemnity)</td>
+<td style="text-align: right;">17,179.39</td>
+</tr>
+<tr class='tax'>
+<td><span class='pill tax'>Return for October 2026</span>, due 13 November 2026</td>
+<td style="text-align: right;">20,580.61</td>
+</tr>
+</tbody>
+</table>
+<p>The return separates the amounts by kind of income (salary, holiday pay, indemnities), so each payslip line must carry that classification.</p>
+</div>
+<p><strong>In Odoo.</strong> The return is literally a sum of payslip lines: Odoo's February 2026 return, 3,978.86 €, equals that month's withholding lines. For October Odoo withholds 18,216.35 €; the gap comes from Emma's final pay (Chapter 6).<sup id="fnref:c7-odoo"><a class="footnote-ref" href="#fn:c7-odoo">5</a></sup></p>
+<h3 id="the-quarterly-social-security-return-and-the-annual-tax-slip">The quarterly social security return and the annual tax slip</h3>
+<p>The quarterly return (<strong>DmfA</strong>) lists, per worker, the pay by code, working time, contributions and reductions; it is due on the last day of the month after the quarter.<sup id="fnref:c7-dmfa"><a class="footnote-ref" href="#fn:c7-dmfa">2</a></sup> Each February, the employer sends one annual tax slip (<strong>281.10</strong>) per employee to the tax administration, with a copy to the employee.<sup id="fnref:c7-belcotax"><a class="footnote-ref" href="#fn:c7-belcotax">7</a></sup></p>
+<h2 id="what-must-match">What must match</h2>
+<p>An authority often receives the same money twice, by two different roads, and compares the two. Withholding tax is the clearest case:</p>
+<ul>
+<li><strong>Every month</strong>, the withholding return gives the month's total for all employees, and the employer pays it. The tax office knows what it received.</li>
+<li><strong>After the year</strong>, the annual certificates give each employee's total for the year. The tax office knows how much to credit to each person against his final tax.</li>
+</ul>
+<p>Both are sums of the same payslip lines, one by month and one by employee, so their grand totals must be equal. If the certificates add up to more than the returns, employees are credited with tax that nobody paid, and the tax office asks why.</p>
+<figure markdown="0">
+<table class="matchgrid">
+<tr><th>Tax withheld</th><th>Jan</th><th>Feb</th><th>…</th><th>Dec</th><th class="cert">Annual certificate</th></tr>
+<tr><td>Employee A</td><td>300</td><td>300</td><td class="gap">…</td><td>300</td><td class="cert">3,600</td></tr>
+<tr><td>Employee B</td><td>200</td><td>200</td><td class="gap">…</td><td>200</td><td class="cert">2,400</td></tr>
+<tr><td>Employee C, joins in July</td><td>0</td><td>0</td><td class="gap">…</td><td>100</td><td class="cert">600</td></tr>
+<tr class="rets"><td>Monthly return</td><td class="ret">500</td><td class="ret">500</td><td class="gap">…</td><td class="ret">600</td><td class="both">6,600 = 6,600</td></tr>
+</table>
+<figcaption>Illustrative numbers. Each column total is a monthly return; each row total is an annual certificate. The twelve returns (6 × 500 + 6 × 600) and the three certificates (3,600 + 2,400 + 600) must both come to 6,600.</figcaption>
+</figure>
+
+<p>Contributions follow the same logic: the contribution return lists each worker's contributions, and their sum must equal what was paid for the period. Both must also equal the payroll debts in the accounts (Chapter 8). At MyVidangeCompany, the twelve monthly withholding returns of 2026 must add up to the annual tax slips, and each quarterly return must match the contributions paid. A localization makes these matches true by construction: every filing reads the same validated lines.</p>
+<div class="admonition pitfall">
+<p class="admonition-title">Common pitfall</p>
+<p>Filing from a PDF or a spreadsheet. A payslip corrected after filing leaves the return silently out of date. Generate each declaration from the validated lines and regenerate it after a correction.</p>
+</div>
+<h2 id="the-payslip-and-the-records-to-keep">The payslip and the records to keep</h2>
+<p>Every country also sets the <strong>content of the payslip</strong> and the <strong>records to keep</strong>. In Belgium the payslip must show how pay is computed, and the employer keeps an individual account per worker.<sup id="fnref:c7-payslip"><a class="footnote-ref" href="#fn:c7-payslip">8</a></sup><sup>,</sup><sup id="fnref:c7-docs"><a class="footnote-ref" href="#fn:c7-docs">9</a></sup> Retention periods were not researched (<code>UNVERIFIED</code>). A localization covers them with the payslip report and a yearly per-employee report.</p>
+<h2 id="the-calendar">The calendar</h2>
+<p>Put together, the filings give a calendar with four rhythms: the event, the month, the quarter and the year (Chapter 1).</p>
+<div class="admonition example">
+<p class="admonition-title">Worked example: MyVidangeCompany's fourth quarter 2026</p>
+<table>
+<thead>
+<tr>
+<th>Date</th>
+<th>Event</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 Nov</td>
+<td>new withholding formula</td>
+</tr>
+<tr>
+<td>2 Nov</td>
+<td>exit notice for Emma</td>
+</tr>
+<tr>
+<td>early Nov</td>
+<td>October net pay transferred: 37,177.22 €</td>
+</tr>
+<tr>
+<td>13 Nov</td>
+<td>withholding return and payment for October: 20,580.61 €</td>
+</tr>
+<tr>
+<td>December</td>
+<td>year-end premiums</td>
+</tr>
+<tr>
+<td>31 Jan 2027</td>
+<td>quarterly social security return for Q4</td>
+</tr>
+<tr>
+<td>28 Feb 2027</td>
+<td>annual tax slips for 2026</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="admonition practice">
+<p class="admonition-title">In practice</p>
+<p>Order the filings by the cost of being late: the hire notice first, then the withholding return, then the contribution return, then the annual certificates. If a payroll bureau keeps filing one, agree how Odoo's numbers reach it.</p>
+</div>
+<p><strong>In Odoo.</strong> Each localization adds one model per filing: Belgium has <span class='pill odoo'>l10n_be.dmfa</span>, <span class='pill odoo'>l10n_be.274_xx</span> and <span class='pill odoo'>l10n_be.281_xx</span>, among others. The yearly per-employee ones share <span class='pill odoo'>hr.payroll.declaration.mixin</span> (Chapter 22). Many smaller localizations ship no declaration at all. Chapter 17 produces the Belgian filings.</p>
+<h2 id="summary">Summary</h2>
+<ul>
+<li>Declarations are sums or lists of validated payslip lines; design the lines first.</li>
+<li>Four kinds of filing exist almost everywhere: hire and exit notification, periodic contribution return, periodic withholding return, annual employee certificate.</li>
+<li>Some countries report every payslip (Mexico) or every pay run (Australia); some add payment-control files (the UAE's Wage Protection System).</li>
+<li>MyVidangeCompany: Dimona at each hire and exit, a monthly withholding return (20,580.61 € for October 2026), a quarterly social security return, annual tax slips by 28 February.</li>
+<li>The year's withholding returns must agree with the annual certificates; contribution returns must agree with payments.</li>
+<li>Payslip content and record keeping are legal duties too.</li>
+</ul>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:c7-dimona">
+<p>ONSS, Dimona: <a href="https://www.socialsecurity.be/employer/instructions/dmfa/fr/latest/instructions/obligations/obligations_nsso/dimona/general.html">https://www.socialsecurity.be/employer/instructions/dmfa/fr/latest/instructions/obligations/obligations_nsso/dimona/general.html</a> and <a href="https://www.socialsecurity.be/employer/instructions/dmfa/fr/latest/instructions/obligations/obligations_nsso/dimona/declarations_modifications_cancellations.html">https://www.socialsecurity.be/employer/instructions/dmfa/fr/latest/instructions/obligations/obligations_nsso/dimona/declarations_modifications_cancellations.html</a>.&#160;<a class="footnote-backref" href="#fnref:c7-dimona" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:c7-dmfa">
+<p>ONSS, DmfA general: <a href="https://www.socialsecurity.be/employer/instructions/dmfa/fr/latest/instructions/obligations/obligations_nsso/dmfa/general.html">https://www.socialsecurity.be/employer/instructions/dmfa/fr/latest/instructions/obligations/obligations_nsso/dmfa/general.html</a>.&#160;<a class="footnote-backref" href="#fnref:c7-dmfa" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:c7-274">
+<p>SPF Finances, withholding tax return: <a href="https://finances.belgium.be/fr/entreprises/personnel_et_remuneration/precompte_professionnel/declaration">https://finances.belgium.be/fr/entreprises/personnel_et_remuneration/precompte_professionnel/declaration</a>.&#160;<a class="footnote-backref" href="#fnref:c7-274" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:c7-cal">
+<p>SPF Finances, withholding calendar: <a href="https://finances.belgium.be/fr/entreprises/personnel_et_remuneration/precompte_professionnel/calendrier">https://finances.belgium.be/fr/entreprises/personnel_et_remuneration/precompte_professionnel/calendrier</a>.&#160;<a class="footnote-backref" href="#fnref:c7-cal" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+<li id="fn:c7-odoo">
+<p>Payslips and declarations computed by Odoo master on the demo database, <code>research/numbers_be.md</code>, sections 6 and 8.&#160;<a class="footnote-backref" href="#fnref:c7-odoo" title="Jump back to footnote 5 in the text">&#8617;</a></p>
+</li>
+<li id="fn:c7-calc">
+<p>Independent calculator, <code>research/numbers_be_calc.md</code>, sections 5 and 10.2.&#160;<a class="footnote-backref" href="#fnref:c7-calc" title="Jump back to footnote 6 in the text">&#8617;</a></p>
+</li>
+<li id="fn:c7-belcotax">
+<p>SPF Finances, Belcotax-on-web deadlines: <a href="https://finances.belgium.be/fr/E-services/Belcotaxonweb/delais-de-rentree-des-fiches">https://finances.belgium.be/fr/E-services/Belcotaxonweb/delais-de-rentree-des-fiches</a>; Belcotax-on-web: <a href="https://finances.belgium.be/fr/E-services/Belcotaxonweb">https://finances.belgium.be/fr/E-services/Belcotaxonweb</a>.&#160;<a class="footnote-backref" href="#fnref:c7-belcotax" title="Jump back to footnote 7 in the text">&#8617;</a></p>
+</li>
+<li id="fn:c7-payslip">
+<p>SPF Emploi, payslip and receipt for the balance: <a href="https://emploi.belgique.be/fr/themes/remuneration/protection-de-la-remuneration/decompte-de-paie-et-quittance-pour-solde-de">https://emploi.belgique.be/fr/themes/remuneration/protection-de-la-remuneration/decompte-de-paie-et-quittance-pour-solde-de</a>.&#160;<a class="footnote-backref" href="#fnref:c7-payslip" title="Jump back to footnote 8 in the text">&#8617;</a></p>
+</li>
+<li id="fn:c7-docs">
+<p>ONSS, social documents: <a href="https://www.socialsecurity.be/employer/instructions/dmfa/fr/latest/instructions/obligations/obligations_other/socialdocuments.html">https://www.socialsecurity.be/employer/instructions/dmfa/fr/latest/instructions/obligations/obligations_other/socialdocuments.html</a>.&#160;<a class="footnote-backref" href="#fnref:c7-docs" title="Jump back to footnote 9 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></section><nav class='pager' aria-label='Previous and next chapter'><a class='pager-prev' rel='prev' href='chapter-06-irregular-pay-corrections-and-leavers.html'><small>Previous · Chapter 6</small><span>Irregular pay, corrections and leavers</span></a><a class='pager-next' rel='next' href='chapter-08-accounting-for-payroll.html'><small>Next · Chapter 8</small><span>Accounting for payroll</span></a></nav>
+</main>
+</div>
+<script src="js/site.js"></script>
+
+</body>
+</html>

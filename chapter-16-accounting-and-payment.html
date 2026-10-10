@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter 16: Accounting and payment · Payroll, from Theory to Odoo Localization</title>
+<meta name="description" content="Gross-to-net in any country, the Odoo salary engine, and how to design, build and review a payroll localization.">
+<link rel="stylesheet" href="css/book.css">
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body class="chapter-page">
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+<button class="nav-toggle" type="button" aria-controls="sidebar" aria-expanded="false"><span aria-hidden="true">&#9776;</span> Contents</button>
+<a class="top-brand" href="index.html">Payroll, from Theory to Odoo Localization</a>
+</header>
+<div class="layout">
+<nav id="sidebar" class="sidebar" aria-label="Book contents">
+<a class="side-brand" href="index.html">Payroll, from Theory to Odoo Localization</a>
+<div class="search" role="search">
+<label for="search-input" class="sr-only">Search the book</label>
+<input id="search-input" type="search" placeholder="Search the book  ( / )" autocomplete="off" spellcheck="false" aria-controls="search-results">
+<div id="search-results" class="search-results" aria-live="polite"></div>
+</div>
+<ol class="nav"><li class='nav-part'><span class='nav-part-title'>Front matter</span><ol><li><a href='preface-before-you-start.html'><span class='nav-num'></span><span>Before you start</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part I · Payroll theory</span><ol><li><a href='chapter-01-what-payroll-is-and-why-it-is-hard.html'><span class='nav-num'>1.</span><span>What payroll is, and why it is hard</span></a></li><li><a href='chapter-02-gross-to-net.html'><span class='nav-num'>2.</span><span>Gross to net</span></a></li><li><a href='chapter-03-contributions-employee-and-employer.html'><span class='nav-num'>3.</span><span>Contributions: employee and employer</span></a></li><li><a href='chapter-04-withholding-tax.html'><span class='nav-num'>4.</span><span>Withholding tax</span></a></li><li><a href='chapter-05-time-proration-and-overtime.html'><span class='nav-num'>5.</span><span>Time, proration and overtime</span></a></li><li><a href='chapter-06-irregular-pay-corrections-and-leavers.html'><span class='nav-num'>6.</span><span>Irregular pay, corrections and leavers</span></a></li><li><a href='chapter-07-declarations-and-the-compliance-calendar.html'><span class='nav-num'>7.</span><span>Declarations and the compliance calendar</span></a></li><li><a href='chapter-08-accounting-for-payroll.html'><span class='nav-num'>8.</span><span>Accounting for payroll</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part II · Localization theory</span><ol><li><a href='chapter-09-what-varies-between-countries-and-what-doesnt.html'><span class='nav-num'>9.</span><span>What varies between countries, and what doesn&#x27;t</span></a></li><li><a href='chapter-10-researching-a-new-country.html'><span class='nav-num'>10.</span><span>Researching a new country</span></a></li><li><a href='chapter-11-laws-that-change-over-time.html'><span class='nav-num'>11.</span><span>Laws that change over time</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part III · Odoo payroll, hands-on</span><ol><li><a href='chapter-12-tour-and-setup.html'><span class='nav-num'>12.</span><span>Tour and setup</span></a></li><li><a href='chapter-13-employees-and-versions.html'><span class='nav-num'>13.</span><span>Employees and versions</span></a></li><li><a href='chapter-14-time-schedules-time-off-worked-days.html'><span class='nav-num'>14.</span><span>Time: schedules, time off, worked days</span></a></li><li><a href='chapter-15-pay-runs-and-payslips.html'><span class='nav-num'>15.</span><span>Pay runs and payslips</span></a></li><li class='current' aria-current='page'><a href='chapter-16-accounting-and-payment.html'><span class='nav-num'>16.</span><span>Accounting and payment</span></a><ol class='nav-sections'><li><a href='#from-payslip-to-bank'>From payslip to bank</a></li><li><a href='#what-you-configure'>What you configure</a></li><li><a href='#when-the-entry-is-created'>When the entry is created</a></li><li><a href='#reading-februarys-entry'>Reading February&#x27;s entry</a></li><li><a href='#paying'>Paying</a></li><li><a href='#missions'>Missions</a></li><li><a href='#summary'>Summary</a></li></ol></li><li><a href='chapter-17-reports-declarations-and-a-leaver.html'><span class='nav-num'>17.</span><span>Reports, declarations and a leaver</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part IV · How the payroll engine works</span><ol><li><a href='chapter-18-the-engine-in-one-picture.html'><span class='nav-num'>18.</span><span>The engine in one picture</span></a></li><li><a href='chapter-19-structures-and-rules.html'><span class='nav-num'>19.</span><span>Structures and rules</span></a></li><li><a href='chapter-20-categories-how-rules-talk-to-each-other.html'><span class='nav-num'>20.</span><span>Categories: how rules talk to each other</span></a></li><li><a href='chapter-21-parameters-updates-and-safe-extensions.html'><span class='nav-num'>21.</span><span>Parameters, updates and safe extensions</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part V · Building a localization</span><ol><li><a href='chapter-22-a-template-for-any-localization-and-how-to-review-one.html'><span class='nav-num'>22.</span><span>A template for any localization, and how to review one</span></a></li></ol></li></ol>
+<a class="nav-pdf" href="payroll_book.pdf" download>Download the PDF</a>
+</nav>
+<div class="backdrop" hidden></div>
+<main id="main" class="content">
+<section class='chapter' id='c-35_ch16'><div class='opener'><div class='opener-band'><span class='opener-num'>Chapter 16</span><span class='opener-part'>Part III · Odoo payroll, hands-on</span></div><h1>Accounting and payment</h1><p class='opener-sub'>From payslip lines to one balanced entry, then to a bank file</p><div class='opener-goals'><div class='goals-title'>After this chapter you can</div><ul><li>Explain how validated payslips become a journal entry, and which settings shape it</li><li>Read a real payroll entry line by line and check that it balances</li><li>Use the Adjustment Entry line as a configuration smoke test</li><li>Pay a pay run with a SEPA file, and know what Paid does and does not mean in accounting</li></ul></div></div><p>Chapter 8 drew a payroll month as T-accounts on paper. Here Odoo does it: the structure and its rules hold the configuration, <em>Validate</em> triggers the entry, and a bank file pays the net.</p>
+<h2 id="from-payslip-to-bank">From payslip to bank</h2>
+<p>Validating the payslips is not the end of the month. Two things still have to happen in the real world, and Odoo handles both:</p>
+<ul>
+<li><strong>Book it.</strong> The company records in its accounts what the month cost and what it now owes, and to whom: the employees, the social security office, the tax office. That record is a <strong>journal entry</strong>.</li>
+<li><strong>Pay it.</strong> The company sends the money. For the employees' net pay, Odoo produces a bank file the bank executes in one go.</li>
+</ul>
+<div class="lanes" markdown="0">
+<div class="lane"><div class="lname c-emp">Book it</div>
+<div class="lstep">Payslips validated</div><div class="la">→</div>
+<div class="lstep">Journal entry created, in draft</div><div class="la">→</div>
+<div class="lstep">The accountant checks and posts it</div></div>
+<div class="lane"><div class="lname c-net">Pay it</div>
+<div class="lstep">Pay button on the run</div><div class="la">→</div>
+<div class="lstep">Bank file (SEPA)</div><div class="la">→</div>
+<div class="lstep">The bank pays each employee</div></div>
+<div class="ljoin">Both meet on the <b>bank statement</b>: the payment is matched with the net pay owed in the entry, and the debt is closed.</div>
+</div>
+
+<h2 id="what-you-configure">What you configure</h2>
+<p>Four settings decide what the journal entry looks like. They are easiest to understand on the result, a simplified version of MyVidangeCompany's February entry:</p>
+<div class="mockentry" markdown="0">
+<div class="mehead"><span class="b">1</span>Journal: <b>Salaries (SLR)</b> · entry SLR/2026/02/0001 · <span class="b">4</span>one entry for the whole run</div>
+<table>
+<tr><th><span class="b">2</span>Account</th><th><span class="b">3</span>Partner</th><th>Debit</th><th>Credit</th></tr>
+<tr><td>620200 Remuneration</td><td></td><td>18,800.00</td><td></td></tr>
+<tr><td>621000 Employer contributions</td><td></td><td>4,626.76</td><td></td></tr>
+<tr><td>454000 Social security office</td><td>the social security office</td><td></td><td>6,975.21</td></tr>
+<tr><td>453000 Taxes withheld</td><td>the tax office</td><td></td><td>3,978.86</td></tr>
+<tr><td>455000 Remuneration owed</td><td></td><td></td><td>12,450.89</td></tr>
+<tr><td>…</td><td></td><td></td><td></td></tr>
+</table>
+</div>
+
+<ol>
+<li><strong>The journal</strong> is the book the entry is written in; payroll has its own, <em>Salaries</em>. You set it on the <strong>structure</strong>. A structure without a journal produces no entry at all, and no error.</li>
+<li><strong>The accounts</strong> are the lines of the company's chart of accounts: an expense (<em>Remuneration</em>) or a debt (<em>Social security office</em>). Each <strong>salary rule</strong> says which account its amount goes to: a <strong>debit</strong> account for what the company spends, a <strong>credit</strong> account for what it owes.</li>
+<li><strong>The partner</strong> says to whom a debt is owed. It is also set on the rule.</li>
+<li><strong>One entry per run, or one per payslip.</strong> The company setting <em>Anonymize Journal Entries</em> (Chapter 12) groups the whole run into one entry, so individual salaries cannot be read in the books.</li>
+</ol>
+<p>With the Belgian chart of accounts, the localization fills all four for you: the <em>Salaries</em> journal, the rule accounts and the anonymized entries.</p>
+<h2 id="when-the-entry-is-created">When the entry is created</h2>
+<p>The entry is created <strong>the moment the run is validated</strong>, in four steps:</p>
+<div class="steps compact" markdown="0">
+<div class="step c-odoo"><b><span class="n">1</span>Collect</b>the lines of the validated payslips that have an account</div>
+<div class="sarrow">→</div>
+<div class="step c-emp"><b><span class="n">2</span>Group</b>one entry per run (or per payslip), amounts summed per account</div>
+<div class="sarrow">→</div>
+<div class="step c-ded"><b><span class="n">3</span>Balance</b>if debits ≠ credits, an <em>Adjustment Entry</em> line fills the gap</div>
+<div class="sarrow">→</div>
+<div class="step c-net"><b><span class="n">4</span>Wait</b>in draft, dated the end of the month, for the accountant to post</div>
+</div>
+
+<p>Step 3 matters most: Odoo never refuses an unbalanced entry, it quietly balances it. The next section shows why that line is a warning sign.</p>
+<h2 id="reading-februarys-entry">Reading February's entry</h2>
+<figure>
+<p><img alt="February 2026 entry" src="assets/screenshots/be_move.png" /></p>
+<figcaption>Accounting &gt; Journal Entries &gt; <i>SLR/2026/02/0001</i>, the entry of the whole February run (posted, dated 28 February). Debits and credits both total 23,426.76 €.</figcaption>
+</figure>
+<table class='payslip'>
+<thead>
+<tr>
+<th>Account</th>
+<th>Label</th>
+<th style="text-align: right;">Debit (€)</th>
+<th style="text-align: right;">Credit (€)</th>
+</tr>
+</thead>
+<tbody>
+<tr class='emp'>
+<td><span class='pill emp'>620200</span> Remuneration</td>
+<td>Remuneration</td>
+<td style="text-align: right;">18,800.00</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class='emp'>
+<td><span class='pill emp'>621000</span> Employer contributions</td>
+<td>Employer social security</td>
+<td style="text-align: right;">4,626.76</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class='ded'>
+<td><span class='pill ded'>454000</span> Social security office</td>
+<td>Employee social security</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">2,190.22</td>
+</tr>
+<tr class='ded'>
+<td><span class='pill ded'>454000</span> Social security office</td>
+<td>Special social security contribution</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">158.23</td>
+</tr>
+<tr class='ded'>
+<td><span class='pill ded'>454000</span> Social security office</td>
+<td>Employer social security</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">4,626.76</td>
+</tr>
+<tr class='tax'>
+<td><span class='pill tax'>453000</span> Taxes withheld</td>
+<td>Withholding tax</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">3,978.86</td>
+</tr>
+<tr class='net'>
+<td><span class='pill net'>455000</span> Remuneration</td>
+<td>Net salary</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">12,450.89</td>
+</tr>
+<tr>
+<td>743000 Miscellaneous income</td>
+<td>Retain on meal voucher</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">21.80</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td></td>
+<td style="text-align: right;"><strong>23,426.76</strong></td>
+<td style="text-align: right;"><strong>23,426.76</strong></td>
+</tr>
+</tbody>
+</table>
+
+<p>The company spends 18,800.00 € of salaries and 4,626.76 € of employer contributions, and owes it to the social security office (6,975.21 €), the tax office (3,978.86 €) and the employees (12,450.89 €). Employer contributions appear on both sides because their rule carries <strong>two</strong> accounts, an expense and a liability: that is how Odoo books costs that never touch net pay.</p>
+<div class="admonition key">
+<p class="admonition-title">Key idea: the Adjustment Entry line is a smoke test</p>
+<p>If a rule has no account, or one side where two are needed, debits and credits differ. Odoo does not refuse the entry: it adds an <em>Adjustment Entry</em> line on the journal's default account, and the books look right while being wrong. After the first month, open the entry: an <em>Adjustment Entry</em> means a missing or doubled account.</p>
+</div>
+<figure>
+<p><img alt="June's entry with an adjustment line" src="assets/screenshots/be_june_adjustment.png" /></p>
+<figcaption>Entry <i>SLR/2026/06/0001</i> of the June run, balanced at 30,259.97 € on each side. ① the <i>Adjustment Entry</i> line: 637.50 € debited on 620200, the amount the June payslip lines failed to book. Mission 16.4 asks you to explain it.</figcaption>
+</figure>
+<div class="admonition pitfall">
+<p class="admonition-title">Common pitfall: rules activated after the chart of accounts</p>
+<p>Rules installed archived (Belgium, until the joint committee is chosen) get no accounts if the chart was loaded first, and the first entry shows a large <em>Adjustment Entry</em>. Reload the chart's payroll accounts (Chapter 22); do not type them rule by rule.</p>
+</div>
+<p>Corrections book too: the refund of Mission 15.2 posts the reverse of the original, the correction posts the corrected amounts. Cancelling a payslip deletes or reverses its entry.</p>
+<h2 id="paying">Paying</h2>
+<p><strong>Validated run net owed on 455000</strong> → <strong>Payment wizard: CSV or SEPA file</strong> → <strong>Mark as Paid: payslips Paid, paid date set</strong> → <strong>Register a payment on the 455000 lines</strong> → <strong>reconciled: payslips Paid when nothing is left</strong></p>
+<p>The run's <em>Pay</em> button opens the payment wizard. With the SEPA module (Mission 12.3) it builds an ISO 20022 credit-transfer file from each payslip's net and the employee's trusted bank account, with the category purpose <code>SALA</code> (salary payment). An employee with several payslips in a run gets one summed transfer.</p>
+<figure>
+<p><img alt="The Pay wizard in SEPA mode" src="assets/screenshots/be_sepa_wizard.png" /></p>
+<figcaption>The <i>Pay</i> wizard of a run, in SEPA mode. ① mode <i>SEPA</i>. ② payment method <i>SEPA Credit Transfer (Bank)</i>. ③ the payment date, which becomes the requested execution date. ④ the bank journal that pays, with the company's IBAN. ⑤ <b>Download</b> builds the XML file; <b>Mark as Paid</b> sets the payslips to <i>Paid</i>.</figcaption>
+</figure>
+<div class="admonition pitfall">
+<p class="admonition-title">Common pitfall: Paid is not booked</p>
+<p><em>Mark as Paid</em> changes the payslips' state; it creates no payment and posts nothing. After paying February, account 455000 still owes 12,450.89 € until the bank statement is reconciled. The payslip state is a payroll status; 455000 is the accounting truth.</p>
+</div>
+<div class="admonition world">
+<p class="admonition-title">Around the world</p>
+<ul>
+<li><strong>Euro countries</strong>: SEPA credit transfer files.</li>
+<li><strong>Switzerland</strong>: the Swiss ISO 20022 variant.</li>
+<li><strong>UAE, Saudi Arabia, Oman</strong>: WPS files (the Wage Protection System that proves salaries were paid).</li>
+<li><strong>United States</strong>: NACHA files through batch payments.</li>
+<li><strong>Everywhere</strong>: the generic CSV export.</li>
+</ul>
+</div>
+<div class="admonition practice">
+<p class="admonition-title">In practice: close the month in this order</p>
+<ol>
+<li>Validate the run. 2. Check the entry (no <em>Adjustment Entry</em>). 3. Post it. 4. Generate and send the bank file. 5. Mark as paid. 6. When the bank statement arrives, reconcile the salary transfers with 455000, and the social security and tax payments with 454000 and 453000.</li>
+</ol>
+</div>
+<h2 id="missions">Missions</h2>
+<div class="admonition mission">
+<p class="admonition-title">Mission 16.1 · Read and post January ★</p>
+<p><strong>Situation.</strong> The accountant asks for January's payroll entries, including the correction of Mission 15.2.</p>
+<p><strong>Your goal.</strong> Find every January payroll entry, check that none has an adjustment line, and post them.</p>
+<p><strong>Check.</strong> Three posted entries in <em>Salaries</em> dated 31/01/2026: the run (<strong>23,264.01 €</strong>), the refund (<strong>5,032.00 €</strong>) and the correction (<strong>4,799.77 €</strong>). No <em>Adjustment Entry</em> line.</p>
+<details class="hint" open="open">
+<summary>Hint</summary>
+<p>A payslip's <em>Journal Entry</em> smart button opens its entry; the journal's list can be filtered by date.</p>
+</details>
+</div>
+<div class="admonition mission">
+<p class="admonition-title">Mission 16.2 · Pay February by SEPA ★★</p>
+<p><strong>Situation.</strong> MyVidangeCompany's bank account is BE77 0014 5678 9042 (BIC GEBABEBB). February's salaries leave by transfer.</p>
+<p><strong>Your goal.</strong> Produce the SEPA file of the February run and mark the run as paid.</p>
+<p><strong>Check.</strong> The file holds <strong>4 transactions</strong>, control sum <strong>12,450.89 €</strong>, category purpose <strong>SALA</strong>; the February run is <strong>Paid</strong>.</p>
+<details class="hint" open="open">
+<summary>Hint</summary>
+<p>The first attempt fails with a clear message: read it. The IBAN belongs on the <em>Bank</em> journal.</p>
+</details>
+</div>
+<div class="admonition mission">
+<p class="admonition-title">Mission 16.3 · Paid is not booked ★★</p>
+<p><strong>Situation.</strong> End of May: every run from January to May is validated, only February is paid. The accountant asks: "How much net pay do we still owe our employees?"</p>
+<p><strong>Your goal.</strong> Post the entries of February to May and read the balance of the net-pay account.</p>
+<p><strong>Check.</strong> February's entry totals <strong>23,360.94 €</strong>; account <strong>455000</strong> shows a credit balance of <strong>68,910.13 €</strong>: every net since January, February included, because no bank statement has been reconciled.</p>
+<details class="hint" open="open">
+<summary>Hint</summary>
+<p>Select several draft entries in the <em>Salaries</em> journal and post them at once; the general ledger gives the balance.</p>
+</details>
+</div>
+<div class="admonition mission">
+<p class="admonition-title">Mission 16.4 · The adjustment line of June ★★★</p>
+<p><strong>Situation.</strong> June's run (run it now, as in Chapter 15) pays the annual sectoral bonus (<code>SECTORIAL.BONUS</code>) to the CP 200 employees. The accountant finds an <em>Adjustment Entry</em> line in June's entry and asks why.</p>
+<p><strong>Your goal.</strong> Run, validate and post June, then explain the adjustment line from the payslip lines and the rules' accounts.</p>
+<p><strong>Check.</strong> An <em>Adjustment Entry</em> debit of <strong>637.50 €</strong> on 620200 = the sectoral bonuses (<strong>1,394.24 €</strong>, booked by no rule) minus the bonus social security (<strong>182.22 €</strong>) and withholding (<strong>574.52 €</strong>), booked a second time as debits on 454000 and 453000. Those liabilities are understated by 756.74 € in total.</p>
+<details class="hint" open="open">
+<summary>Hint</summary>
+<p><em>Show all</em> on a June payslip, list the lines whose code contains <code>BONUS</code>, and open those rules' <em>Accounting</em> tab: are their amounts already in <code>ONSSTOTAL</code> and <code>PPTOTAL</code>?</p>
+</details>
+</div>
+<h2 id="summary">Summary</h2>
+<ul>
+<li>A validated payslip creates accounting only if its structure has a salary journal; the rules' accounts decide the lines.</li>
+<li>With <em>Anonymize Journal Entries</em> (Belgium's default), a run gives one entry per journal and month, dated at month end, in draft.</li>
+<li>February's entry: 18,800.00 € salaries + 4,626.76 € employer contributions = 23,426.76 €, owed to social security, the tax office and the employees.</li>
+<li>Rules with two accounts book employer costs without touching net; an <em>Adjustment Entry</em> line means a missing or doubled account.</li>
+<li>The <em>Pay</em> wizard produces the bank file and marks payslips paid; it does not reconcile anything. The net-pay account clears only when the bank statement is reconciled.</li>
+</ul></section><nav class='pager' aria-label='Previous and next chapter'><a class='pager-prev' rel='prev' href='chapter-15-pay-runs-and-payslips.html'><small>Previous · Chapter 15</small><span>Pay runs and payslips</span></a><a class='pager-next' rel='next' href='chapter-17-reports-declarations-and-a-leaver.html'><small>Next · Chapter 17</small><span>Reports, declarations and a leaver</span></a></nav>
+</main>
+</div>
+<script src="js/site.js"></script>
+
+</body>
+</html>

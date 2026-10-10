@@ -1,0 +1,622 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter 22: A template for any localization, and how to review one · Payroll, from Theory to Odoo Localization</title>
+<meta name="description" content="Gross-to-net in any country, the Odoo salary engine, and how to design, build and review a payroll localization.">
+<link rel="stylesheet" href="css/book.css">
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body class="chapter-page">
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+<button class="nav-toggle" type="button" aria-controls="sidebar" aria-expanded="false"><span aria-hidden="true">&#9776;</span> Contents</button>
+<a class="top-brand" href="index.html">Payroll, from Theory to Odoo Localization</a>
+</header>
+<div class="layout">
+<nav id="sidebar" class="sidebar" aria-label="Book contents">
+<a class="side-brand" href="index.html">Payroll, from Theory to Odoo Localization</a>
+<div class="search" role="search">
+<label for="search-input" class="sr-only">Search the book</label>
+<input id="search-input" type="search" placeholder="Search the book  ( / )" autocomplete="off" spellcheck="false" aria-controls="search-results">
+<div id="search-results" class="search-results" aria-live="polite"></div>
+</div>
+<ol class="nav"><li class='nav-part'><span class='nav-part-title'>Front matter</span><ol><li><a href='preface-before-you-start.html'><span class='nav-num'></span><span>Before you start</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part I · Payroll theory</span><ol><li><a href='chapter-01-what-payroll-is-and-why-it-is-hard.html'><span class='nav-num'>1.</span><span>What payroll is, and why it is hard</span></a></li><li><a href='chapter-02-gross-to-net.html'><span class='nav-num'>2.</span><span>Gross to net</span></a></li><li><a href='chapter-03-contributions-employee-and-employer.html'><span class='nav-num'>3.</span><span>Contributions: employee and employer</span></a></li><li><a href='chapter-04-withholding-tax.html'><span class='nav-num'>4.</span><span>Withholding tax</span></a></li><li><a href='chapter-05-time-proration-and-overtime.html'><span class='nav-num'>5.</span><span>Time, proration and overtime</span></a></li><li><a href='chapter-06-irregular-pay-corrections-and-leavers.html'><span class='nav-num'>6.</span><span>Irregular pay, corrections and leavers</span></a></li><li><a href='chapter-07-declarations-and-the-compliance-calendar.html'><span class='nav-num'>7.</span><span>Declarations and the compliance calendar</span></a></li><li><a href='chapter-08-accounting-for-payroll.html'><span class='nav-num'>8.</span><span>Accounting for payroll</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part II · Localization theory</span><ol><li><a href='chapter-09-what-varies-between-countries-and-what-doesnt.html'><span class='nav-num'>9.</span><span>What varies between countries, and what doesn&#x27;t</span></a></li><li><a href='chapter-10-researching-a-new-country.html'><span class='nav-num'>10.</span><span>Researching a new country</span></a></li><li><a href='chapter-11-laws-that-change-over-time.html'><span class='nav-num'>11.</span><span>Laws that change over time</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part III · Odoo payroll, hands-on</span><ol><li><a href='chapter-12-tour-and-setup.html'><span class='nav-num'>12.</span><span>Tour and setup</span></a></li><li><a href='chapter-13-employees-and-versions.html'><span class='nav-num'>13.</span><span>Employees and versions</span></a></li><li><a href='chapter-14-time-schedules-time-off-worked-days.html'><span class='nav-num'>14.</span><span>Time: schedules, time off, worked days</span></a></li><li><a href='chapter-15-pay-runs-and-payslips.html'><span class='nav-num'>15.</span><span>Pay runs and payslips</span></a></li><li><a href='chapter-16-accounting-and-payment.html'><span class='nav-num'>16.</span><span>Accounting and payment</span></a></li><li><a href='chapter-17-reports-declarations-and-a-leaver.html'><span class='nav-num'>17.</span><span>Reports, declarations and a leaver</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part IV · How the payroll engine works</span><ol><li><a href='chapter-18-the-engine-in-one-picture.html'><span class='nav-num'>18.</span><span>The engine in one picture</span></a></li><li><a href='chapter-19-structures-and-rules.html'><span class='nav-num'>19.</span><span>Structures and rules</span></a></li><li><a href='chapter-20-categories-how-rules-talk-to-each-other.html'><span class='nav-num'>20.</span><span>Categories: how rules talk to each other</span></a></li><li><a href='chapter-21-parameters-updates-and-safe-extensions.html'><span class='nav-num'>21.</span><span>Parameters, updates and safe extensions</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part V · Building a localization</span><ol><li class='current' aria-current='page'><a href='chapter-22-a-template-for-any-localization-and-how-to-review-one.html'><span class='nav-num'>22.</span><span>A template for any localization, and how to review one</span></a><ol class='nav-sections'><li><a href='#221-what-a-localization-module-is'>22.1 What a localization module is</a></li><li><a href='#222-the-skeleton-two-modules-and-a-manifest'>22.2 The skeleton: two modules and a manifest</a></li><li><a href='#223-the-pay-structure-and-the-categories'>22.3 The pay structure and the categories</a></li><li><a href='#224-rules'>22.4 Rules</a></li><li><a href='#225-dated-parameters-and-the-three-wiring-hooks'>22.5 Dated parameters and the three wiring hooks</a></li><li><a href='#226-payroll-warnings'>22.6 Payroll warnings</a></li><li><a href='#227-python-fields-on-the-version-and-guarded-overrides'>22.7 Python: fields on the version and guarded overrides</a></li><li><a href='#228-declarations-and-the-accounting-bridge'>22.8 Declarations and the accounting bridge</a></li><li><a href='#229-tests'>22.9 Tests</a></li><li><a href='#2210-the-yearly-upkeep'>22.10 The yearly upkeep</a></li><li><a href='#2211-how-to-review-a-localization'>22.11 How to review a localization</a></li><li><a href='#summary'>Summary</a></li></ol></li></ol></li></ol>
+<a class="nav-pdf" href="payroll_book.pdf" download>Download the PDF</a>
+</nav>
+<div class="backdrop" hidden></div>
+<main id="main" class="content">
+<section class='chapter' id='c-51_ch22'><div class='opener'><div class='opener-band'><span class='opener-num'>Chapter 22</span><span class='opener-part'>Part V · Building a localization</span></div><h1>A template for any localization, and how to review one</h1><p class='opener-sub'>The few pieces every country module needs, why each one exists, how it stays correct year after year, and a checklist to review it</p><div class='opener-goals'><div class='goals-title'>After this chapter you can</div><ul><li>Say what a payroll localization is and name its five groups of pieces</li><li>Write the data of a country module (structure, categories, rules, dated parameters) and explain why each field is written that way</li><li>Add the Python a country needs (wiring hooks, version fields, guarded overrides) and only that</li><li>Produce the outputs (declarations, accounting) and prove the module with golden-payslip tests</li><li>Run the yearly upkeep, and review a localization with a graded checklist</li></ul></div></div><p>A company in a new country wants Odoo Payroll. The engine is ready: Part IV showed that it runs any rules it is given. What is missing is the country: its rules, its rates, its forms. This chapter is the template for that country module, piece by piece. For each piece it says <strong>why</strong> it exists (what breaks without it), <strong>what</strong> the code does, and <strong>when</strong> you need it. It ends with a review checklist, because a payroll bug never crashes: it pays someone a little wrong every month until the year-end reconciliation finds it.</p>
+<p>Every snippet uses the country code <code>xx</code> and follows a real module: the Dutch one (<code>l10n_nl_hr_payroll</code>, almost only data), the Mexican one (<code>l10n_mx_hr_payroll</code>, several engine hooks) and the Belgian one (<code>l10n_be_hr_payroll</code>, the largest).</p>
+<h2 id="221-what-a-localization-module-is">22.1 What a localization module is</h2>
+<p>A <strong>payroll localization</strong> (also <em>country module</em>, <em>l10n module</em>) is the country layer of Chapter 9: one or two Odoo modules, <code>l10n_xx_hr_payroll</code> and <code>l10n_xx_hr_payroll_account</code>, that turn one country's payroll law into records and a little Python on top of the shared engine. The engine, payslips, pay runs, work entries and the declaration framework stay in <code>hr_payroll</code>; the localization brings only what the country knows.</p>
+<p>Three things follow:</p>
+<ul>
+<li><strong>It is mostly data.</strong> Rules, categories and dated parameters (Part IV) carry the law. Python is for what data cannot say, and stays small.</li>
+<li><strong>It must stay correct every year.</strong> The law changes every January, sometimes more often; the module is built so that a change is a new record that reaches every customer within a week.</li>
+<li><strong>It must be provable.</strong> Nobody can check forty rules by reading them; golden payslips frozen as tests do.</li>
+</ul>
+<div class="locmap" markdown="0">
+<div class="lm-law"><b>The law of country xx</b>: rates, caps, tax scales, methods, forms and deadlines</div>
+<div class="lm-down">▼</div>
+<div class="lm-mod">
+<div class="lm-name">The localization: <code>l10n_xx_hr_payroll</code> + <code>l10n_xx_hr_payroll_account</code></div>
+<div class="lm-row">
+<div class="lm-g c-earn"><b>What it ships as data</b><span class="q">the law as records</span><ul><li>structure type and structures</li><li>categories, one per legal base</li><li>salary rules</li><li>dated parameters</li><li>payroll settings of time types</li><li>payroll warnings</li></ul><span class="sec">§22.2 – 22.6</span></div>
+<div class="lm-g c-odoo"><b>What it adds in Python</b><span class="q">only what data cannot say</span><ul><li>three wiring hooks: update list, post-install, pay frequencies</li><li>fields on <code>hr.version</code> for facts the law needs</li><li>country-guarded overrides, when a test shows the need</li></ul><span class="sec">§22.5, 22.7</span></div>
+<div class="lm-g c-emp"><b>What it must produce</b><span class="q">what the customer files and books</span><ul><li>the payslip PDF</li><li>declarations and yearly certificates</li><li>the journal entry, on the country's accounts</li></ul><span class="sec">§22.8</span></div>
+</div>
+<div class="lm-row two">
+<div class="lm-g c-tax"><b>What proves it</b><span class="q">tests that fail when the law is broken</span><ul><li>golden payslips per situation, structure, frequency</li><li>both sides of every dated change, above every cap</li></ul><span class="sec">§22.9</span></div>
+<div class="lm-g c-law"><b>What keeps it alive</b><span class="q">the yearly upkeep</span><ul><li>a new dated value, never an edit</li><li>delivered by the weekly update; customer edits protected</li></ul><span class="sec">§22.10</span></div>
+</div>
+</div>
+<div class="lm-fw"><b>Built on <code>hr_payroll</code>, shared by every country</b>: the engine, payslips, pay runs, work entries, the declaration framework, payroll accounting (Part IV)</div>
+</div>
+
+<p>Read the figure from the top: the law comes in, the module turns it into five groups of pieces, and everything stands on the shared framework, which a localization never patches (Chapter 21). The three boxes in the upper row are what the customer <em>uses</em>; the two below are what keeps it <em>right</em>. Section 22.11 reviews a module along the same groups.</p>
+<h2 id="222-the-skeleton-two-modules-and-a-manifest">22.2 The skeleton: two modules and a manifest</h2>
+<p>A localization is two modules, not one, because payroll and accounting are separate purchases. Some customers run payroll in Odoo and send the totals to an outside accountant; and the accounts a rule posts to belong to the country's chart of accounts (<code>l10n_xx</code>), which the payroll module must not force on anyone.</p>
+<div class="fcards" markdown="0">
+<div class="fcard c-tax"><div class="ft">l10n_xx_hr_payroll</div><div class="fwhy">The law. Depends only on <code>hr_payroll</code> and <code>hr_holidays</code>, so it installs in any database with payroll.</div>
+<div class="fex"><span>data/</span>categories, structure type, structures, dated parameters, rules, time-type settings</div>
+<div class="fex"><span>models/</span>the wiring hooks, fields on the version, declarations, overrides</div>
+<div class="fex"><span>views/</span>the payslip PDF, version fields on the employee form, declaration screens</div>
+<div class="fex"><span>security/</span>access rights for any model the module adds</div></div>
+<div class="fcard c-emp"><div class="ft">l10n_xx_hr_payroll_account</div><div class="fwhy">The bridge. Depends on <code>hr_payroll_account</code>, the chart <code>l10n_xx</code> and the module on the left; installs itself when both sides are present.</div>
+<div class="fex"><span>models/</span>which account each rule posts to</div>
+<div class="fex"><span>data/</span>loads that mapping for existing companies; marks the net as the employee's debt</div>
+<div class="fex"><span>tests/</span>the golden payslips: the test base needs a company with a chart</div>
+<div class="fex"><span>other</span>any e-filing that needs accounting (Mexico's electronic payslip)</div></div>
+</div>
+
+<p><strong>The name is not cosmetic.</strong> <em>Reset</em> on a rule or a parameter reloads only the modules whose name starts with <code>l10n_&lt;country code&gt;</code>, and the structure's payslip-report field offers only reports whose name contains it. A module called <code>xx_payroll</code> installs fine, but <em>Reset</em> never restores its rules.</p>
+<p>The manifest of the main module, following the Dutch one:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+    <span class="s1">'name'</span><span class="p">:</span> <span class="s1">'Xxland - Payroll'</span><span class="p">,</span>
+    <span class="s1">'countries'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'xx'</span><span class="p">],</span>
+    <span class="s1">'category'</span><span class="p">:</span> <span class="s1">'Human Resources/Payroll'</span><span class="p">,</span>
+    <span class="s1">'depends'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'hr_payroll'</span><span class="p">,</span> <span class="s1">'hr_holidays'</span><span class="p">],</span>                 <span class="c1"># ①</span>
+    <span class="s1">'auto_install'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'hr_payroll'</span><span class="p">],</span>                           <span class="c1"># ②</span>
+    <span class="s1">'data'</span><span class="p">:</span> <span class="p">[</span>                                                 <span class="c1"># ③</span>
+        <span class="s1">'data/hr_salary_rule_category_data.xml'</span><span class="p">,</span>
+        <span class="s1">'data/hr_payroll_structure_type_data.xml'</span><span class="p">,</span>
+        <span class="s1">'data/hr_work_entry_type_data.xml'</span><span class="p">,</span>
+        <span class="s1">'views/hr_payroll_report.xml'</span><span class="p">,</span>
+        <span class="s1">'data/hr_payroll_structure_data.xml'</span><span class="p">,</span>
+        <span class="s1">'data/hr_rule_parameters_data.xml'</span><span class="p">,</span>
+        <span class="s1">'data/hr_salary_rule_data.xml'</span><span class="p">,</span>
+        <span class="s1">'views/report_payslip_templates.xml'</span><span class="p">,</span>
+        <span class="s1">'views/hr_employee_views.xml'</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="s1">'demo'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'data/l10n_xx_hr_payroll_demo.xml'</span><span class="p">],</span>
+    <span class="s1">'post_init_hook'</span><span class="p">:</span> <span class="s1">'_l10n_xx_hr_payroll_post_install'</span><span class="p">,</span>    <span class="c1"># ④</span>
+    <span class="s1">'author'</span><span class="p">:</span> <span class="s1">'Odoo S.A.'</span><span class="p">,</span>
+    <span class="s1">'license'</span><span class="p">:</span> <span class="s1">'OEEL-1'</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="cnotes" markdown="0">
+<div class="cn"><span class="nn">1</span><div><b>No accounting, no chart.</b> <code>hr_holidays</code> is there because time off produces the work entries the payslip pays. <i>Add a dependency here only if a rule or a model really needs it.</i></div></div>
+<div class="cn"><span class="nn">2</span><div><b>Installs itself.</b> With <code>countries</code>, Odoo installs it with payroll only when a company of country xx exists. <i>Without it, a customer must know the module exists.</i></div></div>
+<div class="cn"><span class="nn">3</span><div><b>Load order.</b> Odoo loads files top to bottom, and a reference to a record not yet loaded fails the install. So: categories before the rules that use them, the structure type before the structure, the report action (<code>hr_payroll_report.xml</code>) before the structure that names it, the structure before its rules.</div></div>
+<div class="cn"><span class="nn">4</span><div><b>Post-install hook.</b> Switches existing data to the country's time types (§22.5).</div></div>
+<div class="cwhen"><b>When</b><div>Always. The account module's manifest is the same shape: <code>depends</code> on the three modules above, <code>auto_install</code> on the main module and <code>hr_payroll_account</code>.</div></div>
+</div>
+
+<h2 id="223-the-pay-structure-and-the-categories">22.3 The pay structure and the categories</h2>
+<p>The first data file gives the payslips a home: a structure type for the employees' versions, and a structure listing the rules. These are the Dutch records, renamed:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;record</span><span class="w"> </span><span class="na">id=</span><span class="s">"structure_type_employee_xx"</span><span class="w"> </span><span class="na">model=</span><span class="s">"hr.payroll.structure.type"</span><span class="nt">&gt;</span><span class="w">   </span><span class="cm">&lt;!-- ① --&gt;</span>
+<span class="w">    </span><span class="nt">&lt;field</span><span class="w"> </span><span class="na">name=</span><span class="s">"name"</span><span class="nt">&gt;</span>Xxland:<span class="w"> </span>Employee<span class="nt">&lt;/field&gt;</span>
+<span class="w">    </span><span class="nt">&lt;field</span><span class="w"> </span><span class="na">name=</span><span class="s">"country_id"</span><span class="w"> </span><span class="na">ref=</span><span class="s">"base.xx"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/record&gt;</span>
+
+<span class="nt">&lt;record</span><span class="w"> </span><span class="na">id=</span><span class="s">"hr_payroll_structure_xx_employee_salary"</span><span class="w"> </span><span class="na">model=</span><span class="s">"hr.payroll.structure"</span><span class="nt">&gt;</span><span class="w">  </span><span class="cm">&lt;!-- ② --&gt;</span>
+<span class="w">    </span><span class="nt">&lt;field</span><span class="w"> </span><span class="na">name=</span><span class="s">"name"</span><span class="nt">&gt;</span>Xxland:<span class="w"> </span>Regular<span class="w"> </span>Pay<span class="nt">&lt;/field&gt;</span>
+<span class="w">    </span><span class="nt">&lt;field</span><span class="w"> </span><span class="na">name=</span><span class="s">"code"</span><span class="nt">&gt;</span>XXMONTHLY<span class="nt">&lt;/field&gt;</span>
+<span class="w">    </span><span class="nt">&lt;field</span><span class="w"> </span><span class="na">name=</span><span class="s">"country_id"</span><span class="w"> </span><span class="na">ref=</span><span class="s">"base.xx"</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;field</span><span class="w"> </span><span class="na">name=</span><span class="s">"type_id"</span><span class="w"> </span><span class="na">ref=</span><span class="s">"structure_type_employee_xx"</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;field</span><span class="w"> </span><span class="na">name=</span><span class="s">"report_id"</span><span class="w"> </span><span class="na">ref=</span><span class="s">"action_report_payslip_xx"</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;field</span><span class="w"> </span><span class="na">name=</span><span class="s">"rule_ids"</span><span class="w"> </span><span class="na">eval=</span><span class="s">"[]"</span><span class="nt">/&gt;</span><span class="w">                                       </span><span class="cm">&lt;!-- ③ --&gt;</span>
+<span class="nt">&lt;/record&gt;</span>
+<span class="nt">&lt;record</span><span class="w"> </span><span class="na">id=</span><span class="s">"structure_type_employee_xx"</span><span class="w"> </span><span class="na">model=</span><span class="s">"hr.payroll.structure.type"</span><span class="nt">&gt;</span><span class="w">   </span><span class="cm">&lt;!-- ④ --&gt;</span>
+<span class="w">    </span><span class="nt">&lt;field</span><span class="w"> </span><span class="na">name=</span><span class="s">"default_struct_id"</span><span class="w"> </span><span class="na">ref=</span><span class="s">"hr_payroll_structure_xx_employee_salary"</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;field</span><span class="w"> </span><span class="na">name=</span><span class="s">"default_work_entry_type_id"</span><span class="w"> </span><span class="na">ref=</span><span class="s">"hr_work_entry.xx_work_entry_type_attendance"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/record&gt;</span>
+</code></pre></div>
+<div class="cnotes" markdown="0">
+<div class="cn"><span class="nn">1</span><div><b>The structure type</b> is what HR picks on each employee's version (Chapter 19). Its country hides it from companies of other countries.</div></div>
+<div class="cn"><span class="nn">2</span><div><b>The structure</b> is the list of rules for the regular payslip, with the country's payslip PDF.</div></div>
+<div class="cn"><span class="nn">3</span><div><b><code>rule_ids eval="[]"</code></b>: a new structure otherwise receives a copy of the framework's generic rules (basic, gross, net), which would then sit next to the country's own and duplicate their lines.</div></div>
+<div class="cn"><span class="nn">4</span><div><b>A second write on the type.</b> The type must name its default structure, and the structure needs its type: neither can be created first with both links. So the type is created bare, then completed. It also names the time type used for normal work (Chapter 14).</div></div>
+<div class="cwhen"><b>When</b><div>Always. Add one structure per kind of payslip the law taxes or declares differently (a 13th month, a termination); a bonus paid without worked days sets <code>use_worked_day_lines</code> to <code>False</code>.</div></div>
+</div>
+
+<p>Then the <strong>categories</strong>, the running totals of Chapter 20. Design them from the declarations: each total a form asks for, and each base the law computes something on, gets a category.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;record</span><span class="w"> </span><span class="na">id=</span><span class="s">"hr_salary_rule_category_social_security_employee"</span><span class="w"> </span><span class="na">model=</span><span class="s">"hr.salary.rule.category"</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;field</span><span class="w"> </span><span class="na">name=</span><span class="s">"name"</span><span class="nt">&gt;</span>Employee<span class="w"> </span>Social<span class="w"> </span>Security<span class="w"> </span>Deductions<span class="nt">&lt;/field&gt;</span>
+<span class="w">    </span><span class="nt">&lt;field</span><span class="w"> </span><span class="na">name=</span><span class="s">"code"</span><span class="nt">&gt;</span>SOCIALSECURITYEMPLOYEE<span class="nt">&lt;/field&gt;</span>
+<span class="w">    </span><span class="nt">&lt;field</span><span class="w"> </span><span class="na">name=</span><span class="s">"parent_id"</span><span class="w"> </span><span class="na">ref=</span><span class="s">"hr_payroll.DED"</span><span class="nt">/&gt;</span><span class="w">                           </span><span class="cm">&lt;!-- ① --&gt;</span>
+<span class="w">    </span><span class="nt">&lt;field</span><span class="w"> </span><span class="na">name=</span><span class="s">"country_id"</span><span class="w"> </span><span class="na">ref=</span><span class="s">"base.xx"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/record&gt;</span>
+</code></pre></div>
+<div class="cnotes" markdown="0">
+<div class="cn"><span class="nn">1</span><div><b>Parent <code>DED</code>.</b> Everything added here also rolls up into the deductions, so the generic net formula sees it unchanged (Chapter 20). The declaration reads the child category for its "employee social security" box.</div></div>
+<div class="cwhen"><b>When</b><div>One per legal base or declaration box. Most countries keep the generic chain and add children (Netherlands, Mexico); a country where many items enter and leave the net at different points uses a running net instead (Belgium, Chapter 20).</div></div>
+</div>
+
+<p>Last, the <strong>time types</strong>. They are created for each country in the community module <code>hr_work_entry</code>, so attendance and time off work without payroll. The payroll module only says which total each one feeds:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;record</span><span class="w"> </span><span class="na">id=</span><span class="s">"hr_work_entry.xx_work_entry_type_attendance"</span><span class="w"> </span><span class="na">model=</span><span class="s">"hr.work.entry.type"</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;field</span><span class="w"> </span><span class="na">name=</span><span class="s">"category_ids"</span><span class="w"> </span><span class="na">eval=</span><span class="s">"[(6, 0, [ref('hr_payroll.BASIC')])]"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/record&gt;</span>
+</code></pre></div>
+<p>Without this line, the worked-days amount is on the payslip but never reaches <code>BASIC</code>, so the gross and the net miss it (the pitfall of Chapter 20). Write one such record for every paid time type of the country.</p>
+<h2 id="224-rules">22.4 Rules</h2>
+<p>A rule is a record with five parts (Chapter 19). In a localization it is written in XML, and <em>how</em> it is written decides whether Odoo can keep it correct later. Here is the Dutch old-age contribution, simplified and renamed:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;record</span><span class="w"> </span><span class="na">id=</span><span class="s">"l10n_xx_old_age_insurance"</span><span class="w"> </span><span class="na">model=</span><span class="s">"hr.salary.rule"</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;field</span><span class="w"> </span><span class="na">name=</span><span class="s">"name"</span><span class="nt">&gt;</span>Old<span class="w"> </span>Age<span class="w"> </span>Insurance<span class="nt">&lt;/field&gt;</span>
+<span class="w">    </span><span class="nt">&lt;field</span><span class="w"> </span><span class="na">name=</span><span class="s">"code"</span><span class="nt">&gt;</span>XX_OLD_AGE<span class="nt">&lt;/field&gt;</span><span class="w">                                    </span><span class="cm">&lt;!-- ① --&gt;</span>
+<span class="w">    </span><span class="nt">&lt;field</span><span class="w"> </span><span class="na">name=</span><span class="s">"sequence"</span><span class="nt">&gt;</span>105<span class="nt">&lt;/field&gt;</span><span class="w">                                       </span><span class="cm">&lt;!-- ② --&gt;</span>
+<span class="w">    </span><span class="cm">&lt;!-- ③ --&gt;</span>
+<span class="w">    </span><span class="nt">&lt;field</span><span class="w"> </span><span class="na">name=</span><span class="s">"category_ids"</span><span class="w"> </span><span class="na">eval=</span><span class="s">"[(6, 0, [ref('hr_salary_rule_category_social_security_employee')])]"</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;field</span><span class="w"> </span><span class="na">name=</span><span class="s">"condition_select"</span><span class="nt">&gt;</span>none<span class="nt">&lt;/field&gt;</span>
+<span class="w">    </span><span class="nt">&lt;field</span><span class="w"> </span><span class="na">name=</span><span class="s">"amount_select"</span><span class="nt">&gt;</span>code<span class="nt">&lt;/field&gt;</span>
+<span class="w">    </span><span class="nt">&lt;field</span><span class="w"> </span><span class="na">name=</span><span class="s">"amount_python_compute"</span><span class="nt">&gt;</span><span class="w">                                     </span><span class="cm">&lt;!-- ④ --&gt;</span>
+rates<span class="w"> </span>=<span class="w"> </span>payslip._rule_parameter('l10n_xx_social_security_rates_employee')['OLD_AGE']
+result_rate<span class="w"> </span>=<span class="w"> </span>-rates[0]
+result<span class="w"> </span>=<span class="w"> </span>min(categories['GROSS'],<span class="w"> </span>rates[1]<span class="w"> </span>/<span class="w"> </span>12)
+<span class="w">    </span><span class="nt">&lt;/field&gt;</span>
+<span class="w">    </span><span class="cm">&lt;!-- ⑤ --&gt;</span>
+<span class="w">    </span><span class="nt">&lt;field</span><span class="w"> </span><span class="na">name=</span><span class="s">"struct_ids"</span><span class="w"> </span><span class="na">eval=</span><span class="s">"[(6, 0, [ref('hr_payroll_structure_xx_employee_salary')])]"</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;field</span><span class="w"> </span><span class="na">name=</span><span class="s">"country_id"</span><span class="w"> </span><span class="na">ref=</span><span class="s">"base.xx"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/record&gt;</span>
+</code></pre></div>
+<div class="cnotes" markdown="0">
+<div class="cn"><span class="nn">1</span><div><b>The code</b> is how later rules (<code>result_rules['XX_OLD_AGE']</code>), tests and declarations find this line. Choose it once; renaming it breaks all three.</div></div>
+<div class="cn"><span class="nn">2</span><div><b>Sequence 105</b>: after <code>GROSS</code> (100), which the formula reads; a rule placed before it would read 0 without any error (Chapter 19). Leave gaps: next year's new contribution fits in at 107 without renumbering.</div></div>
+<div class="cn"><span class="nn">3</span><div><b><code>(6, 0, [...])</code> means "exactly this list".</b> The weekly update rewrites only what the XML says. Written as "add this category" (<code>(4, id)</code>), a category you later remove from the XML would stay in every customer database. <i>Same reason to write the condition, the amount, the structures and the country every time, even when they look like defaults.</i></div></div>
+<div class="cn"><span class="nn">4</span><div><b>The formula.</b> Line 1 reads the rate and the yearly cap from a dated parameter (§22.5). Line 2 sets the rate, negative because a deduction lowers the net. Line 3 sets the amount: the taxable salary, capped at a twelfth of the yearly cap. The payslip line then shows <i>base × rate</i>, which anyone can check. <i>No number is written in the code: a literal can only change with a code release, and since rules are not dated, changing it also changes every old payslip you recompute (Chapter 21).</i></div></div>
+<div class="cn"><span class="nn">5</span><div><b>Structures.</b> The rule runs only on these. A contribution due on the 13th month too must list that structure as well.</div></div>
+<div class="cwhen"><b>When</b><div>One record per line the law defines on a payslip.</div></div>
+</div>
+
+<p>Three habits keep rules reviewable:</p>
+<ul>
+<li><strong>A long formula goes to a helper.</strong> Past about ten lines, move the computation to a method on <code>hr.payslip</code> and call it from the rule (<code>result = payslip._get_xx_income_tax()</code>); a method can be tested alone and read with an editor.</li>
+<li><strong>Never rely on leftovers.</strong> All rules of a payslip share one dictionary, so a variable set in one rule is still there in the next. Read earlier results through <code>result_rules</code> or <code>categories</code> instead, and never name a variable like a helper (<code>date</code>).</li>
+<li><strong>Every total a rule reads is fed by an earlier rule.</strong> A misspelt or empty category reads 0, silently.</li>
+</ul>
+<h2 id="225-dated-parameters-and-the-three-wiring-hooks">22.5 Dated parameters and the three wiring hooks</h2>
+<p>The rule above asked for <code>l10n_xx_social_security_rates_employee</code>. Here it is, in the Dutch shape (the values are placeholders):</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;record</span><span class="w"> </span><span class="na">id=</span><span class="s">"rule_parameter_social_security_rates_employee"</span><span class="w"> </span><span class="na">model=</span><span class="s">"hr.rule.parameter"</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;field</span><span class="w"> </span><span class="na">name=</span><span class="s">"name"</span><span class="nt">&gt;</span>Xxland:<span class="w"> </span>Employee<span class="w"> </span>Social<span class="w"> </span>Security<span class="w"> </span>Rates<span class="w"> </span>and<span class="w"> </span>Thresholds<span class="nt">&lt;/field&gt;</span>
+<span class="w">    </span><span class="nt">&lt;field</span><span class="w"> </span><span class="na">name=</span><span class="s">"code"</span><span class="nt">&gt;</span>l10n_xx_social_security_rates_employee<span class="nt">&lt;/field&gt;</span><span class="w">     </span><span class="cm">&lt;!-- ① --&gt;</span>
+<span class="w">    </span><span class="nt">&lt;field</span><span class="w"> </span><span class="na">name=</span><span class="s">"country_id"</span><span class="w"> </span><span class="na">ref=</span><span class="s">"base.xx"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/record&gt;</span>
+<span class="cm">&lt;!-- {code: [rate, yearly cap]} --&gt;</span><span class="w">                                       </span><span class="cm">&lt;!-- ② --&gt;</span>
+<span class="nt">&lt;record</span><span class="w"> </span><span class="na">id=</span><span class="s">"rule_parameter_social_security_rates_employee_2025"</span><span class="w"> </span><span class="na">model=</span><span class="s">"hr.rule.parameter.value"</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;field</span><span class="w"> </span><span class="na">name=</span><span class="s">"parameter_value"</span><span class="nt">&gt;</span>{
+<span class="w">    </span>'OLD_AGE':<span class="w"> </span>[17.9,<span class="w"> </span>35129.00],
+<span class="w">    </span>'SURVIVOR':<span class="w"> </span>[0.1,<span class="w"> </span>35129.00],
+}<span class="nt">&lt;/field&gt;</span>
+<span class="w">    </span><span class="nt">&lt;field</span><span class="w"> </span><span class="na">name=</span><span class="s">"rule_parameter_id"</span><span class="w"> </span><span class="na">ref=</span><span class="s">"rule_parameter_social_security_rates_employee"</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;field</span><span class="w"> </span><span class="na">name=</span><span class="s">"date_from"</span><span class="w"> </span><span class="na">eval=</span><span class="s">"datetime(2025, 1, 1).date()"</span><span class="nt">/&gt;</span><span class="w">          </span><span class="cm">&lt;!-- ③ --&gt;</span>
+<span class="nt">&lt;/record&gt;</span>
+</code></pre></div>
+<div class="cnotes" markdown="0">
+<div class="cn"><span class="nn">1</span><div><b>The parameter</b> is only a name and a code; rules ask for the code. Prefix it with <code>l10n_xx_</code>: one database holds every installed country's parameters, and two countries would otherwise collide on <code>social_security_rates</code>.</div></div>
+<div class="cn"><span class="nn">2</span><div><b>The shape</b> (here, a rate and a cap per contribution) is chosen once and kept every year, so the rule never needs to know the year. The comment documents it for the next developer.</div></div>
+<div class="cn"><span class="nn">3</span><div><b>The value's start date</b> is the date the law takes effect. It lasts until the next value; the record's id ends with the year, so next year is a <i>new</i> record (§22.10).</div></div>
+<div class="cwhen"><b>When</b><div>For every number, scale or table the law sets. How a payslip picks its value is in Chapter 21.</div></div>
+</div>
+
+<p>Records are not enough on their own. Three small hooks connect them to the rest of Odoo; every localization has all three.</p>
+<p><strong>Hook 1: the update list.</strong> It tells the weekly job which files to reload:</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">HrPayslip</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">_inherit</span> <span class="o">=</span> <span class="s1">'hr.payslip'</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_get_data_files_to_update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>                               <span class="c1"># ①</span>
+        <span class="c1"># Note: file order should be maintained</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_get_data_files_to_update</span><span class="p">()</span> <span class="o">+</span> <span class="p">[(</span>
+            <span class="s1">'l10n_xx_hr_payroll'</span><span class="p">,</span> <span class="p">[</span>                                     <span class="c1"># ②</span>
+                <span class="s1">'data/hr_salary_rule_category_data.xml'</span><span class="p">,</span>
+                <span class="s1">'data/hr_payroll_structure_type_data.xml'</span><span class="p">,</span>
+                <span class="s1">'data/hr_payroll_structure_data.xml'</span><span class="p">,</span>
+                <span class="s1">'data/hr_rule_parameters_data.xml'</span><span class="p">,</span>
+                <span class="s1">'data/hr_salary_rule_data.xml'</span><span class="p">,</span>
+            <span class="p">])]</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">HrWorkEntryType</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">_inherit</span> <span class="o">=</span> <span class="s1">'hr.work.entry.type'</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_get_data_files_to_update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>                               <span class="c1"># ③</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_get_data_files_to_update</span><span class="p">()</span> <span class="o">+</span> <span class="p">[(</span>
+            <span class="s1">'l10n_xx_hr_payroll'</span><span class="p">,</span> <span class="p">[</span><span class="s1">'data/hr_work_entry_type_data.xml'</span><span class="p">])]</span>
+</code></pre></div>
+<div class="cnotes" markdown="0">
+<div class="cn"><span class="nn">1</span><div><b>Why.</b> The scheduled action <i>Payroll: Update data</i> reloads, every week and in every database, exactly the files listed here. A file not in the list is loaded at installation and never again: a fixed rate in it reaches new customers only.</div></div>
+<div class="cn"><span class="nn">2</span><div><b>Same order as the manifest</b>, for the same reason: a file can only refer to records loaded before it.</div></div>
+<div class="cn"><span class="nn">3</span><div><b>Time types have their own list</b>, reloaded in a separate step, after the community time types are created, so the references in the file always resolve.</div></div>
+</div>
+
+<p><strong>Hook 2: the post-install hook</strong>, in the module's <code>__init__.py</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">_l10n_xx_hr_payroll_post_install</span><span class="p">(</span><span class="n">env</span><span class="p">):</span>
+    <span class="n">env</span><span class="o">.</span><span class="n">ref</span><span class="p">(</span><span class="s1">'base.xx'</span><span class="p">)</span><span class="o">.</span><span class="n">_adapt_work_entry_types_to_country</span><span class="p">()</span>
+</code></pre></div>
+<p>A database that already used Odoo before installing payroll has schedules, time off, allocations and structure types pointing at the <em>generic</em> time types. This call switches those of the country's companies to the country's own time types with the same code. Without it, existing employees keep generic types that carry none of the country's payroll settings.</p>
+<p><strong>Hook 3: the pay frequencies</strong> the law allows:</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">HrPayrollStructureType</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">_inherit</span> <span class="o">=</span> <span class="s1">'hr.payroll.structure.type'</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_get_selection_schedule_pay</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">company</span><span class="o">.</span><span class="n">country_code</span> <span class="o">==</span> <span class="s1">'XX'</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[(</span><span class="s1">'monthly'</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">_</span><span class="p">(</span><span class="s1">'month'</span><span class="p">))]</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_get_selection_schedule_pay</span><span class="p">()</span>
+</code></pre></div>
+<p>The structure type's <em>Scheduled Pay</em> field offers only these choices, so nobody runs a weekly payroll where the law and the rules only know months. The test is on the current company's country; other countries fall through to <code>super()</code>. Mexico lists seven frequencies, including 10 and 14 days, and also overrides <code>_schedule_timedelta</code> on <code>hr.payslip</code> to tell the engine where such a period ends.</p>
+<h2 id="226-payroll-warnings">22.6 Payroll warnings</h2>
+<p>A payslip computed from incomplete data is wrong without any error: an employee with no sector gets no sector rules, an employee with no bank account cannot be paid, a missing national number gets the declaration rejected months later. A <strong>payroll warning</strong> catches that earlier. It is a data record (<code>hr.payroll.warning</code>) holding a check, either a domain or a few lines of Python. Every record that matches it appears on a card of the payroll dashboard, with a button to open the list; a warning can also <strong>block</strong> the validation of those employees' payslips.</p>
+<p>The framework ships the generic ones (<em>Missing Bank Account</em>); a localization adds the checks its law needs. Belgium's meal-voucher check:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;record</span><span class="w"> </span><span class="na">id=</span><span class="s">"hr_payroll_warning_incorrect_configuration_meal_voucher"</span><span class="w"> </span><span class="na">model=</span><span class="s">"hr.payroll.warning"</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;field</span><span class="w"> </span><span class="na">name=</span><span class="s">"name"</span><span class="nt">&gt;</span>Incorrect<span class="w"> </span>Meal<span class="w"> </span>Voucher<span class="w"> </span>Configuration<span class="nt">&lt;/field&gt;</span><span class="w">                 </span><span class="cm">&lt;!-- ① --&gt;</span>
+<span class="w">    </span><span class="nt">&lt;field</span><span class="w"> </span><span class="na">name=</span><span class="s">"description"</span><span class="nt">&gt;</span>Its<span class="w"> </span>value<span class="w"> </span>cannot<span class="w"> </span>exceed<span class="w"> </span>€10<span class="w"> </span>and<span class="w"> </span>must<span class="w"> </span>be<span class="w"> </span>greater<span class="w"> </span>than<span class="w"> </span>the<span class="w"> </span>employee's<span class="w"> </span>share,<span class="w"> </span>which<span class="w"> </span>cannot<span class="w"> </span>be<span class="w"> </span>less<span class="w"> </span>than<span class="w"> </span>€1.09.<span class="nt">&lt;/field&gt;</span>
+<span class="w">    </span><span class="nt">&lt;field</span><span class="w"> </span><span class="na">name=</span><span class="s">"country_id"</span><span class="w"> </span><span class="na">ref=</span><span class="s">"base.be"</span><span class="nt">/&gt;</span><span class="w">                                         </span><span class="cm">&lt;!-- ② --&gt;</span>
+<span class="w">    </span><span class="nt">&lt;field</span><span class="w"> </span><span class="na">name=</span><span class="s">"warning_color_class"</span><span class="nt">&gt;</span>warning<span class="nt">&lt;/field&gt;</span>
+<span class="w">    </span><span class="nt">&lt;field</span><span class="w"> </span><span class="na">name=</span><span class="s">"button_name"</span><span class="nt">&gt;</span>Review<span class="w"> </span>Employees<span class="nt">&lt;/field&gt;</span>
+<span class="w">    </span><span class="nt">&lt;field</span><span class="w"> </span><span class="na">name=</span><span class="s">"block_payslips"</span><span class="nt">&gt;</span>True<span class="nt">&lt;/field&gt;</span><span class="w">                                        </span><span class="cm">&lt;!-- ③ --&gt;</span>
+<span class="w">    </span><span class="nt">&lt;field</span><span class="w"> </span><span class="na">name=</span><span class="s">"warning_type"</span><span class="nt">&gt;</span>domain<span class="nt">&lt;/field&gt;</span><span class="w">                                        </span><span class="cm">&lt;!-- ④ --&gt;</span>
+<span class="w">    </span><span class="nt">&lt;field</span><span class="w"> </span><span class="na">name=</span><span class="s">"model_id"</span><span class="w"> </span><span class="na">ref=</span><span class="s">"hr.model_hr_employee"</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;field</span><span class="w"> </span><span class="na">name=</span><span class="s">"warning_domain"</span><span class="nt">&gt;</span>[('is_meal_voucher_valid',<span class="w"> </span>'=',<span class="w"> </span>False)]<span class="nt">&lt;/field&gt;</span>
+<span class="nt">&lt;/record&gt;</span>
+</code></pre></div>
+<div class="cnotes" markdown="0">
+<div class="cn"><span class="nn">1</span><div><b>Title and description</b>, as shown on the dashboard card. Say what is wrong and what the law requires, so the payroll officer can fix it without asking.</div></div>
+<div class="cn"><span class="nn">2</span><div><b>Country.</b> Only companies of this country see it. The generic warnings leave it empty.</div></div>
+<div class="cn"><span class="nn">3</span><div><b>Blocking.</b> Validating a payslip of a matching employee fails with the warning's name. Without it, the card only informs.</div></div>
+<div class="cn"><span class="nn">4</span><div><b>The check</b>: a domain on a model; every matching record is listed. When a domain cannot express it, use <code>warning_type</code> <code>python</code> and an <code>evaluation_code</code> that sets <code>warning_records</code> (Belgium's invalid national numbers).</div></div>
+<div class="cwhen"><b>When</b><div>One per piece of data the rules or the declarations cannot do without. Make it <b>blocking</b> only when every payslip of the employee would be wrong or unpayable, and the fix is quick (a voucher amount out of the legal range). Data that matters for a later filing (Belgium's <i>Employees without a Joint Committee</i>) stays a plain card: blocking it would stop the whole pay run for something that can be fixed before the declaration.</div></div>
+</div>
+
+<h2 id="227-python-fields-on-the-version-and-guarded-overrides">22.7 Python: fields on the version and guarded overrides</h2>
+<p>Python enters only when data cannot express the law. The two most common reasons are a <strong>fact about the person</strong> the standard version lacks, and an <strong>engine step</strong> that works differently in the country (the ladder of Chapter 21).</p>
+<p>A fact about the person goes on the version. The Dutch 30 % ruling for skilled migrants, renamed:</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">HrVersion</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">_inherit</span> <span class="o">=</span> <span class="s1">'hr.version'</span>
+
+    <span class="n">l10n_xx_30_percent</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Boolean</span><span class="p">(</span>                                  <span class="c1"># ①</span>
+        <span class="n">string</span><span class="o">=</span><span class="s2">"30</span><span class="si">% E</span><span class="s2">xemption"</span><span class="p">,</span> <span class="n">groups</span><span class="o">=</span><span class="s2">"hr_payroll.group_hr_payroll_user"</span><span class="p">,</span> <span class="n">tracking</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="nd">@api</span><span class="o">.</span><span class="n">model</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_get_whitelist_fields_from_template</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>                        <span class="c1"># ②</span>
+        <span class="n">whitelisted_fields</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_get_whitelist_fields_from_template</span><span class="p">()</span> <span class="ow">or</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">company</span><span class="o">.</span><span class="n">country_id</span><span class="o">.</span><span class="n">code</span> <span class="o">==</span> <span class="s2">"XX"</span><span class="p">:</span>
+            <span class="n">whitelisted_fields</span> <span class="o">+=</span> <span class="p">[</span><span class="s2">"l10n_xx_30_percent"</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">whitelisted_fields</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">HrEmployee</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">_inherit</span> <span class="o">=</span> <span class="s1">'hr.employee'</span>
+
+    <span class="n">l10n_xx_30_percent</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Boolean</span><span class="p">(</span>                                  <span class="c1"># ③</span>
+        <span class="n">readonly</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">related</span><span class="o">=</span><span class="s2">"version_id.l10n_xx_30_percent"</span><span class="p">,</span> <span class="n">inherited</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">groups</span><span class="o">=</span><span class="s2">"hr_payroll.group_hr_payroll_user"</span><span class="p">)</span>
+</code></pre></div>
+<div class="cnotes" markdown="0">
+<div class="cn"><span class="nn">1</span><div><b>On the version, not the employee</b>, because the fact can change and versions are dated (Chapter 13): a payslip of last year reads last year's situation. <code>groups</code> hides it from users without payroll rights; <code>tracking</code> logs every change for audits.</div></div>
+<div class="cn"><span class="nn">2</span><div><b>Whitelist.</b> Contract templates copy only whitelisted fields into new versions; the country test keeps other countries' templates unchanged.</div></div>
+<div class="cn"><span class="nn">3</span><div><b>Mirror on the employee</b>, so HR edits it on the employee form like any standard version field. The view shows it only when <code>country_code</code> is the country's.</div></div>
+<div class="cwhen"><b>When</b><div>Only when a rule needs a fact the version lacks. If a rule reads the field, also add it to <code>_get_fields_that_recompute_payslip</code>, or draft payslips keep the old amount until someone clicks <i>Compute</i>. A list with its own life (Mexico's housing-loan deductions) becomes its own model, with access rights and a multi-company rule.</div></div>
+</div>
+
+<p>An <strong>engine override</strong> changes one step for one country. Mexico values a worked-days line from a legal daily salary instead of the monthly wage:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">_compute_amount</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">mx_worked_days</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filtered</span><span class="p">(</span>
+        <span class="k">lambda</span> <span class="n">wd</span><span class="p">:</span> <span class="n">wd</span><span class="o">.</span><span class="n">payslip_id</span><span class="o">.</span><span class="n">struct_id</span><span class="o">.</span><span class="n">country_id</span><span class="o">.</span><span class="n">code</span> <span class="o">==</span> <span class="s2">"MX"</span><span class="p">)</span>     <span class="c1"># ①</span>
+    <span class="k">for</span> <span class="n">worked_days</span> <span class="ow">in</span> <span class="n">mx_worked_days</span><span class="p">:</span>
+        <span class="o">...</span>   <span class="c1"># value the line from the Mexican daily salary            # ②</span>
+    <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">HrPayslipWorkedDays</span><span class="p">,</span> <span class="bp">self</span> <span class="o">-</span> <span class="n">mx_worked_days</span><span class="p">)</span><span class="o">.</span><span class="n">_compute_amount</span><span class="p">()</span>  <span class="c1"># ③</span>
+</code></pre></div>
+<div class="cnotes" markdown="0">
+<div class="cn"><span class="nn">1</span><div><b>The country guard.</b> One database can hold a Mexican and a Belgian company. Keep only the records of your country, here through the payslip's structure.</div></div>
+<div class="cn"><span class="nn">2</span><div><b>Your country's logic</b>, on those records only.</div></div>
+<div class="cn"><span class="nn">3</span><div><b>Everything else goes to <code>super()</code></b>: other countries get the standard behaviour, and other modules' overrides of the same method still run. <i>Forget the guard and Belgian payslips are valued the Mexican way; forget <code>super()</code> and every other country's worked days stay at zero.</i></div></div>
+</div>
+
+<p>Which hook to override depends on what the law asks. These are the ones localizations use, all on <code>hr.payslip</code> unless noted:</p>
+<div class="needmap" markdown="0">
+<div class="nmh"><span>The law says…</span><span>Override</span></div>
+<div class="nm"><div class="nl">pay periods the core lacks (10 or 14 days)</div><div class="na">→</div><div class="np"><code>_schedule_timedelta</code><i>Mexico: where a 10-day period ends</i></div></div>
+<div class="nm"><div class="nl">a day of work is worth a legal daily rate</div><div class="na">→</div><div class="np"><code>hr.payslip.worked_days._compute_amount</code><i>Mexico: the daily salary; Belgium: an hourly rate</i></div></div>
+<div class="nm"><div class="nl">some rules apply only in some sectors</div><div class="na">→</div><div class="np"><code>hr.salary.rule._satisfy_condition</code><i>Belgium: a filter in front of every condition</i></div></div>
+<div class="nm"><div class="nl">every line is rounded to the cent</div><div class="na">→</div><div class="np"><code>_get_payslip_line_total</code><i>Belgium: half-up rounding (code in Chapter 21)</i></div></div>
+<div class="nm"><div class="nl">rules need the year's earlier payslips</div><div class="na">→</div><div class="np"><code>_get_common_localdict</code><i>Belgium: loaded once for the whole batch, not once per payslip</i></div></div>
+<div class="nm"><div class="nl">an amount appears without anyone typing it</div><div class="na">→</div><div class="np"><code>_compute_input_line_ids</code><i>Belgium: recovery of a salary advance</i></div></div>
+</div>
+
+<p>A new localization usually starts with none of them. Add one when a golden payslip cannot be matched with data, and never override <code>_get_payslip_lines</code>, the engine loop itself.</p>
+<h2 id="228-declarations-and-the-accounting-bridge">22.8 Declarations and the accounting bridge</h2>
+<p>A module the customer cannot file with is not finished. Most countries require at least a <strong>yearly certificate per employee</strong> (what was paid and withheld). The framework gives a mixin with the year, one line per employee, background PDF generation and the screens; a localization fills in four methods. Following the Kenyan certificate:</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">L10nXxAnnualCertificate</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">_name</span> <span class="o">=</span> <span class="s1">'l10n_xx.annual.certificate'</span>
+    <span class="n">_inherit</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'hr.payroll.declaration.mixin'</span><span class="p">]</span>
+    <span class="n">_description</span> <span class="o">=</span> <span class="s1">'Annual Salary Certificate'</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_country_restriction</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>                                       <span class="c1"># ①</span>
+        <span class="k">return</span> <span class="s1">'XX'</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">action_generate_declarations</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>                               <span class="c1"># ②</span>
+        <span class="k">for</span> <span class="n">sheet</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">:</span>
+            <span class="n">payslips</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="p">[</span><span class="s1">'hr.payslip'</span><span class="p">]</span><span class="o">.</span><span class="n">search</span><span class="p">([</span><span class="o">...</span><span class="p">])</span>  <span class="c1"># validated, this year</span>
+            <span class="n">sheet</span><span class="o">.</span><span class="n">line_ids</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)]</span> <span class="o">+</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">{</span>
+                <span class="s1">'employee_id'</span><span class="p">:</span> <span class="n">employee</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="s1">'res_model'</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="p">,</span> <span class="s1">'res_id'</span><span class="p">:</span> <span class="n">sheet</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+            <span class="p">})</span> <span class="k">for</span> <span class="n">employee</span> <span class="ow">in</span> <span class="n">payslips</span><span class="o">.</span><span class="n">employee_id</span><span class="p">]</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">action_generate_declarations</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_get_rendering_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">employees</span><span class="p">):</span>                             <span class="c1"># ③</span>
+        <span class="o">...</span>   <span class="c1"># {employee: {...}} from payslips._get_line_values(['GROSS', 'XX_TAX'])</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_get_pdf_report</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>                                            <span class="c1"># ④</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">ref</span><span class="p">(</span><span class="s1">'l10n_xx_hr_payroll.action_report_annual_certificate'</span><span class="p">)</span>
+</code></pre></div>
+<div class="cnotes" markdown="0">
+<div class="cn"><span class="nn">1</span><div><b>Only companies of the country</b> can open the screen.</div></div>
+<div class="cn"><span class="nn">2</span><div><b>Who gets a certificate</b>: one line per employee with a validated payslip in the year. The mixin's <code>super()</code> refuses an empty declaration.</div></div>
+<div class="cn"><span class="nn">3</span><div><b>The numbers</b>, read from payslip lines by code or category, never recomputed. If the certificate is wrong, the payslips are (Chapter 18).</div></div>
+<div class="cn"><span class="nn">4</span><div><b>The PDF</b> printed for each employee.</div></div>
+<div class="cwhen"><b>When</b><div>For each per-employee form the law requires. Monthly returns and electronic files are their own models with an export (Chapter 17).</div></div>
+</div>
+
+<p>Two habits from the larger modules apply to every filing. <strong>Map payslips to boxes with data</strong>: Mexico stores the official concept code on each rule, so a new allowance needs a rule, not a change to the export. And <strong>collect every validation error before raising</strong>, so the payroll officer fixes ten missing tax numbers at once rather than one per try.</p>
+<p>The <strong>accounting bridge</strong> says which account each rule posts to. The core finds a method named after the chart, <code>_configure_payroll_account_&lt;chart code&gt;</code>, and calls it whenever a company loads that chart. Following the Mexican one:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">_configure_payroll_account_xx</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">companies</span><span class="p">):</span>
+    <span class="n">wages</span> <span class="o">=</span> <span class="s1">'xx_account_wages'</span>                    <span class="c1"># ① xml ids in the l10n_xx chart</span>
+    <span class="n">wages_payable</span> <span class="o">=</span> <span class="s1">'xx_account_wages_payable'</span>
+    <span class="n">rules_mapping</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">dict</span><span class="p">)</span>
+    <span class="n">basic</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">ref</span><span class="p">(</span><span class="s1">'l10n_xx_hr_payroll.l10n_xx_regular_pay_basic'</span><span class="p">)</span>
+    <span class="n">rules_mapping</span><span class="p">[</span><span class="n">basic</span><span class="p">][</span><span class="s1">'debit'</span><span class="p">]</span> <span class="o">=</span> <span class="n">wages</span>         <span class="c1"># ②</span>
+    <span class="n">net</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">ref</span><span class="p">(</span><span class="s1">'l10n_xx_hr_payroll.l10n_xx_regular_pay_net'</span><span class="p">)</span>
+    <span class="n">rules_mapping</span><span class="p">[</span><span class="n">net</span><span class="p">][</span><span class="s1">'credit'</span><span class="p">]</span> <span class="o">=</span> <span class="n">wages_payable</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_configure_payroll_account</span><span class="p">(</span>              <span class="c1"># ③</span>
+        <span class="n">companies</span><span class="p">,</span> <span class="s2">"XX"</span><span class="p">,</span> <span class="n">account_refs</span><span class="o">=</span><span class="p">[</span><span class="n">wages</span><span class="p">,</span> <span class="n">wages_payable</span><span class="p">],</span>
+        <span class="n">rules_mapping</span><span class="o">=</span><span class="n">rules_mapping</span><span class="p">,</span> <span class="n">default_account</span><span class="o">=</span><span class="n">wages_payable</span><span class="p">)</span>
+</code></pre></div>
+<div class="cnotes" markdown="0">
+<div class="cn"><span class="nn">1</span><div><b>Accounts by xml id</b> of the country's chart, so the mapping works in every company whatever the account numbers.</div></div>
+<div class="cn"><span class="nn">2</span><div><b>One debit or credit per rule</b>: the cost side of earnings, the liability side of deductions and of the net (Chapter 16).</div></div>
+<div class="cn"><span class="nn">3</span><div><b>The core helper</b> sets the payroll journal on the country's structures and writes the accounts on each rule, company by company. An account it cannot find only logs a warning: the rule stays without an account and the entry gets an <i>Adjustment Entry</i> line.</div></div>
+</div>
+
+<p>The account module also ships two small data files, both <code>noupdate</code> because accounts are the company's choice and the weekly reload must not overwrite them:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;data</span><span class="w"> </span><span class="na">noupdate=</span><span class="s">"1"</span><span class="nt">&gt;</span><span class="w">                                                       </span><span class="cm">&lt;!-- ① --&gt;</span>
+<span class="w">    </span><span class="nt">&lt;function</span><span class="w"> </span><span class="na">model=</span><span class="s">"account.chart.template"</span><span class="w"> </span><span class="na">name=</span><span class="s">"_load_payroll_accounts"</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;value</span><span class="w"> </span><span class="na">eval=</span><span class="s">"[]"</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;value&gt;</span>xx<span class="nt">&lt;/value&gt;</span>
+<span class="w">        </span><span class="nt">&lt;value</span><span class="w"> </span><span class="na">model=</span><span class="s">"res.company"</span><span class="w"> </span><span class="na">eval=</span><span class="s">"obj().search([('chart_template', '=', 'xx')])"</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/function&gt;</span>
+<span class="nt">&lt;/data&gt;</span>
+
+<span class="nt">&lt;odoo</span><span class="w"> </span><span class="na">noupdate=</span><span class="s">"1"</span><span class="nt">&gt;</span><span class="w">                                                       </span><span class="cm">&lt;!-- ② --&gt;</span>
+<span class="w">    </span><span class="nt">&lt;record</span><span class="w"> </span><span class="na">id=</span><span class="s">"l10n_xx_hr_payroll.hr_payroll_rule_xx_net"</span><span class="w"> </span><span class="na">model=</span><span class="s">"hr.salary.rule"</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;field</span><span class="w"> </span><span class="na">name=</span><span class="s">"employee_move_line"</span><span class="w"> </span><span class="na">eval=</span><span class="s">"True"</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/record&gt;</span>
+<span class="nt">&lt;/odoo&gt;</span>
+</code></pre></div>
+<div class="cnotes" markdown="0">
+<div class="cn"><span class="nn">1</span><div><b>Companies that already have the chart</b> get the mapping at install. Companies created later get it when their chart loads.</div></div>
+<div class="cn"><span class="nn">2</span><div><b>The net is the employee's debt.</b> Its journal item carries the employee as partner, so each salary payment is reconciled per person (Chapter 16).</div></div>
+</div>
+
+<div class="admonition pitfall">
+<p class="admonition-title">Common pitfall: rules activated after the chart</p>
+<p>A mapping that finds its rules with a <code>search</code> skips archived ones. Belgium installs many rules archived and activates them when the employer's sector is chosen; if the chart was loaded first, those rules have no accounts and the first entry shows a large <em>Adjustment Entry</em>. The fix is to run <code>_load_payroll_accounts</code> again for the company once the rules are active, not to type accounts rule by rule.</p>
+</div>
+<h2 id="229-tests">22.9 Tests</h2>
+<p>Chapter 21 explains golden payslips and which situations to cover. This is the test file that holds them, in the account module, following the Dutch one:</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@tagged</span><span class="p">(</span><span class="s1">'post_install_l10n'</span><span class="p">,</span> <span class="s1">'post_install'</span><span class="p">,</span> <span class="s1">'-at_install'</span><span class="p">,</span> <span class="s1">'payslips_validation'</span><span class="p">)</span>  <span class="c1"># ①</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">TestPayslipValidation</span><span class="p">(</span><span class="n">TestPayslipValidationCommon</span><span class="p">):</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="nd">@TestPayslipValidationCommon</span><span class="o">.</span><span class="n">setup_country</span><span class="p">(</span><span class="s1">'xx'</span><span class="p">)</span>                       <span class="c1"># ②</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">setUpClass</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">setUpClass</span><span class="p">()</span>
+        <span class="bp">cls</span><span class="o">.</span><span class="n">_setup_common</span><span class="p">(</span>                                                 <span class="c1"># ③</span>
+            <span class="n">country</span><span class="o">=</span><span class="bp">cls</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">ref</span><span class="p">(</span><span class="s1">'base.xx'</span><span class="p">),</span>
+            <span class="n">structure</span><span class="o">=</span><span class="bp">cls</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">ref</span><span class="p">(</span><span class="s1">'l10n_xx_hr_payroll.hr_payroll_structure_xx_employee_salary'</span><span class="p">),</span>
+            <span class="n">structure_type</span><span class="o">=</span><span class="bp">cls</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">ref</span><span class="p">(</span><span class="s1">'l10n_xx_hr_payroll.structure_type_employee_xx'</span><span class="p">),</span>
+            <span class="n">version_fields</span><span class="o">=</span><span class="p">{</span><span class="s1">'wage'</span><span class="p">:</span> <span class="mi">5000</span><span class="p">},</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_regular_payslip</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">payslip</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_generate_payslip</span><span class="p">(</span><span class="n">date</span><span class="p">(</span><span class="mi">2025</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">date</span><span class="p">(</span><span class="mi">2025</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">31</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_validate_worked_days</span><span class="p">(</span><span class="n">payslip</span><span class="p">,</span> <span class="p">{</span><span class="s1">'WORK100'</span><span class="p">:</span> <span class="p">(</span><span class="mf">23.0</span><span class="p">,</span> <span class="mf">184.0</span><span class="p">,</span> <span class="mf">5000.0</span><span class="p">)})</span>   <span class="c1"># ④</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_validate_payslip</span><span class="p">(</span><span class="n">payslip</span><span class="p">,</span> <span class="p">{</span>                                  <span class="c1"># ⑤</span>
+            <span class="s1">'BASIC'</span><span class="p">:</span> <span class="mf">5000.0</span><span class="p">,</span> <span class="s1">'GROSS'</span><span class="p">:</span> <span class="mf">5000.0</span><span class="p">,</span>
+            <span class="s1">'XX_OLD_AGE'</span><span class="p">:</span> <span class="o">-</span><span class="mf">524.01</span><span class="p">,</span>    <span class="c1"># capped: 35,129 / 12 × 17.9 %</span>
+            <span class="c1"># ... every other line, from the independent calculation</span>
+        <span class="p">})</span>
+</code></pre></div>
+<div class="cnotes" markdown="0">
+<div class="cn"><span class="nn">1</span><div><b>Tags.</b> The test runs after every localization is installed, as in a real database with several countries, and can be run alone with the <code>payslips_validation</code> tag.</div></div>
+<div class="cn"><span class="nn">2</span><div><b>A company of the country with its chart of accounts</b>. That is why the test lives in the account module.</div></div>
+<div class="cn"><span class="nn">3</span><div><b>One employee, one version, one structure.</b> <code>version_fields</code> is the situation under test; other tests change it (<code>self.version.l10n_xx_30_percent = True</code>).</div></div>
+<div class="cn"><span class="nn">4</span><div><b>Time first</b>: days, hours and amount per time type. If these are wrong, no rule can be right.</div></div>
+<div class="cn"><span class="nn">5</span><div><b>Every line, with its source.</b> A line the dict does not list also fails the test, so a rule that suddenly applies is caught.</div></div>
+</div>
+
+<p>When a test fails, <code>_validate_payslip</code> prints a table with one message per code. Each points to a different place:</p>
+<div class="outcomes" style="margin-top:0" markdown="0">
+<div class="outcome c-tax"><b>WRONG CALCULATION</b>: the line exists, its total differs. Check the parameter value for the period, the rounding, the sequence.</div>
+<div class="outcome c-ded"><b>MISSING LINE</b>: a line the test does not expect appeared. A condition became true.</div>
+<div class="outcome c-law"><b>RULE NOT COMPUTED</b>: an expected line is absent. Check the condition, the structures, an input code, an activation switch.</div>
+</div>
+
+<p>For payslips with dozens of lines, <code>_validate_payslip(payslip)</code> without a dict compares with a JSON snapshot in <code>tests/test_files/payslips/</code>. Review the snapshot's diff in the pull request as carefully as code: it <em>is</em> the expected result.</p>
+<div class="admonition practice">
+<p class="admonition-title">In practice: build in this order</p>
+<p>Each step is a pull request that runs and can be reviewed alone. 1 · The country's time types in community. 2 · A skeleton that installs with no warning. 3 · Categories and parameters. 4 · Rules, with golden tests for a low and a high income. 5 · Version fields and helpers. 6 · Declarations. 7 · The accounting bridge: a pay run posts a balanced entry with no <em>Adjustment Entry</em> line.</p>
+</div>
+<h2 id="2210-the-yearly-upkeep">22.10 The yearly upkeep</h2>
+<p>Every year the law publishes new values, usually in December for 1 January: a new tax scale, a higher cap, a new minimum wage. The design of Part IV turns that into a data job. Suppose country xx raises the old-age cap of §22.5 from 35,129 to 36,000 (placeholder values) on 1 January 2026:</p>
+<div class='figure'><pre class='mermaid'>sequenceDiagram
+    autonumber
+    participant DEV as Developer
+    participant XML as Parameter file
+    participant CRON as Weekly job
+    participant DB as Customer DB
+    participant SLIP as Payslip
+    DEV-&gt;&gt;XML: new value from 1 Jan 2026
+    DEV-&gt;&gt;DEV: tests on both sides
+    XML--&gt;&gt;CRON: shipped with code update
+    CRON-&gt;&gt;DB: reload listed files
+    DB--&gt;&gt;SLIP: value valid at end date
+    Note over DB: edited by customer? skipped until Reset</pre></div>
+<p>Step by step:</p>
+<div class="cnotes" markdown="0">
+<div class="cn"><span class="nn">1</span><div><b>Add, never edit.</b> The developer adds a value next to the 2025 one. Editing the 2025 record instead would rewrite every 2025 payslip recomputed later, and break the 2025 tests.</div></div>
+<div class="cn"><span class="nn">2</span><div><b>Test both sides of the date</b> (snippet below): December still reads the old cap, January the new one.</div></div>
+<div class="cn"><span class="nn">3</span><div><b>Merged and shipped</b> in the supported versions. No module upgrade is needed on the customer side.</div></div>
+<div class="cn"><span class="nn">4</span><div><b>The weekly job</b> <i>Payroll: Update data</i> reloads the listed files into every database: the new record is created, untouched records are refreshed.</div></div>
+<div class="cn"><span class="nn">5</span><div><b>The next payslip</b> ending on or after 1 January reads 36,000; a December payslip recomputed later still reads 35,129.</div></div>
+<div class="cn"><span class="nn">!</span><div><b>Customer edits are protected</b> (the note in the diagram). If the customer edited this parameter, the job skips it and the new value never arrives, until someone clicks <i>Reset</i> (Chapter 21). When a customer reports that "the new rate did not come", look there first.</div></div>
+</div>
+
+<p>Steps 1 and 2 are the developer's whole job:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;record</span><span class="w"> </span><span class="na">id=</span><span class="s">"rule_parameter_social_security_rates_employee_2026"</span><span class="w"> </span><span class="na">model=</span><span class="s">"hr.rule.parameter.value"</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;field</span><span class="w"> </span><span class="na">name=</span><span class="s">"parameter_value"</span><span class="nt">&gt;</span>{
+<span class="w">    </span>'OLD_AGE':<span class="w"> </span>[17.9,<span class="w"> </span>36000.00],
+<span class="w">    </span>'SURVIVOR':<span class="w"> </span>[0.1,<span class="w"> </span>36000.00],
+}<span class="nt">&lt;/field&gt;</span>
+<span class="w">    </span><span class="nt">&lt;field</span><span class="w"> </span><span class="na">name=</span><span class="s">"rule_parameter_id"</span><span class="w"> </span><span class="na">ref=</span><span class="s">"rule_parameter_social_security_rates_employee"</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;field</span><span class="w"> </span><span class="na">name=</span><span class="s">"date_from"</span><span class="w"> </span><span class="na">eval=</span><span class="s">"datetime(2026, 1, 1).date()"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/record&gt;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">test_old_age_cap_both_sides</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">december</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_generate_payslip</span><span class="p">(</span><span class="n">date</span><span class="p">(</span><span class="mi">2025</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">date</span><span class="p">(</span><span class="mi">2025</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">31</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_validate_payslip</span><span class="p">(</span><span class="n">december</span><span class="p">,</span> <span class="p">{</span><span class="s1">'XX_OLD_AGE'</span><span class="p">:</span> <span class="o">-</span><span class="mf">524.01</span><span class="p">},</span> <span class="n">skip_lines</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># 35,129 / 12 × 17.9 %</span>
+    <span class="n">january</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_generate_payslip</span><span class="p">(</span><span class="n">date</span><span class="p">(</span><span class="mi">2026</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">date</span><span class="p">(</span><span class="mi">2026</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">31</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_validate_payslip</span><span class="p">(</span><span class="n">january</span><span class="p">,</span> <span class="p">{</span><span class="s1">'XX_OLD_AGE'</span><span class="p">:</span> <span class="o">-</span><span class="mf">537.00</span><span class="p">},</span> <span class="n">skip_lines</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>   <span class="c1"># 36,000 / 12 × 17.9 %</span>
+</code></pre></div>
+<p>Same shape, new id, new date: the rule does not change. The test uses a wage above both caps, otherwise the cap is never reached and the test passes even if the new value is wrong; <code>skip_lines=True</code> checks only the line the change affects. Belgium's professional-expenses cap is the same pattern in a real module: a <code>…_2025</code> record at 5,930 and a <code>…_2026</code> record at 6,070, side by side.</p>
+<p>Not every change is a new value. Three kinds come back every year:</p>
+<div class="fcards three" markdown="0">
+<div class="fcard c-tax"><div class="ft">A new value</div><div class="fwhy">a rate, a cap, a tax scale, a minimum wage</div><div class="fex"><span>You do</span>add a dated record with a new id; same shape</div><div class="fex"><span>Arrives</span>with the weekly job</div><div class="fex"><span>Test</span>one payslip before the date, one after</div></div>
+<div class="fcard c-odoo"><div class="ft">A rule fix</div><div class="fwhy">the method was wrong, or the law changed the method</div><div class="fex"><span>You do</span>edit the rule's XML; if old periods keep the old method, switch on a parameter, since rules are not dated</div><div class="fex"><span>Arrives</span>with the weekly job</div><div class="fex"><span>Test</span>the golden payslip that showed the bug; old tests unchanged</div></div>
+<div class="fcard c-emp"><div class="ft">A new filing format</div><div class="fwhy">the administration changes a file or a form</div><div class="fex"><span>You do</span>change the export code, keyed on the period it applies to</div><div class="fex"><span>Arrives</span>with the code update; no data</div><div class="fex"><span>Test</span>an exact-file or snapshot test</div></div>
+</div>
+
+<p>The upkeep also includes the check of Chapter 11: once a year, compare each value with its official source, line by line.</p>
+<h2 id="2211-how-to-review-a-localization">22.11 How to review a localization</h2>
+<p>Review in a fixed order, the order of the cards below: <strong>law first</strong>, because a perfectly coded wrong rate is still wrong; <strong>screens and filings last</strong>, but never skipped. Grade each finding:</p>
+<div class="sevlegend" markdown="0">
+<div><span class="sev blk">blocker</span> wrong pay, a wrong filing, or a module that cannot be used. Request changes.</div>
+<div><span class="sev maj">major</span> wrong in a realistic case, or a maintenance trap. Fix now, or a ticket with an owner.</div>
+<div><span class="sev min">minor</span> clarity, screens, style. A comment.</div>
+</div>
+
+<div class="rvgrid" markdown="0">
+<div class="rvcard c-law"><div class="rh"><span>1</span>Law</div><ul>
+<li><span class="sev blk">blocker</span><div>Every rate, cap and threshold cites an official source.</div></li>
+<li><span class="sev blk">blocker</span><div>Each <code>date_from</code> is the date the law takes effect.</div></li>
+<li><span class="sev maj">major</span><div>A new value keeps last year's shape.</div></li>
+</ul></div>
+<div class="rvcard c-earn"><div class="rh"><span>2</span>Data</div><ul>
+<li><span class="sev blk">blocker</span><div>Module named <code>l10n_&lt;cc&gt;_…</code>; every rule, structure and parameter file in <code>_get_data_files_to_update</code>, in load order.</div></li>
+<li><span class="sev maj">major</span><div>Every legal number is a dated <code>l10n_&lt;cc&gt;_</code> parameter, and every parameter is read by a rule.</div></li>
+<li><span class="sev maj">major</span><div>New values are added; no past value is edited.</div></li>
+<li><span class="sev maj">major</span><div>Each piece of data the rules or filings need has a payroll warning; blocking only where every payslip would be wrong.</div></li>
+</ul></div>
+<div class="rvcard c-ded"><div class="rh"><span>3</span>Rule code</div><ul>
+<li><span class="sev blk">blocker</span><div>Every category, code, input and field a rule reads exists and is filled earlier.</div></li>
+<li><span class="sev blk">blocker</span><div>Each rule is on every structure where the law applies it.</div></li>
+<li><span class="sev maj">major</span><div>No legal number as a literal (<code>25 *</code>, <code>0.4</code>); rounding only where the law rounds.</div></li>
+<li><span class="sev maj">major</span><div>Categories and structures written as <code>(6, 0, […])</code>.</div></li>
+<li><span class="sev min">minor</span><div>Sequences leave gaps; long formulas sit in helpers.</div></li>
+</ul></div>
+<div class="rvcard c-odoo"><div class="rh"><span>4</span>Engine and overrides</div><ul>
+<li><span class="sev blk">blocker</span><div>Every override has a country guard and calls <code>super()</code>.</div></li>
+<li><span class="sev maj">major</span><div>No <code>search</code> per payslip; batch data in <code>_get_common_localdict</code>.</div></li>
+<li><span class="sev maj">major</span><div>A version field a rule reads is in <code>_get_fields_that_recompute_payslip</code>.</div></li>
+</ul></div>
+<div class="rvcard c-tax"><div class="rh"><span>5</span>Tests</div><ul>
+<li><span class="sev blk">blocker</span><div>Expected values come from an independent calculation, with the source in a comment.</div></li>
+<li><span class="sev maj">major</span><div>Both sides of each dated change; one income above every cap and in the top bracket.</div></li>
+<li><span class="sev maj">major</span><div>Every structure and every frequency has a payslip test.</div></li>
+</ul></div>
+<div class="rvcard c-emp"><div class="rh"><span>6</span>Security</div><ul>
+<li><span class="sev blk">blocker</span><div>Salary fields carry <code>groups="hr_payroll.group_hr_payroll_user"</code>.</div></li>
+<li><span class="sev blk">blocker</span><div>Every new model has access rights and a multi-company rule.</div></li>
+<li><span class="sev maj">major</span><div>No rule writes on a record.</div></li>
+</ul></div>
+<div class="rvcard c-net"><div class="rh"><span>7</span>Screens</div><ul>
+<li><span class="sev maj">major</span><div>Country fields show only for the country (<code>invisible="country_code != 'XX'"</code>).</div></li>
+<li><span class="sev min">minor</span><div>Labels and help in plain English; the payslip PDF readable by an employee.</div></li>
+</ul></div>
+<div class="rvcard c-emp"><div class="rh"><span>8</span>Filings and accounting</div><ul>
+<li><span class="sev blk">blocker</span><div>A test pay run posts a balanced entry with no <i>Adjustment Entry</i> line.</div></li>
+<li><span class="sev blk">blocker</span><div>Declarations read payslip lines, through codes or a data mapping; they never recompute.</div></li>
+<li><span class="sev maj">major</span><div>Filing checks collect every error before raising.</div></li>
+</ul></div>
+</div>
+
+<h3 id="common-bugs-we-found">Common bugs we found</h3>
+<p>Reading Odoo's own payroll modules for this book turned up the same four patterns again and again. Look for them first.</p>
+<div class="fcards" markdown="0">
+<div class="fcard c-ded"><div class="ft">A total nobody feeds</div><div class="fwhy">A rule reads a category that no rule adds to. It reads 0, with no error.</div><div class="fex"><span>Seen as</span>commissions never enter a pension base</div><div class="fex"><span>Card</span>3 · Rule code</div></div>
+<div class="fcard c-ded"><div class="ft">A literal next to its parameter</div><div class="fwhy">The number is typed in the rule while a parameter for it exists and is never read.</div><div class="fex"><span>Seen as</span>Mexico's contribution cap: <code>25 *</code> in the rule, and a parameter worth 25 that no rule reads</div><div class="fex"><span>Card</span>2 · Data, 3 · Rule code</div></div>
+<div class="fcard c-ded"><div class="ft">A bracket right only for low incomes</div><div class="fwhy">The formula is wrong above the second band, and every test is below it.</div><div class="fex"><span>Seen as</span><code>min(gross - low, high)</code> instead of <code>min(gross, high) - low</code></div><div class="fex"><span>Card</span>5 · Tests</div></div>
+<div class="fcard c-ded"><div class="ft">A lookup that silently finds nothing</div><div class="fwhy">A missing record only logs a warning, and the code goes on without it.</div><div class="fex"><span>Seen as</span>account ids absent from the chart: rules without accounts</div><div class="fex"><span>Card</span>8 · Filings and accounting</div></div>
+</div>
+
+<div class="admonition pitfall">
+<p class="admonition-title">Common pitfall: the green test run</p>
+<p>Tests run as an administrator, so a missing access right never shows; and most of them create one company. Before approving, open a payslip in a database with several localizations installed, logged in as a payroll user of the new country's company only.</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Worked example: reviewing a one-line change to a contribution cap</p>
+<p>A pull request changes Mexico's <code>SBC</code> rule from <code>25 * payslip._rule_parameter('l10n_mx_uma')['daily']</code> to read the multiplier from <code>l10n_mx_imss_limit_with_uma</code>. Card 1: is the source of the 25 cited? Card 2: a parameter nobody read becomes used, good. Card 5: is there a payslip with a daily salary <strong>above</strong> 25 times the reference unit? If not, ask for one: a suite of ordinary wages would stay green even if the cap were deleted.</p>
+</div>
+<h2 id="summary">Summary</h2>
+<ul>
+<li>A payroll localization is the country layer: <code>l10n_xx_hr_payroll</code> for the law, <code>l10n_xx_hr_payroll_account</code> for the accounts and the tests, built on the shared <code>hr_payroll</code>. The <code>l10n_&lt;cc&gt;</code> prefix makes <em>Reset</em> work.</li>
+<li>Most of it is data: a structure type and structures, categories designed from the declarations, rules that write every field and contain no legal number, and dated parameters with a stable shape. Payroll warnings catch missing data on the dashboard, and block validation only when every payslip would be wrong.</li>
+<li>Three hooks wire it in: the list of files the weekly job reloads, the post-install switch to the country's time types, and the allowed pay frequencies.</li>
+<li>Python is for facts about the person (fields on the version, mirrored on the employee) and for engine steps the law changes, always behind a country guard and with <code>super()</code>.</li>
+<li>The module must produce the payslip PDF, the declarations (read from payslip lines) and the journal entry, through a rule-to-account mapping.</li>
+<li>Golden-payslip tests prove it. The yearly upkeep is a new dated record with a test on each side of the date; the weekly job delivers it, except to records the customer edited.</li>
+<li>Review along eight cards (law, data, rule code, engine, tests, security, screens, filings), grade each finding blocker, major or minor, and look first for the four known bug patterns.</li>
+</ul></section><nav class='pager' aria-label='Previous and next chapter'><a class='pager-prev' rel='prev' href='chapter-21-parameters-updates-and-safe-extensions.html'><small>Previous · Chapter 21</small><span>Parameters, updates and safe extensions</span></a><span></span></nav>
+</main>
+</div>
+<script src="js/site.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js" integrity="sha384-rbtjAdnIQE/aQJGEgXrVUlMibdfTSa4PQju4HDhN3sR2PmaKFzhEafuePsl9H/9I" crossorigin="anonymous"></script>
+<script>
+(async () => {
+  mermaid.initialize({
+    startOnLoad: false, theme: "base", securityLevel: "loose",
+    flowchart: { htmlLabels: true, curve: "basis", useMaxWidth: true },
+    sequence: { useMaxWidth: true, mirrorActors: false },
+    er: { useMaxWidth: true },
+    themeVariables: {
+      fontFamily: "Helvetica Neue, Helvetica, Arial", fontSize: "13px",
+      primaryColor: "#E9EDF2", primaryBorderColor: "#475569", primaryTextColor: "#1E293B",
+      lineColor: "#64748B", secondaryColor: "#F6F0F5", tertiaryColor: "#F8FAFC",
+      noteBkgColor: "#FFFAEB", noteBorderColor: "#C99A0E", actorBkg: "#E9EDF2", actorBorder: "#475569"
+    }
+  });
+  const nodes = Array.from(document.querySelectorAll("pre.mermaid"));
+  let i = 0;
+  for (const el of nodes) {
+    const src = el.textContent;
+    try {
+      const { svg } = await mermaid.render("m" + (i++), src);
+      el.outerHTML = svg;
+    } catch (e) {
+      el.outerHTML = `<div class="mermaid-error" data-src="${src.replace(/"/g, "'")}">Mermaid error: ${e.message}\n${src}</div>`;
+    }
+  }
+  window.__mermaidDone = true;
+})();
+</script>
+</body>
+</html>

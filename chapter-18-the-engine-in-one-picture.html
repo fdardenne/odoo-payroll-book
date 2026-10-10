@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter 18: The engine in one picture · Payroll, from Theory to Odoo Localization</title>
+<meta name="description" content="Gross-to-net in any country, the Odoo salary engine, and how to design, build and review a payroll localization.">
+<link rel="stylesheet" href="css/book.css">
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body class="chapter-page">
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+<button class="nav-toggle" type="button" aria-controls="sidebar" aria-expanded="false"><span aria-hidden="true">&#9776;</span> Contents</button>
+<a class="top-brand" href="index.html">Payroll, from Theory to Odoo Localization</a>
+</header>
+<div class="layout">
+<nav id="sidebar" class="sidebar" aria-label="Book contents">
+<a class="side-brand" href="index.html">Payroll, from Theory to Odoo Localization</a>
+<div class="search" role="search">
+<label for="search-input" class="sr-only">Search the book</label>
+<input id="search-input" type="search" placeholder="Search the book  ( / )" autocomplete="off" spellcheck="false" aria-controls="search-results">
+<div id="search-results" class="search-results" aria-live="polite"></div>
+</div>
+<ol class="nav"><li class='nav-part'><span class='nav-part-title'>Front matter</span><ol><li><a href='preface-before-you-start.html'><span class='nav-num'></span><span>Before you start</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part I · Payroll theory</span><ol><li><a href='chapter-01-what-payroll-is-and-why-it-is-hard.html'><span class='nav-num'>1.</span><span>What payroll is, and why it is hard</span></a></li><li><a href='chapter-02-gross-to-net.html'><span class='nav-num'>2.</span><span>Gross to net</span></a></li><li><a href='chapter-03-contributions-employee-and-employer.html'><span class='nav-num'>3.</span><span>Contributions: employee and employer</span></a></li><li><a href='chapter-04-withholding-tax.html'><span class='nav-num'>4.</span><span>Withholding tax</span></a></li><li><a href='chapter-05-time-proration-and-overtime.html'><span class='nav-num'>5.</span><span>Time, proration and overtime</span></a></li><li><a href='chapter-06-irregular-pay-corrections-and-leavers.html'><span class='nav-num'>6.</span><span>Irregular pay, corrections and leavers</span></a></li><li><a href='chapter-07-declarations-and-the-compliance-calendar.html'><span class='nav-num'>7.</span><span>Declarations and the compliance calendar</span></a></li><li><a href='chapter-08-accounting-for-payroll.html'><span class='nav-num'>8.</span><span>Accounting for payroll</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part II · Localization theory</span><ol><li><a href='chapter-09-what-varies-between-countries-and-what-doesnt.html'><span class='nav-num'>9.</span><span>What varies between countries, and what doesn&#x27;t</span></a></li><li><a href='chapter-10-researching-a-new-country.html'><span class='nav-num'>10.</span><span>Researching a new country</span></a></li><li><a href='chapter-11-laws-that-change-over-time.html'><span class='nav-num'>11.</span><span>Laws that change over time</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part III · Odoo payroll, hands-on</span><ol><li><a href='chapter-12-tour-and-setup.html'><span class='nav-num'>12.</span><span>Tour and setup</span></a></li><li><a href='chapter-13-employees-and-versions.html'><span class='nav-num'>13.</span><span>Employees and versions</span></a></li><li><a href='chapter-14-time-schedules-time-off-worked-days.html'><span class='nav-num'>14.</span><span>Time: schedules, time off, worked days</span></a></li><li><a href='chapter-15-pay-runs-and-payslips.html'><span class='nav-num'>15.</span><span>Pay runs and payslips</span></a></li><li><a href='chapter-16-accounting-and-payment.html'><span class='nav-num'>16.</span><span>Accounting and payment</span></a></li><li><a href='chapter-17-reports-declarations-and-a-leaver.html'><span class='nav-num'>17.</span><span>Reports, declarations and a leaver</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part IV · How the payroll engine works</span><ol><li class='current' aria-current='page'><a href='chapter-18-the-engine-in-one-picture.html'><span class='nav-num'>18.</span><span>The engine in one picture</span></a><ol class='nav-sections'><li><a href='#what-the-payroll-engine-is'>What the payroll engine is</a></li><li><a href='#why-a-payroll-engine-at-all'>Why a payroll engine at all?</a></li><li><a href='#the-five-records-you-work-with'>The five records you work with</a></li><li><a href='#five-design-ideas'>Five design ideas</a></li><li><a href='#summary'>Summary</a></li></ol></li><li><a href='chapter-19-structures-and-rules.html'><span class='nav-num'>19.</span><span>Structures and rules</span></a></li><li><a href='chapter-20-categories-how-rules-talk-to-each-other.html'><span class='nav-num'>20.</span><span>Categories: how rules talk to each other</span></a></li><li><a href='chapter-21-parameters-updates-and-safe-extensions.html'><span class='nav-num'>21.</span><span>Parameters, updates and safe extensions</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part V · Building a localization</span><ol><li><a href='chapter-22-a-template-for-any-localization-and-how-to-review-one.html'><span class='nav-num'>22.</span><span>A template for any localization, and how to review one</span></a></li></ol></li></ol>
+<a class="nav-pdf" href="payroll_book.pdf" download>Download the PDF</a>
+</nav>
+<div class="backdrop" hidden></div>
+<main id="main" class="content">
+<section class='chapter' id='c-41_ch18'><div class='opener'><div class='opener-band'><span class='opener-num'>Chapter 18</span><span class='opener-part'>Part IV · How the payroll engine works</span></div><h1>The engine in one picture</h1><p class='opener-sub'>What goes into a payslip, what comes out, and the short loop in between</p><div class='opener-goals'><div class='goals-title'>After this chapter you can</div><ul><li>Say in one sentence what the payroll engine does</li><li>Name what goes into a payslip and where its lines go afterwards</li><li>Read the engine's core loop and explain why it is the same in every country</li><li>Name the five records you work with, who owns each, and how often each changes</li><li>Tell which records ship with a country module and which belong to the customer</li></ul></div></div><p>Mélanie's February payslip has 44 lines; Marie's, on the same structure, has 49 (her car, her meal vouchers). A Mexican weekly payslip looks nothing like either. Yet nobody wrote a "Belgian payslip program" or a "Mexican" one. One small engine read a list of rules and applied them, one after the other. This part of the book explains that engine at the level you need to create payroll records and to review them.</p>
+<h2 id="what-the-payroll-engine-is">What the payroll engine is</h2>
+<p>The <strong>payroll engine</strong> is the part of Odoo that turns one employee's data for one period into <strong>payslip lines</strong>. It takes the rules of one structure and applies them, in order, to the employee's contract terms, time and inputs.</p>
+<p>Three things follow from that definition:</p>
+<ul>
+<li><strong>The engine knows no country.</strong> Everything a law says is in the rules and their parameters, which are data. The engine only runs them.</li>
+<li><strong>The engine decides nothing.</strong> Whether a line appears, and how much it is, is decided by a rule. When a payslip is wrong, the cause is a rule or the data it read, almost never the engine.</li>
+<li><strong>It runs again on demand.</strong> A draft payslip is recomputed whenever you click <em>Compute</em> or its data changes. A validated payslip is frozen (Chapter 15).</li>
+</ul>
+<div class="tflow" markdown="0">
+<div class="tcol">
+<div class="tstep">What goes in</div>
+<div class="tin c-earn"><b>The version</b>wage, family situation, structure type<br>Mélanie: 4,000.00 €, single</div>
+<div class="tin c-tax"><b>Time</b>schedule, attendance, overtime, time off → work entries → worked days<br>February: 20 days, 152 h</div>
+<div class="tin c-law"><b>Inputs</b>amounts typed for this period: a commission, an advance, a deduction</div>
+</div>
+<div class="tarrow">→</div>
+<div class="tcol wide">
+<div class="tstep">The engine</div>
+<div class="tin c-odoo"><b><span class="nn">1</span>Choose a period</b>1–28 February 2026</div>
+<div class="tin c-odoo"><b><span class="nn">2</span>Choose a structure</b>the default of the version's structure type: <i>Monthly Pay</i></div>
+<div class="tin c-odoo"><b><span class="nn">3</span>Compute the worked days</b>time becomes days, hours and amounts per time type</div>
+<div class="tin c-odoo"><b><span class="nn">4</span>Compute the rules, in order</b>each rule may add one line, and its total to running totals</div>
+</div>
+<div class="tarrow">→</div>
+<div class="tcol">
+<div class="tstep">What comes out</div>
+<div class="tin c-net"><b>Payslip lines</b>Basic 4,000.00<br>Social security −522.80<br>Withholding tax −826.69<br>… Net 2,614.27</div>
+<div class="tin c-emp"><b>Accounting</b>one journal entry per run (Ch. 16)</div>
+<div class="tin c-tax"><b>Declarations, reports</b>sums of lines over a period (Ch. 17)</div>
+</div>
+</div>
+
+<p>Read the figure from left to right. On the left, the three kinds of data a payslip needs: <strong>who</strong> (the employee's version, Chapter 13), <strong>how much time</strong> (Chapter 14) and <strong>what else happened</strong> this period (inputs). In the middle, the four steps of the engine; Part III showed the first three, this part explains the fourth. On the right, the lines, and everything that reads them later: the journal entry, the declarations, the reports. Nothing downstream recomputes anything; it reads the lines.</p>
+<div class="admonition practice">
+<p class="admonition-title">In practice</p>
+<p>When a payslip looks wrong, follow the figure from the left: is the <strong>version</strong> right (wage, situation, structure type)? Are the <strong>worked days</strong> right? Are the <strong>inputs</strong> right? Only then open a <strong>rule</strong>. Most "rule bugs" are data in one of the first three.</p>
+</div>
+<h2 id="why-a-payroll-engine-at-all">Why a payroll engine at all?</h2>
+<p>Payroll law differs in every country and changes every year. If each country's payslip were a program, every new tax table would be a code change, and every customer who pays a sector bonus would need a developer. Odoo takes the other road: <strong>rules are data</strong>.</p>
+<p>A salary rule is a record: a name, a code, a condition and a small formula, usually a few lines of Python. Country modules ship their rules in data files; a customer can create more from the screen. One engine evaluates all of them the same way, giving each rule a dictionary of what it may see: the version, the worked days, the totals so far (Chapter 19 lists them). Here is that engine, simplified to its core:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">compute_lines</span><span class="p">(</span><span class="n">payslip</span><span class="p">):</span>
+    <span class="n">seen</span> <span class="o">=</span> <span class="n">payslip</span><span class="o">.</span><span class="n">_get_localdict</span><span class="p">()</span>             <span class="c1"># what a rule may read</span>
+    <span class="n">lines</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">rule</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">payslip</span><span class="o">.</span><span class="n">struct_id</span><span class="o">.</span><span class="n">rule_ids</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">r</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">sequence</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">rule</span><span class="o">.</span><span class="n">_satisfy_condition</span><span class="p">(</span><span class="n">seen</span><span class="p">):</span>   <span class="c1"># condition false: no line at all</span>
+            <span class="k">continue</span>
+        <span class="n">amount</span><span class="p">,</span> <span class="n">quantity</span><span class="p">,</span> <span class="n">rate</span> <span class="o">=</span> <span class="n">rule</span><span class="o">.</span><span class="n">_compute_rule</span><span class="p">(</span><span class="n">seen</span><span class="p">)[:</span><span class="mi">3</span><span class="p">]</span>
+        <span class="n">total</span> <span class="o">=</span> <span class="n">amount</span> <span class="o">*</span> <span class="n">quantity</span> <span class="o">*</span> <span class="n">rate</span> <span class="o">/</span> <span class="mi">100</span>
+        <span class="n">seen</span><span class="p">[</span><span class="s1">'result_rules'</span><span class="p">][</span><span class="n">rule</span><span class="o">.</span><span class="n">code</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'total'</span><span class="p">:</span> <span class="n">total</span><span class="p">,</span> <span class="s1">'amount'</span><span class="p">:</span> <span class="n">amount</span><span class="p">}</span>
+        <span class="n">rule</span><span class="o">.</span><span class="n">category_ids</span><span class="o">.</span><span class="n">_sum_salary_rule_category</span><span class="p">(</span><span class="n">seen</span><span class="p">,</span> <span class="n">total</span><span class="p">)</span>   <span class="c1"># running totals</span>
+        <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">'code'</span><span class="p">:</span> <span class="n">rule</span><span class="o">.</span><span class="n">code</span><span class="p">,</span> <span class="s1">'amount'</span><span class="p">:</span> <span class="n">amount</span><span class="p">,</span> <span class="s1">'quantity'</span><span class="p">:</span> <span class="n">quantity</span><span class="p">,</span>
+                      <span class="s1">'rate'</span><span class="p">:</span> <span class="n">rate</span><span class="p">,</span> <span class="s1">'total'</span><span class="p">:</span> <span class="n">total</span><span class="p">})</span>
+    <span class="k">return</span> <span class="n">lines</span>
+</code></pre></div>
+<p>For each rule, in order: test the condition; if it holds, compute an amount, a quantity and a rate; multiply them into a total; remember the result for later rules; add it to the rule's running totals (its categories, Chapter 20); keep one line. The real method, <code>_get_payslip_lines</code>, adds batches of payslips, year-to-date sums and a few hooks for countries, but <strong>the whole engine fits on one page; the names may change, the loop does not.</strong> That is why you can review any country's payroll once you can read its rules.</p>
+<div class="formula">line total = amount × quantity × rate ÷ 100</div>
+
+<p>Mélanie's social-security line: amount 4,000.00 € (her contribution base), quantity 1, rate −13.07 %, total −522.80 €.</p>
+<div class="admonition key">
+<p class="admonition-title">Key idea</p>
+<p>The engine is small and stable; the rules are many and change every year. Everything in this part is about reading and placing rules, because that is where every country's law lives.</p>
+</div>
+<h2 id="the-five-records-you-work-with">The five records you work with</h2>
+<p>Five kinds of record decide how a payslip is computed. Chapter 12 introduced four of them by following Mélanie's payslip; here they are side by side, with who owns them and how often they change.</p>
+<div class="fcards odd" markdown="0">
+<div class="fcard c-odoo"><div class="ft">Structure type</div><div class="fwhy">The kind of pay: who is paid how, and how often. Set on each employee's version; names the default structure.</div><div class="fex"><span>Owner</span>country module; the customer picks one per version</div><div class="fex"><span>Changes</span>almost never</div><div class="fex"><span>Example</span>BE <i>CP200 BE</i>; MX <i>Employee</i></div></div>
+<div class="fcard c-emp"><div class="ft">Structure</div><div class="fwhy">A named list of rules for one kind of payslip (Chapter 19).</div><div class="fex"><span>Owner</span>country module; a customer may add one</div><div class="fex"><span>Changes</span>when a new kind of payslip is needed</div><div class="fex"><span>Example</span>BE <i>Monthly Pay</i>, <i>13th Month</i>; MX <i>Christmas Bonus</i></div></div>
+<div class="fcard c-ded"><div class="ft">Salary rule</div><div class="fwhy">One line of the payslip: when it applies, how much, which totals it feeds (Chapter 19).</div><div class="fex"><span>Owner</span>country module; customers add their own, such as a company allowance</div><div class="fex"><span>Changes</span>when the law's method changes</div><div class="fex"><span>Example</span>BE <code>ONSS</code>; MX <code>ISR</code></div></div>
+<div class="fcard c-earn"><div class="ft">Salary category</div><div class="fwhy">A named running total that rules add to and later rules read (Chapter 20).</div><div class="fex"><span>Owner</span>country module</div><div class="fex"><span>Changes</span>when the law creates a new base</div><div class="fex"><span>Example</span><code>GROSS</code>, <code>NET</code>; MX <code>SBC</code></div></div>
+<div class="fcard c-tax"><div class="ft">Rule parameter</div><div class="fwhy">A legal number or table with its dated values: rates, caps, tax scales (Chapter 21).</div><div class="fex"><span>Owner</span>country module; Odoo adds the new values, not the customer</div><div class="fex"><span>Changes</span>every year, sometimes several times a year</div><div class="fex"><span>Example</span>BE professional-expenses cap: 5,930 in 2025, 6,070 in 2026; MX <code>l10n_mx_uma</code></div></div>
+</div>
+
+<p>Two more long-lived concepts surround them: the employee's <strong>version</strong>, which the customer fills in (Chapter 13), and the <strong>time types</strong>, which the country module ships and which say how each kind of hour is paid (Chapter 14).</p>
+<p>Notice the <em>Changes</em> lines: the records change at very different speeds. A parameter changes every year; a rule only when the method changes; a structure type almost never. Keeping each fact in the record that changes at its speed is what turns a new tax year into a data update instead of a rewrite.</p>
+<div class="admonition pitfall">
+<p class="admonition-title">Common pitfall: fixing one employee in a shared rule</p>
+<p>A rule is shared by every employee on its structures. Editing the <code>ONSS</code> rule because one employee's line looks wrong changes everyone's payslips, and stops the rule from receiving Odoo's fixes (Chapter 21). Look for the cause in that employee's version, worked days or inputs first.</p>
+</div>
+<h2 id="five-design-ideas">Five design ideas</h2>
+<p>Everything in the next three chapters follows from five decisions.</p>
+<div class="ideas" markdown="0">
+<div class="idea"><div class="ititle">1 · Rules are data</div><div class="ibody">A rule is a record with a small formula, not a program. Countries ship rules as data; customers add their own from the screen; one engine runs them all.</div><div class="ipiece"><span>Where</span>salary rules and structures<em>Chapter 19</em></div></div>
+<div class="idea"><div class="ititle">2 · Legal numbers live in dated parameters</div><div class="ibody">A rule asks for "the cap" by its code and gets the value valid on the payslip's date. Next year's law is a new value, never an edit.</div><div class="ipiece"><span>Where</span>rule parameters<em>Chapters 11, 21</em></div></div>
+<div class="idea"><div class="ititle">3 · Time is computed, not stored</div><div class="ibody">Work entries are derived from the schedule and time off whenever a payslip needs them, so a late change of leave is never forgotten.</div><div class="ipiece"><span>Where</span>work entries and worked days<em>Chapter 14</em></div></div>
+<div class="idea"><div class="ititle">4 · Totals connect the rules</div><div class="ibody">Rules do not call each other. Each one adds to running totals (gross, taxable base, net), and later rules read the totals.</div><div class="ipiece"><span>Where</span>salary categories<em>Chapter 20</em></div></div>
+<div class="idea"><div class="ititle">5 · Countries are layers on a shared framework</div><div class="ibody">The engine, payslips, pay runs, accounting and declarations are shared. A country module adds rules, parameters, categories, fields and its filings on top, and never replaces the engine.</div><div class="ipiece"><span>Where</span>country modules <code>l10n_xx_hr_payroll</code><em>Chapters 9, 22</em></div></div>
+</div>
+
+<div class="admonition world">
+<p class="admonition-title">Around the world</p>
+<p>The same five records carry very different laws:</p>
+<ul>
+<li><strong>Mexico</strong>: one structure type, two structures (regular pay and the Christmas bonus), frequencies from weekly to monthly.</li>
+<li><strong>Belgium</strong>: about ten structures for one structure type, because holiday pay, the 13<sup>th</sup> month and termination are separate payslips.</li>
+<li><strong>India</strong>: a second structure type for interns.</li>
+<li><strong>United States</strong>: one structure holding the income-tax rule of every state; each rule's condition tests the employee's work address.</li>
+<li><strong>Netherlands</strong>: a small module that is almost only data.</li>
+</ul>
+</div>
+<div class="admonition practice">
+<p class="admonition-title">Review checklist</p>
+<p>Before reviewing a payroll database or a country module, sort its records by owner:</p>
+<ul>
+<li><strong>Ships with the country module and is updated by Odoo</strong>: structure types, structures, rules, categories, parameters and their values, the payroll settings of time types, dashboard warnings.</li>
+<li><strong>Belongs to the customer</strong>: employees and their versions, time off, inputs, company settings, and any rule or structure they created (Odoo marks those as created by a user).</li>
+<li><strong>A shipped record the customer edited</strong> no longer receives Odoo's updates (Chapter 21). List them; each one needs a reason.</li>
+<li>A legal number typed in a customer record, or a customer-specific amount in a shipped rule, is in the wrong place.</li>
+</ul>
+</div>
+<h2 id="summary">Summary</h2>
+<ul>
+<li>The payroll engine turns one employee's version, time and inputs for one period into payslip lines, by applying the rules of one structure in order.</li>
+<li>Accounting, declarations and reports read the lines; they never recompute.</li>
+<li>Rules are data: small formulas stored as records, shipped by country modules or created by users, run by one engine that fits on a page.</li>
+<li>Each line is <code>amount × quantity × rate ÷ 100</code>, and its total is added to the rule's categories for later rules.</li>
+<li>Five records decide a payslip: structure type, structure, salary rule, salary category, rule parameter. They change at different speeds, from almost never to every year.</li>
+<li>The country module owns the configuration; the customer owns versions, time and inputs; a shipped record the customer edited stops receiving updates.</li>
+</ul></section><nav class='pager' aria-label='Previous and next chapter'><a class='pager-prev' rel='prev' href='chapter-17-reports-declarations-and-a-leaver.html'><small>Previous · Chapter 17</small><span>Reports, declarations and a leaver</span></a><a class='pager-next' rel='next' href='chapter-19-structures-and-rules.html'><small>Next · Chapter 19</small><span>Structures and rules</span></a></nav>
+</main>
+</div>
+<script src="js/site.js"></script>
+
+</body>
+</html>

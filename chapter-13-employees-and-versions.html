@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter 13: Employees and versions · Payroll, from Theory to Odoo Localization</title>
+<meta name="description" content="Gross-to-net in any country, the Odoo salary engine, and how to design, build and review a payroll localization.">
+<link rel="stylesheet" href="css/book.css">
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body class="chapter-page">
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+<button class="nav-toggle" type="button" aria-controls="sidebar" aria-expanded="false"><span aria-hidden="true">&#9776;</span> Contents</button>
+<a class="top-brand" href="index.html">Payroll, from Theory to Odoo Localization</a>
+</header>
+<div class="layout">
+<nav id="sidebar" class="sidebar" aria-label="Book contents">
+<a class="side-brand" href="index.html">Payroll, from Theory to Odoo Localization</a>
+<div class="search" role="search">
+<label for="search-input" class="sr-only">Search the book</label>
+<input id="search-input" type="search" placeholder="Search the book  ( / )" autocomplete="off" spellcheck="false" aria-controls="search-results">
+<div id="search-results" class="search-results" aria-live="polite"></div>
+</div>
+<ol class="nav"><li class='nav-part'><span class='nav-part-title'>Front matter</span><ol><li><a href='preface-before-you-start.html'><span class='nav-num'></span><span>Before you start</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part I · Payroll theory</span><ol><li><a href='chapter-01-what-payroll-is-and-why-it-is-hard.html'><span class='nav-num'>1.</span><span>What payroll is, and why it is hard</span></a></li><li><a href='chapter-02-gross-to-net.html'><span class='nav-num'>2.</span><span>Gross to net</span></a></li><li><a href='chapter-03-contributions-employee-and-employer.html'><span class='nav-num'>3.</span><span>Contributions: employee and employer</span></a></li><li><a href='chapter-04-withholding-tax.html'><span class='nav-num'>4.</span><span>Withholding tax</span></a></li><li><a href='chapter-05-time-proration-and-overtime.html'><span class='nav-num'>5.</span><span>Time, proration and overtime</span></a></li><li><a href='chapter-06-irregular-pay-corrections-and-leavers.html'><span class='nav-num'>6.</span><span>Irregular pay, corrections and leavers</span></a></li><li><a href='chapter-07-declarations-and-the-compliance-calendar.html'><span class='nav-num'>7.</span><span>Declarations and the compliance calendar</span></a></li><li><a href='chapter-08-accounting-for-payroll.html'><span class='nav-num'>8.</span><span>Accounting for payroll</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part II · Localization theory</span><ol><li><a href='chapter-09-what-varies-between-countries-and-what-doesnt.html'><span class='nav-num'>9.</span><span>What varies between countries, and what doesn&#x27;t</span></a></li><li><a href='chapter-10-researching-a-new-country.html'><span class='nav-num'>10.</span><span>Researching a new country</span></a></li><li><a href='chapter-11-laws-that-change-over-time.html'><span class='nav-num'>11.</span><span>Laws that change over time</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part III · Odoo payroll, hands-on</span><ol><li><a href='chapter-12-tour-and-setup.html'><span class='nav-num'>12.</span><span>Tour and setup</span></a></li><li class='current' aria-current='page'><a href='chapter-13-employees-and-versions.html'><span class='nav-num'>13.</span><span>Employees and versions</span></a><ol class='nav-sections'><li><a href='#the-employee-who-is-paid'>The employee: who is paid</a></li><li><a href='#the-version-what-is-agreed-from-when'>The version: what is agreed, from when</a></li><li><a href='#wage-wage-type-pay-frequency'>Wage, wage type, pay frequency</a></li><li><a href='#benefits-are-fields-read-by-rules'>Benefits are fields, read by rules</a></li><li><a href='#three-places-for-a-pay-element'>Three places for a pay element</a></li><li><a href='#missions'>Missions</a></li><li><a href='#summary'>Summary</a></li></ol></li><li><a href='chapter-14-time-schedules-time-off-worked-days.html'><span class='nav-num'>14.</span><span>Time: schedules, time off, worked days</span></a></li><li><a href='chapter-15-pay-runs-and-payslips.html'><span class='nav-num'>15.</span><span>Pay runs and payslips</span></a></li><li><a href='chapter-16-accounting-and-payment.html'><span class='nav-num'>16.</span><span>Accounting and payment</span></a></li><li><a href='chapter-17-reports-declarations-and-a-leaver.html'><span class='nav-num'>17.</span><span>Reports, declarations and a leaver</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part IV · How the payroll engine works</span><ol><li><a href='chapter-18-the-engine-in-one-picture.html'><span class='nav-num'>18.</span><span>The engine in one picture</span></a></li><li><a href='chapter-19-structures-and-rules.html'><span class='nav-num'>19.</span><span>Structures and rules</span></a></li><li><a href='chapter-20-categories-how-rules-talk-to-each-other.html'><span class='nav-num'>20.</span><span>Categories: how rules talk to each other</span></a></li><li><a href='chapter-21-parameters-updates-and-safe-extensions.html'><span class='nav-num'>21.</span><span>Parameters, updates and safe extensions</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part V · Building a localization</span><ol><li><a href='chapter-22-a-template-for-any-localization-and-how-to-review-one.html'><span class='nav-num'>22.</span><span>A template for any localization, and how to review one</span></a></li></ol></li></ol>
+<a class="nav-pdf" href="payroll_book.pdf" download>Download the PDF</a>
+</nav>
+<div class="backdrop" hidden></div>
+<main id="main" class="content">
+<section class='chapter' id='c-32_ch13'><div class='opener'><div class='opener-band'><span class='opener-num'>Chapter 13</span><span class='opener-part'>Part III · Odoo payroll, hands-on</span></div><h1>Employees and versions</h1><p class='opener-sub'>One employee, a dated record per change, and every pay element in its right place</p><div class='opener-goals'><div class='goals-title'>After this chapter you can</div><ul><li>Read an employee form and say which fields payroll uses, and why</li><li>Explain what a version is, how versions follow each other, and what a contract is on top of them</li><li>Distinguish wage, wage type, pay frequency and pay category</li><li>Choose between a version field, a payslip input and a payslip adjustment for a pay element</li><li>Hire an employee and give a raise in Odoo without rewriting history</li></ul></div></div><p>This spring Yannick joins MyVidangeCompany on 12 March, and Jurgen gets a raise from 1 May. Each time payroll must know <em>what</em> was agreed and <em>from when</em>. Odoo answers with one idea: the employee's terms live in <strong>versions</strong>, dated records that follow each other.</p>
+<h2 id="the-employee-who-is-paid">The employee: who is paid</h2>
+<p>The employee form holds the person: identity, family, address, bank account. Tax and social security depend on several of these fields.</p>
+<figure>
+<p><img alt="Marie, Personal tab" src="assets/screenshots/be_employee.png" /></p>
+<figcaption>Marie, <i>Personal</i> tab. ① marital status (Married). ② the spouse's tax status (Without Income). ③ dependent people (2) and ④ of which children (2). ⑤ the national identification number used by the social security office. ⑥ the bank account that receives the net pay, marked <i>Trusted</i>.</figcaption>
+</figure>
+<table>
+<thead>
+<tr>
+<th>Field group</th>
+<th>Why payroll needs it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Family situation ①–④</td>
+<td>the withholding tax grants reductions for a dependent spouse and children (Chapter 4)</td>
+</tr>
+<tr>
+<td>National number ⑤</td>
+<td>identifies the worker in every social security and tax declaration (Chapter 17)</td>
+</tr>
+<tr>
+<td>Bank account ⑥</td>
+<td>where the net goes; the SEPA file reads it (Chapter 16)</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition pitfall">
+<p class="admonition-title">Common pitfall: an employee is not complete when the form saves</p>
+<p>Odoo saves an employee without a national number or a bank account. The dashboard then shows one card per gap, and declarations refuse the employee later. After every hire, look at the dashboard. (The reverse also holds: a few contract fields are required.)</p>
+</div>
+<figure>
+<p><img alt="A new employee that does not save" src="assets/screenshots/be_new_employee_required.png" /></p>
+<figcaption>A new employee with ③ a contract start of 12 March 2026 and ④ a wage of 3,600.00 € a month, saved with ① <i>Employee Type</i> left empty: Odoo refuses with ② "Missing required fields".</figcaption>
+</figure>
+<h2 id="the-version-what-is-agreed-from-when">The version: what is agreed, from when</h2>
+<p>The <em>Payroll</em> tab belongs to a <strong>version</strong> (<span class='pill odoo'>hr.version</span>); the employee shows the one current today. A version starts on its <em>effective date</em> and stays valid until the next one starts.</p>
+<figure>
+<p><img alt="Marie, Payroll tab" src="assets/screenshots/be_version.png" /></p>
+<figcaption>Marie's <i>Payroll</i> tab, her current version (the date button <b>Jun 1, 2020</b> and the <b>+</b> next to it select and add versions). ① wage 7,500.00 € per month. ② joint committee 200, the Belgian sector field. ③ company car with its yearly benefit in kind, 1,782.86 €. ④ meal vouchers, 10.00 € per worked day, with an employee share of 1.09 €. ⑤ pay category <i>CP200 BE</i>, the structure type. The header also shows the employer cost, 133,329.78 € a year.</figcaption>
+</figure>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Effective date (<span class='pill odoo'>date_version</span>)</td>
+<td>the day this version starts</td>
+</tr>
+<tr>
+<td>Contract (<span class='pill odoo'>contract_date_start</span>, <span class='pill odoo'>contract_date_end</span>)</td>
+<td>the employment contract's dates, shared by all its versions</td>
+</tr>
+<tr>
+<td>Wage Type, Wage</td>
+<td>a fixed amount per pay period, or an hourly rate</td>
+</tr>
+<tr>
+<td>Working Hours</td>
+<td>the schedule; the denominator of every proration (Chapter 14)</td>
+</tr>
+<tr>
+<td>Pay Category (<span class='pill odoo'>structure_type_id</span>)</td>
+<td>the structure type, so the rules that will run</td>
+</tr>
+</tbody>
+</table>
+<h3 id="how-versions-follow-each-other">How versions follow each other</h3>
+<div class='figure'><pre class='mermaid'>flowchart LR
+    classDef earn fill:#E3F4EA,stroke:#2E9E5B,stroke-width:2px,color:#1E293B;
+classDef ded fill:#FBE5E5,stroke:#D64545,stroke-width:2px,color:#1E293B;
+classDef emp fill:#EEE8F6,stroke:#7B5EA7,stroke-width:2px,color:#1E293B;
+classDef tax fill:#E2ECF8,stroke:#2F6DB5,stroke-width:2px,color:#1E293B;
+classDef net fill:#FBF3D9,stroke:#C99A0E,stroke-width:2px,color:#1E293B;
+classDef odoo fill:#E9EDF2,stroke:#475569,stroke-width:2px,color:#1E293B;
+classDef law fill:#FDF0E1,stroke:#B45309,stroke-width:2px,color:#1E293B;
+classDef neutral fill:#F4F6F8,stroke:#64748B,stroke-width:2px,color:#1E293B;
+    subgraph C1[&quot;Contract: from 1 Apr 2023, no end&quot;]
+        direction LR
+        V1[&quot;Version 1&lt;br/&gt;effective 1 Apr 2023&lt;br/&gt;wage 2,300&quot;] --&gt; V2[&quot;Version 2&lt;br/&gt;effective 1 May 2026&lt;br/&gt;wage 2,500&quot;]
+    end
+    class V1 earn;
+    class V2 emp;</pre></div>
+<p>This is Jurgen after Mission 13.4. Version 1 ends the day before version 2 starts; you never type an end date. Both belong to the same <strong>contract</strong> because they share the contract dates: a contract is not a separate record but the run of versions with the same start and end.</p>
+<div class="admonition key">
+<p class="admonition-title">Key idea: one payslip may read several versions</p>
+<p>A payslip belongs to the version valid at its start, but its worked days are computed for <strong>every version of the same contract</strong> active in the period. A raise on 15 May gives one May payslip with two sets of worked-days lines, each valued at its own wage. A new <em>contract</em> gives a separate payslip.</p>
+</div>
+<div class="admonition be">
+<p class="admonition-title">In Belgium</p>
+<p>Two versions share a payslip when they have the same Dimona category (the class of worker declared at hiring) and worker code, whatever their contract dates. The <em>Sub-type</em> field (495 for a white-collar employee) is that worker code.</p>
+</div>
+<div class="admonition pitfall">
+<p class="admonition-title">Common pitfall: editing the wage instead of adding a version</p>
+<p>Typing 2,500 into Jurgen's current version rewrites the past: January to April would look as if he always earned 2,500. Add a version dated 1 May with the <strong>+</strong> button instead.</p>
+</div>
+<h3 id="raising-many-employees-at-once">Raising many employees at once</h3>
+<p>A sector-wide indexation is a new version per employee. The <em>Salary Increase</em> action (select employees, then <em>Actions</em>) creates them in one go (Chapter 11 explains indexation).</p>
+<figure>
+<p><img alt="The Salary Increase wizard" src="assets/screenshots/be_index_wizard.png" /></p>
+<figcaption>The <i>Salary Increase</i> wizard on MyVidangeCompany's five employees. ① type: <i>Manual</i> or <i>Legal Indexation</i>. ② the date of the increase, 1 January 2026. ③ the rate, 2.21 %, the sector indexation of January 2026. ④ <i>Confirm</i>, not clicked here: the cast's 2026 wages are already indexed.</figcaption>
+</figure>
+<h2 id="wage-wage-type-pay-frequency">Wage, wage type, pay frequency</h2>
+<p>The <strong>wage type</strong> is a fixed amount or an hourly rate. The <strong>pay frequency</strong> comes from the structure type. The <strong>wage</strong> is an amount <em>per pay period</em>: on a semi-monthly type it is a half-month amount. Always read the unit next to the number.</p>
+<h2 id="benefits-are-fields-read-by-rules">Benefits are fields, read by rules</h2>
+<p>Marie's car and meal vouchers are fields of her version, read by the rules every month:</p>
+<table class='payslip'>
+<thead>
+<tr>
+<th>On the version</th>
+<th>On Marie's February payslip</th>
+<th>Line code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Company car, yearly benefit 1,782.86 €</td>
+<td>benefit in kind added to the taxable base: 136.77 €, then deducted again from net</td>
+<td><code>ATN.CAR</code>, <code>ATN_DED</code></td>
+</tr>
+<tr>
+<td>Meal voucher 10.00 €, employee share 1.09 €</td>
+<td>20 worked days × 1.09 € = −21.80 € on net; employer part 178.20 €</td>
+<td><code>MEAL_V_EMP</code>, <code>MEAL_VOUCHER_EMPLOYER</code></td>
+</tr>
+</tbody>
+</table>
+
+<p>A benefit in kind is taxed as if paid in cash, then removed before net pay (Chapter 2).</p>
+<div class="admonition world">
+<p class="admonition-title">Around the world</p>
+<ul>
+<li><strong>Belgium</strong>: about 250 fields on the version (cars, vouchers, insurances, family, Dimona).</li>
+<li><strong>Switzerland</strong>: about 100.</li>
+<li><strong>India</strong>: about 50.</li>
+<li><strong>United States</strong>: about 30.</li>
+<li><strong>Netherlands</strong>: one. Same engine; only the legal data around the employee varies.</li>
+</ul>
+</div>
+<p>A <strong>contract template</strong> is a version without an employee; <em>Load a Template</em> copies its fields onto the current version.</p>
+<h2 id="three-places-for-a-pay-element">Three places for a pay element</h2>
+<div class='figure'><pre class='mermaid'>flowchart TD
+    classDef earn fill:#E3F4EA,stroke:#2E9E5B,stroke-width:2px,color:#1E293B;
+classDef ded fill:#FBE5E5,stroke:#D64545,stroke-width:2px,color:#1E293B;
+classDef emp fill:#EEE8F6,stroke:#7B5EA7,stroke-width:2px,color:#1E293B;
+classDef tax fill:#E2ECF8,stroke:#2F6DB5,stroke-width:2px,color:#1E293B;
+classDef net fill:#FBF3D9,stroke:#C99A0E,stroke-width:2px,color:#1E293B;
+classDef odoo fill:#E9EDF2,stroke:#475569,stroke-width:2px,color:#1E293B;
+classDef law fill:#FDF0E1,stroke:#B45309,stroke-width:2px,color:#1E293B;
+classDef neutral fill:#F4F6F8,stroke:#64748B,stroke-width:2px,color:#1E293B;
+    Q{&quot;How long does&lt;br/&gt;the element last?&quot;}
+    Q -- &quot;every month, part of the terms&quot; --&gt; E1[&quot;Version field&lt;br/&gt;Payroll tab&quot;]
+    Q -- &quot;this payslip only&quot; --&gt; E2[&quot;Payslip input&lt;br/&gt;Salary Inputs tab&quot;]
+    Q -- &quot;a recurring deduction or credit,&lt;br/&gt;maybe with a balance&quot; --&gt; E3[&quot;Payslip adjustment&lt;br/&gt;Payslip Adjustments tab&quot;]
+    class E1,E2,E3 odoo;</pre></div>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Stored in</th>
+<th>MyVidangeCompany example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Version field</td>
+<td>a field on <span class='pill odoo'>hr.version</span>, read by the rules</td>
+<td>Marie's car and meal vouchers</td>
+</tr>
+<tr>
+<td>Payslip input</td>
+<td><span class='pill odoo'>hr.payslip.input</span>, read as <code>inputs['CODE']</code></td>
+<td>Emma's notice of 24 weeks (Chapter 17)</td>
+</tr>
+<tr>
+<td>Payslip adjustment</td>
+<td><span class='pill odoo'>hr.salary.attachment</span>, an input on every payslip until the balance is reached</td>
+<td>a wage garnishment, a loan repaid monthly</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition practice">
+<p class="admonition-title">In practice: one change, one version</p>
+<p>Date each version at the day the change takes effect, not the day you type it. If that day is in a validated month, add the version anyway: Odoo flags the payslips as outdated (Chapter 15 corrects them).</p>
+</div>
+<h2 id="missions">Missions</h2>
+<div class="admonition mission">
+<p class="admonition-title">Mission 13.1 · Hire the first four ★★</p>
+<p><strong>Situation.</strong> On 1 January 2026 MyVidangeCompany employs four people on open-ended contracts. Marie is married to a spouse without income and has two dependent children; the others are single without children.</p>
+<table>
+<thead>
+<tr>
+<th>Employee</th>
+<th>Job</th>
+<th>Contract start</th>
+<th style="text-align: right;">Wage (€/month)</th>
+<th>Born</th>
+<th>Sex</th>
+<th>National number</th>
+<th>IBAN</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mélanie</td>
+<td>Developer</td>
+<td>01/02/2021</td>
+<td style="text-align: right;">4,000.00</td>
+<td>14/05/1993</td>
+<td>F</td>
+<td>93051412288</td>
+<td>BE14 0635 5500 0083</td>
+</tr>
+<tr>
+<td>Jurgen</td>
+<td>Support Agent</td>
+<td>01/04/2023</td>
+<td style="text-align: right;">2,300.00</td>
+<td>03/09/1998</td>
+<td>M</td>
+<td>98090321174</td>
+<td>BE15 0635 5511 1130</td>
+</tr>
+<tr>
+<td>Marie</td>
+<td>Engineering Manager</td>
+<td>01/06/2020</td>
+<td style="text-align: right;">7,500.00</td>
+<td>21/02/1984</td>
+<td>F</td>
+<td>84022115820</td>
+<td>BE16 0635 5522 2274</td>
+</tr>
+<tr>
+<td>Emma</td>
+<td>Ops Lead</td>
+<td>01/10/2019</td>
+<td style="text-align: right;">5,000.00</td>
+<td>09/11/1981</td>
+<td>F</td>
+<td>81110920443</td>
+<td>BE18 0635 5544 4465</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Your goal.</strong> Create the four employees, each with a version at the right wage and start date, and a bank account Odoo may pay to.</p>
+<p><strong>Check.</strong> Each version is on <strong>CP200 BE</strong>, sub-type <strong>495</strong>, <em>Standard 38 hours/week</em>. Employer cost per year: Mélanie <strong>69,792.80 €</strong>, Jurgen <strong>40,130.86 €</strong>, Emma <strong>87,241.00 €</strong>, Marie <strong>130,861.50 €</strong>.</p>
+<details class="hint" open="open">
+<summary>Hint</summary>
+<p>The contract start is the "Not Employed" placeholder on the Payroll tab, and the form needs an <em>Employee Type</em>. A bank account must be <em>trusted</em> (Send Money) before a bank file can use it.</p>
+</details>
+</div>
+<div class="admonition mission">
+<p class="admonition-title">Mission 13.2 · Marie's car and meal vouchers ★★</p>
+<p><strong>Situation.</strong> Marie drives an electric Volkswagen ID.4, plate 2-MDS-726, catalogue value 52,000.00 € including VAT, CO₂ 0 g/km, first registered on 5 January 2026. She gets meal vouchers of 10.00 € a worked day, of which she pays 1.09 €.</p>
+<p><strong>Your goal.</strong> Register the car in Fleet with Marie as driver, and put the car and the vouchers on her version.</p>
+<p><strong>Check.</strong> The car's benefit in kind is <strong>1,782.86 € / year</strong>; Marie's employer cost rises to <strong>133,329.78 € / year</strong>; meal vouchers <strong>10.00 €</strong> per worked day, employee share <strong>1.09 €</strong>.</p>
+<details class="hint" open="open">
+<summary>Hint</summary>
+<p>The model ID.4 does not exist yet: create it in Fleet's configuration. On the version, tick the company car before you choose it.</p>
+</details>
+</div>
+<div class="admonition mission">
+<p class="admonition-title">Mission 13.3 · Read the dashboard ★</p>
+<p><strong>Situation.</strong> Your manager asks: "What is Odoo complaining about, now that we have staff?"</p>
+<p><strong>Your goal.</strong> List the dashboard cards, open the records behind each blue or orange one, and fix the card about the work address.</p>
+<p><strong>Check.</strong> <strong>6 cards</strong>. <em>Missing Salary Indexation Employees</em> lists <strong>4 employees</strong>; <em>Drivers Without Running Contract</em> points at the car <strong>2-MDS-726</strong>. Once the company has a social security establishment unit, <em>Missing ONSS identification code</em> is gone (a blue <em>Missing DMFA establishment unit language</em> card takes its place: leave it).</p>
+<details class="hint" open="open">
+<summary>Hint</summary>
+<p>The address card wants a work location of type <em>DMFA Unit</em> at MyVidangeCompany's address (<em>Configuration &gt; Belgium &gt; Work Locations</em>). For the car, read what the warning really checks (<em>Configuration &gt; Dashboard &gt; Warnings</em>): a lease, not an employment contract.</p>
+</details>
+</div>
+<div class="admonition mission">
+<p class="admonition-title">Mission 13.4 · Yannick joins, Jurgen gets a raise ★★</p>
+<p><strong>Situation.</strong> Yannick (born 30 July 1996, male, national number 96073031772, IBAN BE17 0635 5533 3321) starts as a designer at 3,600.00 € a month on Thursday 12 March 2026. Jurgen's wage goes from 2,300.00 € to 2,500.00 € from 1 May 2026; his earlier months must stay as they are.</p>
+<p><strong>Your goal.</strong> Hire Yannick from 12 March, and record Jurgen's raise so that January to April still use 2,300.00 €.</p>
+<p><strong>Check.</strong> Yannick's version is effective <strong>12/03/2026</strong>, <strong>CP200 BE</strong>, sub-type <strong>495</strong>, employer cost <strong>62,813.52 € / year</strong>. Jurgen has <strong>2 versions</strong>: the first ends on <strong>30/04/2026</strong> (40,130.86 € / year), the second starts on <strong>01/05/2026</strong> at 2,500.00 € (<strong>43,620.50 € / year</strong>); his contract start stays <strong>01/04/2023</strong>.</p>
+<details class="hint" open="open">
+<summary>Hint</summary>
+<p>Yannick: same form as Mission 13.1. Jurgen: do not type over the wage; use the <strong>+</strong> next to the version date in the header.</p>
+</details>
+</div>
+<h2 id="summary">Summary</h2>
+<ul>
+<li>The employee holds the person (identity, family, bank); the version holds the agreed terms (wage, schedule, pay category, benefits).</li>
+<li>A version starts on its effective date and ends the day before the next one; a contract is the run of versions sharing the same contract dates.</li>
+<li>A payslip reads every version of the same contract active in its period; a new contract means a separate payslip.</li>
+<li>The wage is an amount per pay period; the pay frequency comes from the structure type.</li>
+<li>Benefits are version fields read by rules; one-off amounts are payslip inputs; recurring deductions with a balance are payslip adjustments.</li>
+<li>Hire with the contract start date, raise with a new version, and read the dashboard after each.</li>
+</ul></section><nav class='pager' aria-label='Previous and next chapter'><a class='pager-prev' rel='prev' href='chapter-12-tour-and-setup.html'><small>Previous · Chapter 12</small><span>Tour and setup</span></a><a class='pager-next' rel='next' href='chapter-14-time-schedules-time-off-worked-days.html'><small>Next · Chapter 14</small><span>Time: schedules, time off, worked days</span></a></nav>
+</main>
+</div>
+<script src="js/site.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js" integrity="sha384-rbtjAdnIQE/aQJGEgXrVUlMibdfTSa4PQju4HDhN3sR2PmaKFzhEafuePsl9H/9I" crossorigin="anonymous"></script>
+<script>
+(async () => {
+  mermaid.initialize({
+    startOnLoad: false, theme: "base", securityLevel: "loose",
+    flowchart: { htmlLabels: true, curve: "basis", useMaxWidth: true },
+    sequence: { useMaxWidth: true, mirrorActors: false },
+    er: { useMaxWidth: true },
+    themeVariables: {
+      fontFamily: "Helvetica Neue, Helvetica, Arial", fontSize: "13px",
+      primaryColor: "#E9EDF2", primaryBorderColor: "#475569", primaryTextColor: "#1E293B",
+      lineColor: "#64748B", secondaryColor: "#F6F0F5", tertiaryColor: "#F8FAFC",
+      noteBkgColor: "#FFFAEB", noteBorderColor: "#C99A0E", actorBkg: "#E9EDF2", actorBorder: "#475569"
+    }
+  });
+  const nodes = Array.from(document.querySelectorAll("pre.mermaid"));
+  let i = 0;
+  for (const el of nodes) {
+    const src = el.textContent;
+    try {
+      const { svg } = await mermaid.render("m" + (i++), src);
+      el.outerHTML = svg;
+    } catch (e) {
+      el.outerHTML = `<div class="mermaid-error" data-src="${src.replace(/"/g, "'")}">Mermaid error: ${e.message}\n${src}</div>`;
+    }
+  }
+  window.__mermaidDone = true;
+})();
+</script>
+</body>
+</html>

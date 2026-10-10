@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter 21: Parameters, updates and safe extensions · Payroll, from Theory to Odoo Localization</title>
+<meta name="description" content="Gross-to-net in any country, the Odoo salary engine, and how to design, build and review a payroll localization.">
+<link rel="stylesheet" href="css/book.css">
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body class="chapter-page">
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+<button class="nav-toggle" type="button" aria-controls="sidebar" aria-expanded="false"><span aria-hidden="true">&#9776;</span> Contents</button>
+<a class="top-brand" href="index.html">Payroll, from Theory to Odoo Localization</a>
+</header>
+<div class="layout">
+<nav id="sidebar" class="sidebar" aria-label="Book contents">
+<a class="side-brand" href="index.html">Payroll, from Theory to Odoo Localization</a>
+<div class="search" role="search">
+<label for="search-input" class="sr-only">Search the book</label>
+<input id="search-input" type="search" placeholder="Search the book  ( / )" autocomplete="off" spellcheck="false" aria-controls="search-results">
+<div id="search-results" class="search-results" aria-live="polite"></div>
+</div>
+<ol class="nav"><li class='nav-part'><span class='nav-part-title'>Front matter</span><ol><li><a href='preface-before-you-start.html'><span class='nav-num'></span><span>Before you start</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part I · Payroll theory</span><ol><li><a href='chapter-01-what-payroll-is-and-why-it-is-hard.html'><span class='nav-num'>1.</span><span>What payroll is, and why it is hard</span></a></li><li><a href='chapter-02-gross-to-net.html'><span class='nav-num'>2.</span><span>Gross to net</span></a></li><li><a href='chapter-03-contributions-employee-and-employer.html'><span class='nav-num'>3.</span><span>Contributions: employee and employer</span></a></li><li><a href='chapter-04-withholding-tax.html'><span class='nav-num'>4.</span><span>Withholding tax</span></a></li><li><a href='chapter-05-time-proration-and-overtime.html'><span class='nav-num'>5.</span><span>Time, proration and overtime</span></a></li><li><a href='chapter-06-irregular-pay-corrections-and-leavers.html'><span class='nav-num'>6.</span><span>Irregular pay, corrections and leavers</span></a></li><li><a href='chapter-07-declarations-and-the-compliance-calendar.html'><span class='nav-num'>7.</span><span>Declarations and the compliance calendar</span></a></li><li><a href='chapter-08-accounting-for-payroll.html'><span class='nav-num'>8.</span><span>Accounting for payroll</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part II · Localization theory</span><ol><li><a href='chapter-09-what-varies-between-countries-and-what-doesnt.html'><span class='nav-num'>9.</span><span>What varies between countries, and what doesn&#x27;t</span></a></li><li><a href='chapter-10-researching-a-new-country.html'><span class='nav-num'>10.</span><span>Researching a new country</span></a></li><li><a href='chapter-11-laws-that-change-over-time.html'><span class='nav-num'>11.</span><span>Laws that change over time</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part III · Odoo payroll, hands-on</span><ol><li><a href='chapter-12-tour-and-setup.html'><span class='nav-num'>12.</span><span>Tour and setup</span></a></li><li><a href='chapter-13-employees-and-versions.html'><span class='nav-num'>13.</span><span>Employees and versions</span></a></li><li><a href='chapter-14-time-schedules-time-off-worked-days.html'><span class='nav-num'>14.</span><span>Time: schedules, time off, worked days</span></a></li><li><a href='chapter-15-pay-runs-and-payslips.html'><span class='nav-num'>15.</span><span>Pay runs and payslips</span></a></li><li><a href='chapter-16-accounting-and-payment.html'><span class='nav-num'>16.</span><span>Accounting and payment</span></a></li><li><a href='chapter-17-reports-declarations-and-a-leaver.html'><span class='nav-num'>17.</span><span>Reports, declarations and a leaver</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part IV · How the payroll engine works</span><ol><li><a href='chapter-18-the-engine-in-one-picture.html'><span class='nav-num'>18.</span><span>The engine in one picture</span></a></li><li><a href='chapter-19-structures-and-rules.html'><span class='nav-num'>19.</span><span>Structures and rules</span></a></li><li><a href='chapter-20-categories-how-rules-talk-to-each-other.html'><span class='nav-num'>20.</span><span>Categories: how rules talk to each other</span></a></li><li class='current' aria-current='page'><a href='chapter-21-parameters-updates-and-safe-extensions.html'><span class='nav-num'>21.</span><span>Parameters, updates and safe extensions</span></a><ol class='nav-sections'><li><a href='#what-a-rule-parameter-is'>What a rule parameter is</a></li><li><a href='#where-a-value-belongs'>Where a value belongs</a></li><li><a href='#how-updates-reach-customers'>How updates reach customers</a></li><li><a href='#when-data-is-not-enough'>When data is not enough</a></li><li><a href='#proving-it-works'>Proving it works</a></li><li><a href='#summary'>Summary</a></li></ol></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part V · Building a localization</span><ol><li><a href='chapter-22-a-template-for-any-localization-and-how-to-review-one.html'><span class='nav-num'>22.</span><span>A template for any localization, and how to review one</span></a></li></ol></li></ol>
+<a class="nav-pdf" href="payroll_book.pdf" download>Download the PDF</a>
+</nav>
+<div class="backdrop" hidden></div>
+<main id="main" class="content">
+<section class='chapter' id='c-44_ch21'><div class='opener'><div class='opener-band'><span class='opener-num'>Chapter 21</span><span class='opener-part'>Part IV · How the payroll engine works</span></div><h1>Parameters, updates and safe extensions</h1><p class='opener-sub'>Dated legal values, how Odoo's fixes reach every customer, what to do when data is not enough, and how to prove the result</p><div class='opener-goals'><div class='goals-title'>After this chapter you can</div><ul><li>Explain a rule parameter and predict which value a payslip reads</li><li>Decide where a value belongs: parameter, company setting, version field or rule</li><li>Explain how country updates reach customers, and what happens to a record the customer edited</li><li>Choose the lightest extension when data is not enough</li><li>Prove a localization works with golden payslips frozen as tests</li></ul></div></div><p>On 1 January the minimum wage, a tax scale and a contribution cap change. Nobody touches a rule. Odoo adds three dated values to the country's data, every customer database receives them within a week, and the first January payslip reads them, while a December payslip recomputed in February still reads December's law. This chapter shows how, and what to do when the law asks for more than a new number.</p>
+<h2 id="what-a-rule-parameter-is">What a rule parameter is</h2>
+<p>A <strong>rule parameter</strong> is a code with a list of <strong>dated values</strong>: a rate, a cap, a tax scale, each valid from a date until the next value starts. A rule never contains the number itself; it asks for the parameter by its code, and the payslip gets the value valid on its own date. Next year's law is a <strong>new value</strong>, never an edit.</p>
+<p>Three things follow:</p>
+<ul>
+<li><strong>History is kept.</strong> Old values stay, so any past payslip recomputes with the law of its period (Chapter 11).</li>
+<li><strong>A value has a start date only.</strong> It lasts until the next one; a temporary measure is two values, the measure and the return to normal.</li>
+<li><strong>A value can be any shape</strong> the rule needs: a number, a list of brackets, a table per frequency. Keep the same shape every year, so the rule never needs to know the year.</li>
+</ul>
+<div class="vtl" markdown="0">
+<div class="vbar">
+<div class="vseg c-odoo" style="width:20%">from 01/01/2022<b>1,270</b></div>
+<div class="vseg c-odoo" style="width:20%">from 01/01/2023<b>1,260</b></div>
+<div class="vseg c-earn" style="width:20%">from 01/01/2024<b>1,300</b></div>
+<div class="vseg c-odoo" style="width:20%">from 01/01/2025<b>1,350</b></div>
+<div class="vseg c-odoo" style="width:20%">from 01/01/2026<b>1,400</b></div>
+</div>
+<div class="vslips">
+<div class="vslip" style="width:40%"></div>
+<div class="vslip" style="width:20%"><span>June 2024 payslip<br>(1–30 June)<br>reads <b>1,300</b></span></div>
+<div class="vslip" style="width:40%"></div>
+</div>
+</div>
+
+<p>An illustrative parameter <code>minimum_wage</code> with five values. The June 2024 payslip asks for it:</p>
+<div class="highlight"><pre><span></span><code><span class="n">payslip</span><span class="o">.</span><span class="n">_rule_parameter</span><span class="p">(</span><span class="s1">'minimum_wage'</span><span class="p">)</span>     <span class="c1"># 1300</span>
+</code></pre></div>
+<p>The rule is simple: <strong>the value with the latest start date on or before the payslip's end date</strong>. For June 2024 that is the value of 1 January 2024. Note the 2023 value is lower than 2022's: values follow the law, not a trend, and nobody edits the old ones to "fix" them.</p>
+<p>Belgium's cap on the flat-rate professional expenses works exactly like this: 5,930 € from 1 January 2025, 6,070 € from 1 January 2026. Mélanie's February 2026 payslip reads 6,070; a December 2025 payslip recomputed today still reads 5,930.</p>
+<figure>
+<p><img alt="A parameter with five values in one year" src="assets/screenshots/be_params_2026_timeline.png" /></p>
+<figcaption>A Belgian parameter, <i>Work Bonus: Coefficient</i>. ① its code, which rules use to read it. ②–⑥ five values dated in 2026, newest first; older values stay below, so any past payslip recomputes with its own law.</figcaption>
+</figure>
+<div class="admonition pitfall">
+<p class="admonition-title">Common pitfall: a period that straddles a date</p>
+<p>One value applies to the whole payslip, read at its <strong>end</strong> date. A weekly payslip from 29 June to 5 July reads the July value for the whole week. When the law requires splitting, the rule must ask twice, with two reference dates, and prorate.</p>
+</div>
+<h2 id="where-a-value-belongs">Where a value belongs</h2>
+<p>Not every number is a parameter. Ask who decides it, and for whom.</p>
+<div class="sorter" markdown="0">
+<div class="sq">Who decides this value?</div>
+<div class="scols">
+<div class="scol c-law"><div class="if">The law</div><div class="then">a rule parameter, dated</div><i>tax scales, contribution rates, caps, the minimum wage</i></div>
+<div class="scol c-emp"><div class="if">The employer, for everyone</div><div class="then">a company setting</div><i>Mexico: the company's income-tax calculation method; Belgium: the employer's sector</i></div>
+<div class="scol c-earn"><div class="if">The person's situation</div><div class="then">a field on the version</div><i>wage, family situation, company car, a fixed allowance agreed with this employee</i></div>
+<div class="scol c-odoo"><div class="if">The method</div><div class="then">a rule (or a helper it calls)</div><i>how the tax is computed from the scale, in what order</i></div>
+</div>
+<div class="sfoot">Each kind of value has its own date: the parameter's start date, the version's date, the company setting's date. Rules have none.</div>
+</div>
+
+<p>The last column is the subtle one: <strong>rules are not dated</strong>. Change a rule and every payslip you recompute afterwards uses the new method, including old ones. So a rule should be written to be valid for every year it supports, and everything that changes by year must sit in a parameter it reads.</p>
+<h2 id="how-updates-reach-customers">How updates reach customers</h2>
+<p>Country data is not frozen at installation. Odoo keeps improving it, and delivers it without a module upgrade.</p>
+<div class="steps" markdown="0">
+<div class="step c-law"><b><span class="n">1</span>The law changes</b>a new rate from 1 January, a corrected rule</div>
+<div class="sarrow">→</div>
+<div class="step c-odoo"><b><span class="n">2</span>Odoo adds it</b>in the country module's data files: a new dated value, or the fixed rule</div>
+<div class="sarrow">→</div>
+<div class="step c-tax"><b><span class="n">3</span>A weekly job reloads</b>the scheduled action “Payroll: Update data” reloads every country's payroll data into every database</div>
+<div class="sarrow">→</div>
+<div class="step c-net"><b><span class="n">4</span>Next payslip</b>reads the new value at its date, or runs the fixed rule</div>
+</div>
+<div class="outcomes" markdown="0">
+<div class="outcome c-earn"><b>Untouched record:</b> updated every week, with nothing to do.</div>
+<div class="outcome c-ded"><b>Record the customer edited:</b> flagged as manually updated and skipped by the weekly job, until someone clicks <i>Reset</i>.</div>
+</div>
+
+<p>Why the protection? A customer may have a reason to change what a rule computes, and a weekly reload must not silently undo it. So when a user edits a shipped rule's computation (its code, condition, amount, categories, structures or sequence; not its label), or edits a shipped parameter, Odoo marks the record and stops updating it. Time types are protected the same way. Records the customer created from scratch are never touched by the update.</p>
+<figure>
+<p><img alt="A rule edited by a user" src="assets/screenshots/be_rule_modified.png" style="width:78%" /></p>
+<figcaption>A Belgian rule edited by a user. ① the banner: the rule will no longer be updated. ② <b>Reset</b> reloads the standard version, drops the manual changes and resumes the updates. On a parameter, Reset also removes the values users added.</figcaption>
+</figure>
+<div class="admonition example">
+<p class="admonition-title">Worked example: a customer patches a cap</p>
+<p>MyVidangeCompany's payroll officer thinks the 2026 professional-expenses cap is wrong and edits it "until Odoo fixes it". The parameter is now flagged. When Odoo ships the 2027 value, the weekly job <strong>skips</strong> this parameter: January 2027 payslips silently keep reading the 2026 cap. The right move was to report the value; once the record is flagged, <strong>Reset</strong> brings back Odoo's values and the updates.</p>
+</div>
+<div class="admonition practice">
+<p class="admonition-title">In practice</p>
+<p>In a review or a support case, search the rules and parameters flagged as manually updated. Each one is a place where the customer stopped receiving the law's changes. Ask why; if the reason is gone, reset it. If the customer needs a different computation for good, a rule of their own next to the standard one is easier to maintain than an edited standard rule.</p>
+</div>
+<h2 id="when-data-is-not-enough">When data is not enough</h2>
+<p>Most of a localization is data: parameters, rules, categories, time types, warnings. Sometimes the law needs more. Climb the ladder only as far as needed.</p>
+<div class="prio" markdown="0">
+<div class="parrow"><span>lighter</span><div class="bar"></div><span>heavier</span></div>
+<div class="pstack">
+<div class="pl c-earn" style="margin:0 16mm 0 0"><div class="pn">1 · A record<small>data</small></div><div class="pb">a parameter, a rule, a category, a time type, a dashboard warning<i>updated weekly, resettable, readable by a payroll expert</i></div></div>
+<div class="pl c-tax" style="margin:0 12mm 0 0"><div class="pn">2 · A field on the version<small>data about the person</small></div><div class="pb">a fact the law needs about the employee, which rules then read<i>Belgium: family situation, company car</i></div></div>
+<div class="pl c-emp" style="margin:0 8mm 0 0"><div class="pn">3 · A helper the rules call<small>Python method</small></div><div class="pb">a formula too long for a rule; the rule stays one line<i>India: the yearly income-tax projection</i></div></div>
+<div class="pl c-odoo" style="margin:0 4mm 0 0"><div class="pn">4 · An engine hook<small>guarded by country</small></div><div class="pb">change one step of the engine for one country only<i>Belgium: round every line to the cent; Mexico: value worked days from a legal daily salary</i></div></div>
+<div class="pl c-ded"><div class="pn">5 · Patch the engine<small>for one country</small></div><div class="pb"><b>never</b><i>every future engine change would break that country, or every other one</i></div></div>
+</div>
+</div>
+
+<p>Each rung is harder to change and to review than the one above. A record can be changed by a payroll expert and is delivered by the weekly job; a helper or a hook needs a developer and a code release. Rung 4 always starts with a <strong>country guard</strong>, because one database can hold a Belgian and a Mexican company:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">_get_payslip_line_total</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">amount</span><span class="p">,</span> <span class="n">quantity</span><span class="p">,</span> <span class="n">rate</span><span class="p">,</span> <span class="n">rule</span><span class="p">):</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_get_payslip_line_total</span><span class="p">(</span><span class="n">amount</span><span class="p">,</span> <span class="n">quantity</span><span class="p">,</span> <span class="n">rate</span><span class="p">,</span> <span class="n">rule</span><span class="p">)</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">company_id</span><span class="o">.</span><span class="n">country_id</span><span class="o">.</span><span class="n">code</span> <span class="o">!=</span> <span class="s1">'BE'</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">total</span>
+    <span class="k">return</span> <span class="n">float_round</span><span class="p">(</span><span class="n">total</span><span class="p">,</span> <span class="n">precision_rounding</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">rounding_method</span><span class="o">=</span><span class="s1">'HALF-UP'</span><span class="p">)</span>
+</code></pre></div>
+<p>Belgium's line rounding: other countries get the standard total untouched. Chapter 22 lists the few hooks a new localization actually needs.</p>
+<div class="admonition key">
+<p class="admonition-title">Key idea</p>
+<p>Before writing Python, ask: "could a payroll officer need to change this next year?" If yes (a rate, a cap, a list of codes), it belongs in a record.</p>
+</div>
+<h2 id="proving-it-works">Proving it works</h2>
+<p>A payslip can be wrong by one cent for years before anyone notices. The proof is a set of <strong>golden payslips</strong> (Chapter 10): payslips computed independently of Odoo, from the law and the administration's examples, and frozen as automated tests. Each test sets up an employee, computes a payslip for a period, and compares every line with the expected amount:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">test_standard_month</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">payslip</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_generate_payslip</span><span class="p">(</span><span class="n">date</span><span class="p">(</span><span class="mi">2026</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">date</span><span class="p">(</span><span class="mi">2026</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">28</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_validate_payslip</span><span class="p">(</span><span class="n">payslip</span><span class="p">,</span> <span class="p">{</span>
+        <span class="s1">'BASIC'</span><span class="p">:</span> <span class="mf">4000.0</span><span class="p">,</span> <span class="s1">'ONSS'</span><span class="p">:</span> <span class="o">-</span><span class="mf">522.80</span><span class="p">,</span> <span class="s1">'GROSS'</span><span class="p">:</span> <span class="mf">3477.20</span><span class="p">,</span>
+        <span class="s1">'P.P'</span><span class="p">:</span> <span class="o">-</span><span class="mf">826.69</span><span class="p">,</span> <span class="s1">'NET'</span><span class="p">:</span> <span class="mf">2614.27</span><span class="p">,</span>
+    <span class="p">})</span>
+</code></pre></div>
+<p>Illustrative, with Mélanie's February 2026 values. The tests run on every change to the module, so a fix for one case cannot silently break another.</p>
+<table>
+<thead>
+<tr>
+<th>Write a test…</th>
+<th>Because</th>
+<th>Case study</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>per situation the law distinguishes</td>
+<td>each one takes a different path through the rules</td>
+<td>Mélanie (standard), Jurgen (low wage), Marie (car, family)</td>
+</tr>
+<tr>
+<td>per special time</td>
+<td>absences, joiners and overtime hide bugs better than arithmetic</td>
+<td>Yannick joins on 12 March; Jurgen's April</td>
+</tr>
+<tr>
+<td>per extra structure</td>
+<td>each kind of payslip has its own rules</td>
+<td>Emma's exit payslips</td>
+</tr>
+<tr>
+<td>on both sides of every date change</td>
+<td>proves the new value starts on the right day, and the old one still applies before</td>
+<td>Jurgen's low-wage threshold, March and April 2026</td>
+</tr>
+<tr>
+<td>above every cap and in the top bracket</td>
+<td>a cap that is never reached is never tested</td>
+<td>Marie</td>
+</tr>
+</tbody>
+</table>
+<p>Tests run on fixed dates, so a test of 2025 keeps checking the 2025 law forever. When you add next year's values, keep the old tests unchanged: if one fails, an old value was edited instead of a new one added. And break the module on purpose once (multiply a cap by ten): if no test fails, the suite has a hole.</p>
+<div class="admonition pitfall">
+<p class="admonition-title">Common pitfall: expected values copied from Odoo</p>
+<p>A test whose expected amounts were produced by the code it tests proves nothing about the law; it can only detect a change. The first expected value of each case must come from an independent calculation, with its source in a comment.</p>
+</div>
+<div class="admonition world">
+<p class="admonition-title">Around the world</p>
+<ul>
+<li><strong>Mexico</strong> reads the UMA and the tax tables from dated parameters, with one table per pay frequency.</li>
+<li><strong>Belgium</strong> downloads social-security rates every day into dated parameters, one per employer class and worker type.</li>
+<li><strong>Switzerland</strong> imports tax tariffs from official files through a wizard.</li>
+<li><strong>United States</strong> builds a parameter code per state for unemployment insurance rates, so a new state is a new parameter, not new code.</li>
+</ul>
+</div>
+<div class="admonition practice">
+<p class="admonition-title">Review checklist</p>
+<ul>
+<li><strong>New values are added, not edited.</strong> Each yearly change is a new dated value; old values and old tests are untouched.</li>
+<li><strong>Every legal number is a parameter</strong>, with a code prefixed by the country (<code>l10n_xx_…</code>): codes are shared by all countries.</li>
+<li><strong>Customer edits are known</strong>: rules and parameters flagged as manually updated are listed and justified.</li>
+<li><strong>Code is guarded by country</strong>, and sits on the lightest rung of the ladder that works.</li>
+<li><strong>A test per new case</strong>: each new situation, structure or dated value comes with a golden payslip, on both sides of its date.</li>
+</ul>
+</div>
+<h2 id="summary">Summary</h2>
+<ul>
+<li>A rule parameter is a code with dated values; a payslip reads the value with the latest start date on or before its end date. Next year's law is a new value, never an edit.</li>
+<li>Law goes in parameters, the employer's choices in company settings, the person's facts on the version, the method in rules. Rules are not dated.</li>
+<li>A weekly job reloads every country's payroll data, so new values and fixes arrive without an upgrade; a record the customer edited is flagged and skipped until Reset.</li>
+<li>When data is not enough, climb the ladder: record, version field, helper, country-guarded hook; never patch the engine for one country.</li>
+<li>Golden payslips frozen as tests are the proof: one per legal situation, per structure, on both sides of every date, above every cap.</li>
+</ul></section><nav class='pager' aria-label='Previous and next chapter'><a class='pager-prev' rel='prev' href='chapter-20-categories-how-rules-talk-to-each-other.html'><small>Previous · Chapter 20</small><span>Categories: how rules talk to each other</span></a><a class='pager-next' rel='next' href='chapter-22-a-template-for-any-localization-and-how-to-review-one.html'><small>Next · Chapter 22</small><span>A template for any localization, and how to review one</span></a></nav>
+</main>
+</div>
+<script src="js/site.js"></script>
+
+</body>
+</html>

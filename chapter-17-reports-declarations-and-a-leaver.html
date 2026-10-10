@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter 17: Reports, declarations and a leaver · Payroll, from Theory to Odoo Localization</title>
+<meta name="description" content="Gross-to-net in any country, the Odoo salary engine, and how to design, build and review a payroll localization.">
+<link rel="stylesheet" href="css/book.css">
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body class="chapter-page">
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+<button class="nav-toggle" type="button" aria-controls="sidebar" aria-expanded="false"><span aria-hidden="true">&#9776;</span> Contents</button>
+<a class="top-brand" href="index.html">Payroll, from Theory to Odoo Localization</a>
+</header>
+<div class="layout">
+<nav id="sidebar" class="sidebar" aria-label="Book contents">
+<a class="side-brand" href="index.html">Payroll, from Theory to Odoo Localization</a>
+<div class="search" role="search">
+<label for="search-input" class="sr-only">Search the book</label>
+<input id="search-input" type="search" placeholder="Search the book  ( / )" autocomplete="off" spellcheck="false" aria-controls="search-results">
+<div id="search-results" class="search-results" aria-live="polite"></div>
+</div>
+<ol class="nav"><li class='nav-part'><span class='nav-part-title'>Front matter</span><ol><li><a href='preface-before-you-start.html'><span class='nav-num'></span><span>Before you start</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part I · Payroll theory</span><ol><li><a href='chapter-01-what-payroll-is-and-why-it-is-hard.html'><span class='nav-num'>1.</span><span>What payroll is, and why it is hard</span></a></li><li><a href='chapter-02-gross-to-net.html'><span class='nav-num'>2.</span><span>Gross to net</span></a></li><li><a href='chapter-03-contributions-employee-and-employer.html'><span class='nav-num'>3.</span><span>Contributions: employee and employer</span></a></li><li><a href='chapter-04-withholding-tax.html'><span class='nav-num'>4.</span><span>Withholding tax</span></a></li><li><a href='chapter-05-time-proration-and-overtime.html'><span class='nav-num'>5.</span><span>Time, proration and overtime</span></a></li><li><a href='chapter-06-irregular-pay-corrections-and-leavers.html'><span class='nav-num'>6.</span><span>Irregular pay, corrections and leavers</span></a></li><li><a href='chapter-07-declarations-and-the-compliance-calendar.html'><span class='nav-num'>7.</span><span>Declarations and the compliance calendar</span></a></li><li><a href='chapter-08-accounting-for-payroll.html'><span class='nav-num'>8.</span><span>Accounting for payroll</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part II · Localization theory</span><ol><li><a href='chapter-09-what-varies-between-countries-and-what-doesnt.html'><span class='nav-num'>9.</span><span>What varies between countries, and what doesn&#x27;t</span></a></li><li><a href='chapter-10-researching-a-new-country.html'><span class='nav-num'>10.</span><span>Researching a new country</span></a></li><li><a href='chapter-11-laws-that-change-over-time.html'><span class='nav-num'>11.</span><span>Laws that change over time</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part III · Odoo payroll, hands-on</span><ol><li><a href='chapter-12-tour-and-setup.html'><span class='nav-num'>12.</span><span>Tour and setup</span></a></li><li><a href='chapter-13-employees-and-versions.html'><span class='nav-num'>13.</span><span>Employees and versions</span></a></li><li><a href='chapter-14-time-schedules-time-off-worked-days.html'><span class='nav-num'>14.</span><span>Time: schedules, time off, worked days</span></a></li><li><a href='chapter-15-pay-runs-and-payslips.html'><span class='nav-num'>15.</span><span>Pay runs and payslips</span></a></li><li><a href='chapter-16-accounting-and-payment.html'><span class='nav-num'>16.</span><span>Accounting and payment</span></a></li><li class='current' aria-current='page'><a href='chapter-17-reports-declarations-and-a-leaver.html'><span class='nav-num'>17.</span><span>Reports, declarations and a leaver</span></a><ol class='nav-sections'><li><a href='#why-payroll-reports-to-the-authorities'>Why payroll reports to the authorities</a></li><li><a href='#reports'>Reports</a></li><li><a href='#how-odoo-builds-a-declaration'>How Odoo builds a declaration</a></li><li><a href='#myvidangecompanys-declarations'>MyVidangeCompany&#x27;s declarations</a></li><li><a href='#a-leaver-emmas-departure'>A leaver: Emma&#x27;s departure</a></li><li><a href='#a-month-in-the-life'>A month in the life</a></li><li><a href='#missions'>Missions</a></li><li><a href='#summary'>Summary</a></li></ol></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part IV · How the payroll engine works</span><ol><li><a href='chapter-18-the-engine-in-one-picture.html'><span class='nav-num'>18.</span><span>The engine in one picture</span></a></li><li><a href='chapter-19-structures-and-rules.html'><span class='nav-num'>19.</span><span>Structures and rules</span></a></li><li><a href='chapter-20-categories-how-rules-talk-to-each-other.html'><span class='nav-num'>20.</span><span>Categories: how rules talk to each other</span></a></li><li><a href='chapter-21-parameters-updates-and-safe-extensions.html'><span class='nav-num'>21.</span><span>Parameters, updates and safe extensions</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part V · Building a localization</span><ol><li><a href='chapter-22-a-template-for-any-localization-and-how-to-review-one.html'><span class='nav-num'>22.</span><span>A template for any localization, and how to review one</span></a></li></ol></li></ol>
+<a class="nav-pdf" href="payroll_book.pdf" download>Download the PDF</a>
+</nav>
+<div class="backdrop" hidden></div>
+<main id="main" class="content">
+<section class='chapter' id='c-36_ch17'><div class='opener'><div class='opener-band'><span class='opener-num'>Chapter 17</span><span class='opener-part'>Part III · Odoo payroll, hands-on</span></div><h1>Reports, declarations and a leaver</h1><p class='opener-sub'>Pivots for you, statutory returns for the authorities, Emma's departure, and a month in the life</p><div class='opener-goals'><div class='goals-title'>After this chapter you can</div><ul><li>Use the payroll reports to check a pay run, knowing what their filters hide</li><li>Explain how Odoo builds a declaration from validated payslips, and why categories matter</li><li>Read the Belgian monthly withholding return, quarterly social security return, yearly tax certificates and individual accounts as examples of the generic patterns</li><li>Process a leaver: departure record, exit payslips, and their place in the month</li><li>Replay a full payroll month end to end, in the right order</li></ul></div></div><p>A payslip is not the end of payroll. You check the run with <strong>reports</strong>; the authorities receive <strong>declarations</strong>. This chapter covers both, then follows Emma out of the company and closes Part III with a full month.</p>
+<h2 id="why-payroll-reports-to-the-authorities">Why payroll reports to the authorities</h2>
+<p>An employer that runs payroll holds money that is not its own: the tax and the contributions it kept back from every payslip. The authorities need to know how much it kept, for whom, and when it pays it over. Employees need it too: their pension, unemployment and health rights, and their own tax return, depend on what the employer declared. So every country asks for reports. The names change from country to country; the four kinds below do not.</p>
+<div class="fcards" markdown="0">
+<div class="fcard c-law"><div class="ft">Hire and exit notices</div><div class="fwhy">Social security knows who is insured from the first day, and undeclared work becomes visible.</div><div class="fex"><span class="fbe">Belgium</span>Dimona, before the first hour of work</div><div class="fex"><span>Elsewhere</span>Hong Kong IR56E and IR56F; Türkiye’s hiring notice</div></div>
+<div class="fcard c-tax"><div class="ft">Periodic tax return</div><div class="fwhy">The employer pays over the tax it withheld, and says how much.</div><div class="fex"><span class="fbe">Belgium</span>form 274, every month</div><div class="fex"><span>Elsewhere</span>US form 941 (quarterly); Philippines 1601-C (monthly); India’s quarterly tax-at-source statement</div></div>
+<div class="fcard c-ded"><div class="ft">Periodic social security return</div><div class="fwhy">Contributions are paid, and each worker’s pay and time is recorded for their future rights.</div><div class="fex"><span class="fbe">Belgium</span>DmfA, every quarter</div><div class="fex"><span>Elsewhere</span>Philippines SSS file; Kenya’s pension and health sheets; Switzerland’s ELM transmission</div></div>
+<div class="fcard c-earn"><div class="ft">Yearly certificate per employee</div><div class="fwhy">The employee and the tax office see the year’s pay and tax, for the personal tax return.</div><div class="fex"><span class="fbe">Belgium</span>form 281.10</div><div class="fex"><span>Elsewhere</span>US W-2; Philippines 2316; Hong Kong IR56B; Kenya P9</div></div>
+</div>
+
+<p>A few countries go further and receive payroll <strong>as it happens</strong>: Mexico wants one signed electronic payslip per payslip, Australia a report to the tax office at every pay run. The idea is the same; only the rhythm changes (Chapter 7).</p>
+<h2 id="reports">Reports</h2>
+<p><em>Payroll &gt; Reporting &gt; Payslip</em> offers pivots and graphs on payslip lines (per rule, category, employee, period), worked days and inputs.</p>
+<div class="admonition pitfall">
+<p class="admonition-title">Common pitfall: the report filters on state</p>
+<p>The payslip reports open filtered on validated and paid payslips, so a draft run is invisible. Remove the filter to preview the open month.</p>
+</div>
+<div class="admonition practice">
+<p class="admonition-title">In practice: three cross-checks before you declare</p>
+<ol>
+<li><strong>Tax</strong>: the month's withholding lines (<code>PPTOTAL</code>) = the credit on 453000 = the withholding return. February: 3,978.86 € in all three places.</li>
+<li><strong>Social security</strong>: the quarter's employee and employer contributions = the credits on 454000.</li>
+<li><strong>Headcount</strong>: every employee paid in the period appears in the declaration, and nobody else.</li>
+</ol>
+</div>
+<h2 id="how-odoo-builds-a-declaration">How Odoo builds a declaration</h2>
+<p>Every declaration in Odoo, whatever the country, is a <strong>declaration sheet</strong> for one period. You create it, and Odoo does the rest in a fixed order:</p>
+<div class="steps compact" markdown="0">
+<div class="step c-odoo"><b><span class="n">1</span>Create</b>a sheet for the period and the company</div>
+<div class="sarrow">→</div>
+<div class="step c-odoo"><b><span class="n">2</span>Populate</b>Odoo finds the employees paid in the period</div>
+<div class="sarrow">→</div>
+<div class="step c-tax"><b><span class="n">3</span>Compute</b>it adds up their validated payslips, box by box</div>
+<div class="sarrow">→</div>
+<div class="step c-ded"><b><span class="n">4</span>Check</b>it lists what the authority would reject</div>
+<div class="sarrow">→</div>
+<div class="step c-net"><b><span class="n">5</span>Generate</b>the file or the PDFs you submit</div>
+</div>
+
+<p>The framework provides this design once; each country adds its own boxes, file format and checks.</p>
+<div class="admonition key">
+<p class="admonition-title">Key idea: a form is a sum of categories</p>
+<p>A declaration rarely looks at individual rules. It sums <strong>salary rule categories</strong> over the period: taxable base, withholding, contribution base. If a rule sits in the wrong category, the payslip can be right and the return wrong. Designing categories is designing the declarations (Chapters 20 and 22).</p>
+</div>
+<h2 id="myvidangecompanys-declarations">MyVidangeCompany's declarations</h2>
+<table>
+<thead>
+<tr>
+<th>Declaration</th>
+<th>Generic role</th>
+<th>Frequency</th>
+<th>Same role elsewhere</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Form 274</td>
+<td>the <strong>withholding-tax return</strong> to the tax office</td>
+<td>month</td>
+<td>US 941, Philippines 1601-C</td>
+</tr>
+<tr>
+<td>DmfA</td>
+<td>the <strong>social security return</strong>: pay and time per worker</td>
+<td>quarter</td>
+<td>Philippines SSS file, Kenya pension sheet</td>
+</tr>
+<tr>
+<td>Form 281.10</td>
+<td>the <strong>tax certificate</strong> per employee, to employee and tax office</td>
+<td>year</td>
+<td>US W-2, Philippines 2316, Hong Kong IR56B</td>
+</tr>
+<tr>
+<td>Individual account</td>
+<td>the <strong>record of pay per employee</strong> the employer must keep</td>
+<td>year</td>
+<td>Switzerland</td>
+</tr>
+<tr>
+<td>Dimona</td>
+<td>the <strong>hiring and exit declaration</strong>, before the first hour</td>
+<td>event</td>
+<td>Hong Kong IR56E / IR56F</td>
+</tr>
+</tbody>
+</table>
+<p>All but Dimona live under <em>Reporting &gt; Belgium</em>; Dimona is sent from the employee form.</p>
+<figure>
+<p><img alt="274 for February 2026" src="assets/screenshots/be_274.png" /></p>
+<figcaption>The withholding-tax return (form 274) of February 2026. ① the totals: taxable amount 16,746.55 €, withholding taxes 3,978.86 €, no exemption, 3,978.86 € to pay. ② the tab of per-employee lines. The right column lists the partial exemptions an employer may claim (none for MyVidangeCompany).</figcaption>
+</figure>
+<p>3,978.86 € is the sum of the four withholding lines (826.69 + 164.60 + 1,742.31 + 1,245.26) and the 453000 credit of February's entry: three documents, one number.</p>
+<figure>
+<p><img alt="DmfA, Q3 2026" src="assets/screenshots/be_dmfa.png" /></p>
+<figcaption>The DmfA of the third quarter of 2026 on the full demo database. ① the quarter. ② <b>Report Payslips 15</b>: the validated payslips of July to September (5 employees × 3 months). ③ a validation error: the five employees have no Dimona for the period. Odoo catches it before the authority's rejection mail.</figcaption>
+</figure>
+<figure>
+<p><img alt="281.10 sheet" src="assets/screenshots/be_281_10.png" /></p>
+<figcaption>The 281.10 sheet of the 2026 tax-certificate declaration: one line per employee, each with its own PDF and state. ① Marie's 281.10. The sheet's own <i>Year</i> field shows 2025, its default, while the parent declaration is 2026: check it before generating.</figcaption>
+</figure>
+<figure>
+<p><img alt="Individual accounts 2026" src="assets/screenshots/be_individual_account.png" /></p>
+<figcaption>Individual accounts of 2026. ① 5 eligible employees, found from the year's payslips. ② <b>Populate</b> creates one line, then one PDF, per employee.</figcaption>
+</figure>
+<h2 id="a-leaver-emmas-departure">A leaver: Emma's departure</h2>
+<p>Emma is dismissed on 31 October 2026 and does not work her notice: the company pays it as an indemnity. A leaver is an <strong>event</strong> that creates <strong>off-cycle payslips</strong>, each on its own structure, next to the last regular one.</p>
+<figure>
+<p><img alt="Emma's departure" src="assets/screenshots/be_departure.png" style="width:72%" /></p>
+<figcaption>Emma's <i>End of Collaboration</i> dialog (employee form, gear menu), <i>Notice Period</i> tab. ① end reason <i>Fired: Termination by Employer</i>. ② dismissal date 31 October. ③ the notice is not worked. ④ Odoo computes 24 weeks to be paid. ⑤ from the first contract date, a seniority of 7 years and 0 months.</figcaption>
+</figure>
+<p>The dialog creates no payslip. When Emma's last regular payslip enters the October run, Odoo adds her exit payslips to it:</p>
+<table class='payslip'>
+<thead>
+<tr>
+<th>Emma's October payslips</th>
+<th>Structure</th>
+<th style="text-align: right;">Net (€)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Last month's salary</td>
+<td>Monthly Pay (BE)</td>
+<td style="text-align: right;">3,159.73</td>
+</tr>
+<tr>
+<td>Indemnity in lieu of notice</td>
+<td>Termination Fees (BE)</td>
+<td style="text-align: right;">18,977.78</td>
+</tr>
+<tr>
+<td>Exit holiday pay, current year</td>
+<td>Termination Holidays N (BE)</td>
+<td style="text-align: right;">3,204.29</td>
+</tr>
+<tr>
+<td>Exit holiday pay, previous year</td>
+<td>Termination Holidays N-1 (BE)</td>
+<td style="text-align: right;">0.00</td>
+</tr>
+<tr>
+<td>13<sup>th</sup> month, pro rata</td>
+<td>13<sup>th</sup> Month (BE)</td>
+<td style="text-align: right;">1,757.44</td>
+</tr>
+</tbody>
+</table>
+
+<p>An indemnity and holiday pay are taxed at their own rates (Chapter 4): that is why they are separate payslips.</p>
+<figure>
+<p><img alt="Emma's termination fees" src="assets/screenshots/be_slip_emma_exit.png" style="width:80%" /></p>
+<figcaption>Emma's termination-fee payslip. ① the reference salary, 69,850.00 € a year (12.92 × 5,000 + the year-end bonus + eco-vouchers). ② 24 weeks at 1,343.27 € = 32,238.46 €. ③ employee social security on the indemnity. ④ withholding tax on the indemnity. ⑤ net 18,977.78 €.</figcaption>
+</figure>
+<div class="admonition be">
+<p class="admonition-title">In Belgium</p>
+<p>The notice length is a dated parameter (Chapter 12 shows it): 24 weeks for 7 years. Exit holiday pay settles holidays earned but not taken (N-1 is zero: the demo has no 2025 payslips).</p>
+</div>
+<div class="admonition pitfall">
+<p class="admonition-title">Common pitfall: process the departure before the run</p>
+<p>Record the departure <em>before</em> you generate October's run. Otherwise the exit payslips land outside the run, or nowhere. To create them by hand, use the <em>Termination Documents</em> menu of the employee form: one button per exit payslip (termination fees, holiday attests, 13<sup>th</sup> month), each with its inputs filled from the departure.</p>
+</div>
+<h2 id="a-month-in-the-life">A month in the life</h2>
+<p>Part III showed each piece on its own. A payroll officer runs them as one routine, every month, in the same order. The order is not a habit: each step needs the one before it to be finished.</p>
+<div class="month" markdown="0">
+<div class="mcol c-earn"><div class="mh">Before the run<span>all month long</span></div><ul><li><b>Record the events:</b> hires, raises, time off, departures (Ch. 13, 14).</li><li><b>Why first:</b> the payslips are computed from them.</li></ul></div><div class="mcol c-tax"><div class="mh">Pay run<span>a few days before payday</span></div><ul><li><b>Generate and compute</b> the run (Ch. 15).</li><li><b>Review</b> warnings, the change against last month, the reports.</li><li><b>Validate:</b> the amounts are now final.</li></ul></div><div class="mcol c-emp"><div class="mh">Book and pay<span>payday</span></div><ul><li><b>Post</b> the journal entry; check there is no adjustment line (Ch. 16).</li><li><b>Pay</b> the net with the bank file (Ch. 16).</li></ul></div><div class="mcol c-ded"><div class="mh">Declare<span>by the legal deadlines</span></div><ul><li><b>Monthly:</b> the withholding return and its payment.</li><li><b>Quarterly and yearly:</b> social security return, employee certificates.</li></ul></div>
+</div>
+
+<p>Most payroll mistakes come from breaking that order: a sick day recorded after validation becomes a correction (Chapter 15); a run validated before the departure is recorded leaves the exit payslips out; a return filed before the payslips are validated declares the wrong amounts. The capstone mission below plays the whole routine on October 2026.</p>
+<h2 id="missions">Missions</h2>
+<div class="admonition mission">
+<p class="admonition-title">Mission 17.1 · February's withholding return ★</p>
+<p><strong>Situation.</strong> The monthly withholding return for February is due. Your accountant wants the amount to pay.</p>
+<p><strong>Your goal.</strong> Create the February 2026 return and check it against the payslips and accounting.</p>
+<p><strong>Check.</strong> Taxable amount <strong>16,746.55 €</strong>, withholding <strong>3,978.86 €</strong>, which is also the 453000 credit in February's entry.</p>
+<details class="hint" open="open">
+<summary>Hint</summary>
+<p><em>Reporting &gt; Belgium &gt; 274.XX Sheets &gt; New</em>: year and month are enough.</p>
+</details>
+</div>
+<div class="admonition mission">
+<p class="admonition-title">Mission 17.2 · Summer: holiday pay and the third quarter ★★</p>
+<p><strong>Situation.</strong> In June Belgian employers pay a second, "double" holiday pay on its own structure. July to September are ordinary months, except Emma's holiday in August (Mission 14.4).</p>
+<p><strong>Your goal.</strong> Run and validate a run <em>Double Holiday Pay 2026</em> in June on <em>Double Holidays (BE)</em>, then July, August and September on <em>Monthly Pay (BE)</em>.</p>
+<p><strong>Check.</strong> The double holiday run has <strong>5 payslips</strong>, net <strong>8,138.92 €</strong> (Mélanie <strong>1,864.04 €</strong>, Jurgen <strong>1,328.02 €</strong>). Emma's August payslip shows <strong>10 days</strong> of paid time off worth <strong>2,307.69 €</strong>.</p>
+<details class="hint" open="open">
+<summary>Hint</summary>
+<p>Pick the structure in the run's form. Yannick's double holiday pay is zero: he has no previous year at MyVidangeCompany.</p>
+</details>
+</div>
+<div class="admonition mission">
+<p class="admonition-title">Mission 17.3 · Capstone: October, Emma's last month ★★★</p>
+<p><strong>Situation.</strong> Emma is dismissed on 31 October 2026 and will not work her notice. Everything else is a normal month.</p>
+<p><strong>Your goal.</strong> Record the departure, then run and validate October, post its entry, pay it by SEPA, and prepare October's withholding return.</p>
+<p><strong>Check.</strong></p>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Departure</td>
+<td>notice <strong>24 weeks</strong>, seniority <strong>7 years and 0 months</strong>, end of notice <strong>16/04/2027</strong></td>
+</tr>
+<tr>
+<td>October run</td>
+<td><strong>9 payslips</strong> (5 regular, 4 exit), net <strong>39,018.19 €</strong>; Emma's termination fees <strong>18,977.78 €</strong></td>
+</tr>
+<tr>
+<td>SEPA file</td>
+<td><strong>5 transactions</strong>, control sum <strong>39,018.19 €</strong> (Emma's four payslips in one transfer of 27,099.24 €)</td>
+</tr>
+<tr>
+<td>Return 274</td>
+<td>taxable <strong>57,907.30 €</strong>, withholding <strong>18,301.63 €</strong></td>
+</tr>
+<tr>
+<td>Entry</td>
+<td>total <strong>93,305.69 €</strong>, <em>Adjustment Entry</em> <strong>16,140.65 €</strong>: explain it as in Mission 16.4</td>
+</tr>
+</tbody>
+</table>
+<details class="hint" open="open">
+<summary>Hint</summary>
+<p>Departure first, then the run: <em>End of Collaboration</em> is under the gear of Emma's form; save with <em>Schedule</em>. If it offers <em>Apply</em> instead (you play after October 2026), first set <em>Archive Employee On</em> after today, or Emma is left out of the run.</p>
+</details>
+</div>
+<h2 id="summary">Summary</h2>
+<ul>
+<li>Payslip reports are pivots on lines, worked days and inputs; they filter on validated payslips by default.</li>
+<li>A declaration finds the employees, sums validated payslips by category, checks, then builds a file or PDFs.</li>
+<li>MyVidangeCompany files a monthly withholding return (274), a quarterly social security return (DmfA), yearly certificates (281.10), individual accounts, and hiring and exit declarations (Dimona).</li>
+<li>February's withholding, 3,978.86 €, matches the payslips, the 453000 credit and the return.</li>
+<li>A leaver is an event that creates off-cycle payslips on their own structures; record the departure before the run.</li>
+<li>Emma's exit: 24 weeks of notice worth 32,238.46 € gross, 18,977.78 € net, plus exit holiday pay and a pro-rata 13<sup>th</sup> month.</li>
+<li>A month is eight steps; the system computes, books and sums, people decide, check and send.</li>
+</ul></section><nav class='pager' aria-label='Previous and next chapter'><a class='pager-prev' rel='prev' href='chapter-16-accounting-and-payment.html'><small>Previous · Chapter 16</small><span>Accounting and payment</span></a><a class='pager-next' rel='next' href='chapter-18-the-engine-in-one-picture.html'><small>Next · Chapter 18</small><span>The engine in one picture</span></a></nav>
+</main>
+</div>
+<script src="js/site.js"></script>
+
+</body>
+</html>

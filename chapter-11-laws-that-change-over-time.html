@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter 11: Laws that change over time · Payroll, from Theory to Odoo Localization</title>
+<meta name="description" content="Gross-to-net in any country, the Odoo salary engine, and how to design, build and review a payroll localization.">
+<link rel="stylesheet" href="css/book.css">
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body class="chapter-page">
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+<button class="nav-toggle" type="button" aria-controls="sidebar" aria-expanded="false"><span aria-hidden="true">&#9776;</span> Contents</button>
+<a class="top-brand" href="index.html">Payroll, from Theory to Odoo Localization</a>
+</header>
+<div class="layout">
+<nav id="sidebar" class="sidebar" aria-label="Book contents">
+<a class="side-brand" href="index.html">Payroll, from Theory to Odoo Localization</a>
+<div class="search" role="search">
+<label for="search-input" class="sr-only">Search the book</label>
+<input id="search-input" type="search" placeholder="Search the book  ( / )" autocomplete="off" spellcheck="false" aria-controls="search-results">
+<div id="search-results" class="search-results" aria-live="polite"></div>
+</div>
+<ol class="nav"><li class='nav-part'><span class='nav-part-title'>Front matter</span><ol><li><a href='preface-before-you-start.html'><span class='nav-num'></span><span>Before you start</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part I · Payroll theory</span><ol><li><a href='chapter-01-what-payroll-is-and-why-it-is-hard.html'><span class='nav-num'>1.</span><span>What payroll is, and why it is hard</span></a></li><li><a href='chapter-02-gross-to-net.html'><span class='nav-num'>2.</span><span>Gross to net</span></a></li><li><a href='chapter-03-contributions-employee-and-employer.html'><span class='nav-num'>3.</span><span>Contributions: employee and employer</span></a></li><li><a href='chapter-04-withholding-tax.html'><span class='nav-num'>4.</span><span>Withholding tax</span></a></li><li><a href='chapter-05-time-proration-and-overtime.html'><span class='nav-num'>5.</span><span>Time, proration and overtime</span></a></li><li><a href='chapter-06-irregular-pay-corrections-and-leavers.html'><span class='nav-num'>6.</span><span>Irregular pay, corrections and leavers</span></a></li><li><a href='chapter-07-declarations-and-the-compliance-calendar.html'><span class='nav-num'>7.</span><span>Declarations and the compliance calendar</span></a></li><li><a href='chapter-08-accounting-for-payroll.html'><span class='nav-num'>8.</span><span>Accounting for payroll</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part II · Localization theory</span><ol><li><a href='chapter-09-what-varies-between-countries-and-what-doesnt.html'><span class='nav-num'>9.</span><span>What varies between countries, and what doesn&#x27;t</span></a></li><li><a href='chapter-10-researching-a-new-country.html'><span class='nav-num'>10.</span><span>Researching a new country</span></a></li><li class='current' aria-current='page'><a href='chapter-11-laws-that-change-over-time.html'><span class='nav-num'>11.</span><span>Laws that change over time</span></a><ol class='nav-sections'><li><a href='#where-a-change-goes'>Where a change goes</a></li><li><a href='#every-legal-value-is-a-timeline'>Every legal value is a timeline</a></li><li><a href='#indexation-a-new-wage-not-a-new-parameter'>Indexation: a new wage, not a new parameter</a></li><li><a href='#yearly-tables-one-dated-value-per-year'>Yearly tables: one dated value per year</a></li><li><a href='#how-odoo-picks-the-value-for-a-payslip'>How Odoo picks the value for a payslip</a></li><li><a href='#mid-year-changes'>Mid-year changes</a></li><li><a href='#retroactive-changes'>Retroactive changes</a></li><li><a href='#rates-you-download'>Rates you download</a></li><li><a href='#summary'>Summary</a></li></ol></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part III · Odoo payroll, hands-on</span><ol><li><a href='chapter-12-tour-and-setup.html'><span class='nav-num'>12.</span><span>Tour and setup</span></a></li><li><a href='chapter-13-employees-and-versions.html'><span class='nav-num'>13.</span><span>Employees and versions</span></a></li><li><a href='chapter-14-time-schedules-time-off-worked-days.html'><span class='nav-num'>14.</span><span>Time: schedules, time off, worked days</span></a></li><li><a href='chapter-15-pay-runs-and-payslips.html'><span class='nav-num'>15.</span><span>Pay runs and payslips</span></a></li><li><a href='chapter-16-accounting-and-payment.html'><span class='nav-num'>16.</span><span>Accounting and payment</span></a></li><li><a href='chapter-17-reports-declarations-and-a-leaver.html'><span class='nav-num'>17.</span><span>Reports, declarations and a leaver</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part IV · How the payroll engine works</span><ol><li><a href='chapter-18-the-engine-in-one-picture.html'><span class='nav-num'>18.</span><span>The engine in one picture</span></a></li><li><a href='chapter-19-structures-and-rules.html'><span class='nav-num'>19.</span><span>Structures and rules</span></a></li><li><a href='chapter-20-categories-how-rules-talk-to-each-other.html'><span class='nav-num'>20.</span><span>Categories: how rules talk to each other</span></a></li><li><a href='chapter-21-parameters-updates-and-safe-extensions.html'><span class='nav-num'>21.</span><span>Parameters, updates and safe extensions</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part V · Building a localization</span><ol><li><a href='chapter-22-a-template-for-any-localization-and-how-to-review-one.html'><span class='nav-num'>22.</span><span>A template for any localization, and how to review one</span></a></li></ol></li></ol>
+<a class="nav-pdf" href="payroll_book.pdf" download>Download the PDF</a>
+</nav>
+<div class="backdrop" hidden></div>
+<main id="main" class="content">
+<section class='chapter' id='c-23_ch11'><div class='opener'><div class='opener-band'><span class='opener-num'>Chapter 11</span><span class='opener-part'>Part II · Localization theory</span></div><h1>Laws that change over time</h1><p class='opener-sub'>Effective dates, indexation, yearly tables, reference units, mid-year and retroactive changes, downloaded rates, and the dated parameter that absorbs them</p><div class='opener-goals'><div class='goals-title'>After this chapter you can</div><ul><li>Model any legal value as a timeline of effective dates</li><li>Tell indexation of wages (employee data) from a new table or unit (country data)</li><li>Say which parameter value Odoo uses for a payslip, and why the period end decides</li><li>Handle a scheduled reform, a mid-year change, and a law that applies to the past</li><li>Choose between typing rates into data files and downloading them from the administration</li></ul></div></div><p>Every country changes its payroll law on its own calendar. In 2026 Mexico got new tax tables on 1 January and a new reference unit on 1 February; Australia switches its superannuation basis on 1 July; Belgium needed a new withholding formula on 1 November. A payslip of the old period, reopened a year later, must still show the old amount. Payroll must always answer: <em>what was the law on that date?</em></p>
+<h2 id="where-a-change-goes">Where a change goes</h2>
+<p>When the law changes, the first question is <strong>what</strong> changed. Each kind of change has one home in Odoo, and in all three cases the payslip reads what was valid on its own dates.</p>
+<div class="sorter" markdown="0">
+<div class="sq">The law changed. What changed?</div>
+<div class="scols">
+<div class="scol c-earn"><div class="if">A person's wage</div><div class="then">a new <code>hr.version</code>, dated</div><i>e.g. wages indexed by 2.21 % on 1 January</i></div>
+<div class="scol c-tax"><div class="if">A rate, a cap, a table</div><div class="then">a new dated value of a <code>hr.rule.parameter</code></div><i>e.g. next year's tax scale, a new contribution rate</i></div>
+<div class="scol c-odoo"><div class="if">The method itself</div><div class="then">rule or helper code, reading new parameters</div><i>e.g. a new withholding formula with an extra step</i></div>
+</div>
+<div class="sfoot">Every payslip, old or new, is computed with the law of its own period.</div>
+</div>
+
+<h2 id="every-legal-value-is-a-timeline">Every legal value is a timeline</h2>
+<p>A rate is never "13.07 %". It is "13.07 % from a date, until a later value replaces it". The law changes on several rhythms:</p>
+<table class='payslip'>
+<thead>
+<tr>
+<th>Rhythm</th>
+<th>Example</th>
+<th>What the module stores</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Yearly tables and units</td>
+<td>MX tax tables each 1 January, reference unit each 1 February</td>
+<td>one new value per year</td>
+</tr>
+<tr>
+<td>Wage indexation</td>
+<td>BE sector wages +2.21 % on 1 Jan 2026<sup id="fnref2:c11-cp200"><a class="footnote-ref" href="#fn:c11-cp200">3</a></sup></td>
+<td>a new version of each contract</td>
+</tr>
+<tr>
+<td>Scheduled reform</td>
+<td>MX employer pension rates loaded up to 2030</td>
+<td>future values, loaded in advance</td>
+</tr>
+<tr>
+<td>Mid-year change</td>
+<td>AU super on 1 Jul; BE withholding on 1 Nov 2026</td>
+<td>a dated value, sometimes a rule branch</td>
+</tr>
+<tr>
+<td>Retroactive change</td>
+<td>BE overtime reduction published in July, in force from 1 Jan</td>
+<td>a past-dated value, plus corrections</td>
+</tr>
+</tbody>
+</table>
+
+<div class="admonition key">
+<p class="admonition-title">Key idea</p>
+<p>Store every legal value with its start date, and <strong>never edit a value that has already been used</strong>. A new law is a new dated record. Then every payslip, old or new, recomputes with the law of its own period.</p>
+</div>
+<p><strong>1 Jan 2026</strong>: MX tax tables, MX minimum wage, BE scale and index → <strong>1 Feb</strong>: MX reference unit → <strong>1 Jul</strong>: AU super basis → <strong>1 Aug</strong>: BE notice table → <strong>1 Nov</strong>: BE second tax formula of the year (and in July, a BE decree reaching back to 1 Jan).</p>
+<h2 id="indexation-a-new-wage-not-a-new-parameter">Indexation: a new wage, not a new parameter</h2>
+<p>Some countries raise wages automatically with prices. The percentage is law; the result is a new wage for each person.</p>
+<div class="admonition example">
+<p class="admonition-title">Worked example: Mélanie on 1 January 2026</p>
+<p>Belgian sector wages rose by 2.21 % on 1 January 2026.<sup id="fnref:c11-cp200"><a class="footnote-ref" href="#fn:c11-cp200">3</a></sup> Mélanie's 2025 salary of 3,913.51 € became 4,000.00 €.<sup id="fnref:c11-calc"><a class="footnote-ref" href="#fn:c11-calc">4</a></sup></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th style="text-align: right;">Before 1 Jan 2026</th>
+<th style="text-align: right;">From 1 Jan 2026</th>
+</tr>
+</thead>
+<tbody>
+<tr class='earn'>
+<td><span class='pill earn'>Mélanie's monthly salary</span></td>
+<td style="text-align: right;">3,913.51</td>
+<td style="text-align: right;">4,000.00</td>
+</tr>
+<tr>
+<td>Index factor</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">× 1.0221</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Indexation is a law about <strong>every employee's wage</strong>, so its result is employee data. Odoo stores it as a new version of the contract, not as a rule parameter.</p>
+<div class="vtl" markdown="0">
+<div class="vbar">
+<div class="vseg c-odoo" style="width:50%">Version until 31 Dec 2025<b>3,913.51 €</b></div>
+<div class="vseg c-earn" style="width:50%">New version from 1 Jan 2026<b>4,000.00 €</b></div>
+</div>
+<div class="vslips">
+<div class="vslip" style="width:50%"><span>December 2025 payslip reads 3,913.51</span></div>
+<div class="vslip" style="width:50%"><span>January 2026 payslip reads 4,000.00</span></div>
+</div>
+</div>
+
+<p><strong>In Odoo.</strong> The <em>Salary Increase</em> wizard (<code>hr.payroll.salary.increase</code>, Chapter 13) takes employees, a date and a rate. It does not change the old version: it <strong>adds</strong> one per employee, starting on the indexation date. Each payslip then picks the version valid in its period, so December keeps the old wage and January gets the new one. If January was already validated when the indexation is entered, the wizard opens the correction wizard (Chapter 15).</p>
+<h2 id="yearly-tables-one-dated-value-per-year">Yearly tables: one dated value per year</h2>
+<p>Most countries reissue their tax tables every year. The design is the same everywhere: one parameter, one value per year, the same shape every year (a list of brackets, or a dict of lists by frequency in Mexico). The Belgian value for 2026:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;record</span><span class="w"> </span><span class="na">id=</span><span class="s">"rule_parameter_value_prp_basic_bareme_2026"</span><span class="w"> </span><span class="na">model=</span><span class="s">"hr.rule.parameter.value"</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;field</span><span class="w"> </span><span class="na">name=</span><span class="s">"parameter_value"</span><span class="nt">&gt;</span>[(16710.0,<span class="w"> </span>0.2675),<span class="w"> </span>(29500.0,<span class="w"> </span>0.428),<span class="w"> </span>(51050.0,<span class="w"> </span>0.4815),<span class="w"> </span>(None,<span class="w"> </span>0.535)]<span class="nt">&lt;/field&gt;</span>
+<span class="w">    </span><span class="nt">&lt;field</span><span class="w"> </span><span class="na">name=</span><span class="s">"rule_parameter_id"</span><span class="w"> </span><span class="na">ref=</span><span class="s">"rule_parameter_prp_basic_bareme"</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;field</span><span class="w"> </span><span class="na">name=</span><span class="s">"date_from"</span><span class="w"> </span><span class="na">eval=</span><span class="s">"datetime(2026, 1, 1).date()"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/record&gt;</span>
+</code></pre></div>
+<p>Its bands match the official formula (16,710 / 29,500 / 51,050).<sup id="fnref:c11-kf"><a class="footnote-ref" href="#fn:c11-kf">2</a></sup> That check, value by value against the source, is the yearly upkeep of a localization (Chapter 22).</p>
+<div class="admonition pitfall">
+<p class="admonition-title">Common pitfall</p>
+<p>Editing last year's value to this year's bands "because it is January". Every recomputed payslip of last year (a correction, a year-end certificate, a test) then silently uses this year's law. Add a record; never overwrite history.</p>
+</div>
+<h2 id="how-odoo-picks-the-value-for-a-payslip">How Odoo picks the value for a payslip</h2>
+<p>A salary rule asks for a parameter by its code. It never mentions a date.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># in a rule or a helper on hr.payslip</span>
+<span class="n">uma</span> <span class="o">=</span> <span class="n">payslip</span><span class="o">.</span><span class="n">_rule_parameter</span><span class="p">(</span><span class="s1">'l10n_mx_uma'</span><span class="p">)[</span><span class="s1">'daily'</span><span class="p">]</span>
+</code></pre></div>
+<p>The engine returns the latest value whose <code>date_from</code> is on or before the payslip's <strong>end date</strong> (<code>date_to</code>). Two consequences for the law: a value starting on the 16<sup>th</sup> applies to the whole period, and a value has no end date, so a temporary measure is <strong>two</strong> values (the measure, and the one restoring the baseline). Chapter 21 shows how a rule reads it.</p>
+<div class="admonition example">
+<p class="admonition-title">Worked example: Jurgen, July and August 2026</p>
+<p>A Belgian tax reduction for low wages rises on 1 August 2026. Jurgen's July payslip reads the old value, his August payslip the new one.<sup id="fnref2:c11-calc"><a class="footnote-ref" href="#fn:c11-calc">4</a></sup></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th style="text-align: right;">July 2026</th>
+<th style="text-align: right;">August 2026</th>
+</tr>
+</thead>
+<tbody>
+<tr class='tax'>
+<td><span class='pill tax'>Withholding before the reduction</span></td>
+<td style="text-align: right;">294.95</td>
+<td style="text-align: right;">294.95</td>
+</tr>
+<tr class='tax'>
+<td><span class='pill tax'>Low-wage tax reduction</span></td>
+<td style="text-align: right;">−132.63</td>
+<td style="text-align: right;">−150.62</td>
+</tr>
+<tr class='tax'>
+<td><span class='pill tax'>Withholding</span></td>
+<td style="text-align: right;">162.32</td>
+<td style="text-align: right;">144.33</td>
+</tr>
+<tr class='net'>
+<td><span class='pill net'>Net pay</span></td>
+<td style="text-align: right;">2,125.06</td>
+<td style="text-align: right;">2,143.05</td>
+</tr>
+</tbody>
+</table>
+<p>The demo database agrees: the August pay run withholds 17.99 € less than July, exactly 150.62 − 132.63.<sup id="fnref2:c11-odoo"><a class="footnote-ref" href="#fn:c11-odoo">5</a></sup></p>
+</div>
+<figure>
+<p><img alt="The rate behind Jurgen's tax reduction" src="assets/screenshots/be_param_volet_b.png" /></p>
+<figcaption>The parameter behind that reduction, in <i>Configuration &gt; Rule Parameters</i>. ① its code, the only thing the rule knows. ② a value already loaded for 2028. ③ the value from 1 August 2026 that Jurgen's August payslip reads. ④ the older value his July payslip reads.</figcaption>
+</figure>
+<div class="admonition pitfall">
+<p class="admonition-title">Common pitfall</p>
+<p>Assuming the work period is what the law looks at. Many texts speak of income <strong>paid</strong> from a date: a July salary paid on 3 August gets the July value in Odoo. If the payment date decides, the rule must pass it as reference date.</p>
+</div>
+<h2 id="mid-year-changes">Mid-year changes</h2>
+<p>A mid-year change of a <strong>number</strong> is another dated value. A change of <strong>method</strong> needs code, and the question is how to keep that code dated.</p>
+<div class="admonition world">
+<p class="admonition-title">Around the world: Australia, 1 July 2026</p>
+<p>Superannuation moves to a new base with a year-to-date cap. The parameter changes shape (a number before, a dict after) and the rule branches on a date in its code:</p>
+<div class="highlight"><pre><span></span><code><span class="n">rule</span> <span class="o">=</span> <span class="n">payslip</span><span class="o">.</span><span class="n">_rule_parameter</span><span class="p">(</span><span class="s2">"l10n_au_withholding_super"</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">payslip</span><span class="o">.</span><span class="n">date_from</span> <span class="o">&gt;=</span> <span class="n">date</span><span class="p">(</span><span class="mi">2026</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="n">prior_slips</span> <span class="o">=</span> <span class="n">payslip</span><span class="o">.</span><span class="n">_l10n_au_get_year_to_date_slips</span><span class="p">()</span>
+    <span class="n">prior_ote</span> <span class="o">=</span> <span class="n">prior_slips</span><span class="o">.</span><span class="n">_get_line_values</span><span class="p">([</span><span class="s1">'QE'</span><span class="p">],</span> <span class="n">compute_sum</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="s1">'QE'</span><span class="p">][</span><span class="s1">'sum'</span><span class="p">][</span><span class="s1">'total'</span><span class="p">]</span>
+    <span class="n">remaining</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">rule</span><span class="p">[</span><span class="s1">'cap'</span><span class="p">]</span> <span class="o">-</span> <span class="n">prior_ote</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">categories</span><span class="p">[</span><span class="s1">'QE'</span><span class="p">],</span> <span class="n">remaining</span><span class="p">)</span> <span class="o">*</span> <span class="n">rule</span><span class="p">[</span><span class="s1">'rate'</span><span class="p">]</span> <span class="o">/</span> <span class="mi">100</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">categories</span><span class="p">[</span><span class="s1">'OTE'</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">rule</span> <span class="o">/</span> <span class="mi">100</span><span class="p">)</span>
+</code></pre></div>
+<p>But the date now lives in two places, and the rule keys on <code>date_from</code> while the lookup keys on <code>date_to</code>. A weekly payslip from 29 June to 5 July reads the new dict but takes the old branch, which divides a dict by 100 (read from the code, not run: UNVERIFIED). Branching on the parameter's own shape keeps one source of truth.</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Worked example: Marie's November rise (Belgium)</p>
+<p>The 1 November 2026 formula (Chapter 4) changed three family levers: Marie's withholding rises by 28.86 €, the singles' falls by 8.47 €.<sup id="fnref2:c11-cons"><a class="footnote-ref" href="#fn:c11-cons">1</a></sup> In Odoo it needs no code: three new records dated 1 November, next to the January ones.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;record</span><span class="w"> </span><span class="na">id=</span><span class="s">"rule_parameter_value_prp_max_spouse_income_2026_11"</span><span class="w"> </span><span class="na">model=</span><span class="s">"hr.rule.parameter.value"</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;field</span><span class="w"> </span><span class="na">name=</span><span class="s">"parameter_value"</span><span class="nt">&gt;</span>11780.0<span class="nt">&lt;/field&gt;</span>
+<span class="w">    </span><span class="nt">&lt;field</span><span class="w"> </span><span class="na">name=</span><span class="s">"rule_parameter_id"</span><span class="w"> </span><span class="na">ref=</span><span class="s">"rule_parameter_prp_max_spouse_income"</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;field</span><span class="w"> </span><span class="na">name=</span><span class="s">"date_from"</span><span class="w"> </span><span class="na">eval=</span><span class="s">"datetime(2026, 11, 1).date()"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/record&gt;</span>
+</code></pre></div>
+</div>
+<div class="admonition practice">
+<p class="admonition-title">In practice</p>
+<p>On 8 October 2026 master had no value dated 1 November for those parameters: Marie would be under-withheld by 28.86 € a month. The weekly payroll data cron (Chapter 21) delivers the fix without a module upgrade, if it is merged before the November pay runs. Track announced changes with their dates.</p>
+</div>
+<h2 id="retroactive-changes">Retroactive changes</h2>
+<p>Sometimes the law is published after its start date. A Belgian decree of 24 July 2026 extended an overtime tax reduction to all sectors <strong>from 1 January 2026</strong>.<sup id="fnref:c11-cons"><a class="footnote-ref" href="#fn:c11-cons">1</a></sup></p>
+<p><strong>Start of the rule in the past</strong> → <strong>Publication</strong> → <strong>Data update value dated at the start</strong> → <strong>Computed with the old rule</strong> → <strong>New and recomputed payslips see the new rule</strong> → <strong>Correction payslips (Chapter 6, Chapter 15)</strong></p>
+<p>A past-dated value fixes <strong>new</strong> and <strong>recomputed</strong> payslips. Validated ones record what was paid; the difference becomes a correction. Odoo flags validated payslips when a version, the company settings or the time off change after validation, but <strong>not</strong> when a rule parameter gets a past-dated value: find those payslips yourself.</p>
+<div class="admonition pitfall">
+<p class="admonition-title">Common pitfall</p>
+<p>Assuming the system will "catch up" after a retroactive value. It won't. List the validated payslips of the period, recompute them in a correction run, and check whether filed declarations need an amendment.</p>
+</div>
+<h2 id="rates-you-download">Rates you download</h2>
+<p>When the administration publishes rates as a file or an API, a module can load them instead of a developer typing them:</p>
+<table class='payslip'>
+<thead>
+<tr>
+<th>Country</th>
+<th>Source</th>
+<th>How it arrives</th>
+<th>Where it lands</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BE</td>
+<td>social-security rate files, per quarter</td>
+<td>daily cron + wizard</td>
+<td>dated rule parameters</td>
+</tr>
+<tr>
+<td>CH</td>
+<td>cantonal source-tax tariffs</td>
+<td>wizard run by the user</td>
+<td>dated rule parameters</td>
+</tr>
+<tr>
+<td>SA</td>
+<td>the GOSI API</td>
+<td>optional module with a cron</td>
+<td>fields on the version</td>
+</tr>
+</tbody>
+</table>
+
+<div class="steps" markdown="0">
+<div class="step c-law"><b><span class="n">1</span>Official file or API</b>The administration publishes the rates, per period.<i>a quarterly rate file, a tariff table, an online service</i></div>
+<div class="sarrow">→</div>
+<div class="step c-odoo"><b><span class="n">2</span>Import</b>A scheduled job or a button reads it, no developer involved.<i>daily cron, or a wizard the user runs</i></div>
+<div class="sarrow">→</div>
+<div class="step c-tax"><b><span class="n">3</span>Dated parameter</b>Each rate becomes a parameter value, dated at the start of its period.<i><code>hr.rule.parameter</code> + value</i></div>
+<div class="sarrow">→</div>
+<div class="step c-net"><b><span class="n">4</span>Payslip</b>The rule reads it like any other parameter, at the payslip's date.<i><code>payslip._rule_parameter(code)</code></i></div>
+</div>
+
+<p>Imported data still goes through dated parameters, so an old quarter's payslip recomputes with that quarter's rates. The closure-fund rate the research could not read on a web page (Chapter 10) arrives this way.<sup id="fnref:c11-odoo"><a class="footnote-ref" href="#fn:c11-odoo">5</a></sup></p>
+<div class="admonition pitfall">
+<p class="admonition-title">Common pitfall</p>
+<p>A test database or offline server has no downloaded rates, and the lines that read them may silently compute 0. Tests load fixed copies instead. Also, a corrected file for a past period updates that value in place: an intended exception to "never edit history".</p>
+</div>
+<h2 id="summary">Summary</h2>
+<ul>
+<li>Every legal value is a timeline. Countries change values yearly (tables, units), quarterly, mid-year, on a multi-year schedule, and sometimes retroactively.</li>
+<li>Indexation changes the wage, so it is a new <code>hr.version</code> (wizard <em>Salary Increase</em>); a new rate, table or unit is a new <code>hr.rule.parameter.value</code>.</li>
+<li>Store a reference unit plus multipliers: one value a year moves every cap.</li>
+<li>A payslip reads the latest value whose <code>date_from</code> is on or before its <code>date_to</code>; a temporary measure needs a closing value.</li>
+<li>A change of number is data; a change of method needs code, and the date should live in one place.</li>
+<li>A retroactive value fixes new and recomputed payslips; validated ones are corrected, and nothing flags them for you.</li>
+<li>Rates published as files or APIs can be imported into dated parameters (BE, CH) or fields (SA); payslips stay reproducible.</li>
+</ul>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:c11-cons">
+<p>SPF Finances (Belgian tax office), Annex III AR/CIR 92 for income 2026, consolidated with the AR of 24 July 2026 and the AR of 27 September 2026 (n° 32, 34, 38, 45, 46.2): <a href="https://www.minfin.fgov.be/myminfin-web/pages/public/fisconet/document/0c174ec5-448b-4d1e-983b-fc457e5e7e28">https://www.minfin.fgov.be/myminfin-web/pages/public/fisconet/document/0c174ec5-448b-4d1e-983b-fc457e5e7e28</a>.&#160;<a class="footnote-backref" href="#fnref:c11-cons" title="Jump back to footnote 1 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:c11-cons" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:c11-kf">
+<p>SPF Finances, key formula from 1 January 2026 (annex 1, basic scale): <a href="https://www.minfin.fgov.be/myminfin-web/pages/public/fisconet/document/389035ca-432e-422b-859d-2d32fbdaa4cf">https://www.minfin.fgov.be/myminfin-web/pages/public/fisconet/document/389035ca-432e-422b-859d-2d32fbdaa4cf</a>.&#160;<a class="footnote-backref" href="#fnref:c11-kf" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:c11-cp200">
+<p>SPF Emploi (Belgian labour ministry), minimum wages of joint committee 200, "Indexation de 2,21% en 1/2026": <a href="http://www.salairesminimums.be/document.html?jcId=8e8cddf22c5d4cc9b9fe6234b4ea569e&amp;date=01%2F03%2F2026">http://www.salairesminimums.be/document.html?jcId=8e8cddf22c5d4cc9b9fe6234b4ea569e&amp;date=01%2F03%2F2026</a>.&#160;<a class="footnote-backref" href="#fnref:c11-cp200" title="Jump back to footnote 3 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:c11-cp200" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:c11-calc">
+<p>Independent calculator, <code>research/numbers_be_calc.md</code>, sections 3, 8 and 10.7.&#160;<a class="footnote-backref" href="#fnref:c11-calc" title="Jump back to footnote 4 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:c11-calc" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+<li id="fn:c11-odoo">
+<p>Payslips computed by Odoo master on the demo database, <code>research/numbers_be.md</code>, sections 1 and 6.&#160;<a class="footnote-backref" href="#fnref:c11-odoo" title="Jump back to footnote 5 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:c11-odoo" title="Jump back to footnote 5 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></section><nav class='pager' aria-label='Previous and next chapter'><a class='pager-prev' rel='prev' href='chapter-10-researching-a-new-country.html'><small>Previous · Chapter 10</small><span>Researching a new country</span></a><a class='pager-next' rel='next' href='chapter-12-tour-and-setup.html'><small>Next · Chapter 12</small><span>Tour and setup</span></a></nav>
+</main>
+</div>
+<script src="js/site.js"></script>
+
+</body>
+</html>

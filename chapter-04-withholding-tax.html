@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter 4: Withholding tax · Payroll, from Theory to Odoo Localization</title>
+<meta name="description" content="Gross-to-net in any country, the Odoo salary engine, and how to design, build and review a payroll localization.">
+<link rel="stylesheet" href="css/book.css">
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body class="chapter-page">
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+<button class="nav-toggle" type="button" aria-controls="sidebar" aria-expanded="false"><span aria-hidden="true">&#9776;</span> Contents</button>
+<a class="top-brand" href="index.html">Payroll, from Theory to Odoo Localization</a>
+</header>
+<div class="layout">
+<nav id="sidebar" class="sidebar" aria-label="Book contents">
+<a class="side-brand" href="index.html">Payroll, from Theory to Odoo Localization</a>
+<div class="search" role="search">
+<label for="search-input" class="sr-only">Search the book</label>
+<input id="search-input" type="search" placeholder="Search the book  ( / )" autocomplete="off" spellcheck="false" aria-controls="search-results">
+<div id="search-results" class="search-results" aria-live="polite"></div>
+</div>
+<ol class="nav"><li class='nav-part'><span class='nav-part-title'>Front matter</span><ol><li><a href='preface-before-you-start.html'><span class='nav-num'></span><span>Before you start</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part I · Payroll theory</span><ol><li><a href='chapter-01-what-payroll-is-and-why-it-is-hard.html'><span class='nav-num'>1.</span><span>What payroll is, and why it is hard</span></a></li><li><a href='chapter-02-gross-to-net.html'><span class='nav-num'>2.</span><span>Gross to net</span></a></li><li><a href='chapter-03-contributions-employee-and-employer.html'><span class='nav-num'>3.</span><span>Contributions: employee and employer</span></a></li><li class='current' aria-current='page'><a href='chapter-04-withholding-tax.html'><span class='nav-num'>4.</span><span>Withholding tax</span></a><ol class='nav-sections'><li><a href='#what-a-withholding-tax-is'>What a withholding tax is</a></li><li><a href='#withholding-is-an-advance'>Withholding is an advance</a></li><li><a href='#progressive-scales-slice-by-slice'>Progressive scales: slice by slice</a></li><li><a href='#case-study-belgium-annualises'>Case study: Belgium annualises</a></li><li><a href='#family-situation'>Family situation</a></li><li><a href='#a-formula-that-changes-in-november'>A formula that changes in November</a></li><li><a href='#marginal-and-effective-rates'>Marginal and effective rates</a></li><li><a href='#irregular-pay-bonuses-holiday-pay-indemnities'>Irregular pay: bonuses, holiday pay, indemnities</a></li><li><a href='#withholding-is-not-the-final-tax'>Withholding is not the final tax</a></li><li><a href='#summary'>Summary</a></li></ol></li><li><a href='chapter-05-time-proration-and-overtime.html'><span class='nav-num'>5.</span><span>Time, proration and overtime</span></a></li><li><a href='chapter-06-irregular-pay-corrections-and-leavers.html'><span class='nav-num'>6.</span><span>Irregular pay, corrections and leavers</span></a></li><li><a href='chapter-07-declarations-and-the-compliance-calendar.html'><span class='nav-num'>7.</span><span>Declarations and the compliance calendar</span></a></li><li><a href='chapter-08-accounting-for-payroll.html'><span class='nav-num'>8.</span><span>Accounting for payroll</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part II · Localization theory</span><ol><li><a href='chapter-09-what-varies-between-countries-and-what-doesnt.html'><span class='nav-num'>9.</span><span>What varies between countries, and what doesn&#x27;t</span></a></li><li><a href='chapter-10-researching-a-new-country.html'><span class='nav-num'>10.</span><span>Researching a new country</span></a></li><li><a href='chapter-11-laws-that-change-over-time.html'><span class='nav-num'>11.</span><span>Laws that change over time</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part III · Odoo payroll, hands-on</span><ol><li><a href='chapter-12-tour-and-setup.html'><span class='nav-num'>12.</span><span>Tour and setup</span></a></li><li><a href='chapter-13-employees-and-versions.html'><span class='nav-num'>13.</span><span>Employees and versions</span></a></li><li><a href='chapter-14-time-schedules-time-off-worked-days.html'><span class='nav-num'>14.</span><span>Time: schedules, time off, worked days</span></a></li><li><a href='chapter-15-pay-runs-and-payslips.html'><span class='nav-num'>15.</span><span>Pay runs and payslips</span></a></li><li><a href='chapter-16-accounting-and-payment.html'><span class='nav-num'>16.</span><span>Accounting and payment</span></a></li><li><a href='chapter-17-reports-declarations-and-a-leaver.html'><span class='nav-num'>17.</span><span>Reports, declarations and a leaver</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part IV · How the payroll engine works</span><ol><li><a href='chapter-18-the-engine-in-one-picture.html'><span class='nav-num'>18.</span><span>The engine in one picture</span></a></li><li><a href='chapter-19-structures-and-rules.html'><span class='nav-num'>19.</span><span>Structures and rules</span></a></li><li><a href='chapter-20-categories-how-rules-talk-to-each-other.html'><span class='nav-num'>20.</span><span>Categories: how rules talk to each other</span></a></li><li><a href='chapter-21-parameters-updates-and-safe-extensions.html'><span class='nav-num'>21.</span><span>Parameters, updates and safe extensions</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part V · Building a localization</span><ol><li><a href='chapter-22-a-template-for-any-localization-and-how-to-review-one.html'><span class='nav-num'>22.</span><span>A template for any localization, and how to review one</span></a></li></ol></li></ol>
+<a class="nav-pdf" href="payroll_book.pdf" download>Download the PDF</a>
+</nav>
+<div class="backdrop" hidden></div>
+<main id="main" class="content">
+<section class='chapter' id='c-14_ch04'><div class='opener'><div class='opener-band'><span class='opener-num'>Chapter 4</span><span class='opener-part'>Part I · Payroll theory</span></div><h1>Withholding tax</h1><p class='opener-sub'>A yearly tax, collected in instalments: five ways to do it</p><div class='opener-goals'><div class='goals-title'>After this chapter you can</div><ul><li>Explain withholding as an advance on a yearly income tax, and name the main withholding methods</li><li>Compute a progressive tax slice by slice</li><li>Run an annualisation formula by hand, for a single employee and for a married one</li><li>Tell the marginal rate from the effective rate, and find the low-wage trap</li><li>Explain why bonuses and other irregular pay need their own tax method</li></ul></div></div><p>Mélanie's withholding tax for October 2026 is 826.70 €. It is not "the tax on 4,000 €": it is one twelfth of a yearly tax, computed as if she earned this salary every month. Another country would look at what she earned since January, read a table, or not withhold at all. Knowing which road a country takes explains almost every rule in its tax module.</p>
+<h2 id="what-a-withholding-tax-is">What a withholding tax is</h2>
+<p><strong>Income tax</strong> is a tax on a person's income for a whole year. In most countries the employee does not pay it in one go at the end of the year. Instead, the employer deducts a part of it from <strong>every payslip</strong> and pays that part to the tax office on the employee's behalf. That deduction is the <strong>withholding tax</strong> (also called <em>pay-as-you-earn</em>, <em>PAYE</em>, or <em>tax at source</em>).</p>
+<p>Three things follow from that definition:</p>
+<ul>
+<li><strong>It is the employee's tax, not the employer's.</strong> It comes out of the gross, like the employee contributions. The employer is only a collector: it deducts, declares and pays.</li>
+<li><strong>It is an estimate.</strong> On the payslip, the employer does not know the employee's whole year: other income, a second job, a partner's income, deductible expenses. So each instalment is a best guess.</li>
+<li><strong>The real tax comes later.</strong> After the year, the tax office computes the real tax on everything and settles the difference: a refund, or a bill to the employee.</li>
+</ul>
+<figure>
+<p><img alt="Twelve monthly advances, then one yearly settlement" src="assets/charts/gen_ch4_withholding_year.svg" /></p>
+<figcaption>Illustrative numbers. The employer withholds 300 a month, 3,600 over the year. The real tax, computed after the year, is 3,400: the tax office refunds 200 to the employee. Had the real tax been higher, the employee would pay the difference.</figcaption>
+</figure>
+<h2 id="withholding-is-an-advance">Withholding is an advance</h2>
+<p>So every localization answers one question: <em>how do you turn a yearly tax into a monthly instalment?</em> Countries pick one of five methods.</p>
+<div class="wcards" markdown="0">
+<div class="wcard c-tax"><div class="wt">1 · Annualise one period</div><div class="wr"><span>How</span>Tax this month's pay as if it came every month of the year, then divide the yearly tax by the number of periods.</div><div class="wr"><span>Where</span>Belgium, US federal, Egypt, Pakistan</div><div class="wr"><span>Corrects?</span><div><b class="no">No</b>: the final assessment settles the year.</div></div></div>
+<div class="wcard c-earn"><div class="wt">2 · Cumulative</div><div class="wr"><span>How</span>Tax the income since the start of the year (or projected for the year), minus the tax already withheld.</div><div class="wr"><span>Where</span>India, Turkey, Poland</div><div class="wr"><span>Corrects?</span><div><b class="yes">Yes</b>, every period.</div></div></div>
+<div class="wcard c-emp"><div class="wt">3 · Period tables</div><div class="wr"><span>How</span>Read the tax from an official table made for the pay frequency (month, week…).</div><div class="wr"><span>Where</span>Mexico, the Netherlands</div><div class="wr"><span>Corrects?</span>Only as far as the table is designed to.</div></div>
+<div class="wcard c-odoo"><div class="wt">4 · None</div><div class="wr"><span>How</span>No income tax on salaries, so nothing to withhold.</div><div class="wr"><span>Where</span>UAE, Saudi Arabia</div><div class="wr"><span>Corrects?</span>Nothing to correct.</div></div>
+<div class="wcard c-law"><div class="wt">5 · Employee files himself</div><div class="wr"><span>How</span>The employer withholds nothing and only reports the salaries; the tax office collects from the employee.</div><div class="wr"><span>Where</span>Hong Kong</div><div class="wr"><span>Corrects?</span>Nothing to correct on the payslip.</div></div>
+</div>
+
+<p>The method shapes the code. An annualising country needs only this month's lines; a cumulative one needs every earlier payslip of the tax year, including a previous employer's.</p>
+<div class="admonition world">
+<p class="admonition-title">Around the world</p>
+<ul>
+<li><strong>India</strong>: cumulative; actual months plus projected months give the annual tax, spread over the months left.</li>
+<li><strong>Mexico</strong>: tax tables per pay frequency, plus an employment subsidy.</li>
+<li><strong>United States</strong>: annualise per period with the employee's W-4, then a second layer of state tax.</li>
+<li><strong>Australia</strong>: period pay converted to weekly, put through coefficients (a × x − b), converted back.</li>
+<li><strong>Hong Kong</strong>: no withholding; each employee pays his own tax.</li>
+</ul>
+</div>
+<h2 id="progressive-scales-slice-by-slice">Progressive scales: slice by slice</h2>
+<p>Most income taxes are <strong>progressive</strong>: each slice of income is taxed at its own band's rate. Belgium's 2026 scale:<sup id="fnref:c4-kf"><a class="footnote-ref" href="#fn:c4-kf">3</a></sup></p>
+<table>
+<thead>
+<tr>
+<th>Annual net taxable (€)</th>
+<th>Tax</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0.01 – 16,710.00</td>
+<td>26.75 %</td>
+</tr>
+<tr>
+<td>16,710.01 – 29,500.00</td>
+<td>4,469.93 + 42.80 % above 16,710</td>
+</tr>
+<tr>
+<td>29,500.01 – 51,050.00</td>
+<td>9,944.05 + 48.15 % above 29,500</td>
+</tr>
+<tr>
+<td>above 51,050.00</td>
+<td>20,320.38 + 53.50 % above 51,050</td>
+</tr>
+</tbody>
+</table>
+<p>The fixed amounts are the tax on all slices below each band, precomputed so a rule looks up one row.</p>
+<div class="admonition world">
+<p class="admonition-title">Around the world</p>
+<ul>
+<li><strong>Netherlands</strong>: monthly brackets, the annual table divided by 12, with separate tables for residents and non-residents.</li>
+<li><strong>Kenya</strong>: monthly bands, then fixed reliefs subtracted (personal relief, insurance, housing levy).</li>
+<li><strong>Morocco</strong>: one monthly table where each bracket has a rate and a fixed deduction, the same shortcut as Belgium's fixed amounts.</li>
+<li><strong>Turkey, Poland</strong>: the bands apply to the income since 1 January, so an employee climbs into a higher band during the year.</li>
+<li><strong>Lithuania</strong>: one flat rate, but the tax-free amount shrinks as income rises, which makes the tax progressive anyway.</li>
+</ul>
+</div>
+<div class="admonition pitfall">
+<p class="admonition-title">Common pitfall</p>
+<p>"Mélanie is in the 48.15 % band, so her tax is 48.15 %." Only the slice above 29,500 € is. Her withholding is 20.67 % of her gross.<sup id="fnref3:c4-calc"><a class="footnote-ref" href="#fn:c4-calc">7</a></sup></p>
+</div>
+<h2 id="case-study-belgium-annualises">Case study: Belgium annualises</h2>
+<p>Belgium's official "key formula" turns one month into a year, applies the scale and family relief, and divides by twelve.<sup id="fnref2:c4-kf"><a class="footnote-ref" href="#fn:c4-kf">3</a></sup></p>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Rule (2026)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A. Annual gross</td>
+<td>monthly taxable base × 12</td>
+</tr>
+<tr>
+<td>B. Annual net</td>
+<td>minus a flat allowance for professional expenses: 30 %, at most 6,070 €</td>
+</tr>
+<tr>
+<td>C. Annual tax</td>
+<td>scale, minus the tax on a tax-free sum, minus family reductions; never below 0</td>
+</tr>
+<tr>
+<td>D. Monthly</td>
+<td>annual tax ÷ 12</td>
+</tr>
+<tr>
+<td>E. Reductions</td>
+<td>low-wage tax credit, overtime, part of pension contributions; never below 0</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition example">
+<p class="admonition-title">Worked example: Mélanie, October 2026</p>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th style="text-align: right;">Amount (€)</th>
+</tr>
+</thead>
+<tbody>
+<tr class='tax'>
+<td><span class='pill tax'>GROSS</span> Monthly taxable base</td>
+<td style="text-align: right;">3,477.20</td>
+</tr>
+<tr>
+<td>A. × 12</td>
+<td style="text-align: right;">41,726.40</td>
+</tr>
+<tr>
+<td>B. − professional expenses (capped)</td>
+<td style="text-align: right;">−6,070.00</td>
+</tr>
+<tr>
+<td>Annual net taxable</td>
+<td style="text-align: right;">35,656.40</td>
+</tr>
+<tr>
+<td>C. Scale: 9,944.05 + 48.15 % × (35,656.40 − 29,500)</td>
+<td style="text-align: right;">12,908.36</td>
+</tr>
+<tr>
+<td>− tax on the tax-free sum of 11,170 €</td>
+<td style="text-align: right;">−2,987.98</td>
+</tr>
+<tr>
+<td>Annual tax</td>
+<td style="text-align: right;">9,920.38</td>
+</tr>
+<tr class='tax'>
+<td><span class='pill tax'>P.P</span> D. ÷ 12</td>
+<td style="text-align: right;">826.70</td>
+</tr>
+</tbody>
+</table>
+<p>The calculator reproduces the official simulator's examples to the cent.<sup id="fnref:c4-sim"><a class="footnote-ref" href="#fn:c4-sim">5</a></sup></p>
+</div>
+<p><strong>In Odoo.</strong> Mélanie's payslip shows 826.69 €: Odoo rounds the monthly amount down, where the official formula rounds half up. Chapter 10 lists this as a question for an expert.<sup id="fnref:c4-odoo"><a class="footnote-ref" href="#fn:c4-odoo">8</a></sup></p>
+<div class="admonition key">
+<p class="admonition-title">Key idea</p>
+<p>An annualising method aims at the tax of someone who earns <strong>this</strong> month's pay twelve times. Anything else (other income, a partial year, a raise) is settled by the final assessment. A cumulative method makes the opposite choice: each month corrects the past.</p>
+</div>
+<h2 id="family-situation">Family situation</h2>
+<p>Almost every income tax adjusts for the household, with few levers: a personal allowance (Belgium, Kenya), a reduction per child (Belgium, Morocco), splitting with a spouse (Belgium), a tax class by family status (Luxembourg, Indonesia), or the employee's own form (US W-4).</p>
+<p>Marie is married, her spouse has no income, and they have two children. Belgium gives her a <strong>marital quotient</strong>, which moves up to 30 % of her income (capped) to her spouse, taxed in the lowest band with a second tax-free sum, and a <strong>reduction for two children</strong>.<sup id="fnref3:c4-kf"><a class="footnote-ref" href="#fn:c4-kf">3</a></sup></p>
+<div class="admonition example">
+<p class="admonition-title">Worked example: Marie, October 2026</p>
+<p>Taxable base 6,668.32 € (with the car, Chapter 2).</p>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th style="text-align: right;">Amount (€)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Annual gross 6,668.32 × 12</td>
+<td style="text-align: right;">80,019.84</td>
+</tr>
+<tr>
+<td>− professional expenses</td>
+<td style="text-align: right;">−6,070.00</td>
+</tr>
+<tr>
+<td>Annual net taxable</td>
+<td style="text-align: right;">73,949.84</td>
+</tr>
+<tr>
+<td>Marital quotient: 30 % is above the cap, so</td>
+<td style="text-align: right;">13,790.00</td>
+</tr>
+<tr>
+<td>Scale on the quotient</td>
+<td style="text-align: right;">3,688.83</td>
+</tr>
+<tr>
+<td>Scale on the rest (73,949.84 − 13,790.00)</td>
+<td style="text-align: right;">25,194.14</td>
+</tr>
+<tr>
+<td>− tax-free sum twice (2 × 2,987.98)</td>
+<td style="text-align: right;">−5,975.96</td>
+</tr>
+<tr>
+<td>Base tax</td>
+<td style="text-align: right;">22,907.01</td>
+</tr>
+<tr>
+<td>− reduction for 2 children</td>
+<td style="text-align: right;">−1,656.00</td>
+</tr>
+<tr class='tax'>
+<td><span class='pill tax'>P.P</span> ÷ 12</td>
+<td style="text-align: right;">1,770.92</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>With the same taxable base, a single person would have 2,465.32 € withheld.<sup id="fnref:c4-calc"><a class="footnote-ref" href="#fn:c4-calc">7</a></sup></p>
+<div class="admonition todo">
+<p class="admonition-title">Open question</p>
+<p>Odoo withholds 1,750.15 € from Marie, 20.77 € less, because it deducts a yearly 500 € transport exemption. Whether an employee with a company car is entitled to it is not settled by the sources read for this book (Chapter 10).<sup id="fnref3:c4-odoo"><a class="footnote-ref" href="#fn:c4-odoo">8</a></sup></p>
+</div>
+<h2 id="a-formula-that-changes-in-november">A formula that changes in November</h2>
+<p>Tax parameters are dated. Belgium published a new formula on 2 October 2026 for pay from 1 November: a higher tax-free sum, but a lower cap on the marital quotient and smaller child reductions.<sup id="fnref:c4-hist"><a class="footnote-ref" href="#fn:c4-hist">2</a></sup></p>
+<table class='payslip'>
+<thead>
+<tr>
+<th></th>
+<th style="text-align: right;">Mélanie</th>
+<th style="text-align: right;">Jurgen</th>
+<th style="text-align: right;">Marie</th>
+</tr>
+</thead>
+<tbody>
+<tr class='tax'>
+<td><span class='pill tax'>Withholding October</span> (Jan-2026 formula)</td>
+<td style="text-align: right;">826.70</td>
+<td style="text-align: right;">144.33</td>
+<td style="text-align: right;">1,770.92</td>
+</tr>
+<tr class='tax'>
+<td><span class='pill tax'>Withholding November</span> (Nov-2026 formula)</td>
+<td style="text-align: right;">818.23</td>
+<td style="text-align: right;">135.86</td>
+<td style="text-align: right;">1,799.78</td>
+</tr>
+<tr>
+<td>Difference</td>
+<td style="text-align: right;">−8.47</td>
+<td style="text-align: right;">−8.47</td>
+<td style="text-align: right;"><strong>+28.86</strong></td>
+</tr>
+</tbody>
+</table>
+
+<p>The singles gain only the higher tax-free sum. Marie gets it twice, but her capped quotient keeps more of her income in her own high band.<sup id="fnref:c4-cons"><a class="footnote-ref" href="#fn:c4-cons">4</a></sup> Chapter 11 shows how Odoo keeps both formulas, each with its start date.</p>
+<h2 id="marginal-and-effective-rates">Marginal and effective rates</h2>
+<p>The <strong>effective rate</strong> is tax ÷ gross. The <strong>marginal rate</strong> is what happens to one more euro, and it is not the band rate when contributions and reductions move too.</p>
+<figure>
+<p><img alt="Effective and marginal rate" src="assets/charts/be_ch4_marginal.svg" /></p>
+<figcaption>Single employee, Belgian October 2026 rules. The effective withholding rate climbs smoothly. The share of an extra 100 € lost to contributions and tax jumps where the low-wage reduction fades out.</figcaption>
+</figure>
+<table class='payslip'>
+<thead>
+<tr>
+<th>+100.00 € gross per month</th>
+<th style="text-align: right;">Mélanie</th>
+<th style="text-align: right;">Jurgen</th>
+<th style="text-align: right;">Marie</th>
+</tr>
+</thead>
+<tbody>
+<tr class='ded'>
+<td><span class='pill ded'>Extra employee contributions</span></td>
+<td style="text-align: right;">13.07</td>
+<td style="text-align: right;">39.89</td>
+<td style="text-align: right;">13.07</td>
+</tr>
+<tr class='tax'>
+<td><span class='pill tax'>Extra withholding</span></td>
+<td style="text-align: right;">41.86</td>
+<td style="text-align: right;">42.61</td>
+<td style="text-align: right;">46.51</td>
+</tr>
+<tr class='ded'>
+<td><span class='pill ded'>Extra special contribution</span></td>
+<td style="text-align: right;">3.38</td>
+<td style="text-align: right;">1.10</td>
+<td style="text-align: right;">0.00</td>
+</tr>
+<tr class='net'>
+<td><span class='pill net'>Extra net</span></td>
+<td style="text-align: right;">41.69</td>
+<td style="text-align: right;">16.40</td>
+<td style="text-align: right;">40.42</td>
+</tr>
+<tr>
+<td>Share of the 100 € lost</td>
+<td style="text-align: right;">58.31 %</td>
+<td style="text-align: right;">83.60 %</td>
+<td style="text-align: right;">59.58 %</td>
+</tr>
+</tbody>
+</table>
+
+<p>Jurgen keeps 16.40 € of a 100 € raise: his contributions rise by 39.89 €, not 13.07 €, because his low-wage reduction shrinks. His effective rate is only 6.28 %, but his marginal loss is the cast's highest.<sup id="fnref2:c4-calc"><a class="footnote-ref" href="#fn:c4-calc">7</a></sup> This "low-wage trap" exists wherever a reduction fades out.</p>
+<div class="admonition practice">
+<p class="admonition-title">In practice</p>
+<p>When HR asks "what does a 100 € raise give net?", run the payslip twice and subtract. Never answer with the band rate.</p>
+</div>
+<h2 id="irregular-pay-bonuses-holiday-pay-indemnities">Irregular pay: bonuses, holiday pay, indemnities</h2>
+<p>An annualising formula applied to a once-a-year bonus would tax it as if paid every month, far too high. So countries use a separate method:</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>How</th>
+<th>Examples in Odoo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Flat rate by bracket</strong></td>
+<td>a fixed rate chosen from normal annual pay</td>
+<td>Belgium</td>
+</tr>
+<tr>
+<td><strong>Difference method</strong></td>
+<td>tax(year + bonus) − tax(year)</td>
+<td>Mexico</td>
+</tr>
+<tr>
+<td><strong>Separate rule</strong></td>
+<td>its own table or formula</td>
+<td>Luxembourg</td>
+</tr>
+<tr>
+<td><strong>None needed</strong></td>
+<td>a cumulative method absorbs the bonus</td>
+<td>India, Turkey</td>
+</tr>
+</tbody>
+</table>
+<p>In Belgium, holiday pay and bonuses get a flat rate chosen from annual normal pay; a notice indemnity gets a third scale.<sup id="fnref:c4-a3"><a class="footnote-ref" href="#fn:c4-a3">6</a></sup></p>
+<table class='payslip'>
+<thead>
+<tr>
+<th>Mélanie, annual normal gross 41,726.40 €</th>
+<th style="text-align: right;">Taxable</th>
+<th style="text-align: right;">Rate</th>
+<th style="text-align: right;"><span class='pill tax'>Withholding</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Holiday bonus, June 2026</td>
+<td style="text-align: right;">3,235.62</td>
+<td style="text-align: right;">42.39 %</td>
+<td style="text-align: right;">1,371.58</td>
+</tr>
+<tr>
+<td>Year-end premium, December 2026</td>
+<td style="text-align: right;">3,477.20</td>
+<td style="text-align: right;">46.44 %</td>
+<td style="text-align: right;">1,614.81</td>
+</tr>
+</tbody>
+</table>
+
+<p>Odoo's June payslip gives Mélanie the same 1,371.58 €.<sup id="fnref2:c4-odoo"><a class="footnote-ref" href="#fn:c4-odoo">8</a></sup> The calculator takes "annual normal gross" as (monthly gross − employee contributions) × 12, common practice that the rules retrieved do not define (<code>UNVERIFIED</code>).</p>
+<h2 id="withholding-is-not-the-final-tax">Withholding is not the final tax</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Withholding</th>
+<th>Final tax</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Computed by</td>
+<td>the employer, every period</td>
+<td>the tax office, once a year</td>
+</tr>
+<tr>
+<td>Basis</td>
+<td>the payslip (one month, or the year so far)</td>
+<td>the real year's income, all sources</td>
+</tr>
+<tr>
+<td>Who settles the difference</td>
+<td>—</td>
+<td>the employee, with the tax office</td>
+</tr>
+</tbody>
+</table>
+<p>Yannick joins in March. His March withholding of 163.37 € assumes he earns 1,991.49 € taxable every month of the year; the assessment settles the difference with his previous employer's income. This book computes no final tax (<code>UNVERIFIED</code>).<sup id="fnref:c4-decl"><a class="footnote-ref" href="#fn:c4-decl">1</a></sup></p>
+<p><strong>In Odoo.</strong> Belgium's formula is a chain of salary rules, from <code>GROSS.Y</code> (× 12) through <code>Y.P.P</code> (scale) to <code>P.P</code>, with dated rule parameters for the scale and family table. A cumulative localization looks different: India's <code>TDS</code> rule calls a Python method that reads the year's payslips.</p>
+<h2 id="summary">Summary</h2>
+<ul>
+<li>Withholding is an advance on a yearly tax. Countries turn the year into periods by annualising, by cumulating year to date, with period tables, or not at all.</li>
+<li>Progressive scales are computed slice by slice; the band rate is not the tax rate.</li>
+<li>Belgium annualises: × 12, − professional expenses, scale, − tax-free sum, − family reductions, ÷ 12. Mélanie: 826.70 €.</li>
+<li>Family relief uses a few levers: allowances, dependants, spouse splitting, tax classes. Marie: 1,770.92 € instead of 2,465.32 € as a single person.</li>
+<li>Tax parameters are dated; the 1 November 2026 formula lowers singles' withholding by 8.47 € and raises Marie's by 28.86 €.</li>
+<li>The marginal loss is not the band rate: Jurgen keeps only 16.40 € of a 100 € raise.</li>
+<li>Bonuses and other irregular pay need their own method; an annualising formula would overtax them.</li>
+</ul>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:c4-decl">
+<p>SPF Finances, withholding tax return (withholding is an advance credited against the final tax): <a href="https://finances.belgium.be/fr/entreprises/personnel_et_remuneration/precompte_professionnel/declaration">https://finances.belgium.be/fr/entreprises/personnel_et_remuneration/precompte_professionnel/declaration</a>.&#160;<a class="footnote-backref" href="#fnref:c4-decl" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:c4-hist">
+<p>SPF Finances, Annex III AR/CIR 92 version history (AR 11.12.2025, AR 14.02.2026, AR 24.07.2026, AR 27.09.2026 published 2.10.2026): <a href="https://www.minfin.fgov.be/myminfin-web/pages/public/fisconet/document/439228c6-67bb-4e75-a9e1-4cabe4dc62ec">https://www.minfin.fgov.be/myminfin-web/pages/public/fisconet/document/439228c6-67bb-4e75-a9e1-4cabe4dc62ec</a>.&#160;<a class="footnote-backref" href="#fnref:c4-hist" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:c4-kf">
+<p>SPF Finances, key formula from 1 January 2026 (n° 3, 5, 7–21 and annexes 1, 3, 4): <a href="https://www.minfin.fgov.be/myminfin-web/pages/public/fisconet/document/389035ca-432e-422b-859d-2d32fbdaa4cf">https://www.minfin.fgov.be/myminfin-web/pages/public/fisconet/document/389035ca-432e-422b-859d-2d32fbdaa4cf</a>.&#160;<a class="footnote-backref" href="#fnref:c4-kf" title="Jump back to footnote 3 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:c4-kf" title="Jump back to footnote 3 in the text">&#8617;</a><a class="footnote-backref" href="#fnref3:c4-kf" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:c4-cons">
+<p>SPF Finances, Annex III consolidated with the AR of 27 September 2026 (formula from 1 November 2026, n° 32, 34, 38–40, 54): <a href="https://www.minfin.fgov.be/myminfin-web/pages/public/fisconet/document/0c174ec5-448b-4d1e-983b-fc457e5e7e28">https://www.minfin.fgov.be/myminfin-web/pages/public/fisconet/document/0c174ec5-448b-4d1e-983b-fc457e5e7e28</a>.&#160;<a class="footnote-backref" href="#fnref:c4-cons" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+<li id="fn:c4-sim">
+<p>SPF Finances withholding simulators 2026, January version <a href="https://www.minfin.fgov.be/myminfin-rest/fisconetPlus/public/document/addenda/SimulateurPrP2026verrouilleFR.xlsx">https://www.minfin.fgov.be/myminfin-rest/fisconetPlus/public/document/addenda/SimulateurPrP2026verrouilleFR.xlsx</a> and November version <a href="https://www.minfin.fgov.be/myminfin-rest/fisconetPlus/public/document/addenda/SimulateurPrP2026novembreverrouill%C3%A9.xlsx">https://www.minfin.fgov.be/myminfin-rest/fisconetPlus/public/document/addenda/SimulateurPrP2026novembreverrouill%C3%A9.xlsx</a>.&#160;<a class="footnote-backref" href="#fnref:c4-sim" title="Jump back to footnote 5 in the text">&#8617;</a></p>
+</li>
+<li id="fn:c4-a3">
+<p>SPF Finances, Annex III from 1 January 2026, n° 53–62 (exceptional income, arrears and indemnities): <a href="https://www.minfin.fgov.be/myminfin-web/pages/public/fisconet/document/536a741e-81d6-4605-ad11-8e07ebc4a440">https://www.minfin.fgov.be/myminfin-web/pages/public/fisconet/document/536a741e-81d6-4605-ad11-8e07ebc4a440</a>.&#160;<a class="footnote-backref" href="#fnref:c4-a3" title="Jump back to footnote 6 in the text">&#8617;</a></p>
+</li>
+<li id="fn:c4-calc">
+<p>Independent calculator, <code>research/numbers_be_calc.md</code>, sections 10.3 to 10.6.&#160;<a class="footnote-backref" href="#fnref:c4-calc" title="Jump back to footnote 7 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:c4-calc" title="Jump back to footnote 7 in the text">&#8617;</a><a class="footnote-backref" href="#fnref3:c4-calc" title="Jump back to footnote 7 in the text">&#8617;</a></p>
+</li>
+<li id="fn:c4-odoo">
+<p>Payslips computed by Odoo master on the demo database, <code>research/numbers_be.md</code>: Marie's February 2026 lines (<code>TRANSPORT_TAX_DED</code>), the October 2026 summary, the double holiday pay and Emma's 13<sup>th</sup> month.&#160;<a class="footnote-backref" href="#fnref:c4-odoo" title="Jump back to footnote 8 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:c4-odoo" title="Jump back to footnote 8 in the text">&#8617;</a><a class="footnote-backref" href="#fnref3:c4-odoo" title="Jump back to footnote 8 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></section><nav class='pager' aria-label='Previous and next chapter'><a class='pager-prev' rel='prev' href='chapter-03-contributions-employee-and-employer.html'><small>Previous · Chapter 3</small><span>Contributions: employee and employer</span></a><a class='pager-next' rel='next' href='chapter-05-time-proration-and-overtime.html'><small>Next · Chapter 5</small><span>Time, proration and overtime</span></a></nav>
+</main>
+</div>
+<script src="js/site.js"></script>
+
+</body>
+</html>

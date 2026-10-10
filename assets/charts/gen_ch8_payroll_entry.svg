@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="520.698672pt" height="261.569pt" viewBox="0 0 520.698672 261.569" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-10-10T13:46:04.938677</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.11.2, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 261.569 
+L 520.698672 261.569 
+L 520.698672 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 7.2 223.509 
+L 509.4 223.509 
+L 509.4 23.925 
+L 7.2 23.925 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_1">
+      <defs>
+       <path id="m6896c4b3dd" d="M 0 0 
+L 0 3.5 
+" style="stroke: #64748b; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#m6896c4b3dd" x="174.6" y="223.509" style="fill: #64748b; stroke: #64748b; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_1">
+      <text style="font-size: 10px; font-family: 'Helvetica Neue'; fill: #64748b" transform="translate(162.744531 240.169)">Debit</text>
+      <text style="font-size: 10px; font-family: 'Helvetica Neue'; fill: #64748b" transform="translate(132.640625 252.099)">costs of the month</text>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_2">
+      <g>
+       <use xlink:href="#m6896c4b3dd" x="319.68" y="223.509" style="fill: #64748b; stroke: #64748b; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_2">
+      <text style="font-size: 10px; font-family: 'Helvetica Neue'; fill: #64748b" transform="translate(306.159688 240.169)">Credit</text>
+      <text style="font-size: 10px; font-family: 'Helvetica Neue'; fill: #64748b" transform="translate(258.01125 252.099)">what is owed, and to whom</text>
+     </g>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2"/>
+   <g id="patch_3">
+    <path d="M 151.164 223.509 
+L 198.036 223.509 
+L 198.036 78.882913 
+L 151.164 78.882913 
+z
+" clip-path="url(#p85fc928703)" style="fill: #e3f4ea; stroke: #2e9e5b; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 151.164 78.882913 
+L 198.036 78.882913 
+L 198.036 49.957696 
+L 151.164 49.957696 
+z
+" clip-path="url(#p85fc928703)" style="fill: #eee8f6; stroke: #7b5ea7; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 296.244 223.509 
+L 343.116 223.509 
+L 343.116 129.502043 
+L 296.244 129.502043 
+z
+" clip-path="url(#p85fc928703)" style="fill: #fbf3d9; stroke: #c99a0e; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 296.244 129.502043 
+L 343.116 129.502043 
+L 343.116 78.882913 
+L 296.244 78.882913 
+z
+" clip-path="url(#p85fc928703)" style="fill: #fbe5e5; stroke: #d64545; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 296.244 78.882913 
+L 343.116 78.882913 
+L 343.116 49.957696 
+L 296.244 49.957696 
+z
+" clip-path="url(#p85fc928703)" style="fill: #e2ecf8; stroke: #2f6db5; stroke-width: 1.4; stroke-linejoin: miter"/>
+   </g>
+   <g id="line2d_3">
+    <path d="M 198.036 49.957696 
+L 296.244 49.957696 
+" clip-path="url(#p85fc928703)" style="fill: none; stroke-dasharray: 3.33,1.44; stroke-dashoffset: 0; stroke: #64748b; stroke-width: 0.9"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 7.2 223.509 
+L 509.4 223.509 
+" style="fill: none; stroke: #e2e8f0; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_3">
+    <text style="font-weight: 700; font-size: 8.5px; font-family: 'Helvetica Neue'; text-anchor: end; fill: #2e9e5b" x="146.7" y="154.417457" transform="rotate(-0 146.7 154.417457)">Gross wages  1,000</text>
+   </g>
+   <g id="text_4">
+    <text style="font-weight: 700; font-size: 8.5px; font-family: 'Helvetica Neue'; text-anchor: end; fill: #7b5ea7" x="146.7" y="67.641804" transform="rotate(-0 146.7 67.641804)">Employer contributions  200</text>
+   </g>
+   <g id="text_5">
+    <text style="font-weight: 700; font-size: 10px; font-family: 'Helvetica Neue'; text-anchor: middle; fill: #1e293b" x="174.6" y="44.172043" transform="rotate(-0 174.6 44.172043)">1,200</text>
+   </g>
+   <g id="text_6">
+    <text style="font-weight: 700; font-size: 8.5px; font-family: 'Helvetica Neue'; text-anchor: start; fill: #c99a0e" x="347.58" y="179.727022" transform="rotate(-0 347.58 179.727022)">650  Net pay due to the employee</text>
+   </g>
+   <g id="text_7">
+    <text style="font-weight: 700; font-size: 8.5px; font-family: 'Helvetica Neue'; fill: #d64545" transform="translate(347.58 102.224728)">350  Contributions due to social security</text>
+    <text style="font-weight: 700; font-size: 8.5px; font-family: 'Helvetica Neue'; fill: #d64545" transform="translate(347.58 112.603228)">150 employee + 200 employer</text>
+   </g>
+   <g id="text_8">
+    <text style="font-weight: 700; font-size: 8.5px; font-family: 'Helvetica Neue'; text-anchor: start; fill: #2f6db5" x="347.58" y="67.641804" transform="rotate(-0 347.58 67.641804)">200  Tax withheld due to the tax authority</text>
+   </g>
+   <g id="text_9">
+    <text style="font-weight: 700; font-size: 10px; font-family: 'Helvetica Neue'; text-anchor: middle; fill: #1e293b" x="319.68" y="44.172043" transform="rotate(-0 319.68 44.172043)">1,200</text>
+   </g>
+   <g id="text_10">
+    <text style="font-size: 8.5px; font-family: 'Helvetica Neue'; text-anchor: middle; fill: #64748b" x="247.14" y="44.531543" transform="rotate(-0 247.14 44.531543)">debit = credit</text>
+   </g>
+   <g id="text_11">
+    <text style="font-weight: 700; font-size: 11px; font-family: 'Helvetica Neue'; text-anchor: start" x="7.2" y="17.925" transform="rotate(-0 7.2 17.925)">One payslip, one balanced entry: 1,200 of cost, 1,200 of debts</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p85fc928703">
+   <rect x="7.2" y="23.925" width="502.2" height="199.584"/>
+  </clipPath>
+ </defs>
+</svg>

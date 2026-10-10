@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter 3: Contributions: employee and employer · Payroll, from Theory to Odoo Localization</title>
+<meta name="description" content="Gross-to-net in any country, the Odoo salary engine, and how to design, build and review a payroll localization.">
+<link rel="stylesheet" href="css/book.css">
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body class="chapter-page">
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+<button class="nav-toggle" type="button" aria-controls="sidebar" aria-expanded="false"><span aria-hidden="true">&#9776;</span> Contents</button>
+<a class="top-brand" href="index.html">Payroll, from Theory to Odoo Localization</a>
+</header>
+<div class="layout">
+<nav id="sidebar" class="sidebar" aria-label="Book contents">
+<a class="side-brand" href="index.html">Payroll, from Theory to Odoo Localization</a>
+<div class="search" role="search">
+<label for="search-input" class="sr-only">Search the book</label>
+<input id="search-input" type="search" placeholder="Search the book  ( / )" autocomplete="off" spellcheck="false" aria-controls="search-results">
+<div id="search-results" class="search-results" aria-live="polite"></div>
+</div>
+<ol class="nav"><li class='nav-part'><span class='nav-part-title'>Front matter</span><ol><li><a href='preface-before-you-start.html'><span class='nav-num'></span><span>Before you start</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part I · Payroll theory</span><ol><li><a href='chapter-01-what-payroll-is-and-why-it-is-hard.html'><span class='nav-num'>1.</span><span>What payroll is, and why it is hard</span></a></li><li><a href='chapter-02-gross-to-net.html'><span class='nav-num'>2.</span><span>Gross to net</span></a></li><li class='current' aria-current='page'><a href='chapter-03-contributions-employee-and-employer.html'><span class='nav-num'>3.</span><span>Contributions: employee and employer</span></a><ol class='nav-sections'><li><a href='#what-a-social-contribution-is'>What a social contribution is</a></li><li><a href='#anatomy-of-a-contribution'>Anatomy of a contribution</a></li><li><a href='#case-study-myvidangecompanys-contributions'>Case study: MyVidangeCompany&#x27;s contributions</a></li><li><a href='#reductions-for-low-wages'>Reductions for low wages</a></li><li><a href='#contributions-over-a-quarter-or-a-year'>Contributions over a quarter or a year</a></li><li><a href='#employer-cost-melanie-jurgen-marie'>Employer cost: Mélanie, Jurgen, Marie</a></li><li><a href='#summary'>Summary</a></li></ol></li><li><a href='chapter-04-withholding-tax.html'><span class='nav-num'>4.</span><span>Withholding tax</span></a></li><li><a href='chapter-05-time-proration-and-overtime.html'><span class='nav-num'>5.</span><span>Time, proration and overtime</span></a></li><li><a href='chapter-06-irregular-pay-corrections-and-leavers.html'><span class='nav-num'>6.</span><span>Irregular pay, corrections and leavers</span></a></li><li><a href='chapter-07-declarations-and-the-compliance-calendar.html'><span class='nav-num'>7.</span><span>Declarations and the compliance calendar</span></a></li><li><a href='chapter-08-accounting-for-payroll.html'><span class='nav-num'>8.</span><span>Accounting for payroll</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part II · Localization theory</span><ol><li><a href='chapter-09-what-varies-between-countries-and-what-doesnt.html'><span class='nav-num'>9.</span><span>What varies between countries, and what doesn&#x27;t</span></a></li><li><a href='chapter-10-researching-a-new-country.html'><span class='nav-num'>10.</span><span>Researching a new country</span></a></li><li><a href='chapter-11-laws-that-change-over-time.html'><span class='nav-num'>11.</span><span>Laws that change over time</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part III · Odoo payroll, hands-on</span><ol><li><a href='chapter-12-tour-and-setup.html'><span class='nav-num'>12.</span><span>Tour and setup</span></a></li><li><a href='chapter-13-employees-and-versions.html'><span class='nav-num'>13.</span><span>Employees and versions</span></a></li><li><a href='chapter-14-time-schedules-time-off-worked-days.html'><span class='nav-num'>14.</span><span>Time: schedules, time off, worked days</span></a></li><li><a href='chapter-15-pay-runs-and-payslips.html'><span class='nav-num'>15.</span><span>Pay runs and payslips</span></a></li><li><a href='chapter-16-accounting-and-payment.html'><span class='nav-num'>16.</span><span>Accounting and payment</span></a></li><li><a href='chapter-17-reports-declarations-and-a-leaver.html'><span class='nav-num'>17.</span><span>Reports, declarations and a leaver</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part IV · How the payroll engine works</span><ol><li><a href='chapter-18-the-engine-in-one-picture.html'><span class='nav-num'>18.</span><span>The engine in one picture</span></a></li><li><a href='chapter-19-structures-and-rules.html'><span class='nav-num'>19.</span><span>Structures and rules</span></a></li><li><a href='chapter-20-categories-how-rules-talk-to-each-other.html'><span class='nav-num'>20.</span><span>Categories: how rules talk to each other</span></a></li><li><a href='chapter-21-parameters-updates-and-safe-extensions.html'><span class='nav-num'>21.</span><span>Parameters, updates and safe extensions</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part V · Building a localization</span><ol><li><a href='chapter-22-a-template-for-any-localization-and-how-to-review-one.html'><span class='nav-num'>22.</span><span>A template for any localization, and how to review one</span></a></li></ol></li></ol>
+<a class="nav-pdf" href="payroll_book.pdf" download>Download the PDF</a>
+</nav>
+<div class="backdrop" hidden></div>
+<main id="main" class="content">
+<section class='chapter' id='c-13_ch03'><div class='opener'><div class='opener-band'><span class='opener-num'>Chapter 3</span><span class='opener-part'>Part I · Payroll theory</span></div><h1>Contributions: employee and employer</h1><p class='opener-sub'>A rate, a base, a floor, a cap, and the reductions that make low wages cheaper</p><div class='opener-goals'><div class='goals-title'>After this chapter you can</div><ul><li>Describe any social contribution with five parameters: base, rate, floor, cap and who pays</li><li>Explain why a capped contribution is regressive and an uncapped one is not</li><li>Explain how low-wage reductions work, and why they make a raise expensive</li><li>Handle contributions computed over a quarter or a year, not a month</li><li>Compare the employer cost of three employees, and say why rates must be stored with dates</li></ul></div></div><p>Mélanie pays 522.80 € of social security on 4,000.00 €. Jurgen pays 1.08 € on 2,300.00 €. Same law, same 13.07 % rate. Some countries shape contributions with a <strong>cap</strong>; Belgium has none and uses <strong>reductions</strong> instead. Both are variations on one small model.</p>
+<h2 id="what-a-social-contribution-is">What a social contribution is</h2>
+<p>A <strong>social contribution</strong> (<em>social security contribution</em>, <em>social charge</em>, <em>national insurance</em>; some countries say <em>payroll tax</em>) is a compulsory payment, computed on pay, that finances social insurance: pensions, health care, unemployment, family benefits. Unlike income tax, it is tied to the job and usually paid by both sides: an <strong>employee share</strong>, deducted from the gross, and an <strong>employer share</strong>, paid on top of it.</p>
+<p>Three things follow from that definition:</p>
+<ul>
+<li><strong>It is computed per period, on the pay of that period.</strong> No yearly estimate, no settlement afterwards, unlike withholding (Chapter 4).</li>
+<li><strong>It buys rights.</strong> Pensions and benefits are often computed from the pay declared for contributions, so a wrong base can cost the employee later, not only the fund now.</li>
+<li><strong>Each fund is a small formula.</strong> A base, a rate, and sometimes a floor, a cap and a reduction: the next section takes it apart.</li>
+</ul>
+<h2 id="anatomy-of-a-contribution">Anatomy of a contribution</h2>
+<p>A contribution is a percentage of the pay, with two limits. Take one imaginary fund with round numbers: <strong>10 % of gross pay, with a minimum base of 500 and a maximum base of 5,000</strong> a month, and three employees.</p>
+<figure>
+<p><img alt="A contribution with a floor, a rate and a cap" src="assets/charts/gen_ch3_contribution_curve.svg" /></p>
+<figcaption>Illustrative fund: 10 % of gross, base at least 500 and at most 5,000. Left: what each employee pays. Right: the same amount as a share of their pay.</figcaption>
+</figure>
+<ul>
+<li><strong>The rate</strong> applies in the middle band. Ben earns 3,000 and pays 3,000 × 10 % = <strong>300</strong>.</li>
+<li><strong>The floor</strong> is a minimum base: below it, the fund charges as if the pay were 500. Ana earns 300 and still pays <strong>50</strong>, that is 16.7 % of her pay. Some funds use a minimum contribution instead.</li>
+<li><strong>The cap</strong> is a maximum base: above it, nothing more is due. Cleo earns 8,000 and pays <strong>500</strong>, only 6.25 % of her pay. A cap makes a contribution <strong>regressive</strong>: the higher the pay, the smaller the share.</li>
+<li><strong>Reductions.</strong> Some laws then subtract a reduction, for low wages or for target groups; Jurgen's case below.</li>
+</ul>
+<div class="formula">Contribution = min( max(base, floor), cap ) × rate − reductions</div>
+
+<p>Every country's contributions are a combination of these knobs:</p>
+<table>
+<thead>
+<tr>
+<th>Knob</th>
+<th>Question</th>
+<th>Variants</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Base</strong></td>
+<td>which earnings count?</td>
+<td>gross; basic only; basic + housing</td>
+</tr>
+<tr>
+<td><strong>Rate</strong></td>
+<td>how much, for whom?</td>
+<td>one per fund; by side, nationality or sector</td>
+</tr>
+<tr>
+<td><strong>Floor</strong></td>
+<td>minimum base or amount?</td>
+<td>none; a minimum contribution</td>
+</tr>
+<tr>
+<td><strong>Cap</strong></td>
+<td>a ceiling?</td>
+<td>none; per month; per year to date; tiers</td>
+</tr>
+<tr>
+<td><strong>Who pays</strong></td>
+<td>employee, employer, both?</td>
+<td>employer only for accident funds</td>
+</tr>
+<tr>
+<td><strong>Reductions</strong></td>
+<td>who pays less?</td>
+<td>low wages; first hires; target groups</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition world">
+<p class="admonition-title">Around the world</p>
+<ul>
+<li><strong>United States</strong>: Social Security has a yearly cap tracked year to date; Medicare has none.</li>
+<li><strong>India</strong>: provident fund on basic salary; state insurance only below a wage threshold.</li>
+<li><strong>Saudi Arabia</strong>: on basic + housing; the employee share only for nationals.</li>
+<li><strong>Mexico</strong>: on an integrated daily wage, capped at 25 × a legal reference unit.</li>
+<li><strong>Kenya</strong>: pension in two tiers between a lower and an upper limit.</li>
+</ul>
+</div>
+<h2 id="case-study-myvidangecompanys-contributions">Case study: MyVidangeCompany's contributions</h2>
+<p>Belgium sits at one end of the scale: one office (ONSS) collects everything, the employee pays one rate on an uncapped base, and the employer pays a sum of rates on the same base.<sup id="fnref:c3-contrib"><a class="footnote-ref" href="#fn:c3-contrib">1</a></sup></p>
+<table class='payslip'>
+<thead>
+<tr>
+<th></th>
+<th style="text-align: right;">Mélanie</th>
+<th style="text-align: right;">Jurgen</th>
+<th style="text-align: right;">Marie</th>
+</tr>
+</thead>
+<tbody>
+<tr class='earn'>
+<td><span class='pill earn'>Contribution base</span></td>
+<td style="text-align: right;">4,000.00</td>
+<td style="text-align: right;">2,300.00</td>
+<td style="text-align: right;">7,500.00</td>
+</tr>
+<tr class='ded'>
+<td><span class='pill ded'>Employee 13.07 %</span></td>
+<td style="text-align: right;">522.80</td>
+<td style="text-align: right;">300.61</td>
+<td style="text-align: right;">980.25</td>
+</tr>
+<tr class='ded'>
+<td><span class='pill ded'>Low-wage reduction</span></td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">−299.53</td>
+<td style="text-align: right;">0.00</td>
+</tr>
+<tr class='ded'>
+<td><span class='pill ded'>Employee contributions withheld</span></td>
+<td style="text-align: right;">522.80</td>
+<td style="text-align: right;">1.08</td>
+<td style="text-align: right;">980.25</td>
+</tr>
+<tr class='emp'>
+<td><span class='pill emp'>Employer 25.12 %</span></td>
+<td style="text-align: right;">1,004.80</td>
+<td style="text-align: right;">577.76</td>
+<td style="text-align: right;">1,884.00</td>
+</tr>
+</tbody>
+</table>
+
+<p>With no cap, Marie pays the same 13.07 % as Mélanie. The employer rate is a sum of components, each with its own dates: 25.13 % in the first three quarters of 2026, 25.12 % in the fourth, because a 0.01 % asbestos fund is collected only until September.<sup id="fnref:c3-asb"><a class="footnote-ref" href="#fn:c3-asb">3</a></sup></p>
+<p><strong>In Odoo.</strong> Odoo reads the employer rates from the social security office's official rate file, which includes small funds (closure fund, sector fund) the calculator leaves out: Mélanie's October employer contribution is 1,030.49 € in Odoo against 1,004.80 €.<sup id="fnref:c3-odoo"><a class="footnote-ref" href="#fn:c3-odoo">7</a></sup></p>
+<div class="admonition practice">
+<p class="admonition-title">In practice</p>
+<p>An employer rate is never "a number". Store it as components, each with its own dates. One combined constant would silently be wrong for Q4 2026.</p>
+</div>
+<h2 id="reductions-for-low-wages">Reductions for low wages</h2>
+<p>Many countries want low-paid jobs to be cheap and a low wage's raise to reach the pocket. They use <strong>reductions</strong>: an amount subtracted from the contribution, large for low wages, fading to zero as the wage rises.</p>
+<div class='figure'><pre class='mermaid'>flowchart LR
+    S[&quot;Reference wage&lt;br/&gt;full-time equivalent&quot;] --&gt; T{&quot;Below the&lt;br/&gt;threshold?&quot;}
+    T --&gt;|&quot;yes&quot;| F[&quot;Full reduction&quot;]
+    T --&gt;|&quot;in the fade-out band&quot;| P[&quot;Reduction shrinks&lt;br/&gt;with each extra euro&quot;]
+    T --&gt;|&quot;above&quot;| Z[&quot;No reduction&quot;]
+    classDef earn fill:#E3F4EA,stroke:#2E9E5B,stroke-width:2px,color:#1E293B;
+classDef ded fill:#FBE5E5,stroke:#D64545,stroke-width:2px,color:#1E293B;
+classDef emp fill:#EEE8F6,stroke:#7B5EA7,stroke-width:2px,color:#1E293B;
+classDef tax fill:#E2ECF8,stroke:#2F6DB5,stroke-width:2px,color:#1E293B;
+classDef net fill:#FBF3D9,stroke:#C99A0E,stroke-width:2px,color:#1E293B;
+classDef odoo fill:#E9EDF2,stroke:#475569,stroke-width:2px,color:#1E293B;
+classDef law fill:#FDF0E1,stroke:#B45309,stroke-width:2px,color:#1E293B;
+classDef neutral fill:#F4F6F8,stroke:#64748B,stroke-width:2px,color:#1E293B;
+    class S earn;
+    class T law;
+    class F,P,Z ded;</pre></div>
+<p>Two design points follow:</p>
+<ul>
+<li>It is tested on a <strong>reference wage</strong>, usually the full-time monthly equivalent, so a part-month joiner does not look like a low earner (Chapter 5).</li>
+<li>In the fade-out band, a raise also shrinks the reduction, so its <strong>marginal</strong> cost is much higher than the rate suggests.</li>
+</ul>
+<h3 id="case-study-jurgen">Case study: Jurgen</h3>
+<p>Belgium has a reduction on each side: the employee "work bonus" and the employer "structural reduction".</p>
+<figure>
+<p><img alt="Work bonus curve" src="assets/charts/be_ch3_work_bonus.svg" /></p>
+<figcaption>Belgium, employee contributions before and after the low-wage reduction, by reference wage. At 2,300.00 € Jurgen gets the full reduction; above 3,403.62 € nobody gets any.</figcaption>
+</figure>
+<div class="admonition example">
+<p class="admonition-title">Worked example: Jurgen, October 2026</p>
+<table>
+<thead>
+<tr>
+<th>Line</th>
+<th style="text-align: right;">Amount (€)</th>
+</tr>
+</thead>
+<tbody>
+<tr class='ded'>
+<td><span class='pill ded'>ONSS</span> 13.07 % × 2,300.00</td>
+<td style="text-align: right;">−300.61</td>
+</tr>
+<tr class='ded'>
+<td><span class='pill ded'>EmpBonus.A</span> + <span class='pill ded'>EmpBonus.B</span> Employee low-wage reduction</td>
+<td style="text-align: right;">+299.53</td>
+</tr>
+<tr class='ded'>
+<td><span class='pill ded'>Employee contributions withheld</span></td>
+<td style="text-align: right;">−1.08</td>
+</tr>
+<tr class='emp'>
+<td><span class='pill emp'>ONSSEMPLOYER</span> Employer 25.12 %</td>
+<td style="text-align: right;">577.76</td>
+</tr>
+<tr class='emp'>
+<td><span class='pill emp'>ONSS_STRUCTURAL</span> Employer low-wage reduction</td>
+<td style="text-align: right;">−374.79</td>
+</tr>
+<tr class='emp'>
+<td><span class='pill emp'>Employer contributions after reduction</span></td>
+<td style="text-align: right;">202.97</td>
+</tr>
+</tbody>
+</table>
+<p>Jurgen's taxable base goes up by the same 299.53 €: a contribution not deducted is taxed like salary. Mélanie gets no reduction.<sup id="fnref2:c3-calc"><a class="footnote-ref" href="#fn:c3-calc">6</a></sup></p>
+</div>
+<div class="admonition be">
+<p class="admonition-title">In Belgium</p>
+<p>The work bonus has two parts, each a flat amount that fades to zero across a wage band (fully gone at 3,403.62 €). Its table changed five times in 2026.<sup id="fnref:c3-wb"><a class="footnote-ref" href="#fn:c3-wb">2</a></sup> The employer reduction is a quarterly formula with parameters published each quarter (Q4 2026 not yet published, <code>UNVERIFIED</code>).<sup id="fnref:c3-struct"><a class="footnote-ref" href="#fn:c3-struct">4</a></sup></p>
+</div>
+<p><strong>In Odoo.</strong> Odoo computes the same employee reduction for Jurgen. Its employer reduction is 395.91 €, because the calculator reuses the Q3 parameters for Q4.<sup id="fnref2:c3-odoo"><a class="footnote-ref" href="#fn:c3-odoo">7</a></sup></p>
+<div class="admonition pitfall">
+<p class="admonition-title">Common pitfall</p>
+<p>Computing the reference wage from "all remuneration of the month". In Belgium it leaves out the year-end premium, exit holiday pay and notice indemnities;<sup id="fnref2:c3-wb"><a class="footnote-ref" href="#fn:c3-wb">2</a></sup> including them takes Jurgen's reduction away in December. Every reduction defines the wage it tests.</p>
+</div>
+<h2 id="contributions-over-a-quarter-or-a-year">Contributions over a quarter or a year</h2>
+<p>A cap or scale is often defined over a <strong>longer period</strong> than the payslip: a yearly cap (US Social Security) or a quarterly scale (Belgium). Each payslip withholds an advance and a later one <strong>regularises</strong>.</p>
+<div class="formula">This payslip = contribution on the period's base so far − what earlier payslips of the period already took</div>
+
+<p>Belgium's example is the special social security contribution: a scale on the <strong>quarterly</strong> base, withheld monthly and fixed on the quarter's last payslip. It does not lower the taxable base.<sup id="fnref:c3-ssc"><a class="footnote-ref" href="#fn:c3-ssc">5</a></sup> Mélanie pays 36.24 € a month; Marie, above the top of the scale, pays the maximum, 60.94 €. In December, Mélanie's year-end premium raises her quarterly base and her December payslip catches up (Chapter 6).</p>
+<p><strong>In Odoo.</strong> Year-to-date and quarter-to-date rules read the employee's earlier payslips of the period.</p>
+<h2 id="employer-cost-melanie-jurgen-marie">Employer cost: Mélanie, Jurgen, Marie</h2>
+<figure>
+<p><img alt="Split of employer cost" src="assets/charts/be_ch3_cost_split.svg" /></p>
+<figcaption>What each employee costs MyVidangeCompany in October 2026, split by destination. Net pay is 85.62 % of the cost for Jurgen, 52.24 % for Mélanie and 48.47 % for Marie.</figcaption>
+</figure>
+<table class='payslip'>
+<thead>
+<tr>
+<th>October 2026</th>
+<th style="text-align: right;">Mélanie</th>
+<th style="text-align: right;">Jurgen</th>
+<th style="text-align: right;">Marie</th>
+</tr>
+</thead>
+<tbody>
+<tr class='earn'>
+<td><span class='pill earn'>Gross</span></td>
+<td style="text-align: right;">4,000.00</td>
+<td style="text-align: right;">2,300.00</td>
+<td style="text-align: right;">7,500.00</td>
+</tr>
+<tr class='emp'>
+<td><span class='pill emp'>Employer cost</span></td>
+<td style="text-align: right;">5,004.80</td>
+<td style="text-align: right;">2,502.97</td>
+<td style="text-align: right;">9,622.36</td>
+</tr>
+<tr class='net'>
+<td><span class='pill net'>Net pay</span></td>
+<td style="text-align: right;">2,614.26</td>
+<td style="text-align: right;">2,143.05</td>
+<td style="text-align: right;">4,663.91</td>
+</tr>
+<tr>
+<td>Employer cost per 1 € of net</td>
+<td style="text-align: right;">1.91</td>
+<td style="text-align: right;">1.17</td>
+<td style="text-align: right;">2.06</td>
+</tr>
+</tbody>
+</table>
+
+<p>Reductions make a low wage cheap, but they fade out: Jurgen's 100 € raise costs MyVidangeCompany 155.12 €, Mélanie's 125.12 €.<sup id="fnref:c3-calc"><a class="footnote-ref" href="#fn:c3-calc">6</a></sup> With a cap the picture flips at the top: above it, a raise costs only the gross.</p>
+<p><strong>In Odoo.</strong> Each contribution is a salary rule (<code>ONSS</code>, <code>EmpBonus.A</code>, <code>M.ONSS</code>, then employer rules after the net such as <code>ONSSEMPLOYER</code>). Rates and thresholds are dated <span class='pill odoo'>hr.rule.parameter</span> values (Chapter 21).</p>
+<h2 id="summary">Summary</h2>
+<ul>
+<li>Any contribution is a base, a rate, a floor, a cap, a payer and possible reductions. Learn the knobs once.</li>
+<li>A cap makes a contribution regressive above it; an uncapped contribution stays proportional.</li>
+<li>Belgium: one uncapped employee rate of 13.07 %; an employer rate that is a sum of dated components.</li>
+<li>Low-wage reductions fade out with a full-time reference wage: Jurgen pays 1.08 € instead of 300.61 €, and his 100 € raise costs 155.12 €.</li>
+<li>Caps and scales defined over a quarter or a year are withheld as advances and regularised later.</li>
+<li>Employer cost per euro of net: 1.17 for Jurgen, 1.91 for Mélanie, 2.06 for Marie.</li>
+</ul>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:c3-contrib">
+<p>ONSS, contributions (employee 13.07 %, branches, employer basic rate 19.88 %, wage moderation, 1.60 %, 108 %): <a href="https://www.socialsecurity.be/employer/instructions/dmfa/fr/latest/instructions/socialsecuritycontributions/contributions.html">https://www.socialsecurity.be/employer/instructions/dmfa/fr/latest/instructions/socialsecuritycontributions/contributions.html</a>.&#160;<a class="footnote-backref" href="#fnref:c3-contrib" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:c3-wb">
+<p>ONSS, work bonus (2026/3 instructions; earlier quarters under <code>/fr/2026-1/</code> and <code>/fr/2026-2/</code>): <a href="https://www.socialsecurity.be/employer/instructions/dmfa/fr/latest/instructions/deductions/workers_reductions/workbonus.html">https://www.socialsecurity.be/employer/instructions/dmfa/fr/latest/instructions/deductions/workers_reductions/workbonus.html</a>.&#160;<a class="footnote-backref" href="#fnref:c3-wb" title="Jump back to footnote 2 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:c3-wb" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:c3-asb">
+<p>ONSS, asbestos fund (collected in Q1, Q2 and Q3 2026): <a href="https://www.socialsecurity.be/employer/instructions/dmfa/fr/latest/instructions/special_contributions/other_specialcontributions/asbestosfunds.html">https://www.socialsecurity.be/employer/instructions/dmfa/fr/latest/instructions/special_contributions/other_specialcontributions/asbestosfunds.html</a>.&#160;<a class="footnote-backref" href="#fnref:c3-asb" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:c3-struct">
+<p>ONSS, structural reduction (Q3 2026; Q1 and Q2 under <code>/fr/2026-1/</code> and <code>/fr/2026-2/</code>): <a href="https://www.socialsecurity.be/employer/instructions/dmfa/fr/latest/instructions/deductions/structuralreduction_targetgroupreductions/structuralreduction.html">https://www.socialsecurity.be/employer/instructions/dmfa/fr/latest/instructions/deductions/structuralreduction_targetgroupreductions/structuralreduction.html</a>.&#160;<a class="footnote-backref" href="#fnref:c3-struct" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+<li id="fn:c3-ssc">
+<p>ONSS, special social security contribution: <a href="https://www.socialsecurity.be/employer/instructions/dmfa/fr/latest/instructions/special_contributions/other_specialcontributions/specialsocialsecuritycontribution.html">https://www.socialsecurity.be/employer/instructions/dmfa/fr/latest/instructions/special_contributions/other_specialcontributions/specialsocialsecuritycontribution.html</a>.&#160;<a class="footnote-backref" href="#fnref:c3-ssc" title="Jump back to footnote 5 in the text">&#8617;</a></p>
+</li>
+<li id="fn:c3-calc">
+<p>Independent calculator, <code>research/numbers_be_calc.md</code>, sections 2, 10.3 and 10.4.&#160;<a class="footnote-backref" href="#fnref:c3-calc" title="Jump back to footnote 6 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:c3-calc" title="Jump back to footnote 6 in the text">&#8617;</a></p>
+</li>
+<li id="fn:c3-odoo">
+<p>Payslips computed by Odoo master on the demo database, <code>research/numbers_be.md</code> (Marie, February 2026, for the rate lines; October 2026 summary).&#160;<a class="footnote-backref" href="#fnref:c3-odoo" title="Jump back to footnote 7 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:c3-odoo" title="Jump back to footnote 7 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></section><nav class='pager' aria-label='Previous and next chapter'><a class='pager-prev' rel='prev' href='chapter-02-gross-to-net.html'><small>Previous · Chapter 2</small><span>Gross to net</span></a><a class='pager-next' rel='next' href='chapter-04-withholding-tax.html'><small>Next · Chapter 4</small><span>Withholding tax</span></a></nav>
+</main>
+</div>
+<script src="js/site.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js" integrity="sha384-rbtjAdnIQE/aQJGEgXrVUlMibdfTSa4PQju4HDhN3sR2PmaKFzhEafuePsl9H/9I" crossorigin="anonymous"></script>
+<script>
+(async () => {
+  mermaid.initialize({
+    startOnLoad: false, theme: "base", securityLevel: "loose",
+    flowchart: { htmlLabels: true, curve: "basis", useMaxWidth: true },
+    sequence: { useMaxWidth: true, mirrorActors: false },
+    er: { useMaxWidth: true },
+    themeVariables: {
+      fontFamily: "Helvetica Neue, Helvetica, Arial", fontSize: "13px",
+      primaryColor: "#E9EDF2", primaryBorderColor: "#475569", primaryTextColor: "#1E293B",
+      lineColor: "#64748B", secondaryColor: "#F6F0F5", tertiaryColor: "#F8FAFC",
+      noteBkgColor: "#FFFAEB", noteBorderColor: "#C99A0E", actorBkg: "#E9EDF2", actorBorder: "#475569"
+    }
+  });
+  const nodes = Array.from(document.querySelectorAll("pre.mermaid"));
+  let i = 0;
+  for (const el of nodes) {
+    const src = el.textContent;
+    try {
+      const { svg } = await mermaid.render("m" + (i++), src);
+      el.outerHTML = svg;
+    } catch (e) {
+      el.outerHTML = `<div class="mermaid-error" data-src="${src.replace(/"/g, "'")}">Mermaid error: ${e.message}\n${src}</div>`;
+    }
+  }
+  window.__mermaidDone = true;
+})();
+</script>
+</body>
+</html>

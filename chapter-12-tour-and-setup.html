@@ -1,0 +1,430 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter 12: Tour and setup · Payroll, from Theory to Odoo Localization</title>
+<meta name="description" content="Gross-to-net in any country, the Odoo salary engine, and how to design, build and review a payroll localization.">
+<link rel="stylesheet" href="css/book.css">
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body class="chapter-page">
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+<button class="nav-toggle" type="button" aria-controls="sidebar" aria-expanded="false"><span aria-hidden="true">&#9776;</span> Contents</button>
+<a class="top-brand" href="index.html">Payroll, from Theory to Odoo Localization</a>
+</header>
+<div class="layout">
+<nav id="sidebar" class="sidebar" aria-label="Book contents">
+<a class="side-brand" href="index.html">Payroll, from Theory to Odoo Localization</a>
+<div class="search" role="search">
+<label for="search-input" class="sr-only">Search the book</label>
+<input id="search-input" type="search" placeholder="Search the book  ( / )" autocomplete="off" spellcheck="false" aria-controls="search-results">
+<div id="search-results" class="search-results" aria-live="polite"></div>
+</div>
+<ol class="nav"><li class='nav-part'><span class='nav-part-title'>Front matter</span><ol><li><a href='preface-before-you-start.html'><span class='nav-num'></span><span>Before you start</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part I · Payroll theory</span><ol><li><a href='chapter-01-what-payroll-is-and-why-it-is-hard.html'><span class='nav-num'>1.</span><span>What payroll is, and why it is hard</span></a></li><li><a href='chapter-02-gross-to-net.html'><span class='nav-num'>2.</span><span>Gross to net</span></a></li><li><a href='chapter-03-contributions-employee-and-employer.html'><span class='nav-num'>3.</span><span>Contributions: employee and employer</span></a></li><li><a href='chapter-04-withholding-tax.html'><span class='nav-num'>4.</span><span>Withholding tax</span></a></li><li><a href='chapter-05-time-proration-and-overtime.html'><span class='nav-num'>5.</span><span>Time, proration and overtime</span></a></li><li><a href='chapter-06-irregular-pay-corrections-and-leavers.html'><span class='nav-num'>6.</span><span>Irregular pay, corrections and leavers</span></a></li><li><a href='chapter-07-declarations-and-the-compliance-calendar.html'><span class='nav-num'>7.</span><span>Declarations and the compliance calendar</span></a></li><li><a href='chapter-08-accounting-for-payroll.html'><span class='nav-num'>8.</span><span>Accounting for payroll</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part II · Localization theory</span><ol><li><a href='chapter-09-what-varies-between-countries-and-what-doesnt.html'><span class='nav-num'>9.</span><span>What varies between countries, and what doesn&#x27;t</span></a></li><li><a href='chapter-10-researching-a-new-country.html'><span class='nav-num'>10.</span><span>Researching a new country</span></a></li><li><a href='chapter-11-laws-that-change-over-time.html'><span class='nav-num'>11.</span><span>Laws that change over time</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part III · Odoo payroll, hands-on</span><ol><li class='current' aria-current='page'><a href='chapter-12-tour-and-setup.html'><span class='nav-num'>12.</span><span>Tour and setup</span></a><ol class='nav-sections'><li><a href='#the-module-stack'>The module stack</a></li><li><a href='#the-payroll-app-menu-by-menu'>The Payroll app, menu by menu</a></li><li><a href='#the-dashboard-is-a-list-of-checks'>The dashboard is a list of checks</a></li><li><a href='#four-words-that-sound-alike'>Four words that sound alike</a></li><li><a href='#company-settings'>Company settings</a></li><li><a href='#missions'>Missions</a></li><li><a href='#summary'>Summary</a></li></ol></li><li><a href='chapter-13-employees-and-versions.html'><span class='nav-num'>13.</span><span>Employees and versions</span></a></li><li><a href='chapter-14-time-schedules-time-off-worked-days.html'><span class='nav-num'>14.</span><span>Time: schedules, time off, worked days</span></a></li><li><a href='chapter-15-pay-runs-and-payslips.html'><span class='nav-num'>15.</span><span>Pay runs and payslips</span></a></li><li><a href='chapter-16-accounting-and-payment.html'><span class='nav-num'>16.</span><span>Accounting and payment</span></a></li><li><a href='chapter-17-reports-declarations-and-a-leaver.html'><span class='nav-num'>17.</span><span>Reports, declarations and a leaver</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part IV · How the payroll engine works</span><ol><li><a href='chapter-18-the-engine-in-one-picture.html'><span class='nav-num'>18.</span><span>The engine in one picture</span></a></li><li><a href='chapter-19-structures-and-rules.html'><span class='nav-num'>19.</span><span>Structures and rules</span></a></li><li><a href='chapter-20-categories-how-rules-talk-to-each-other.html'><span class='nav-num'>20.</span><span>Categories: how rules talk to each other</span></a></li><li><a href='chapter-21-parameters-updates-and-safe-extensions.html'><span class='nav-num'>21.</span><span>Parameters, updates and safe extensions</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part V · Building a localization</span><ol><li><a href='chapter-22-a-template-for-any-localization-and-how-to-review-one.html'><span class='nav-num'>22.</span><span>A template for any localization, and how to review one</span></a></li></ol></li></ol>
+<a class="nav-pdf" href="payroll_book.pdf" download>Download the PDF</a>
+</nav>
+<div class="backdrop" hidden></div>
+<main id="main" class="content">
+<section class='chapter' id='c-31_ch12'><div class='opener'><div class='opener-band'><span class='opener-num'>Chapter 12</span><span class='opener-part'>Part III · Odoo payroll, hands-on</span></div><h1>Tour and setup</h1><p class='opener-sub'>Which modules make up payroll, what each menu holds, and where the company settings live</p><div class='opener-goals'><div class='goals-title'>After this chapter you can</div><ul><li>Name the modules of Odoo payroll and say what each one adds</li><li>Find your way in the Payroll app: dashboard, employees, time off, payslips, reporting, configuration</li><li>Tell a structure type, a structure, a salary rule and a rule parameter apart</li><li>Configure a company's payroll settings and read the dashboard warnings</li><li>Set up MyVidangeCompany's payroll from scratch on the master runbot</li></ul></div></div><p>It is your first morning on a payroll project. Someone gives you an empty Odoo and says: "Set up payroll for our company and run the year." Before you click anything you need a map: which module owns which screen, where the wage lives, where the law lives, and what the dashboard is telling you. This chapter is that map, and its missions set up the company you will pay all year.</p>
+<p>Part III follows the data. The employee's <strong>version</strong> (Chapter 13) says <em>what</em> to pay. <strong>Time</strong> (Chapter 14) says <em>how much of it was earned</em>. A <strong>pay run</strong> (Chapter 15) turns both into payslips. <strong>Accounting</strong> (Chapter 16) books and pays the result. <strong>Declarations</strong> (Chapter 17) tell the authorities.</p>
+<p>Each chapter ends with missions, played on one master runbot database that you build from an empty Odoo (the preface explains how). They follow MyVidangeCompany through 2026:</p>
+<p><strong>January setup, first run, a late correction</strong> → <strong>March Yannick joins</strong> → <strong>April sick day, unpaid day</strong> → <strong>May raise, overtime</strong> → <strong>June holiday-pay run</strong> → <strong>October Emma leaves, capstone month</strong></p>
+<div class="admonition pitfall">
+<p class="admonition-title">Common pitfall: the wrong company</p>
+<p>A runbot database also holds Odoo's demo companies. If the company switcher (top right) is not on <em>MyVidangeCompany</em>, the Payroll app shows other employees, structures and warnings, and no mission check will match.</p>
+</div>
+<h2 id="the-module-stack">The module stack</h2>
+<p>Payroll is not one module but a stack. Each layer adds one idea.</p>
+<table>
+<thead>
+<tr>
+<th>Module</th>
+<th>Adds</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>resource</code></td>
+<td>working schedules, public holidays, the time-interval engine</td>
+</tr>
+<tr>
+<td><code>hr</code></td>
+<td>employees and <span class='pill odoo'>hr.version</span>, the dated record of the employment terms</td>
+</tr>
+<tr>
+<td><code>hr_work_entry</code>, <code>hr_holidays</code></td>
+<td>time types, the work-entry generator, time off</td>
+</tr>
+<tr>
+<td><code>hr_payroll</code> (enterprise)</td>
+<td>structures, rules, parameters, payslips, pay runs, warnings, declarations</td>
+</tr>
+<tr>
+<td><code>hr_payroll_account</code>, <code>hr_payroll_account_iso20022</code></td>
+<td>journal entries from payslips; the SEPA bank file</td>
+</tr>
+<tr>
+<td><code>l10n_be_hr_payroll</code> (+ <code>_account</code>)</td>
+<td>the Belgian structures, rules, parameters, declarations and accounts</td>
+</tr>
+</tbody>
+</table>
+<div class='figure dot'><svg width="381pt" height="476pt"
+ viewBox="0.00 0.00 380.88 476.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 472)">
+<title>payroll_modules</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-472 376.88,-472 376.88,4 -4,4"/>
+<!-- resource -->
+<g id="node1" class="node">
+<title>resource</title>
+<path fill="#dbe9f6" stroke="black" d="M178.88,-468C178.88,-468 148.88,-468 148.88,-468 142.88,-468 136.88,-462 136.88,-456 136.88,-456 136.88,-444 136.88,-444 136.88,-438 142.88,-432 148.88,-432 148.88,-432 178.88,-432 178.88,-432 184.88,-432 190.88,-438 190.88,-444 190.88,-444 190.88,-456 190.88,-456 190.88,-462 184.88,-468 178.88,-468"/>
+<text text-anchor="middle" x="163.88" y="-446.12" font-family="Helvetica,sans-Serif" font-size="10.00">resource</text>
+</g>
+<!-- hr -->
+<g id="node2" class="node">
+<title>hr</title>
+<path fill="#dbe9f6" stroke="black" d="M178.88,-396C178.88,-396 148.88,-396 148.88,-396 142.88,-396 136.88,-390 136.88,-384 136.88,-384 136.88,-372 136.88,-372 136.88,-366 142.88,-360 148.88,-360 148.88,-360 178.88,-360 178.88,-360 184.88,-360 190.88,-366 190.88,-372 190.88,-372 190.88,-384 190.88,-384 190.88,-390 184.88,-396 178.88,-396"/>
+<text text-anchor="middle" x="163.88" y="-374.12" font-family="Helvetica,sans-Serif" font-size="10.00">hr</text>
+</g>
+<!-- hr&#45;&gt;resource -->
+<g id="edge1" class="edge">
+<title>hr&#45;&gt;resource</title>
+<path fill="none" stroke="black" d="M163.88,-396.3C163.88,-403.59 163.88,-412.27 163.88,-420.46"/>
+<polygon fill="black" stroke="black" points="160.38,-420.38 163.88,-430.38 167.38,-420.38 160.38,-420.38"/>
+</g>
+<!-- hr_work_entry -->
+<g id="node3" class="node">
+<title>hr_work_entry</title>
+<path fill="#dbe9f6" stroke="black" d="M190.62,-324C190.62,-324 137.12,-324 137.12,-324 131.12,-324 125.12,-318 125.12,-312 125.12,-312 125.12,-300 125.12,-300 125.12,-294 131.12,-288 137.12,-288 137.12,-288 190.62,-288 190.62,-288 196.62,-288 202.62,-294 202.62,-300 202.62,-300 202.62,-312 202.62,-312 202.62,-318 196.62,-324 190.62,-324"/>
+<text text-anchor="middle" x="163.88" y="-302.12" font-family="Helvetica,sans-Serif" font-size="10.00">hr_work_entry</text>
+</g>
+<!-- hr_work_entry&#45;&gt;hr -->
+<g id="edge2" class="edge">
+<title>hr_work_entry&#45;&gt;hr</title>
+<path fill="none" stroke="black" d="M163.88,-324.3C163.88,-331.59 163.88,-340.27 163.88,-348.46"/>
+<polygon fill="black" stroke="black" points="160.38,-348.38 163.88,-358.38 167.38,-348.38 160.38,-348.38"/>
+</g>
+<!-- hr_holidays -->
+<g id="node4" class="node">
+<title>hr_holidays</title>
+<path fill="#dbe9f6" stroke="black" d="M184.62,-252C184.62,-252 143.12,-252 143.12,-252 137.12,-252 131.12,-246 131.12,-240 131.12,-240 131.12,-228 131.12,-228 131.12,-222 137.12,-216 143.12,-216 143.12,-216 184.62,-216 184.62,-216 190.62,-216 196.62,-222 196.62,-228 196.62,-228 196.62,-240 196.62,-240 196.62,-246 190.62,-252 184.62,-252"/>
+<text text-anchor="middle" x="163.88" y="-230.12" font-family="Helvetica,sans-Serif" font-size="10.00">hr_holidays</text>
+</g>
+<!-- hr_holidays&#45;&gt;hr_work_entry -->
+<g id="edge3" class="edge">
+<title>hr_holidays&#45;&gt;hr_work_entry</title>
+<path fill="none" stroke="black" d="M163.88,-252.3C163.88,-259.59 163.88,-268.27 163.88,-276.46"/>
+<polygon fill="black" stroke="black" points="160.38,-276.38 163.88,-286.38 167.38,-276.38 160.38,-276.38"/>
+</g>
+<!-- hr_payroll -->
+<g id="node5" class="node">
+<title>hr_payroll</title>
+<path fill="#f6c6c6" stroke="black" stroke-width="2" d="M180.88,-180C180.88,-180 146.88,-180 146.88,-180 140.88,-180 134.88,-174 134.88,-168 134.88,-168 134.88,-156 134.88,-156 134.88,-150 140.88,-144 146.88,-144 146.88,-144 180.88,-144 180.88,-144 186.88,-144 192.88,-150 192.88,-156 192.88,-156 192.88,-168 192.88,-168 192.88,-174 186.88,-180 180.88,-180"/>
+<text text-anchor="middle" x="163.88" y="-158.12" font-family="Helvetica,sans-Serif" font-size="10.00">hr_payroll</text>
+</g>
+<!-- hr_payroll&#45;&gt;hr_holidays -->
+<g id="edge4" class="edge">
+<title>hr_payroll&#45;&gt;hr_holidays</title>
+<path fill="none" stroke="black" d="M163.88,-180.66C163.88,-187.76 163.88,-196.14 163.88,-204.08"/>
+<polygon fill="black" stroke="black" points="160.38,-204.07 163.88,-214.07 167.38,-204.07 160.38,-204.07"/>
+</g>
+<!-- hr_payroll_account -->
+<g id="node6" class="node">
+<title>hr_payroll_account</title>
+<path fill="#efe0f2" stroke="black" d="M85.75,-108C85.75,-108 12,-108 12,-108 6,-108 0,-102 0,-96 0,-96 0,-84 0,-84 0,-78 6,-72 12,-72 12,-72 85.75,-72 85.75,-72 91.75,-72 97.75,-78 97.75,-84 97.75,-84 97.75,-96 97.75,-96 97.75,-102 91.75,-108 85.75,-108"/>
+<text text-anchor="middle" x="48.88" y="-86.12" font-family="Helvetica,sans-Serif" font-size="10.00">hr_payroll_account</text>
+</g>
+<!-- hr_payroll_account&#45;&gt;hr_payroll -->
+<g id="edge5" class="edge">
+<title>hr_payroll_account&#45;&gt;hr_payroll</title>
+<path fill="none" stroke="black" d="M77.6,-108.48C91.79,-117.12 109.13,-127.67 124.53,-137.05"/>
+<polygon fill="black" stroke="black" points="122.66,-140.01 133.03,-142.22 126.3,-134.03 122.66,-140.01"/>
+</g>
+<!-- accountant -->
+<g id="node10" class="node">
+<title>accountant</title>
+<path fill="#eeeeee" stroke="black" d="M68.88,-180C68.88,-180 28.88,-180 28.88,-180 22.88,-180 16.88,-174 16.88,-168 16.88,-168 16.88,-156 16.88,-156 16.88,-150 22.88,-144 28.88,-144 28.88,-144 68.88,-144 68.88,-144 74.88,-144 80.88,-150 80.88,-156 80.88,-156 80.88,-168 80.88,-168 80.88,-174 74.88,-180 68.88,-180"/>
+<text text-anchor="middle" x="48.88" y="-158.12" font-family="Helvetica,sans-Serif" font-size="10.00">accountant</text>
+</g>
+<!-- hr_payroll_account&#45;&gt;accountant -->
+<g id="edge6" class="edge">
+<title>hr_payroll_account&#45;&gt;accountant</title>
+<path fill="none" stroke="black" d="M48.88,-108.3C48.88,-115.59 48.88,-124.27 48.88,-132.46"/>
+<polygon fill="black" stroke="black" points="45.38,-132.38 48.88,-142.38 52.38,-132.38 45.38,-132.38"/>
+</g>
+<!-- hr_payroll_account_iso20022 -->
+<g id="node7" class="node">
+<title>hr_payroll_account_iso20022</title>
+<path fill="#efe0f2" stroke="black" d="M360.88,-108C360.88,-108 242.88,-108 242.88,-108 236.88,-108 230.88,-102 230.88,-96 230.88,-96 230.88,-84 230.88,-84 230.88,-78 236.88,-72 242.88,-72 242.88,-72 360.88,-72 360.88,-72 366.88,-72 372.88,-78 372.88,-84 372.88,-84 372.88,-96 372.88,-96 372.88,-102 366.88,-108 360.88,-108"/>
+<text text-anchor="middle" x="301.88" y="-86.12" font-family="Helvetica,sans-Serif" font-size="10.00">hr_payroll_account_iso20022</text>
+</g>
+<!-- hr_payroll_account_iso20022&#45;&gt;hr_payroll -->
+<g id="edge7" class="edge">
+<title>hr_payroll_account_iso20022&#45;&gt;hr_payroll</title>
+<path fill="none" stroke="black" d="M267.41,-108.48C248.1,-118.28 223.93,-130.54 203.8,-140.75"/>
+<polygon fill="black" stroke="black" points="202.38,-137.54 195.04,-145.19 205.55,-143.79 202.38,-137.54"/>
+</g>
+<!-- account_iso20022 -->
+<g id="node11" class="node">
+<title>account_iso20022</title>
+<path fill="#eeeeee" stroke="black" d="M337.25,-180C337.25,-180 266.5,-180 266.5,-180 260.5,-180 254.5,-174 254.5,-168 254.5,-168 254.5,-156 254.5,-156 254.5,-150 260.5,-144 266.5,-144 266.5,-144 337.25,-144 337.25,-144 343.25,-144 349.25,-150 349.25,-156 349.25,-156 349.25,-168 349.25,-168 349.25,-174 343.25,-180 337.25,-180"/>
+<text text-anchor="middle" x="301.88" y="-158.12" font-family="Helvetica,sans-Serif" font-size="10.00">account_iso20022</text>
+</g>
+<!-- hr_payroll_account_iso20022&#45;&gt;account_iso20022 -->
+<g id="edge8" class="edge">
+<title>hr_payroll_account_iso20022&#45;&gt;account_iso20022</title>
+<path fill="none" stroke="black" d="M301.88,-108.3C301.88,-115.59 301.88,-124.27 301.88,-132.46"/>
+<polygon fill="black" stroke="black" points="298.38,-132.38 301.88,-142.38 305.38,-132.38 298.38,-132.38"/>
+</g>
+<!-- l10n_be_hr_payroll -->
+<g id="node8" class="node">
+<title>l10n_be_hr_payroll</title>
+<path fill="#efe0f2" stroke="black" d="M200.38,-108C200.38,-108 127.38,-108 127.38,-108 121.38,-108 115.38,-102 115.38,-96 115.38,-96 115.38,-84 115.38,-84 115.38,-78 121.38,-72 127.38,-72 127.38,-72 200.38,-72 200.38,-72 206.38,-72 212.38,-78 212.38,-84 212.38,-84 212.38,-96 212.38,-96 212.38,-102 206.38,-108 200.38,-108"/>
+<text text-anchor="middle" x="163.88" y="-86.12" font-family="Helvetica,sans-Serif" font-size="10.00">l10n_be_hr_payroll</text>
+</g>
+<!-- l10n_be_hr_payroll&#45;&gt;hr_payroll -->
+<g id="edge9" class="edge">
+<title>l10n_be_hr_payroll&#45;&gt;hr_payroll</title>
+<path fill="none" stroke="black" d="M163.88,-108.3C163.88,-115.48 163.88,-124.01 163.88,-132.1"/>
+<polygon fill="black" stroke="black" points="160.38,-131.9 163.88,-141.9 167.38,-131.9 160.38,-131.9"/>
+</g>
+<!-- l10n_be_hr_payroll_account -->
+<g id="node9" class="node">
+<title>l10n_be_hr_payroll_account</title>
+<path fill="#efe0f2" stroke="black" d="M162.25,-36C162.25,-36 49.5,-36 49.5,-36 43.5,-36 37.5,-30 37.5,-24 37.5,-24 37.5,-12 37.5,-12 37.5,-6 43.5,0 49.5,0 49.5,0 162.25,0 162.25,0 168.25,0 174.25,-6 174.25,-12 174.25,-12 174.25,-24 174.25,-24 174.25,-30 168.25,-36 162.25,-36"/>
+<text text-anchor="middle" x="105.88" y="-14.12" font-family="Helvetica,sans-Serif" font-size="10.00">l10n_be_hr_payroll_account</text>
+</g>
+<!-- l10n_be_hr_payroll_account&#45;&gt;hr_payroll_account -->
+<g id="edge10" class="edge">
+<title>l10n_be_hr_payroll_account&#45;&gt;hr_payroll_account</title>
+<path fill="none" stroke="black" d="M91.79,-36.3C85.23,-44.36 77.29,-54.11 70.03,-63.02"/>
+<polygon fill="black" stroke="black" points="67.36,-60.76 63.76,-70.72 72.79,-65.18 67.36,-60.76"/>
+</g>
+<!-- l10n_be_hr_payroll_account&#45;&gt;l10n_be_hr_payroll -->
+<g id="edge11" class="edge">
+<title>l10n_be_hr_payroll_account&#45;&gt;l10n_be_hr_payroll</title>
+<path fill="none" stroke="black" d="M120.21,-36.3C126.95,-44.44 135.13,-54.31 142.58,-63.3"/>
+<polygon fill="black" stroke="black" points="139.66,-65.26 148.74,-70.73 145.05,-60.8 139.66,-65.26"/>
+</g>
+</g>
+</svg>
+</div>
+<p>Arrows point to what a module depends on. The localization sits <em>on top of</em> <code>hr_payroll</code> and never replaces it.</p>
+<h2 id="the-payroll-app-menu-by-menu">The Payroll app, menu by menu</h2>
+<figure>
+<p><img alt="Payroll dashboard" src="assets/screenshots/be_dashboard.png" /></p>
+<figcaption>The Payroll dashboard of MyVidangeCompany (October 2026, from the full demo database). ① <b>Payslips</b>, where pay runs and payslips live. ② <b>Reporting</b>, where the country's declarations hang. ③ <b>Configuration</b>, where schedules, structures, rules and settings live. The cards are warnings: purple ones are onboarding to-dos, blue ones information, orange ones problems to fix.</figcaption>
+</figure>
+<table>
+<thead>
+<tr>
+<th>Menu</th>
+<th>Opens</th>
+<th>Chapter</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Employees</td>
+<td>the employee form and its <em>Payroll</em> tab (<span class='pill odoo'>hr.version</span>)</td>
+<td>13</td>
+</tr>
+<tr>
+<td>Time Offs</td>
+<td>the absences of each employee (<span class='pill odoo'>hr.leave</span>)</td>
+<td>14</td>
+</tr>
+<tr>
+<td>Payslips &gt; Pay Runs / Payslips</td>
+<td><span class='pill odoo'>hr.payslip.run</span>, <span class='pill odoo'>hr.payslip</span></td>
+<td>15</td>
+</tr>
+<tr>
+<td>Reporting</td>
+<td>pivots on payslip lines, and the country's declarations</td>
+<td>17</td>
+</tr>
+<tr>
+<td>Configuration &gt; Settings, Company data</td>
+<td>the company's payroll settings</td>
+<td>this chapter</td>
+</tr>
+<tr>
+<td>Configuration &gt; Salary</td>
+<td>structures, rules, parameters, categories</td>
+<td>Part IV</td>
+</tr>
+</tbody>
+</table>
+<p>Configuration is for payroll <strong>managers</strong>; payroll <strong>officers</strong> see the other menus.</p>
+<h2 id="the-dashboard-is-a-list-of-checks">The dashboard is a list of checks</h2>
+<p>Every card on the dashboard is a record of <span class='pill odoo'>hr.payroll.warning</span>: a name, a colour, and a check written as a domain or a few lines of Python. The dashboard runs the checks for the current company and shows those that find something; the card's button opens the records found. Some warnings also <strong>block validation</strong> of the payslips they concern (Chapter 15).</p>
+<figure>
+<p><img alt="A warning on the dashboard" src="assets/screenshots/be_warning_jc.png" /></p>
+<figcaption>A check catching a data problem: ① the card "Employees without a Joint Committee" (one employee is missing the Belgian sector field, see the box below) and ② its <b>Show Employees</b> button, which opens exactly the employees the check found.</figcaption>
+</figure>
+<div class="admonition key">
+<p class="admonition-title">Key idea: a warning is configuration, not code</p>
+<p>Because a warning is a record, a localization adds its legal checks as data, and a customer can add their own under <em>Configuration &gt; Dashboard &gt; Warnings</em>. Chapter 21 places warnings among the records a localization ships.</p>
+</div>
+<h2 id="four-words-that-sound-alike">Four words that sound alike</h2>
+<p>Four Odoo objects decide how a payslip is computed: the <strong>structure type</strong>, the <strong>structure</strong>, the <strong>salary rule</strong> and the <strong>rule parameter</strong>. Their names sound alike and everyone mixes them up at first. The easiest way to keep them apart is to follow one payslip and ask: <em>how does Odoo know what to compute for Mélanie in October?</em></p>
+<div class="nest" markdown="0">
+<div class="nest-from">Mélanie's <b>version</b> (her contract terms) says: pay category <b>CP200 BE</b></div>
+<div class="nest-main">
+<div class="nbox n-type"><div class="nh"><span class="nn">1</span>Structure type · <b>CP200 BE</b><i>what kind of pay: monthly, fixed wage</i></div>
+<div class="nrow">
+<div class="nbox n-struct"><div class="nh"><span class="nn">2</span>Structure · <b>Monthly Pay (BE)</b><i>the regular monthly payslip · the type's default</i></div>
+<div class="nrules">
+<div class="nbox n-rule"><span class="nn">3</span>Rule <b>BASIC</b><i>basic salary</i></div>
+<div class="nbox n-rule"><span class="nn">3</span>Rule <b>ONSS</b><i>social security</i></div>
+<div class="nbox n-rule tax"><span class="nn">3</span>Rule <b>P.P</b><i>withholding tax</i></div>
+<div class="nmore">… 213 rules</div>
+</div></div>
+<div class="nothers"><div class="nbox n-struct small">Double holiday pay</div><div class="nbox n-struct small">13th month</div><div class="nbox n-struct small">Termination fees</div><i>other structures of the same type, for special payslips</i></div>
+</div></div>
+<div class="nshelf"><div class="nh"><span class="nn">4</span>Rule parameter<i>a shelf of dated numbers, outside any structure</i></div>
+<div class="nval"><b>Professional expenses cap</b><span>2025: 5,930</span><span>2026: 6,070</span></div>
+<div class="nread">← the withholding rules read it by its code, at the payslip's date</div>
+</div>
+</div>
+</div>
+
+<p>Read the figure in order of the numbers:</p>
+<ol>
+<li><strong>The structure type is the kind of pay.</strong> It is stored on the employee's version and answers <em>who is paid how, and how often</em>: here, a monthly fixed wage under the sector agreement CP 200. Change an employee's type and a different set of rules runs, without touching a single rule.</li>
+<li><strong>A structure is the recipe for one kind of payslip.</strong> The type has a <strong>default</strong> structure for the regular monthly payslip, and others for payslips that have their own tax treatment: double holiday pay, the 13<sup>th</sup> month, termination fees. Each runs on its own payslip (Chapters 15 and 17).</li>
+<li><strong>A salary rule computes one line of the payslip</strong>: when it applies (its condition), how much (its formula) and which totals it feeds (its categories). The regular Belgian structure has 213 of them; <code>P.P</code> computes the withholding tax.</li>
+<li><strong>A rule parameter holds a legal number with its dates.</strong> A rule never writes the law's numbers in its code: the withholding rules ask for the parameter by its code, and get the value valid on the payslip's date, 6,070 in 2026. Next year's law is a new value, not a new rule (Chapters 11 and 21).</li>
+</ol>
+<div class="admonition key">
+<p class="admonition-title">Key idea</p>
+<p>Each object changes for a different reason: the <strong>type</strong> when the employee's kind of pay changes, a <strong>structure</strong> when a new kind of payslip is needed, a <strong>rule</strong> when the calculation method changes, a <strong>parameter</strong> when the law's numbers change. Keeping them apart is what lets a yearly law change be a one-line data update.</p>
+</div>
+<figure>
+<p><img alt="The Monthly Pay (BE) structure" src="assets/screenshots/be_structure_bemonthly.png" /></p>
+<figcaption>Configuration &gt; Salary &gt; Structures &gt; <i>Monthly Pay (BE)</i>. ① the structure name. ② the <b>Salary Rules</b> tab, with the rules and their categories. ③ the <b>BASIC</b> rule. The header holds the type (CP200 BE), <i>Use Worked Day Lines</i> (this structure is driven by time), the scheduled pay and the salary journal.</figcaption>
+</figure>
+<figure>
+<p><img alt="A dated rule parameter" src="assets/screenshots/be_param.png" /></p>
+<figcaption>Configuration &gt; Salary &gt; Rule Parameters, the notice length after a dismissal: ① its code, which rules use to read it, ② the value valid from 1 August and ③ the value valid from 1 January 2020. A payslip reads the value in force at its end date (Chapters 11 and 21).</figcaption>
+</figure>
+<div class="admonition world">
+<p class="admonition-title">Around the world</p>
+<ul>
+<li><strong>Belgium, UAE, Saudi Arabia</strong>: monthly structure types.</li>
+<li><strong>Philippines</strong>: a semi-monthly type.</li>
+<li><strong>Hong Kong</strong>: an extra weekly type for casual employees.</li>
+<li><strong>India</strong>: a second type for interns.</li>
+<li><strong>Belgium, Luxembourg</strong>: several structures per type, because holiday pay, bonuses and termination are separate payslips.</li>
+</ul>
+</div>
+<h2 id="company-settings">Company settings</h2>
+<p><em>Configuration &gt; Settings</em> holds the operational choices; <em>Configuration &gt; Company data</em> holds the legal identity of the employer, as a dated record.</p>
+<figure>
+<p><img alt="Payroll settings" src="assets/screenshots/be_settings.png" /></p>
+<figcaption>Configuration &gt; Settings for MyVidangeCompany. <b>Payroll</b>: expiry notices, year-to-date reset date, when payslips are sent, payroll closing date. <b>Accounting</b>: <i>Payroll SEPA</i> and <i>Anonymize Journal Entries</i>. <b>Belgian Localization</b>: the social security office connection and the employer's registration date. <b>Time Off</b>: <i>Deferred Time Off</i> with its responsible.</figcaption>
+</figure>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>YTD Reset Date</td>
+<td>the day the year-to-date totals restart</td>
+</tr>
+<tr>
+<td>Send payslips to employees</td>
+<td>when the PDF is e-mailed: when confirmed, when paid, never</td>
+</tr>
+<tr>
+<td>Payroll SEPA</td>
+<td>installs the SEPA module, so the <em>Pay</em> button can produce a bank file</td>
+</tr>
+<tr>
+<td>Anonymize Journal Entries</td>
+<td>one journal entry per pay run instead of one per payslip</td>
+</tr>
+<tr>
+<td>Deferred Time Off &gt; Responsible</td>
+<td>who is warned when time off arrives after its month was validated (Chapter 14)</td>
+</tr>
+</tbody>
+</table>
+<p><em>Company data</em> (<span class='pill odoo'>payroll.config.settings</span>) has an <em>Effective Date</em>. A localization stores there the employer data the law attaches to a period: registration numbers, sector, size class. A 2025 payslip still reads the 2025 configuration after the company changes it.</p>
+<div class="admonition be">
+<p class="admonition-title">In Belgium</p>
+<p>The localization installs its rules, structures and warnings <strong>archived</strong>. Choosing the employer's sector agreement (the <em>joint committee</em>, CP 200 for most office employees) in <em>Company data</em> activates the ones that apply. A chart of accounts loaded before that leaves those rules without accounts (Chapter 22 gives the fix), which is why Mission 12.2 chooses the committee first.</p>
+</div>
+<div class="admonition practice">
+<p class="admonition-title">In practice: the order of setup for a new company</p>
+<ol>
+<li>Install the localization, then fill <em>Company data</em> before loading the chart of accounts.</li>
+<li>Check the structure type, the working schedule and the public holidays (Chapter 14).</li>
+<li>Check the salary journal on the structure and the accounts on the rules (Chapter 16).</li>
+<li>Create employees and their versions (Chapter 13), then the first pay run (Chapter 15).</li>
+<li>Read the dashboard after each step: a card that does not go away is a step you skipped.</li>
+</ol>
+</div>
+<h2 id="missions">Missions</h2>
+<div class="admonition mission">
+<p class="admonition-title">Mission 12.1 · Install Payroll and create the company ★</p>
+<p><strong>Situation.</strong> MyVidangeCompany (Rue des Brasseurs 10, 5000 Namur, Belgium, VAT BE0765432146) wants to run its payroll in Odoo. Your runbot database is still empty (Mission 0.1).</p>
+<p><strong>Your goal.</strong> Install Payroll, create MyVidangeCompany and switch to it.</p>
+<p><strong>Check.</strong> The company switcher lists <em>MyVidangeCompany</em>, and <em>Apps</em> shows <strong>Belgium - Payroll</strong> as installed, although you never clicked it.</p>
+<details class="hint" open="open">
+<summary>Hint</summary>
+<p>Install <em>Payroll</em> only, not <em>Accounting</em> yet (see Mission 12.2). Companies live in the <em>Settings</em> app; a Belgian company makes Odoo install the Belgian payroll module by itself.</p>
+</details>
+</div>
+<div class="admonition mission">
+<p class="admonition-title">Mission 12.2 · Switch on the Belgian localization ★★★</p>
+<p><strong>Situation.</strong> The accountant sends the employer data: social security number 119753095, employer category 010, joint committee 200, 5 to 9 employees, revenue code 1293, payroll valid since 1 January 2019. Staff work 38 hours a week, Monday to Friday, 8:00–12:00 and 12:30–16:06, and payroll starts in January 2026.</p>
+<p><strong>Your goal.</strong> Fill <em>Company data</em>, install Accounting with the Belgian chart of accounts, make <em>Standard 38 hours/week</em> the company's schedule and load the 2026 public holidays.</p>
+<p><strong>Check.</strong> <em>Monthly Pay (BE)</em> uses the journal <em>Salaries</em> and its rule <em>Net Salary</em> credits <strong>455000 Remuneration</strong>; the currency is <strong>EUR</strong>; the rule parameters include the <em>ONSS Rates: Employer Class (010) …</em> lines (<strong>97</strong> when this book was played). The schedule has <strong>38 hours a week</strong>, 7.6 hours a day, work time rate <strong>100 %</strong>; the company has <strong>10 public holidays</strong> in 2026.</p>
+<details class="hint" open="open">
+<summary>Hint</summary>
+<p>Order matters: the joint committee before the chart (the <em>Fiscal Localization</em> of the Accounting settings), and a company-data <em>Effective Date</em> of 01/01/2019. The rates download a few seconds after you save; if none appear, or you play after 2026, use <em>Configuration &gt; Belgium &gt; Import ONSS Rates</em> (debug mode), 2026, Q1. A new schedule takes the 40-hour one as <em>Reference Calendar</em>: empty that field, or everybody is 95 % part-time.</p>
+</details>
+</div>
+<div class="admonition mission">
+<p class="admonition-title">Mission 12.3 · Configure MyVidangeCompany's settings ★</p>
+<p><strong>Situation.</strong> MyVidangeCompany registered as an employer with the social security office on 1 October 2019; the payroll manager (Mitchell Admin) wants to hear about late time off; salaries will be paid by SEPA transfer.</p>
+<p><strong>Your goal.</strong> Record the three facts in the payroll settings.</p>
+<p><strong>Check.</strong> The card <em>NSSO immatriculation date not set</em> is gone, the dashboard shows <strong>3 cards</strong> (<em>Choose your pay schedule</em>, <em>Configure your payslip layout</em>, <em>Create your first employee</em>) and <strong>SEPA Payments for Payroll</strong> is installed.</p>
+<details class="hint" open="open">
+<summary>Hint</summary>
+<p>All three are on one settings page, in three blocks. The SEPA checkbox installs a module, so the page reloads.</p>
+</details>
+</div>
+<div class="admonition mission">
+<p class="admonition-title">Mission 12.4 · Find where the law lives ★★</p>
+<p><strong>Situation.</strong> A developer from another office asks: "How many rules does the regular monthly structure run, and what is the 2026 cap on flat-rate professional expenses?"</p>
+<p><strong>Your goal.</strong> Answer both from the screens, without reading code.</p>
+<p><strong>Check.</strong> <em>Monthly Pay (BE)</em> has <strong>213</strong> salary rules; <em>CP200: Maximum Professional Flat Fee</em> is <strong>6,070.00</strong> from 1 January 2026 (5,930.00 from 1 January 2025).</p>
+<details class="hint" open="open">
+<summary>Hint</summary>
+<p>Both answers are under <em>Configuration &gt; Salary</em>; search the parameters for "Professional".</p>
+</details>
+</div>
+<h2 id="summary">Summary</h2>
+<ul>
+<li>Payroll is a stack: <code>resource</code>, <code>hr</code> (with <span class='pill odoo'>hr.version</span>), work entries and time off, <code>hr_payroll</code>, then accounting, SEPA and the localization on top.</li>
+<li>The Payroll app has six menus: Dashboard, Employees, Time Offs, Payslips, Reporting and Configuration.</li>
+<li>Dashboard cards are <span class='pill odoo'>hr.payroll.warning</span> records: a check, a colour, a button to the records found; some block validation.</li>
+<li>Structure type (kind of pay) &gt; structure (set of rules) &gt; salary rule (one line) &gt; rule parameter (a dated number).</li>
+<li><em>Settings</em> holds operational choices; <em>Company data</em> holds the employer's legal identity as a dated record.</li>
+<li>In Belgium, choosing the joint committee activates the localization's rules: do it before loading the chart of accounts.</li>
+</ul></section><nav class='pager' aria-label='Previous and next chapter'><a class='pager-prev' rel='prev' href='chapter-11-laws-that-change-over-time.html'><small>Previous · Chapter 11</small><span>Laws that change over time</span></a><a class='pager-next' rel='next' href='chapter-13-employees-and-versions.html'><small>Next · Chapter 13</small><span>Employees and versions</span></a></nav>
+</main>
+</div>
+<script src="js/site.js"></script>
+
+</body>
+</html>

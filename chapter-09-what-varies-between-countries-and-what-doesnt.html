@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter 9: What varies between countries, and what doesn&#x27;t · Payroll, from Theory to Odoo Localization</title>
+<meta name="description" content="Gross-to-net in any country, the Odoo salary engine, and how to design, build and review a payroll localization.">
+<link rel="stylesheet" href="css/book.css">
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body class="chapter-page">
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+<button class="nav-toggle" type="button" aria-controls="sidebar" aria-expanded="false"><span aria-hidden="true">&#9776;</span> Contents</button>
+<a class="top-brand" href="index.html">Payroll, from Theory to Odoo Localization</a>
+</header>
+<div class="layout">
+<nav id="sidebar" class="sidebar" aria-label="Book contents">
+<a class="side-brand" href="index.html">Payroll, from Theory to Odoo Localization</a>
+<div class="search" role="search">
+<label for="search-input" class="sr-only">Search the book</label>
+<input id="search-input" type="search" placeholder="Search the book  ( / )" autocomplete="off" spellcheck="false" aria-controls="search-results">
+<div id="search-results" class="search-results" aria-live="polite"></div>
+</div>
+<ol class="nav"><li class='nav-part'><span class='nav-part-title'>Front matter</span><ol><li><a href='preface-before-you-start.html'><span class='nav-num'></span><span>Before you start</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part I · Payroll theory</span><ol><li><a href='chapter-01-what-payroll-is-and-why-it-is-hard.html'><span class='nav-num'>1.</span><span>What payroll is, and why it is hard</span></a></li><li><a href='chapter-02-gross-to-net.html'><span class='nav-num'>2.</span><span>Gross to net</span></a></li><li><a href='chapter-03-contributions-employee-and-employer.html'><span class='nav-num'>3.</span><span>Contributions: employee and employer</span></a></li><li><a href='chapter-04-withholding-tax.html'><span class='nav-num'>4.</span><span>Withholding tax</span></a></li><li><a href='chapter-05-time-proration-and-overtime.html'><span class='nav-num'>5.</span><span>Time, proration and overtime</span></a></li><li><a href='chapter-06-irregular-pay-corrections-and-leavers.html'><span class='nav-num'>6.</span><span>Irregular pay, corrections and leavers</span></a></li><li><a href='chapter-07-declarations-and-the-compliance-calendar.html'><span class='nav-num'>7.</span><span>Declarations and the compliance calendar</span></a></li><li><a href='chapter-08-accounting-for-payroll.html'><span class='nav-num'>8.</span><span>Accounting for payroll</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part II · Localization theory</span><ol><li class='current' aria-current='page'><a href='chapter-09-what-varies-between-countries-and-what-doesnt.html'><span class='nav-num'>9.</span><span>What varies between countries, and what doesn&#x27;t</span></a><ol class='nav-sections'><li><a href='#the-four-layers'>The four layers</a></li><li><a href='#what-is-the-same-everywhere'>What is the same everywhere</a></li><li><a href='#the-axes-of-variation'>The axes of variation</a></li><li><a href='#the-comparison-grid'>The comparison grid</a></li><li><a href='#summary'>Summary</a></li></ol></li><li><a href='chapter-10-researching-a-new-country.html'><span class='nav-num'>10.</span><span>Researching a new country</span></a></li><li><a href='chapter-11-laws-that-change-over-time.html'><span class='nav-num'>11.</span><span>Laws that change over time</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part III · Odoo payroll, hands-on</span><ol><li><a href='chapter-12-tour-and-setup.html'><span class='nav-num'>12.</span><span>Tour and setup</span></a></li><li><a href='chapter-13-employees-and-versions.html'><span class='nav-num'>13.</span><span>Employees and versions</span></a></li><li><a href='chapter-14-time-schedules-time-off-worked-days.html'><span class='nav-num'>14.</span><span>Time: schedules, time off, worked days</span></a></li><li><a href='chapter-15-pay-runs-and-payslips.html'><span class='nav-num'>15.</span><span>Pay runs and payslips</span></a></li><li><a href='chapter-16-accounting-and-payment.html'><span class='nav-num'>16.</span><span>Accounting and payment</span></a></li><li><a href='chapter-17-reports-declarations-and-a-leaver.html'><span class='nav-num'>17.</span><span>Reports, declarations and a leaver</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part IV · How the payroll engine works</span><ol><li><a href='chapter-18-the-engine-in-one-picture.html'><span class='nav-num'>18.</span><span>The engine in one picture</span></a></li><li><a href='chapter-19-structures-and-rules.html'><span class='nav-num'>19.</span><span>Structures and rules</span></a></li><li><a href='chapter-20-categories-how-rules-talk-to-each-other.html'><span class='nav-num'>20.</span><span>Categories: how rules talk to each other</span></a></li><li><a href='chapter-21-parameters-updates-and-safe-extensions.html'><span class='nav-num'>21.</span><span>Parameters, updates and safe extensions</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part V · Building a localization</span><ol><li><a href='chapter-22-a-template-for-any-localization-and-how-to-review-one.html'><span class='nav-num'>22.</span><span>A template for any localization, and how to review one</span></a></li></ol></li></ol>
+<a class="nav-pdf" href="payroll_book.pdf" download>Download the PDF</a>
+</nav>
+<div class="backdrop" hidden></div>
+<main id="main" class="content">
+<section class='chapter' id='c-21_ch09'><div class='opener'><div class='opener-band'><span class='opener-num'>Chapter 9</span><span class='opener-part'>Part II · Localization theory</span></div><h1>What varies between countries, and what doesn't</h1><p class='opener-sub'>Four layers, ten axes of variation, and a comparison grid of Odoo's localizations read from the code</p><div class='opener-goals'><div class='goals-title'>After this chapter you can</div><ul><li>Place any payroll fact in one of four layers: framework, country, company, employee</li><li>Name what every country shares and the axes along which countries differ</li><li>Read the comparison grid and say what each module teaches</li><li>Recognise the four places a rate can live: XML parameters, downloaded parameters, customer-maintained records, contract fields</li></ul></div></div><p>Open three payslips in Odoo: Monterrey, Sydney, Namur. Each has earnings, contributions, a tax line and a net, computed by the same engine. Yet the Mexican one caps its social-security wage in a legal reference unit, the Australian one has no employee contribution, and the Belgian one annualises the month. Before you write or review a localization, know which part Odoo gives you and which part is yours to build.</p>
+<h2 id="the-four-layers">The four layers</h2>
+<p>Every payroll fact lives in one of four layers. The question to ask is: <em>who decides this value, and how often does it change?</em></p>
+<div class="layers" markdown="0">
+<div class="lstack">
+<div class="layer emp"><div class="lname">Employee</div><div class="lbody"><b>HR, per person</b> · changes at hire, raise, family event, exit<br>e.g. wage, family situation, company car<span class="lodoo">hr.version fields</span></div></div>
+<div class="layer comp"><div class="lname">Company</div><div class="lbody"><b>The employer or its accountant</b> · changes rarely<br>e.g. pay frequency, sector agreement, bank and journals<span class="lodoo">settings, company fields</span></div></div>
+<div class="layer ctry"><div class="lname">Country</div><div class="lbody"><b>The legislator, then the localization team</b> · changes yearly, sometimes mid-year<br>e.g. contribution rates, tax scale, declarations<span class="lodoo">l10n_xx_hr_payroll</span></div></div>
+<div class="layer fw"><div class="lname">Framework</div><div class="lbody"><b>Odoo R&amp;D</b> · changes with each release<br>e.g. payslips, the rule engine, dated parameters, pay runs<span class="lodoo">hr_payroll</span></div></div>
+</div>
+</div>
+
+<p>Each layer is built on the one below it: a company configures what its country's module allows, and an employee's values fill fields the country declared. When a value has to go somewhere, put it in the <strong>highest layer where it is still true</strong>: a legal rate in the country, an employer's choice in the company, a person's situation on the employee.</p>
+<h2 id="what-is-the-same-everywhere">What is the same everywhere</h2>
+<p>However exotic a country's payroll looks, it is built from the same five ideas. Odoo implements each idea <strong>once</strong>, in the framework, and every localization reuses it. Learn these five and you can open any country module and know where to look.</p>
+<div class="ideas" markdown="0">
+<div class="idea"><div class="ititle">1 · Time becomes money</div><div class="ibody">A month of salary pays a month of work. Days not worked, paid leave and overtime change the amount, each at its own rate.</div><div class="ipiece"><span>Framework piece</span>work entries and worked days<em>Chapters 5, 14</em></div></div>
+<div class="idea"><div class="ititle">2 · Totals feed the formulas</div><div class="ibody">A contribution or a tax is a percentage of a <b>total</b> of payslip lines: the gross, the contribution base, the taxable base.</div><div class="ipiece"><span>Framework piece</span>salary rule categories<em>Chapters 2, 20</em></div></div>
+<div class="idea"><div class="ititle">3 · Rates change over time</div><div class="ibody">Every year brings new rates and tax scales, but an old payslip must keep the rates of its own period.</div><div class="ipiece"><span>Framework piece</span>dated rule parameters<em>Chapters 11, 21</em></div></div>
+<div class="idea"><div class="ititle">4 · Every period ends in an entry and a payment</div><div class="ibody">The pay run is booked in the accounts and the net is paid to the bank, every period, the same way.</div><div class="ipiece"><span>Framework piece</span>pay runs and payroll accounting<em>Chapters 8, 16</em></div></div>
+<div class="idea"><div class="ititle">5 · The authorities want reports</div><div class="ibody">What was paid and withheld is reported to the tax office and social security, monthly, quarterly or yearly.</div><div class="ipiece"><span>Framework piece</span>the declaration model<em>Chapters 7, 17</em></div></div>
+</div>
+
+<h2 id="the-axes-of-variation">The axes of variation</h2>
+<p>Everything outside those five ideas varies, and ten questions cover it. They are the checklist for any new country: answer each one by placing the country on its line, and you know the shape of the module before reading a law text. Each line runs from the simplest answer found in Odoo's localizations (left) to the heaviest (right).</p>
+<div class="axes" markdown="0">
+<div class="agroup">What is paid</div>
+<div class="axis"><div class="aq"><span class="an">1</span><b>Pay frequency and structures</b><br>How often are people paid, and which payments need their own payslip?</div><div class="track"><div class="stop"><b>monthly only</b><span>NL, BE</span></div><div class="stop"><b>monthly and weekly</b><span>HK</span></div><div class="stop"><b>seven frequencies</b><span>MX</span></div></div></div>
+<div class="axis"><div class="aq"><span class="an">2</span><b>Earnings</b><br>Which pay elements have their own treatment?</div><div class="track"><div class="stop"><b>basic only</b><span>NL</span></div><div class="stop"><b>fixed components on the contract</b><span>SA, AE</span></div><div class="stop"><b>hundreds of wage types</b><span>CH</span></div></div></div>
+<div class="axis"><div class="aq"><span class="an">3</span><b>Time</b><br>How is a partial month valued?</div><div class="track"><div class="stop"><b>real working days</b><span>most</span></div><div class="stop"><b>a fixed 30-day month</b><span>SA</span></div></div></div>
+<div class="axis"><div class="aq"><span class="an">4</span><b>Irregular pay and leavers</b><br>Bonuses, 13th month, gratuity, severance?</div><div class="track"><div class="stop"><b>not in the module</b><span>US</span></div><div class="stop"><b>separate structures</b><span>MX, BE</span></div><div class="stop"><b>end-of-service gratuity</b><span>SA, AE</span></div></div></div>
+<div class="agroup">What is taken</div>
+<div class="axis"><div class="aq"><span class="an">5</span><b>Contributions</b><br>How many funds, on which base, with which caps?</div><div class="track"><div class="stop"><b>no employee share</b><span>AU</span></div><div class="stop"><b>one uncapped rate</b><span>BE</span></div><div class="stop"><b>several capped funds</b><span>US</span></div></div></div>
+<div class="axis"><div class="aq"><span class="an">6</span><b>Income tax</b><br>Does the employer withhold, and how?</div><div class="track"><div class="stop"><b>no withholding</b><span>AE, HK</span></div><div class="stop"><b>period tables</b><span>MX</span></div><div class="stop"><b>annualise the period</b><span>BE, US</span></div><div class="stop"><b>cumulative year to date</b><span>IN</span></div></div></div>
+<div class="agroup">What goes out</div>
+<div class="axis"><div class="aq"><span class="an">7</span><b>Declarations</b><br>What must be filed, and how often?</div><div class="track"><div class="stop"><b>none in the module</b><span>NL</span></div><div class="stop"><b>periodic returns</b><span>BE, IN</span></div><div class="stop"><b>one per payslip</b><span>MX</span></div><div class="stop"><b>one per pay run</b><span>AU</span></div></div></div>
+<div class="axis"><div class="aq"><span class="an">8</span><b>Payment files</b><br>A plain bank transfer, or a file the state controls?</div><div class="track"><div class="stop"><b>bank transfer file</b><span>BE, US</span></div><div class="stop"><b>state-controlled salary file</b><span>AE</span></div></div></div>
+<div class="axis"><div class="aq"><span class="an">9</span><b>Accounting</b><br>Does the accounting module only map accounts, or carry filings too?</div><div class="track"><div class="stop"><b>account mapping only</b><span>NL</span></div><div class="stop"><b>carries the e-filing</b><span>MX, AU</span></div></div></div>
+<div class="agroup">What comes in</div>
+<div class="axis"><div class="aq"><span class="an">10</span><b>Data feeds</b><br>Where do the rates come from?</div><div class="track"><div class="stop"><b>typed in data files</b><span>most</span></div><div class="stop"><b>downloaded official files</b><span>BE, CH</span></div><div class="stop"><b>an online API</b><span>SA</span></div></div></div>
+</div>
+
+<p>The further right a country sits, the more code it needs: a heavy answer on the <strong>outputs</strong> (declarations, payment files, accounting) and on the <strong>data feeds</strong> costs far more than a heavy answer on earnings or contributions, which are only more rules.</p>
+<h2 id="the-comparison-grid">The comparison grid</h2>
+<p>Six localizations, read from the master code.<sup id="fnref:c9-grid"><a class="footnote-ref" href="#fn:c9-grid">1</a></sup> Each has a personality; together they cover almost every answer on the ten axes. "None" means the module does not do it, not that the country has no such rule.</p>
+<div class="ccards" markdown="0">
+<div class="ccard"><div class="chead"><span class="ccode">NL</span><span class="cname">Netherlands</span><span class="ctag">the minimalist</span></div><div class="crow"><span class="ded">Contributions</span>national insurances, capped yearly ÷ 12</div><div class="crow"><span class="tax">Income tax</span>monthly brackets</div><div class="crow"><span class="emp">Declarations</span>none</div></div>
+<div class="ccard"><div class="chead"><span class="ccode">AE</span><span class="cname">United Arab Emirates</span><span class="ctag">no income tax</span></div><div class="crow"><span class="ded">Contributions</span>pension for nationals only</div><div class="crow"><span class="tax">Income tax</span>none</div><div class="crow"><span class="emp">Declarations</span>a wage-protection salary file</div></div>
+<div class="ccard"><div class="chead"><span class="ccode">IN</span><span class="cname">India</span><span class="ctag">the year-to-date one</span></div><div class="crow"><span class="ded">Contributions</span>provident fund on basic; state insurance below a threshold</div><div class="crow"><span class="tax">Income tax</span>cumulative over the financial year</div><div class="crow"><span class="emp">Declarations</span>quarterly tax-at-source statement</div></div>
+<div class="ccard"><div class="chead"><span class="ccode">MX</span><span class="cname">Mexico</span><span class="ctag">the e-payslip</span></div><div class="crow"><span class="ded">Contributions</span>social security on an integrated daily wage, capped at 25 × UMA</div><div class="crow"><span class="tax">Income tax</span>period tables, or monthly table × period factor</div><div class="crow"><span class="emp">Declarations</span>one signed e-payslip (CFDI) per payslip</div></div>
+<div class="ccard"><div class="chead"><span class="ccode">AU</span><span class="cname">Australia</span><span class="ctag">the real-time reporter</span></div><div class="crow"><span class="ded">Contributions</span>no employee share; employer superannuation</div><div class="crow"><span class="tax">Income tax</span>weekly-equivalent coefficients</div><div class="crow"><span class="emp">Declarations</span>a report to the tax office every pay run</div></div>
+<div class="ccard"><div class="chead"><span class="ccode">BE</span><span class="cname">Belgium</span><span class="ctag">the heavyweight</span></div><div class="crow"><span class="ded">Contributions</span>one uncapped employee rate; employer rates downloaded from official files</div><div class="crow"><span class="tax">Income tax</span>annualise the month, ÷ 12</div><div class="crow"><span class="emp">Declarations</span>hire/exit notice, quarterly, monthly and yearly returns</div></div>
+</div>
+
+<p>What the six teach:</p>
+<ul>
+<li><strong>Size follows declarations and data feeds, not rules.</strong> Australia has fewer rules than Mexico but far more code: it reports to the tax office in real time.</li>
+<li><strong>A rate has four possible homes:</strong> a data file (NL, MX), a downloaded official file (BE), records the customer maintains (CH insurers), or a field on the employee's version (SA).</li>
+<li><strong>The employee side can be empty:</strong> Australia has no employee contribution; the UAE has one for nationals only.</li>
+<li><strong>The accounting module can carry the law:</strong> Mexico puts its e-payslip there, Australia its pay-run reporting.</li>
+</ul>
+<p>Others (US, CH, SA, HK, KE…) are in <code>research/world_grid.md</code>.</p>
+<div class="admonition practice">
+<p class="admonition-title">In practice</p>
+<p>Before estimating a new country, count its <strong>statutory outputs</strong> and its <strong>sources of rates</strong>. Each declaration is a model, an export, a test and a legal source to verify. Rules are cheap; declarations and data feeds are where the weeks go.</p>
+</div>
+<div class="admonition pitfall">
+<p class="admonition-title">Common pitfall</p>
+<p>Trusting a grid cell because the rule exists. Reading these modules found an income-tax rule that over-taxes incomes above the second band, tested only on lower salaries. A cell is verified when a golden payslip covers it (Chapter 10), not when the code is there. Chapter 22 lists these patterns.</p>
+</div>
+<div class="admonition be">
+<p class="admonition-title">In Belgium</p>
+<p>Belgium sits at the top of most columns: more than 200 sectors with their own agreements, quarterly declarations, a dozen filings. Two of its answers travel: switching rules on and off by sector, and downloading official rates into dated parameters.</p>
+</div>
+<h2 id="summary">Summary</h2>
+<ul>
+<li>Four layers: framework, country, company, employee. Put each fact in the highest layer where it is still true; every payslip needs all four.</li>
+<li>The framework (<code>hr_payroll</code>) holds the engine, categories, dated parameters, pay runs and hooks; a localization ships rules, data, fields and declarations.</li>
+<li>Ten axes describe a country, from pay frequency to data feeds.</li>
+<li>Rates live in four places: XML parameters, downloaded parameters, customer-maintained records, version fields.</li>
+<li>Size follows declarations and data feeds, not the number of rules.</li>
+<li>A grid cell is verified by a golden payslip, not by the presence of a rule.</li>
+</ul>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:c9-grid">
+<p>Read from the <code>l10n_*_hr_payroll*</code> modules of enterprise master; counts by script over XML records, Python classes and test methods. <code>research/world_grid.md</code>, sections 1 to 11.&#160;<a class="footnote-backref" href="#fnref:c9-grid" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></section><nav class='pager' aria-label='Previous and next chapter'><a class='pager-prev' rel='prev' href='chapter-08-accounting-for-payroll.html'><small>Previous · Chapter 8</small><span>Accounting for payroll</span></a><a class='pager-next' rel='next' href='chapter-10-researching-a-new-country.html'><small>Next · Chapter 10</small><span>Researching a new country</span></a></nav>
+</main>
+</div>
+<script src="js/site.js"></script>
+
+</body>
+</html>

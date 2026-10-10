@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter 20: Categories: how rules talk to each other · Payroll, from Theory to Odoo Localization</title>
+<meta name="description" content="Gross-to-net in any country, the Odoo salary engine, and how to design, build and review a payroll localization.">
+<link rel="stylesheet" href="css/book.css">
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body class="chapter-page">
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+<button class="nav-toggle" type="button" aria-controls="sidebar" aria-expanded="false"><span aria-hidden="true">&#9776;</span> Contents</button>
+<a class="top-brand" href="index.html">Payroll, from Theory to Odoo Localization</a>
+</header>
+<div class="layout">
+<nav id="sidebar" class="sidebar" aria-label="Book contents">
+<a class="side-brand" href="index.html">Payroll, from Theory to Odoo Localization</a>
+<div class="search" role="search">
+<label for="search-input" class="sr-only">Search the book</label>
+<input id="search-input" type="search" placeholder="Search the book  ( / )" autocomplete="off" spellcheck="false" aria-controls="search-results">
+<div id="search-results" class="search-results" aria-live="polite"></div>
+</div>
+<ol class="nav"><li class='nav-part'><span class='nav-part-title'>Front matter</span><ol><li><a href='preface-before-you-start.html'><span class='nav-num'></span><span>Before you start</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part I · Payroll theory</span><ol><li><a href='chapter-01-what-payroll-is-and-why-it-is-hard.html'><span class='nav-num'>1.</span><span>What payroll is, and why it is hard</span></a></li><li><a href='chapter-02-gross-to-net.html'><span class='nav-num'>2.</span><span>Gross to net</span></a></li><li><a href='chapter-03-contributions-employee-and-employer.html'><span class='nav-num'>3.</span><span>Contributions: employee and employer</span></a></li><li><a href='chapter-04-withholding-tax.html'><span class='nav-num'>4.</span><span>Withholding tax</span></a></li><li><a href='chapter-05-time-proration-and-overtime.html'><span class='nav-num'>5.</span><span>Time, proration and overtime</span></a></li><li><a href='chapter-06-irregular-pay-corrections-and-leavers.html'><span class='nav-num'>6.</span><span>Irregular pay, corrections and leavers</span></a></li><li><a href='chapter-07-declarations-and-the-compliance-calendar.html'><span class='nav-num'>7.</span><span>Declarations and the compliance calendar</span></a></li><li><a href='chapter-08-accounting-for-payroll.html'><span class='nav-num'>8.</span><span>Accounting for payroll</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part II · Localization theory</span><ol><li><a href='chapter-09-what-varies-between-countries-and-what-doesnt.html'><span class='nav-num'>9.</span><span>What varies between countries, and what doesn&#x27;t</span></a></li><li><a href='chapter-10-researching-a-new-country.html'><span class='nav-num'>10.</span><span>Researching a new country</span></a></li><li><a href='chapter-11-laws-that-change-over-time.html'><span class='nav-num'>11.</span><span>Laws that change over time</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part III · Odoo payroll, hands-on</span><ol><li><a href='chapter-12-tour-and-setup.html'><span class='nav-num'>12.</span><span>Tour and setup</span></a></li><li><a href='chapter-13-employees-and-versions.html'><span class='nav-num'>13.</span><span>Employees and versions</span></a></li><li><a href='chapter-14-time-schedules-time-off-worked-days.html'><span class='nav-num'>14.</span><span>Time: schedules, time off, worked days</span></a></li><li><a href='chapter-15-pay-runs-and-payslips.html'><span class='nav-num'>15.</span><span>Pay runs and payslips</span></a></li><li><a href='chapter-16-accounting-and-payment.html'><span class='nav-num'>16.</span><span>Accounting and payment</span></a></li><li><a href='chapter-17-reports-declarations-and-a-leaver.html'><span class='nav-num'>17.</span><span>Reports, declarations and a leaver</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part IV · How the payroll engine works</span><ol><li><a href='chapter-18-the-engine-in-one-picture.html'><span class='nav-num'>18.</span><span>The engine in one picture</span></a></li><li><a href='chapter-19-structures-and-rules.html'><span class='nav-num'>19.</span><span>Structures and rules</span></a></li><li class='current' aria-current='page'><a href='chapter-20-categories-how-rules-talk-to-each-other.html'><span class='nav-num'>20.</span><span>Categories: how rules talk to each other</span></a><ol class='nav-sections'><li><a href='#what-a-salary-category-is'>What a salary category is</a></li><li><a href='#the-standard-chain'>The standard chain</a></li><li><a href='#one-rule-several-totals-maries-company-car'>One rule, several totals: Marie&#x27;s company car</a></li><li><a href='#parent-categories-roll-up'>Parent categories roll up</a></li><li><a href='#who-reads-categories-after-the-payslip'>Who reads categories after the payslip</a></li><li><a href='#how-countries-extend-the-chain'>How countries extend the chain</a></li><li><a href='#summary'>Summary</a></li></ol></li><li><a href='chapter-21-parameters-updates-and-safe-extensions.html'><span class='nav-num'>21.</span><span>Parameters, updates and safe extensions</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part V · Building a localization</span><ol><li><a href='chapter-22-a-template-for-any-localization-and-how-to-review-one.html'><span class='nav-num'>22.</span><span>A template for any localization, and how to review one</span></a></li></ol></li></ol>
+<a class="nav-pdf" href="payroll_book.pdf" download>Download the PDF</a>
+</nav>
+<div class="backdrop" hidden></div>
+<main id="main" class="content">
+<section class='chapter' id='c-43_ch20'><div class='opener'><div class='opener-band'><span class='opener-num'>Chapter 20</span><span class='opener-part'>Part IV · How the payroll engine works</span></div><h1>Categories: how rules talk to each other</h1><p class='opener-sub'>Running totals that rules add to and later rules read: the gross, the bases, the net</p><div class='opener-goals'><div class='goals-title'>After this chapter you can</div><ul><li>Define a salary category as a running total, and say why rules read totals rather than each other</li><li>Walk the standard chain BASIC → ALW → GROSS → DED → NET, with employer contributions outside the net</li><li>Explain how one rule feeds several totals, with Marie's company car</li><li>Say who reads categories after the payslip is computed</li><li>Check that a country's categories match its legal bases</li></ul></div></div><p>Belgium adds a new tax-free allowance. The social-security rule, the withholding rule and the net rule do not change: the new rule simply joins the right <strong>totals</strong>, and every rule that reads those totals sees it. That is the whole point of categories: rules never name each other; they meet in shared totals.</p>
+<h2 id="what-a-salary-category-is">What a salary category is</h2>
+<p>A <strong>salary category</strong> (<em>salary rule category</em> in Odoo) is a named running total. Each rule adds its result to its categories; later rules read the total instead of naming every rule that fed it. Categories are how rules talk to each other.</p>
+<p>Three things follow:</p>
+<ul>
+<li><strong>A new rule needs no change elsewhere.</strong> Put a new allowance in the allowances total, and the gross and the net pick it up.</li>
+<li><strong>One rule can feed several totals.</strong> A contribution can lower both the net and the taxable base.</li>
+<li><strong>A total is not a line.</strong> It lives during the computation. When the law needs it on the payslip, a rule copies it into a line (that is what the <code>GROSS</code> rule does).</li>
+</ul>
+<div class="tflow" markdown="0">
+<div class="tcol">
+<div class="tstep">Rules add…</div>
+<div class="tin c-earn"><b>Basic salary</b>3,000</div>
+<div class="tin c-earn"><b>Transport allowance</b>100</div>
+<div class="tin c-earn"><b>Phone allowance</b>50</div>
+<div class="tin c-ded"><b>Pension contribution</b>−150</div>
+<div class="tin c-ded"><b>Income tax</b>−400</div>
+</div>
+<div class="tarrow">→</div>
+<div class="tcol wide">
+<div class="tstep">…to running totals</div>
+<div class="tin c-earn"><b>BASIC</b>3,000</div>
+<div class="tin c-earn"><b>ALW (allowances)</b>100 + 50 = 150</div>
+<div class="tin c-ded"><b>DED (deductions)</b>−150 − 400 = −550</div>
+</div>
+<div class="tarrow">→</div>
+<div class="tcol">
+<div class="tstep">…that later rules read</div>
+<div class="tin c-net"><b>Net rule</b><code>BASIC + ALW + DED</code><br>3,000 + 150 − 550 = <b>2,600</b></div>
+<div class="tnote">A third allowance would change nothing here.</div>
+</div>
+</div>
+
+<p>Illustrative numbers. The net rule names three totals, not five rules.</p>
+<h2 id="the-standard-chain">The standard chain</h2>
+<p>The payroll framework ships seven categories, and every country starts from them. Five form a chain from the basic salary to the net:</p>
+<div class="steps" markdown="0">
+<div class="step c-earn"><b>BASIC</b>pay for the time worked and paid<i>comes first: everything else derives from it</i></div>
+<div class="sarrow">→</div>
+<div class="step c-earn"><b>ALW</b>allowances: everything paid on top of basic<i>earnings that are not time</i></div>
+<div class="sarrow">→</div>
+<div class="step c-tax"><b>GROSS</b>"Taxable Salary": basic + allowances so far<i>a snapshot taken before taxes are computed on it</i></div>
+<div class="sarrow">→</div>
+<div class="step c-ded"><b>DED</b>deductions: contributions, tax, garnishments<i>everything that lowers the net</i></div>
+<div class="sarrow">→</div>
+<div class="step c-net"><b>NET</b>basic + allowances + deductions<i>what the bank transfer pays</i></div>
+</div>
+<div class="outcomes" markdown="0">
+<div class="outcome c-emp"><b>COMP</b> (company contribution): the employer's contributions. Recorded, booked and declared, but outside the chain: the net formula never reads it, because the employee does not pay them.</div>
+<div class="outcome c-odoo"><b>EXTRA_HOURS</b>: overtime pay, kept apart so a country can treat it differently (for example, exclude it from the hours that set the hourly rate).</div>
+</div>
+
+<p>Two words decide where a rule lands: its <strong>category</strong> and its <strong>position</strong>.</p>
+<div class="admonition key">
+<p class="admonition-title">Key idea: category and position</p>
+<ul>
+<li><strong><code>GROSS</code> is "taxable" by position.</strong> It reads <code>BASIC + ALW</code> at the moment it runs. An expense reimbursement is in <code>ALW</code> too, but runs after <code>GROSS</code>: the net includes it, the taxable salary does not. An expense paid back is not salary.</li>
+<li><strong>Garnishments come after taxes</strong> because the law protects a part of the <em>net</em> (Chapter 6); the seizable amount is known only once taxes are withheld.</li>
+<li><strong>Employer contributions stay out of the net by category, not by position.</strong> The net reads <code>BASIC</code>, <code>ALW</code> and <code>DED</code>, never <code>COMP</code>, wherever the employer rules run.</li>
+</ul>
+</div>
+<h3 id="where-the-worked-days-go">Where the worked days go</h3>
+<p>Before any rule runs, each worked-days line adds its amount to the categories of its <strong>time type</strong> (Chapter 14). Attendance usually feeds <code>BASIC</code>; a paid leave type feeds what the country decides; unpaid leave is worth 0 and adds nothing. That is how time reaches the totals: the basic salary rule often just reads <code>categories['BASIC']</code>.</p>
+<div class="admonition pitfall">
+<p class="admonition-title">Common pitfall: a paid time type with no category</p>
+<p>If a paid time type has no category, its amount is on the worked-days line but never reaches <code>BASIC</code>, so the gross and the net miss it. When a country adds a time type, check its categories. The opposite mistake also exists: a rule that both reads a total seeded by worked days and writes into it counts the amount twice.</p>
+</div>
+<h2 id="one-rule-several-totals-maries-company-car">One rule, several totals: Marie's company car</h2>
+<p>Belgian law needs three bases, not one: the <strong>running net</strong> (what will be paid), the <strong>contribution base</strong> (what social security is computed on) and the <strong>taxable base</strong>. So Belgium keeps one total per base, and each rule says which bases it belongs to.</p>
+<p>Marie's company car is a <strong>benefit in kind</strong>: taxed as if it were salary, but never paid in cash (Chapter 2). Its rule, <code>ATN.CAR</code>, adds 136.77 € to the taxable base and nothing to the running net. The social-security rule adds its −980.25 € to both.</p>
+<table class='payslip'>
+<thead>
+<tr>
+<th>Marie, February 2026</th>
+<th style="text-align: right;">Line total</th>
+<th style="text-align: right;">Running net</th>
+<th style="text-align: right;">Taxable base</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Worked days (attendance)</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">7,500.00</td>
+<td style="text-align: right;">7,500.00</td>
+</tr>
+<tr class='ded'>
+<td><span class='pill ded'>ONSS</span> social security, 13.07 %</td>
+<td style="text-align: right;">−980.25</td>
+<td style="text-align: right;">6,519.75</td>
+<td style="text-align: right;">6,519.75</td>
+</tr>
+<tr class='earn'>
+<td><span class='pill earn'>ATN.CAR</span> company car</td>
+<td style="text-align: right;">136.77</td>
+<td style="text-align: right;">6,519.75</td>
+<td style="text-align: right;"><strong>6,656.52</strong></td>
+</tr>
+<tr class='tax'>
+<td><span class='pill tax'>GROSS</span> reads the taxable base</td>
+<td style="text-align: right;">6,656.52</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+</tr>
+</tbody>
+</table>
+
+<p>The car changes the tax, not the cash: 7,500.00 − 980.25 + 136.77 = <strong>6,656.52 €</strong> of taxable salary. The withholding rule, the net rule and the declarations never mention the car; they read totals. A new benefit in kind next year will be one more rule in the taxable base.</p>
+<div class="admonition example">
+<p class="admonition-title">Worked example: Mélanie's three bases</p>
+<p>Mélanie has no benefit in kind. Her social security (−522.80 €) lowers the running net and the taxable base but not the contribution base, which stays at 4,000.00 €. So her <code>GROSS</code> line, the taxable salary, is <strong>3,477.20 €</strong>, not 4,000.00 €. After withholding (−826.69 €) and a special contribution (−36.24 €), the net rule reads the running net: <strong>2,614.27 €</strong>.</p>
+</div>
+<h2 id="parent-categories-roll-up">Parent categories roll up</h2>
+<p>A category can have a <strong>parent</strong>. When a rule adds to a category, the engine also adds to its parent, and to the parent's parent. A country can then make the generic chain more precise without rewriting it.</p>
+<div class="nest" markdown="0">
+<div class="nest-main">
+<div class="nbox c-earn" style="flex:1"><div class="nh"><b>ALW</b> · allowances<i>read by the net rule</i></div>
+<div class="nrules">
+<div class="nbox c-earn" style="background:#fff"><b>TAXABLE_ALW</b><i>commissions, bonuses: read by <code>GROSS</code></i></div>
+<div class="nbox c-earn" style="background:#fff"><b>exempt allowances</b><i>added to ALW directly: in the net, not taxed</i></div>
+</div></div>
+<div class="nbox c-ded" style="flex:1"><div class="nh"><b>DED</b> · deductions<i>read by the net rule</i></div>
+<div class="nrules">
+<div class="nbox c-ded" style="background:#fff"><b>IMSS_EMPLOYEE</b><i>employee social security</i></div>
+<div class="nbox c-ded" style="background:#fff"><b>income tax (ISR)</b><i>added to DED directly</i></div>
+</div></div>
+</div>
+</div>
+
+<p>Mexico, as shipped. Its two formulas:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># GROSS, the taxable salary: only the taxable allowances</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">categories</span><span class="p">[</span><span class="s1">'BASIC'</span><span class="p">]</span> <span class="o">+</span> <span class="n">categories</span><span class="p">[</span><span class="s1">'TAXABLE_ALW'</span><span class="p">]</span>
+<span class="c1"># NET: unchanged from the standard; the children roll up into ALW and DED</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">categories</span><span class="p">[</span><span class="s1">'BASIC'</span><span class="p">]</span> <span class="o">+</span> <span class="n">categories</span><span class="p">[</span><span class="s1">'ALW'</span><span class="p">]</span> <span class="o">+</span> <span class="n">categories</span><span class="p">[</span><span class="s1">'DED'</span><span class="p">]</span>
+</code></pre></div>
+<p>The net formula is the generic one, yet it sees commissions and employee social security, because their categories roll up into <code>ALW</code> and <code>DED</code>. The taxable salary reads only the child, so exempt allowances stay out of it.</p>
+<h2 id="who-reads-categories-after-the-payslip">Who reads categories after the payslip</h2>
+<p>Categories exist during the computation; afterwards, each line remembers its rule, and the rule its categories. That is enough for everything downstream:</p>
+<table>
+<thead>
+<tr>
+<th>Who</th>
+<th>Reads</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Declarations and yearly certificates</td>
+<td>the sum of a category over a period, across validated payslips: the taxable base of the quarter, the tax withheld in the year (Chapter 17)</td>
+</tr>
+<tr>
+<td>Payroll reports</td>
+<td>payslip lines grouped by rule or by category</td>
+</tr>
+<tr>
+<td>The journal entry</td>
+<td>each rule's accounts, not its categories (Chapter 16)</td>
+</tr>
+<tr>
+<td>The payslip's gross and net fields</td>
+<td>the lines with codes <code>BASIC</code>, <code>GROSS</code>, <code>NET</code></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition practice">
+<p class="admonition-title">In practice</p>
+<p>If a declaration total is wrong while every payslip looks right, look for a rule in the wrong category. A declaration sums categories, so designing a country's categories is designing its declarations: start from the boxes of the forms.</p>
+</div>
+<h2 id="how-countries-extend-the-chain">How countries extend the chain</h2>
+<p>The rule of thumb: <strong>one category per legal base</strong>. Whatever amount the law computes something <em>on</em> (a contribution base, a taxable base, a pensionable salary) gets its own total, and each rule says which bases it belongs to. Countries keep the codes <code>BASIC</code>, <code>GROSS</code> and <code>NET</code>, because the payslip fields and reports read them, and add what their law needs between them.</p>
+<div class="admonition world">
+<p class="admonition-title">Around the world</p>
+<ul>
+<li><strong>Mexico</strong> keeps the generic tree, adds child categories (<code>TAXABLE_ALW</code>, <code>IMSS_EMPLOYEE</code>) and a separate total for the social-security base, <code>SBC</code>, capped by its own rule.</li>
+<li><strong>India</strong> keeps the generic formulas: <code>GROSS = BASIC + ALW</code>, so there <code>GROSS</code> really is the gross salary.</li>
+<li><strong>Belgium</strong> uses a <strong>running net</strong>: one total (<code>REMUNERATION_BASE</code>) that every rule paying or withholding cash feeds, plus a contribution base and a taxable base. The net rule just reads the running net.</li>
+<li><strong>United States</strong> keeps pre-tax deductions in their own category, because they lower the taxable wages.</li>
+</ul>
+</div>
+<div class="admonition pitfall">
+<p class="admonition-title">Common pitfall: GROSS does not mean the same everywhere</p>
+<p>The <code>GROSS</code> category is labelled <em>Taxable Salary</em>. In India it is the gross; in Mexico, the taxable part of the earnings; in Belgium, the salary after employee social security (Mélanie: 3,477.20 €, not 4,000.00 €). Before comparing "gross" across countries, or building a report on it, open the <code>GROSS</code> rule and read its formula.</p>
+</div>
+<div class="admonition practice">
+<p class="admonition-title">Review checklist</p>
+<ul>
+<li><strong>Every legal base has a category</strong>: list the bases in the law (contribution base, taxable base, pensionable pay…) and find each one.</li>
+<li><strong>Each rule feeds exactly the bases the law says</strong>: for every earning, ask "is it subject to contributions? to tax? paid in cash?" and compare with its categories.</li>
+<li><strong>Is <code>GROSS</code> gross or taxable here?</strong> Read the formula, and check the reports and declarations that use it agree.</li>
+<li><strong>Every paid time type has a category</strong>, and no rule both reads and writes the same seeded total.</li>
+<li><strong>Employer contributions are outside the net</strong> by category, whatever their position.</li>
+</ul>
+</div>
+<h2 id="summary">Summary</h2>
+<ul>
+<li>A category is a named running total: rules add to it, later rules read it, and rules never name each other.</li>
+<li>The standard chain is <code>BASIC</code> → <code>ALW</code> → <code>GROSS</code> (taxable salary) → <code>DED</code> → <code>NET</code>; employer contributions (<code>COMP</code>) stay outside the net.</li>
+<li>Category decides which totals a rule changes; position decides which rules see it. A reimbursement after <code>GROSS</code> is paid but not taxed.</li>
+<li>Worked days add their amounts to their time types' categories before the first rule.</li>
+<li>One rule can feed several totals: Marie's car is in the taxable base, not in the running net.</li>
+<li>Parent categories roll up, so a country can refine the chain without changing the net formula.</li>
+<li>Declarations sum categories over a period; one category per legal base is the design rule.</li>
+</ul></section><nav class='pager' aria-label='Previous and next chapter'><a class='pager-prev' rel='prev' href='chapter-19-structures-and-rules.html'><small>Previous · Chapter 19</small><span>Structures and rules</span></a><a class='pager-next' rel='next' href='chapter-21-parameters-updates-and-safe-extensions.html'><small>Next · Chapter 21</small><span>Parameters, updates and safe extensions</span></a></nav>
+</main>
+</div>
+<script src="js/site.js"></script>
+
+</body>
+</html>

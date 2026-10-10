@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter 19: Structures and rules · Payroll, from Theory to Odoo Localization</title>
+<meta name="description" content="Gross-to-net in any country, the Odoo salary engine, and how to design, build and review a payroll localization.">
+<link rel="stylesheet" href="css/book.css">
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body class="chapter-page">
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+<button class="nav-toggle" type="button" aria-controls="sidebar" aria-expanded="false"><span aria-hidden="true">&#9776;</span> Contents</button>
+<a class="top-brand" href="index.html">Payroll, from Theory to Odoo Localization</a>
+</header>
+<div class="layout">
+<nav id="sidebar" class="sidebar" aria-label="Book contents">
+<a class="side-brand" href="index.html">Payroll, from Theory to Odoo Localization</a>
+<div class="search" role="search">
+<label for="search-input" class="sr-only">Search the book</label>
+<input id="search-input" type="search" placeholder="Search the book  ( / )" autocomplete="off" spellcheck="false" aria-controls="search-results">
+<div id="search-results" class="search-results" aria-live="polite"></div>
+</div>
+<ol class="nav"><li class='nav-part'><span class='nav-part-title'>Front matter</span><ol><li><a href='preface-before-you-start.html'><span class='nav-num'></span><span>Before you start</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part I · Payroll theory</span><ol><li><a href='chapter-01-what-payroll-is-and-why-it-is-hard.html'><span class='nav-num'>1.</span><span>What payroll is, and why it is hard</span></a></li><li><a href='chapter-02-gross-to-net.html'><span class='nav-num'>2.</span><span>Gross to net</span></a></li><li><a href='chapter-03-contributions-employee-and-employer.html'><span class='nav-num'>3.</span><span>Contributions: employee and employer</span></a></li><li><a href='chapter-04-withholding-tax.html'><span class='nav-num'>4.</span><span>Withholding tax</span></a></li><li><a href='chapter-05-time-proration-and-overtime.html'><span class='nav-num'>5.</span><span>Time, proration and overtime</span></a></li><li><a href='chapter-06-irregular-pay-corrections-and-leavers.html'><span class='nav-num'>6.</span><span>Irregular pay, corrections and leavers</span></a></li><li><a href='chapter-07-declarations-and-the-compliance-calendar.html'><span class='nav-num'>7.</span><span>Declarations and the compliance calendar</span></a></li><li><a href='chapter-08-accounting-for-payroll.html'><span class='nav-num'>8.</span><span>Accounting for payroll</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part II · Localization theory</span><ol><li><a href='chapter-09-what-varies-between-countries-and-what-doesnt.html'><span class='nav-num'>9.</span><span>What varies between countries, and what doesn&#x27;t</span></a></li><li><a href='chapter-10-researching-a-new-country.html'><span class='nav-num'>10.</span><span>Researching a new country</span></a></li><li><a href='chapter-11-laws-that-change-over-time.html'><span class='nav-num'>11.</span><span>Laws that change over time</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part III · Odoo payroll, hands-on</span><ol><li><a href='chapter-12-tour-and-setup.html'><span class='nav-num'>12.</span><span>Tour and setup</span></a></li><li><a href='chapter-13-employees-and-versions.html'><span class='nav-num'>13.</span><span>Employees and versions</span></a></li><li><a href='chapter-14-time-schedules-time-off-worked-days.html'><span class='nav-num'>14.</span><span>Time: schedules, time off, worked days</span></a></li><li><a href='chapter-15-pay-runs-and-payslips.html'><span class='nav-num'>15.</span><span>Pay runs and payslips</span></a></li><li><a href='chapter-16-accounting-and-payment.html'><span class='nav-num'>16.</span><span>Accounting and payment</span></a></li><li><a href='chapter-17-reports-declarations-and-a-leaver.html'><span class='nav-num'>17.</span><span>Reports, declarations and a leaver</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part IV · How the payroll engine works</span><ol><li><a href='chapter-18-the-engine-in-one-picture.html'><span class='nav-num'>18.</span><span>The engine in one picture</span></a></li><li class='current' aria-current='page'><a href='chapter-19-structures-and-rules.html'><span class='nav-num'>19.</span><span>Structures and rules</span></a><ol class='nav-sections'><li><a href='#what-a-structure-is'>What a structure is</a></li><li><a href='#anatomy-of-a-salary-rule'>Anatomy of a salary rule</a></li><li><a href='#what-a-rule-can-read'>What a rule can read</a></li><li><a href='#what-a-rule-can-do'>What a rule can do</a></li><li><a href='#order-is-meaning'>Order is meaning</a></li><li><a href='#three-shapes-of-rule'>Three shapes of rule</a></li><li><a href='#summary'>Summary</a></li></ol></li><li><a href='chapter-20-categories-how-rules-talk-to-each-other.html'><span class='nav-num'>20.</span><span>Categories: how rules talk to each other</span></a></li><li><a href='chapter-21-parameters-updates-and-safe-extensions.html'><span class='nav-num'>21.</span><span>Parameters, updates and safe extensions</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part V · Building a localization</span><ol><li><a href='chapter-22-a-template-for-any-localization-and-how-to-review-one.html'><span class='nav-num'>22.</span><span>A template for any localization, and how to review one</span></a></li></ol></li></ol>
+<a class="nav-pdf" href="payroll_book.pdf" download>Download the PDF</a>
+</nav>
+<div class="backdrop" hidden></div>
+<main id="main" class="content">
+<section class='chapter' id='c-42_ch19'><div class='opener'><div class='opener-band'><span class='opener-num'>Chapter 19</span><span class='opener-part'>Part IV · How the payroll engine works</span></div><h1>Structures and rules</h1><p class='opener-sub'>A structure is a list of rules for one kind of payslip; a rule is one line, with a condition, an amount and a place in the order</p><div class='opener-goals'><div class='goals-title'>After this chapter you can</div><ul><li>Explain what a structure is, why a country has several, and how a payslip finds its own</li><li>Read any salary rule: its code, condition, amount, categories and position</li><li>Say what a rule can read, what it cannot, and what it is allowed to do</li><li>Explain why the order of the rules carries meaning</li><li>Recognise the three shapes of rule and review each one</li></ul></div></div><p>Jurgen and Mélanie are paid on the same structure, <em>Monthly Pay</em>. Yet Jurgen's February payslip has a low-wage bonus line that Mélanie's lacks, and Marie's has a company-car line that neither of them has. Nobody added or removed those lines by hand: the structure holds every rule, and each rule decides for itself, payslip by payslip, whether it applies.</p>
+<h2 id="what-a-structure-is">What a structure is</h2>
+<p>A <strong>salary structure</strong> (also <em>pay structure</em>) is a named list of salary rules for one kind of payslip. When a payslip is computed, the engine runs the rules of its structure, and only those.</p>
+<p>Three things follow:</p>
+<ul>
+<li><strong>One structure per kind of payslip.</strong> A regular month, a 13<sup>th</sup> month, holiday pay and a leaver's indemnity are taxed and declared differently, so each is a separate payslip on its own structure.</li>
+<li><strong>A rule can belong to several structures.</strong> The social-security rule of a country is usually shared by its regular and bonus structures; it is one record, maintained once.</li>
+<li><strong>Structures are grouped by structure type.</strong> The type (the kind of pay on the employee's version) lists its structures and names the <strong>default</strong> one, for the regular payslip.</li>
+</ul>
+<div class="lanes" markdown="0">
+<div class="lane"><div class="lname c-odoo">Regular</div>
+<div class="lstep">Mélanie's version</div><div class="la">→</div>
+<div class="lstep"><span>its structure type: <b>CP200 BE</b></span></div><div class="la">→</div>
+<div class="lstep"><span>the type's default: <b>Monthly Pay</b></span></div></div>
+<div class="lane"><div class="lname c-emp">Special</div>
+<div class="lstep">a pay run or a payslip created on purpose</div><div class="la">→</div>
+<div class="lstep">a structure chosen for it</div><div class="la">→</div>
+<div class="lstep"><span><b>13th Month</b>, <b>Double Holidays</b>, <b>Termination Fees</b>…</span></div></div>
+<div class="ljoin">Either way, a payslip has exactly <b>one</b> structure, and only that structure's rules run.</div>
+</div>
+
+<p>A regular pay run takes each employee's default structure from the version. For a payment outside the regular month, you create a run (or a single off-cycle payslip) and choose its structure (Chapter 15).</p>
+<table>
+<thead>
+<tr>
+<th>Country</th>
+<th>Structures</th>
+<th>Why so many, or so few</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Belgium</td>
+<td>ten: <em>Monthly Pay</em>, <em>Double Holidays</em>, <em>13<sup>th</sup> Month</em>, <em>Termination Fees</em>, two exit holiday-pay structures, <em>Advance Pay</em>, and three bonus plans</td>
+<td>each has its own withholding method or declaration code</td>
+</tr>
+<tr>
+<td>Mexico</td>
+<td>two: <em>Regular Pay</em>, <em>Christmas Bonus</em></td>
+<td>the bonus has an exempt part and its own tax</td>
+</tr>
+<tr>
+<td>Most other countries</td>
+<td>one regular structure</td>
+<td>bonuses are lines on the regular payslip</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition pitfall">
+<p class="admonition-title">Common pitfall: a rule missing from one structure</p>
+<p>A rule runs only on the structures it is attached to. A new allowance added to <em>Monthly Pay</em> but not to <em>Termination Fees</em> is simply absent from leavers' final pay, with no error. When you add or review a rule, check its <strong>structures</strong> list.</p>
+</div>
+<h2 id="anatomy-of-a-salary-rule">Anatomy of a salary rule</h2>
+<p>A <strong>salary rule</strong> computes at most one line of the payslip. Every rule, in every country, answers the same five questions. Here is the Belgian employee social-security rule, as you can open it under <em>Configuration &gt; Salary &gt; Rules</em>:</p>
+<div class="anat" markdown="0">
+<div class="acard">
+<div class="ahead">Social contribution<span>ONSS</span></div>
+<div class="arow"><div class="ak"><span class="nn">1</span>Identity</div><div>name and <b>code</b><i>The code is how other rules refer to its result (<code>result_rules['ONSS']</code>), and the code on the payslip line.</i></div></div>
+<div class="arow"><div class="ak"><span class="nn">2</span>When</div><div>condition, Python: <code>result = not version.no_onss and not version.is_PFI()</code><i>Always present, except for the few employees exempt from social security. Other choices: always, an input is present, a domain.</i></div></div>
+<div class="arow"><div class="ak"><span class="nn">3</span>How much</div><div>amount = the contribution base (a total, <code>ONSS_BASE</code>); rate = −13.07 %, read from dated rates<i>Other choices: a fixed amount, a percentage of a total, the amount of an input.</i></div></div>
+<div class="arow"><div class="ak"><span class="nn">4</span>Where it goes</div><div>categories: the running net, the taxable base, the social-security total; partner: the social security office; shown on the payslip: always<i>Accounts sit on the rule too, when the country maps them.</i></div></div>
+<div class="arow"><div class="ak"><span class="nn">5</span>Order</div><div>sequence 600<i>After the gross salary lines, before the taxable salary (<code>GROSS</code>, 1000) and the tax.</i></div></div>
+</div>
+<div class="aside">
+<div class="alabel">Mélanie, February 2026</div>
+<div class="anum">amount<b>4,000.00</b></div>
+<div class="anum">× quantity<b>1</b></div>
+<div class="anum">× rate<b>−13.07 %</b></div>
+<div class="anum tot">= total<b>−522.80</b></div>
+<div class="anote">The line shows all four numbers, so anyone can check it without opening the rule.</div>
+</div>
+</div>
+
+<figure>
+<p><img alt="The ONSS rule form" src="assets/screenshots/be_rule_onss.png" style="width:78%" /></p>
+<figcaption>The same rule in Odoo. ① its code and its sequence. ② its categories. ③ the amount code: the rate comes from a helper that reads the downloaded rates. ④ a Belgian addition: the sectors the rule does not apply to.</figcaption>
+</figure>
+<p>Two details of the card matter in review. The <strong>rate</strong> is not written in the rule: it comes from dated parameters (Chapter 21), so a new rate next year needs no rule change. And the rule feeds <strong>three</strong> totals at once, which is how one contribution lowers both the net and the taxable base (Chapter 20).</p>
+<h2 id="what-a-rule-can-read">What a rule can read</h2>
+<p>A rule's formula runs with a dictionary of names, the same in every country. The list is short and stable:</p>
+<table>
+<thead>
+<tr>
+<th>What</th>
+<th>Name in the rule</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>The employee, the version, the company</td>
+<td><code>employee</code>, <code>version</code>, <code>company</code></td>
+<td><code>version.wage</code></td>
+</tr>
+<tr>
+<td>The payslip and its period</td>
+<td><code>payslip</code></td>
+<td><code>payslip.date_to</code></td>
+</tr>
+<tr>
+<td>Time worked this period</td>
+<td><code>worked_days</code></td>
+<td><code>worked_days['WORK100'].number_of_days</code></td>
+</tr>
+<tr>
+<td>Amounts typed for this period</td>
+<td><code>inputs</code></td>
+<td><code>inputs['COMMISSIONS'].amount</code></td>
+</tr>
+<tr>
+<td>Totals so far</td>
+<td><code>categories</code></td>
+<td><code>categories['GROSS']</code></td>
+</tr>
+<tr>
+<td>Results of earlier rules</td>
+<td><code>result_rules</code></td>
+<td><code>result_rules['SBC']['total']</code></td>
+</tr>
+<tr>
+<td>Legal values on the payslip's date</td>
+<td><code>payslip._rule_parameter(code)</code></td>
+<td><code>payslip._rule_parameter('l10n_mx_uma')</code></td>
+</tr>
+</tbody>
+</table>
+<p>The form of every rule lists these names next to the code editor (the right side of the screenshot above). A country module can add a few of its own; the Belgian one adds the employee's earlier payslips of the year.</p>
+<p>What a rule <strong>cannot</strong> read is a rule that comes later. At its turn, a later rule has not run yet, and its total, or a category only it feeds, reads as <strong>0, without any error</strong>. The same silence hides a misspelt category code. By contrast, <code>worked_days</code> and <code>inputs</code> only contain the codes present on this payslip: reading <code>inputs['BONUS']</code> when no bonus was typed stops the computation with an error. That is why input rules start by checking (<code>result = 'BONUS' in inputs</code>), or use the <em>Input Value</em> condition, which does it for them.</p>
+<h2 id="what-a-rule-can-do">What a rule can do</h2>
+<p>A rule produces <strong>one line or none</strong>. Nothing else.</p>
+<div class="outcomes" style="margin-top:0" markdown="0">
+<div class="outcome c-earn"><b>Condition true:</b> the rule returns an amount, a quantity (default 1) and a rate (default 100 %), and may rename its line. The engine stores one line: amount × quantity × rate ÷ 100. A total of zero is still a line; the rule's <i>Visibility</i> setting decides whether it is printed.</div>
+<div class="outcome c-ded"><b>Condition false:</b> no line at all. Its code is absent from the payslip, its totals receive nothing, and later rules read 0 for it.</div>
+</div>
+
+<p>A rule does <strong>not</strong> change records. It does not write on the employee, create a leave or update a balance; those are actions of the payslip's validation or of other modules. Rule code runs in a restricted interpreter (no imports), but it can still reach the database through the records it reads, which is why only payroll managers may edit rules, and why a rule that writes anything is a review finding.</p>
+<div class="admonition example">
+<p class="admonition-title">Worked example: Marie's meal vouchers</p>
+<p>Marie received 20 meal vouchers in February. The rule <em>Retain on Meal Voucher</em> returns amount 1.09 € (the employee's share of one voucher: face value minus the employer's part, both on her version), quantity 20 (one voucher per day worked) and rate −100 %. Total: 1.09 × 20 × −100 % = <strong>−21.80 €</strong>. The payslip line reads "20 × 1.09", which the employee can check without asking anyone.</p>
+</div>
+<h2 id="order-is-meaning">Order is meaning</h2>
+<p>Rules run in the order of their <strong>sequence</strong> number. There is no other dependency mechanism: a rule sees exactly what ran before it. So the order of a structure is not cosmetic; it is the law's order of operations.</p>
+<div class="interactive" data-widget="payslip-stepper" markdown="0">
+<div class="rorder" markdown="0">
+<div class="rrow">
+<div class="rr c-earn"><b>BASIC</b>basic salary<br><code>1</code></div><div class="ra">→</div>
+<div class="rr c-ded"><b>ONSS</b>social security<br><code>600</code></div><div class="ra">→</div>
+<div class="rr c-tax"><b>GROSS</b>taxable salary<br><code>1000</code></div><div class="ra">→</div>
+<div class="rr c-tax"><b>P.P</b>withholding tax<br><code>1400</code></div><div class="ra">→</div>
+<div class="rr c-net"><b>NET</b>net salary<br><code>3340</code></div><div class="ra">→</div>
+<div class="rr c-emp"><b>Employer</b>contributions<br><code>4000+</code></div>
+</div>
+<div class="rrow">
+<div class="kn">knows: the <b>worked days</b></div><div class="kgap"></div>
+<div class="kn">+ the <b>basic salary</b></div><div class="kgap"></div>
+<div class="kn">+ the <b>contribution</b></div><div class="kgap"></div>
+<div class="kn">+ the <b>taxable base</b></div><div class="kgap"></div>
+<div class="kn">+ the <b>tax</b>: everything the employee gets</div><div class="kgap"></div>
+<div class="kn">+ the <b>net</b>; changes nothing the employee gets</div>
+</div>
+<div class="kbar"></div>
+<div class="klabel"><span>first rule: knows only the version, time and inputs</span><span>last rule: knows every earlier line</span></div>
+</div>
+</div>
+
+<p>The Belgian monthly structure, read as a timeline. Each rule can use what the rules on its left produced:</p>
+<ul>
+<li><strong>Contributions before tax.</strong> In Belgium, as in many countries, the taxable base is the salary <em>after</em> the employee's social security, so the contribution must run first.</li>
+<li><strong>Net last</strong> among the employee's lines, because it sums them all.</li>
+<li><strong>Employer contributions after the net.</strong> They are a cost for the company, not a deduction from the employee; running them after the net makes it obvious they cannot change it. (Some countries run them earlier, and keep them out of the net by category instead: Chapter 20.)</li>
+</ul>
+<p>The numbers themselves mean nothing: Mexico uses 1 to 210, Belgium 1 to over 6,000. Do not memorise them; read them relative to their neighbours, and leave gaps when you create rules so the next law fits in between.</p>
+<div class="admonition pitfall">
+<p class="admonition-title">Common pitfall: reading a total that is filled later</p>
+<p>A rule at sequence 500 that reads <code>categories['GROSS']</code>, filled at 1000, gets 0 and computes a wrong line silently. When a line is unexpectedly zero, compare the sequence of the rule with the sequences of the rules that feed what it reads.</p>
+</div>
+<h2 id="three-shapes-of-rule">Three shapes of rule</h2>
+<p>Open any country's rules and you find three shapes.</p>
+<div class="fcards three" markdown="0">
+<div class="fcard c-earn"><div class="ft">1 · No code</div><div class="fwhy">A fixed amount, or a percentage of a total, chosen in the form.</div><div class="fex">Fits an employer's own simple rule.</div><div class="fex">Anyone can read it.</div></div>
+<div class="fcard c-law"><div class="ft">2 · Input rule</div><div class="fwhy">The amount is typed on the payslip or the employee for this period.</div><div class="fex">Fits commissions, bonuses, one-off deductions.</div><div class="fex">The rule is also the input type.</div></div>
+<div class="fcard c-tax"><div class="ft">3 · Formula</div><div class="fwhy">A few lines of Python reading totals, time and parameters.</div><div class="fex">Fits contributions, taxes, caps.</div><div class="fex">Most rules of a country module.</div></div>
+</div>
+
+<p><strong>No code.</strong> A customer who pays a company pension contribution of 3 % of the basic salary needs no developer: <em>Amount Type</em> "Percentage (%)", based on <code>categories['BASIC']</code>, 3 %, condition "Always Present", category "Deduction", attached to the regular structure. (An illustrative rule; country modules rarely use this shape, because their rates belong in dated parameters.)</p>
+<p><strong>Input rule.</strong> Mexico's <code>COMMISSIONS</code> has condition and amount both set to <em>Input Value</em>: the line exists only when someone types a commission on the payslip, and its amount is what was typed. It belongs to the category <em>Taxable Allowance</em>, so commissions are taxed, and it is shown only when not zero. There is no separate "input type" record: the rule <strong>is</strong> the input type, and its code is the key in <code>inputs</code>.</p>
+<p><strong>Formula reading a parameter.</strong> Mexico's additional sickness-and-maternity quota (employee part) is due on the part of the daily contribution base above three times the UMA, the official reference unit:</p>
+<div class="highlight"><pre><span></span><code><span class="n">base_contribution_salary</span> <span class="o">=</span> <span class="n">result_rules</span><span class="p">[</span><span class="s1">'SBC'</span><span class="p">][</span><span class="s1">'total'</span><span class="p">]</span>
+<span class="n">daily_uma</span> <span class="o">=</span> <span class="n">payslip</span><span class="o">.</span><span class="n">_rule_parameter</span><span class="p">(</span><span class="s1">'l10n_mx_uma'</span><span class="p">)[</span><span class="s1">'daily'</span><span class="p">]</span>
+<span class="n">result</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="n">base_contribution_salary</span> <span class="o">-</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">daily_uma</span><span class="p">))</span>
+<span class="n">result_qty</span> <span class="o">=</span> <span class="n">days_without_disabilities</span>
+<span class="n">result_rate</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.4</span>
+</code></pre></div>
+<p>It reads an earlier result (<code>SBC</code>, sequence 124, before this rule at 136), a dated parameter (the UMA) and sets amount, quantity and rate separately, so the line explains itself: <em>daily excess × days × −0.4 %</em>. A reviewer would still note one thing: the 0.4 % rate is written in the code while the UMA is a parameter. If the law changes the rate, this rule changes, and so would every old payslip recomputed with it.</p>
+<div class="admonition world">
+<p class="admonition-title">Around the world: switching rules on and off</p>
+<p>Conditions are how one structure serves very different employees:</p>
+<ul>
+<li><strong>United States</strong>: one income-tax rule per state, each with <code>result = version.address_id.state_id.code == 'CA'</code> (or its own state).</li>
+<li><strong>India</strong>: income tax is withheld only in the months the rule's condition selects.</li>
+<li><strong>Mexico</strong>: commissions and bonuses appear only when an input is typed.</li>
+<li><strong>Belgium</strong>: a filter in front of every condition skips the rules of other sectors (joint committees), so one structure serves them all.</li>
+</ul>
+</div>
+<div class="admonition practice">
+<p class="admonition-title">Review checklist</p>
+<p>For each rule you create or review:</p>
+<ul>
+<li><strong>No legal number in the code.</strong> Rates, caps and brackets come from a parameter (Chapter 21); a literal <code>0.4</code> or <code>25 *</code> is a finding.</li>
+<li><strong>Everything it reads is computed earlier.</strong> Each category and result it reads is fed by rules with a lower sequence.</li>
+<li><strong>It feeds the right totals.</strong> A rule with no category, or a missing one, never reaches the gross, the taxable base or the net (Chapter 20).</li>
+<li><strong>It checks inputs and time codes exist</strong> before reading them, or uses the <em>Input Value</em> condition.</li>
+<li><strong>It rounds where the law rounds</strong>, and only there. The engine does not round inside a computation; Belgium's withholding rule, for instance, rounds the monthly tax down to the cent itself.</li>
+<li><strong>It is on every structure where it applies</strong>, and changes no record.</li>
+</ul>
+</div>
+<h2 id="summary">Summary</h2>
+<ul>
+<li>A structure is a named list of rules for one kind of payslip; a country has one per payslip that is taxed or declared differently.</li>
+<li>A payslip gets its structure from the version's structure type (the default), or from the pay run or off-cycle payslip that names one.</li>
+<li>A rule answers five questions: identity (name, code), when (condition), how much (amount × quantity × rate), where it goes (categories, accounts, visibility) and order (sequence).</li>
+<li>A rule reads the employee and version, the payslip, worked days, inputs, totals so far, earlier results and parameters; never a later rule, which reads as 0.</li>
+<li>A rule produces one line or none, and changes no record.</li>
+<li>Order is meaning: contributions before tax, net last, employer contributions after the net.</li>
+<li>Three shapes: no code, input rule, formula reading a parameter.</li>
+</ul></section><nav class='pager' aria-label='Previous and next chapter'><a class='pager-prev' rel='prev' href='chapter-18-the-engine-in-one-picture.html'><small>Previous · Chapter 18</small><span>The engine in one picture</span></a><a class='pager-next' rel='next' href='chapter-20-categories-how-rules-talk-to-each-other.html'><small>Next · Chapter 20</small><span>Categories: how rules talk to each other</span></a></nav>
+</main>
+</div>
+<script src="js/site.js"></script>
+
+<script src="js/widgets.js"></script>
+</body>
+</html>

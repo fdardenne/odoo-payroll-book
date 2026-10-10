@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter 6: Irregular pay, corrections and leavers · Payroll, from Theory to Odoo Localization</title>
+<meta name="description" content="Gross-to-net in any country, the Odoo salary engine, and how to design, build and review a payroll localization.">
+<link rel="stylesheet" href="css/book.css">
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body class="chapter-page">
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+<button class="nav-toggle" type="button" aria-controls="sidebar" aria-expanded="false"><span aria-hidden="true">&#9776;</span> Contents</button>
+<a class="top-brand" href="index.html">Payroll, from Theory to Odoo Localization</a>
+</header>
+<div class="layout">
+<nav id="sidebar" class="sidebar" aria-label="Book contents">
+<a class="side-brand" href="index.html">Payroll, from Theory to Odoo Localization</a>
+<div class="search" role="search">
+<label for="search-input" class="sr-only">Search the book</label>
+<input id="search-input" type="search" placeholder="Search the book  ( / )" autocomplete="off" spellcheck="false" aria-controls="search-results">
+<div id="search-results" class="search-results" aria-live="polite"></div>
+</div>
+<ol class="nav"><li class='nav-part'><span class='nav-part-title'>Front matter</span><ol><li><a href='preface-before-you-start.html'><span class='nav-num'></span><span>Before you start</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part I · Payroll theory</span><ol><li><a href='chapter-01-what-payroll-is-and-why-it-is-hard.html'><span class='nav-num'>1.</span><span>What payroll is, and why it is hard</span></a></li><li><a href='chapter-02-gross-to-net.html'><span class='nav-num'>2.</span><span>Gross to net</span></a></li><li><a href='chapter-03-contributions-employee-and-employer.html'><span class='nav-num'>3.</span><span>Contributions: employee and employer</span></a></li><li><a href='chapter-04-withholding-tax.html'><span class='nav-num'>4.</span><span>Withholding tax</span></a></li><li><a href='chapter-05-time-proration-and-overtime.html'><span class='nav-num'>5.</span><span>Time, proration and overtime</span></a></li><li class='current' aria-current='page'><a href='chapter-06-irregular-pay-corrections-and-leavers.html'><span class='nav-num'>6.</span><span>Irregular pay, corrections and leavers</span></a><ol class='nav-sections'><li><a href='#what-irregular-pay-is'>What irregular pay is</a></li><li><a href='#13th-months-and-bonuses'>13 th months and bonuses</a></li><li><a href='#holiday-pay'>Holiday pay</a></li><li><a href='#corrections'>Corrections</a></li><li><a href='#garnishment'>Garnishment</a></li><li><a href='#leavers'>Leavers</a></li><li><a href='#emmas-final-pay'>Emma&#x27;s final pay</a></li><li><a href='#summary'>Summary</a></li></ol></li><li><a href='chapter-07-declarations-and-the-compliance-calendar.html'><span class='nav-num'>7.</span><span>Declarations and the compliance calendar</span></a></li><li><a href='chapter-08-accounting-for-payroll.html'><span class='nav-num'>8.</span><span>Accounting for payroll</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part II · Localization theory</span><ol><li><a href='chapter-09-what-varies-between-countries-and-what-doesnt.html'><span class='nav-num'>9.</span><span>What varies between countries, and what doesn&#x27;t</span></a></li><li><a href='chapter-10-researching-a-new-country.html'><span class='nav-num'>10.</span><span>Researching a new country</span></a></li><li><a href='chapter-11-laws-that-change-over-time.html'><span class='nav-num'>11.</span><span>Laws that change over time</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part III · Odoo payroll, hands-on</span><ol><li><a href='chapter-12-tour-and-setup.html'><span class='nav-num'>12.</span><span>Tour and setup</span></a></li><li><a href='chapter-13-employees-and-versions.html'><span class='nav-num'>13.</span><span>Employees and versions</span></a></li><li><a href='chapter-14-time-schedules-time-off-worked-days.html'><span class='nav-num'>14.</span><span>Time: schedules, time off, worked days</span></a></li><li><a href='chapter-15-pay-runs-and-payslips.html'><span class='nav-num'>15.</span><span>Pay runs and payslips</span></a></li><li><a href='chapter-16-accounting-and-payment.html'><span class='nav-num'>16.</span><span>Accounting and payment</span></a></li><li><a href='chapter-17-reports-declarations-and-a-leaver.html'><span class='nav-num'>17.</span><span>Reports, declarations and a leaver</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part IV · How the payroll engine works</span><ol><li><a href='chapter-18-the-engine-in-one-picture.html'><span class='nav-num'>18.</span><span>The engine in one picture</span></a></li><li><a href='chapter-19-structures-and-rules.html'><span class='nav-num'>19.</span><span>Structures and rules</span></a></li><li><a href='chapter-20-categories-how-rules-talk-to-each-other.html'><span class='nav-num'>20.</span><span>Categories: how rules talk to each other</span></a></li><li><a href='chapter-21-parameters-updates-and-safe-extensions.html'><span class='nav-num'>21.</span><span>Parameters, updates and safe extensions</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part V · Building a localization</span><ol><li><a href='chapter-22-a-template-for-any-localization-and-how-to-review-one.html'><span class='nav-num'>22.</span><span>A template for any localization, and how to review one</span></a></li></ol></li></ol>
+<a class="nav-pdf" href="payroll_book.pdf" download>Download the PDF</a>
+</nav>
+<div class="backdrop" hidden></div>
+<main id="main" class="content">
+<section class='chapter' id='c-16_ch06'><div class='opener'><div class='opener-band'><span class='opener-num'>Chapter 6</span><span class='opener-part'>Part I · Payroll theory</span></div><h1>Irregular pay, corrections and leavers</h1><p class='opener-sub'>Bonuses, holiday pay, mistakes, and the last payslip</p><div class='opener-goals'><div class='goals-title'>After this chapter you can</div><ul><li>Recognise the patterns behind irregular pay: 13th months and bonuses, holiday pay, accruals and provisions</li><li>Choose a correction method, and know why some errors cannot be recovered from the employee</li><li>Apply a garnishment ceiling on net pay</li><li>Tell notice, payment in lieu of notice, severance and end-of-service gratuity apart</li><li>Assemble a leaver's final pay from its components</li></ul></div></div><p>On 31 October 2026 MyVidangeCompany dismisses Emma after seven years, with immediate effect and an indemnity in lieu of notice. Her last pay is the biggest of her career: 48,959.75 € gross, five different components, three different tax rates, and 25,311.63 € net. None of it follows the monthly formula of Chapters 2 to 4. This chapter covers the pay that does not come every month: bonuses, holiday pay, corrections and leavers.</p>
+<h2 id="what-irregular-pay-is">What irregular pay is</h2>
+<p><strong>Irregular pay</strong> (<em>non-recurring pay</em>, <em>one-off payments</em>; tax laws often say <em>non-periodic income</em>) is any pay that does not come with every regular payslip: a 13<sup>th</sup> month, a bonus, a holiday bonus, a correction of an earlier month. A leaver's <strong>final pay</strong> (<em>final settlement</em>, <em>full and final settlement</em>) is the last pay of a contract. It collects several irregular items at once: the last salary, the bonus and leave earned but not yet paid, and money for the end of the contract itself.</p>
+<p>Three things follow from that definition:</p>
+<ul>
+<li><strong>It does not fit the monthly formula.</strong> Annualise a double month and the employee looks like a high earner for a year. Irregular pay usually gets its own tax method (Chapter 4) and often its own payslip.</li>
+<li><strong>It is earned before it is paid.</strong> A 13<sup>th</sup> month is earned month by month; a leaver is owed the share earned so far.</li>
+<li><strong>A final pay is a list of items.</strong> The items are the same everywhere; the law of each country says which are due (see Leavers below).</li>
+</ul>
+<figure>
+<p><img alt="Irregular pay and a final pay" src="assets/charts/gen_ch6_irregular_pay.svg" /></p>
+<figcaption>Illustrative numbers, 3,000 a month. Left: an employee who stays gets a holiday bonus in June and a 13th month in December. Right: one who leaves at the end of September gets, in one month, the last salary, 9/12 of the 13th month, the untaken leave and the notice paid in lieu: more than five normal months.</figcaption>
+</figure>
+<h2 id="13th-months-and-bonuses">13<sup>th</sup> months and bonuses</h2>
+<p>Many countries add a payment once or twice a year: a 13<sup>th</sup> month, a Christmas bonus, a religious-holiday allowance. They share three design questions:</p>
+<table>
+<thead>
+<tr>
+<th>Question</th>
+<th>Options</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>When is it paid?</strong></td>
+<td>once a year; in two halves; pro rata at exit</td>
+</tr>
+<tr>
+<td><strong>How is it accrued?</strong></td>
+<td>not at all; or a <strong>monthly provision</strong>, so the cost lands in the month it was earned</td>
+</tr>
+<tr>
+<td><strong>How is it taxed?</strong></td>
+<td>its own method, not the monthly formula (Chapter 4)</td>
+</tr>
+</tbody>
+</table>
+<p>In Odoo, such a payment is usually a <strong>separate payslip on its own structure</strong>, with its own rules and tax method, rather than an extra line on the monthly payslip.</p>
+<div class="admonition world">
+<p class="admonition-title">Around the world</p>
+<ul>
+<li><strong>Mexico</strong>: the Christmas bonus has its own structure, an exempt part and monthly provisions.</li>
+<li><strong>Philippines</strong>: a 13<sup>th</sup>-month provision every month.</li>
+<li><strong>Switzerland</strong>: 13<sup>th</sup> and 14<sup>th</sup> month, with provisions.</li>
+<li><strong>Luxembourg</strong>: separate structures with a tax rule for non-periodic income.</li>
+<li><strong>Indonesia</strong>: the religious-holiday allowance, entered as a payslip input.</li>
+</ul>
+</div>
+<h3 id="case-study-melanies-year-end-premium">Case study: Mélanie's year-end premium</h3>
+<p>MyVidangeCompany's sector agreement grants a year-end premium of one monthly salary in December. It carries ordinary contributions, a flat tax rate (Chapter 4), and pushes up the quarterly special contribution (Chapter 3).</p>
+<div class="admonition example">
+<p class="admonition-title">Worked example: Mélanie's December 2026</p>
+<table>
+<thead>
+<tr>
+<th>Line</th>
+<th style="text-align: right;">Amount (€)</th>
+</tr>
+</thead>
+<tbody>
+<tr class='earn'>
+<td><span class='pill earn'>SALARY</span> December salary</td>
+<td style="text-align: right;">4,000.00</td>
+</tr>
+<tr class='earn'>
+<td><span class='pill earn'>Year-end premium</span></td>
+<td style="text-align: right;">4,000.00</td>
+</tr>
+<tr class='ded'>
+<td><span class='pill ded'>ONSS</span> Employee contributions 13.07 % on both</td>
+<td style="text-align: right;">−1,045.60</td>
+</tr>
+<tr class='tax'>
+<td><span class='pill tax'>P.P</span> Withholding on the salary (November formula)</td>
+<td style="text-align: right;">−818.23</td>
+</tr>
+<tr class='tax'>
+<td><span class='pill tax'>Withholding on the premium</span>: 3,477.20 × 46.44 %</td>
+<td style="text-align: right;">−1,614.81</td>
+</tr>
+<tr class='ded'>
+<td><span class='pill ded'>M.ONSS</span> Special contribution: quarter's 159.53 − 72.48 already withheld</td>
+<td style="text-align: right;">−87.05</td>
+</tr>
+<tr class='net'>
+<td><span class='pill net'>NET</span> Net pay December</td>
+<td style="text-align: right;">4,434.31</td>
+</tr>
+<tr class='emp'>
+<td><span class='pill emp'>Employer contributions 25.12 %</span></td>
+<td style="text-align: right;">2,009.60</td>
+</tr>
+<tr>
+<td><strong>Employer cost</strong></td>
+<td style="text-align: right;"><strong>10,009.60</strong></td>
+</tr>
+</tbody>
+</table>
+<p>The premium lifts the quarterly base to 16,000.00 €; December withholds the quarter's 159.53 € minus what October and November took.<sup id="fnref2:c6-calc"><a class="footnote-ref" href="#fn:c6-calc">9</a></sup> The premium's rules come from the sector agreement, not the law (<code>UNVERIFIED</code>, secondary source).<sup id="fnref:c6-accg"><a class="footnote-ref" href="#fn:c6-accg">5</a></sup></p>
+</div>
+<h2 id="holiday-pay">Holiday pay</h2>
+<p><strong>Paid leave</strong> is the employee's right to a number of days off a year, set by law or contract, without losing pay. <strong>Holiday pay</strong> is the money tied to those days. It comes in up to three forms, and each one lands on a different payslip:</p>
+<div class="wcards three" markdown="0">
+<div class="wcard c-earn"><div class="wt">The salary continues</div><div class="wd">The employee is on leave; the salary keeps running as if he worked.</div><div class="wr"><span>When</span><div>the month of the days off</div></div><div class="wr"><span>Payslip</span><div>same gross; the days show as paid leave instead of worked (Chapter 5)</div></div><div class="wr"><span>Where</span><div>almost everywhere</div></div></div>
+<div class="wcard c-net"><div class="wt">A holiday bonus</div><div class="wd">Extra money on top of the salary, so the employee can afford the holiday.</div><div class="wr"><span>When</span><div>once a year, often before summer</div></div><div class="wr"><span>Payslip</span><div>an extra amount, often its own payslip and tax method</div></div><div class="wr"><span>Where</span><div>Belgium, Mexico, Australia (leave loading)</div></div></div>
+<div class="wcard c-ded"><div class="wt">Untaken leave paid out</div><div class="wd">Days earned but not taken when the contract ends become money.</div><div class="wr"><span>When</span><div>the final pay</div></div><div class="wr"><span>Payslip</span><div>days left × daily rate, one line of the final pay</div></div><div class="wr"><span>Where</span><div>Saudi Arabia, UAE, Belgium</div></div></div>
+</div>
+
+<p>In a few systems a fund pays the holiday money instead of the employer (Belgian blue-collar workers); then it never appears on the payslip.</p>
+<h3 id="case-study-melanies-holiday-bonus">Case study: Mélanie's holiday bonus</h3>
+<p>Belgian white-collar employees get a holiday bonus of 92 % of a monthly salary, earned in the previous year. Instead of ordinary contributions, a special 13.07 % deduction applies to part of it, and it is taxed at a flat rate.<sup id="fnref:c6-cit"><a class="footnote-ref" href="#fn:c6-cit">2</a></sup><sup>,</sup><sup id="fnref:c6-double"><a class="footnote-ref" href="#fn:c6-double">4</a></sup></p>
+<div class="admonition example">
+<p class="admonition-title">Worked example: Mélanie's holiday bonus, June 2026</p>
+<table>
+<thead>
+<tr>
+<th>Line</th>
+<th style="text-align: right;">Amount (€)</th>
+</tr>
+</thead>
+<tbody>
+<tr class='earn'>
+<td><span class='pill earn'>Holiday bonus</span> 92 % × 4,000.00</td>
+<td style="text-align: right;">3,680.00</td>
+</tr>
+<tr class='ded'>
+<td><span class='pill ded'>Special 13.07 %</span> on 85 % of the salary (3,400.00)</td>
+<td style="text-align: right;">−444.38</td>
+</tr>
+<tr class='tax'>
+<td><span class='pill tax'>Taxable</span></td>
+<td style="text-align: right;">3,235.62</td>
+</tr>
+<tr class='tax'>
+<td><span class='pill tax'>Withholding</span>, holiday-pay rate 42.39 %</td>
+<td style="text-align: right;">−1,371.58</td>
+</tr>
+<tr class='net'>
+<td><span class='pill net'>Net holiday bonus</span></td>
+<td style="text-align: right;">1,864.04</td>
+</tr>
+</tbody>
+</table>
+<p>Odoo's June payslip gives the same special deduction, withholding and net.<sup id="fnref:c6-odoo"><a class="footnote-ref" href="#fn:c6-odoo">1</a></sup></p>
+</div>
+<div class="admonition be">
+<p class="admonition-title">In Belgium</p>
+<p>Three variants: <strong>simple</strong> (the salary during the days off), <strong>double</strong> (the 92 % bonus) and <strong>exit</strong> holiday pay, which settles both when a contract ends.<sup id="fnref2:c6-onsshp"><a class="footnote-ref" href="#fn:c6-onsshp">3</a></sup> The 85 % base is practice, not a legal figure (<code>UNVERIFIED</code>).</p>
+</div>
+<h2 id="corrections">Corrections</h2>
+<p>A <strong>correction</strong> fixes a payslip that was computed with wrong or late information: an unpaid day reported after the payroll ran, a raise signed late, a wrong rate. It happens whenever the error is found, often weeks later. What it means for the payslip depends on how far the payslip has already travelled: before the bank transfer nothing has left the company; after it, the money and the declarations have, and only the <strong>difference</strong> can still be settled.</p>
+<div class="steps" markdown="0">
+<div class="step c-earn"><b><span class="n">1</span>Computed, not paid yet</b>Fix the data, <strong>cancel and recompute</strong>.<i>Nothing has left the company, so nothing needs undoing.</i></div>
+<div class="sarrow">→</div>
+<div class="step c-net"><b><span class="n">2</span>Paid, small error, same year</b><strong>Adjust on the next payslip</strong>: one extra line for the difference, plus or minus.<i>The declared month stays wrong until its return is corrected.</i></div>
+<div class="sarrow">→</div>
+<div class="step c-ded"><b><span class="n">3</span>Large, or an earlier year</b><strong>Refund and reissue</strong>: a negative copy cancels the original, a new payslip replaces it.<i>More documents; the declarations must be amended.</i></div>
+</div>
+
+<p>The further the payslip went (paid, declared, a closed year), the heavier the fix. The law adds limits: some deductions cannot be recovered from the employee later (in Belgium, a contribution not withheld in time),<sup id="fnref:c6-general"><a class="footnote-ref" href="#fn:c6-general">6</a></sup> a closed tax year needs a special form, and arrears have their own tax rule.<sup id="fnref:c6-a3"><a class="footnote-ref" href="#fn:c6-a3">7</a></sup></p>
+<div class="admonition example">
+<p class="admonition-title">Worked example: Jurgen's forgotten unpaid day</p>
+<p>Jurgen's October unpaid day is entered after October was paid. MyVidangeCompany deducts the 106.15 € (Chapter 5's daily rate) on the November payslip, and November's reduction, withholding and special contribution follow the lower gross. October's line in the quarterly return is corrected when it is filed.</p>
+</div>
+<p>When deductions exceed earnings, the net goes negative and a bank cannot pay it. The usual policy is to pay zero and carry the rest forward; the Belgian structure has a <code>NET_TO_RECOVER</code> line for that.</p>
+<div class="admonition world">
+<p class="admonition-title">Around the world</p>
+<ul>
+<li><strong>India, Turkey, Poland</strong>: the cumulative method corrects itself next month.</li>
+<li><strong>Egypt, Pakistan</strong>: a year-to-date tax adjustment wizard adds a correction line.</li>
+<li><strong>Australia</strong>: a pay-event report already sent can be replaced in full.</li>
+<li><strong>Philippines</strong>: a year-end annualisation trues up the year.</li>
+</ul>
+</div>
+<p><strong>In Odoo.</strong> A validated payslip can be refunded: a negated copy linked to the original. Chapter 15 corrects a payslip after validation.</p>
+<h2 id="garnishment">Garnishment</h2>
+<p>A court can order the employer to pay part of the salary to a creditor. Almost every country protects a minimum: only the <strong>net</strong> above legal thresholds can be seized, in slices. In Belgium nothing below 1,419.00 € of net can be seized in 2026, then growing slices; on Mélanie's 2,614.26 €, at most 906.46 €.<sup id="fnref:c6-garn"><a class="footnote-ref" href="#fn:c6-garn">8</a></sup><sup>,</sup><sup id="fnref:c6-calc"><a class="footnote-ref" href="#fn:c6-calc">9</a></sup></p>
+<p><strong>In Odoo.</strong> A garnishment is a payslip adjustment (<span class='pill odoo'>hr.salary.attachment</span>); the rule applies the legal ceiling.</p>
+<h2 id="leavers">Leavers</h2>
+<p>A <strong>leaver</strong> is an employee whose contract ends: he resigns, is dismissed, reaches the end of a fixed-term contract, or retires. It happens on a known last day, often after a notice period. For the payroll, the leaver's last pay, the <strong>final pay</strong>, must settle everything still owed in one go: there is no next month to fix a forgotten item. The items fall into three groups:</p>
+<div class="sorter" markdown="0">
+<div class="sq">What goes into a final pay</div>
+<div class="scols">
+<div class="scol c-earn"><div class="if">Earned before the end</div><div class="then">Last salary, prorated<br>Bonus earned so far (9/12 of a 13th month)<br>Leave not taken</div><i>Owed whatever the reason for leaving.</i></div>
+<div class="scol c-emp"><div class="if">Because of the end</div><div class="then">Notice paid in lieu<br>Severance pay or end-of-service gratuity</div><i>Depends on who ended the contract, and why.</i></div>
+<div class="scol c-ded"><div class="if">Taken back, and paperwork</div><div class="then">Recoveries: advances, equipment<br>Exit notice, certificates for the employee</div><i>A deduction or a document, not pay.</i></div>
+</div>
+<div class="sfoot">The law of each country decides which items are due, and how each one is taxed.</div>
+</div>
+
+<p>Four terms are often confused:</p>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>What it is</th>
+<th>Typical formula</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Notice</strong></td>
+<td>a period between announcement and end, worked and paid as usual</td>
+<td>length by seniority</td>
+</tr>
+<tr>
+<td><strong>Payment in lieu of notice</strong></td>
+<td>the notice not worked, paid at once</td>
+<td>weekly pay × weeks of notice</td>
+</tr>
+<tr>
+<td><strong>Severance pay</strong></td>
+<td>compensation for losing the job, on top of notice</td>
+<td>an amount per year of service</td>
+</tr>
+<tr>
+<td><strong>End-of-service gratuity</strong></td>
+<td>earned through the years, paid at any exit</td>
+<td>a share of salary per year, accrued monthly</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition world">
+<p class="admonition-title">Around the world</p>
+<ul>
+<li><strong>Saudi Arabia, UAE</strong>: end-of-service gratuity, accrued monthly, paid when a departure reason is set.</li>
+<li><strong>India</strong>: a monthly gratuity line; "full-and-final" payslips on departure.</li>
+<li><strong>Hong Kong</strong>: severance reduced by the employer's provident-fund contributions.</li>
+<li><strong>Australia</strong>: lump sums with tax-free limits by years of service.</li>
+<li><strong>Turkey</strong>: severance pay with a legal ceiling.</li>
+</ul>
+</div>
+<h3 id="case-study-emma-dismissed-with-an-indemnity-in-lieu-of-notice">Case study: Emma, dismissed with an indemnity in lieu of notice</h3>
+<p>Emma's notice depends on her seniority: 7 years and 1 month gives <strong>24 weeks</strong>.<sup id="fnref:c6-l78"><a class="footnote-ref" href="#fn:c6-l78">10</a></sup> MyVidangeCompany pays them as an indemnity, valued on her annual pay, benefits included:</p>
+<div class="formula">Indemnity = (12 × monthly + year-end premium + holiday bonus) ÷ 52 × weeks of notice</div>
+
+<p>For Emma: (60,000.00 + 5,000.00 + 4,600.00) ÷ 52 × 24 = <strong>32,123.08 €</strong>. It carries ordinary contributions<sup id="fnref:c6-end"><a class="footnote-ref" href="#fn:c6-end">11</a></sup> and is taxed on a separate indemnity scale (38.96 % for Emma).</p>
+<div class="admonition pitfall">
+<p class="admonition-title">Common pitfall</p>
+<p>Getting the hire date wrong by one month. Counted from 1 November 2019, Emma's 24 weeks become 21: 4,015.39 € less. Check the contract start, earlier contracts with the same employer, and the notice start before computing.</p>
+</div>
+<div class="admonition be">
+<p class="admonition-title">In Belgium</p>
+<p>Notice grows with seniority by steps (3 more weeks per started year from 5 years), with a cap for recent contracts. An employee who resigns has a shorter notice. The employer also pays a special contribution of 1 % to 3 % on dismissal indemnities (<code>UNVERIFIED</code> band; the calculator applies 1 %).<sup id="fnref:c6-tf"><a class="footnote-ref" href="#fn:c6-tf">12</a></sup></p>
+</div>
+<h2 id="emmas-final-pay">Emma's final pay</h2>
+<p>Her other items: the October salary, the year-end premium pro rata (10/12), and the <strong>exit holiday pay</strong> she earned in 2026.</p>
+<figure>
+<p><img alt="Emma's final pay" src="assets/charts/be_ch6_waterfall_emma.svg" /></p>
+<figcaption>Emma's final pay, October 2026: four earnings, three deductions. The indemnity is by far the largest part.</figcaption>
+</figure>
+<table class='payslip'>
+<thead>
+<tr>
+<th>Component</th>
+<th>Pattern</th>
+<th style="text-align: right;">Gross</th>
+<th style="text-align: right;">Employee contributions</th>
+<th style="text-align: right;"><span class='pill tax'>Withholding</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class='earn'>
+<td><span class='pill earn'>October salary</span></td>
+<td>last salary, monthly formula</td>
+<td style="text-align: right;">5,000.00</td>
+<td style="text-align: right;">653.50</td>
+<td style="text-align: right;">1,245.27</td>
+</tr>
+<tr class='earn'>
+<td><span class='pill earn'>Year-end premium 10/12</span></td>
+<td>pro-rata bonus, flat rate 51.48 %</td>
+<td style="text-align: right;">4,166.67</td>
+<td style="text-align: right;">544.58</td>
+<td style="text-align: right;">1,864.65</td>
+</tr>
+<tr class='earn'>
+<td><span class='pill earn'>Exit holiday pay, simple</span></td>
+<td>accrued leave</td>
+<td style="text-align: right;">3,835.00</td>
+<td style="text-align: right;">501.23</td>
+<td style="text-align: right;">with next row</td>
+</tr>
+<tr class='earn'>
+<td><span class='pill earn'>Exit holiday pay, double</span></td>
+<td>accrued holiday bonus, 47.44 % on both</td>
+<td style="text-align: right;">3,835.00</td>
+<td style="text-align: right;">444.38</td>
+<td style="text-align: right;">3,190.05</td>
+</tr>
+<tr class='earn'>
+<td><span class='pill earn'>Indemnity, 24 weeks</span></td>
+<td>payment in lieu of notice, 38.96 %</td>
+<td style="text-align: right;">32,123.08</td>
+<td style="text-align: right;">4,198.49</td>
+<td style="text-align: right;">10,879.42</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td></td>
+<td style="text-align: right;"><strong>48,959.75</strong></td>
+<td style="text-align: right;"><strong>6,342.18</strong></td>
+<td style="text-align: right;"><strong>17,179.39</strong></td>
+</tr>
+</tbody>
+</table>
+
+<table class='payslip'>
+<thead>
+<tr>
+<th>Final pay</th>
+<th style="text-align: right;">Amount (€)</th>
+</tr>
+</thead>
+<tbody>
+<tr class='earn'>
+<td><span class='pill earn'>Gross</span></td>
+<td style="text-align: right;">48,959.75</td>
+</tr>
+<tr class='ded'>
+<td><span class='pill ded'>Employee contributions</span></td>
+<td style="text-align: right;">−6,342.18</td>
+</tr>
+<tr class='tax'>
+<td><span class='pill tax'>Withholding</span></td>
+<td style="text-align: right;">−17,179.39</td>
+</tr>
+<tr class='ded'>
+<td><span class='pill ded'>Special social security contribution</span> (quarter, indemnity left out)</td>
+<td style="text-align: right;">−126.55</td>
+</tr>
+<tr class='net'>
+<td><span class='pill net'>Net paid</span></td>
+<td style="text-align: right;">25,311.63</td>
+</tr>
+<tr class='emp'>
+<td><span class='pill emp'>Employer contributions</span> 25.12 % on 45,124.75</td>
+<td style="text-align: right;">11,335.34</td>
+</tr>
+<tr class='emp'>
+<td><span class='pill emp'>Special contribution on the indemnity</span> 1 %</td>
+<td style="text-align: right;">321.23</td>
+</tr>
+<tr>
+<td><strong>Employer cost</strong></td>
+<td style="text-align: right;"><strong>60,616.32</strong></td>
+</tr>
+</tbody>
+</table>
+
+<p>Five components, four tax treatments, two contribution treatments: a final pay is never "one more payslip". Exit holiday pay is 15.34 % of the year's gross, half simple, half double.<sup id="fnref:c6-onsshp"><a class="footnote-ref" href="#fn:c6-onsshp">3</a></sup></p>
+<div class="admonition todo">
+<p class="admonition-title">Open questions: Emma's final pay in Odoo</p>
+<p>Odoo finds the same 24 weeks and the same premium withholding. Other lines differ; the main ones:<sup id="fnref2:c6-odoo"><a class="footnote-ref" href="#fn:c6-odoo">1</a></sup></p>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th style="text-align: right;">Calculator</th>
+<th style="text-align: right;">Odoo</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Withholding on the indemnity</td>
+<td style="text-align: right;">10,879.42</td>
+<td style="text-align: right;">8,771.79</td>
+<td>38.96 % against about 31.3 %: <strong>open</strong></td>
+</tr>
+<tr>
+<td>Exit holiday pay, simple part</td>
+<td style="text-align: right;">3,835.00</td>
+<td style="text-align: right;">3,476.88</td>
+<td>Odoo's base covers January to September only: <strong>open</strong></td>
+</tr>
+<tr>
+<td><strong>Net of the five payslips</strong></td>
+<td style="text-align: right;"><strong>25,311.63</strong></td>
+<td style="text-align: right;"><strong>27,099.24</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Chapter 10 shows how such differences are taken to an expert.</p>
+</div>
+<p><strong>In Odoo.</strong> Each component is a separate payslip on its own structure (<em>Monthly Pay</em>, <em>13<sup>th</sup> Month</em>, <em>Termination Holidays</em>, <em>Termination Fees</em>). The departure dialog computes the notice; the exit payslips join the leaver's last pay run. Chapter 17 follows Emma's departure in Odoo.</p>
+<div class="admonition practice">
+<p class="admonition-title">In practice</p>
+<p>Build a final pay as a checklist before computing: last salary, bonus pro rata, accrued leave, notice or payment in lieu, severance, recoveries (advances, a laptop), documents. Most final-pay errors are a forgotten line, not a wrong rate.</p>
+</div>
+<h2 id="summary">Summary</h2>
+<ul>
+<li>Irregular pay (13<sup>th</sup> months, bonuses, holiday bonuses) usually gets its own structure and its own tax method, and is often accrued monthly with a provision.</li>
+<li>Mélanie's December: 4,000.00 € of premium taxed at a flat 46.44 %, and a quarterly catch-up of 87.05 €; net 4,434.31 €.</li>
+<li>Holiday pay is salary that continues, sometimes plus a bonus; untaken leave is paid at exit. Mélanie nets 1,864.04 € of holiday bonus.</li>
+<li>Correct before payment by recomputing; after, adjust next month or refund and reissue.</li>
+<li>Garnishment is capped on the net: at most 906.46 € of Mélanie's 2,614.26 €.</li>
+<li>Notice, payment in lieu, severance and gratuity are four different things. Emma gets 24 weeks paid in lieu: 32,123.08 €.</li>
+<li>Emma's final pay: 48,959.75 € gross, 25,311.63 € net, 60,616.32 € of employer cost.</li>
+</ul>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:c6-odoo">
+<p>Payslips computed by Odoo master on the demo database, <code>research/numbers_be.md</code>, sections 4 (Emma's departure and exit payslips) and 5 (double holiday pay); differences in <code>research/odoo_vs_calc.md</code>.&#160;<a class="footnote-backref" href="#fnref:c6-odoo" title="Jump back to footnote 1 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:c6-odoo" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:c6-cit">
+<p>socialsecurity.be, annual holidays (20 days, double holiday pay 92 %): <a href="https://www.socialsecurity.be/citizen/fr/conges-credit-temps-et-interruption-de-carriere/vacances-annuelles">https://www.socialsecurity.be/citizen/fr/conges-credit-temps-et-interruption-de-carriere/vacances-annuelles</a>.&#160;<a class="footnote-backref" href="#fnref:c6-cit" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:c6-onsshp">
+<p>ONSS, holiday pay (exit holiday pay 15.34 %, new employer advance 10 %): <a href="https://www.socialsecurity.be/employer/instructions/dmfa/fr/latest/instructions/salary/particularcases/holidaypay.html">https://www.socialsecurity.be/employer/instructions/dmfa/fr/latest/instructions/salary/particularcases/holidaypay.html</a>.&#160;<a class="footnote-backref" href="#fnref:c6-onsshp" title="Jump back to footnote 3 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:c6-onsshp" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:c6-double">
+<p>ONSS, special contribution on double holiday pay, private sector: <a href="https://www.socialsecurity.be/employer/instructions/dmfa/fr/latest/instructions/special_contributions/other_specialcontributions/doubleholiday_privatesector.html">https://www.socialsecurity.be/employer/instructions/dmfa/fr/latest/instructions/special_contributions/other_specialcontributions/doubleholiday_privatesector.html</a>.&#160;<a class="footnote-backref" href="#fnref:c6-double" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+<li id="fn:c6-accg">
+<p>Secondary source: ACCG, <em>Tool CP 200 prime de fin d'année 2025</em>: <a href="https://www.accg.be/sites/default/files/sectors/cp-200/accg-cp-200-tool-cp-200-prime-de-fin-d-annee-2025.pdf">https://www.accg.be/sites/default/files/sectors/cp-200/accg-cp-200-tool-cp-200-prime-de-fin-d-annee-2025.pdf</a>.&#160;<a class="footnote-backref" href="#fnref:c6-accg" title="Jump back to footnote 5 in the text">&#8617;</a></p>
+</li>
+<li id="fn:c6-general">
+<p>ONSS, general rule on contribution payment: <a href="https://www.socialsecurity.be/employer/instructions/dmfa/fr/latest/instructions/obligations/obligations_nsso/contributionpayment_obligations_periodicity/generalrule.html">https://www.socialsecurity.be/employer/instructions/dmfa/fr/latest/instructions/obligations/obligations_nsso/contributionpayment_obligations_periodicity/generalrule.html</a>.&#160;<a class="footnote-backref" href="#fnref:c6-general" title="Jump back to footnote 6 in the text">&#8617;</a></p>
+</li>
+<li id="fn:c6-a3">
+<p>SPF Finances, Annex III from 1 January 2026, n° 53–62: <a href="https://www.minfin.fgov.be/myminfin-web/pages/public/fisconet/document/536a741e-81d6-4605-ad11-8e07ebc4a440">https://www.minfin.fgov.be/myminfin-web/pages/public/fisconet/document/536a741e-81d6-4605-ad11-8e07ebc4a440</a>.&#160;<a class="footnote-backref" href="#fnref:c6-a3" title="Jump back to footnote 7 in the text">&#8617;</a></p>
+</li>
+<li id="fn:c6-garn">
+<p>SPF Emploi, garnishment and assignment of salary (2026 amounts): <a href="https://emploi.belgique.be/fr/themes/remuneration/protection-de-la-remuneration/saisie-et-cession-sur-salaires">https://emploi.belgique.be/fr/themes/remuneration/protection-de-la-remuneration/saisie-et-cession-sur-salaires</a>.&#160;<a class="footnote-backref" href="#fnref:c6-garn" title="Jump back to footnote 8 in the text">&#8617;</a></p>
+</li>
+<li id="fn:c6-calc">
+<p>Independent calculator, <code>research/numbers_be_calc.md</code>, sections 5 to 7, 10.11 and 10.13.&#160;<a class="footnote-backref" href="#fnref:c6-calc" title="Jump back to footnote 9 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:c6-calc" title="Jump back to footnote 9 in the text">&#8617;</a></p>
+</li>
+<li id="fn:c6-l78">
+<p>Law of 3 July 1978, art. 37/1, 37/2 (version from 1 August 2026), 37/4 and 39 (Justel): <a href="https://www.ejustice.just.fgov.be/cgi_loi/article.pl?language=fr&amp;lg_txt=f&amp;type=&amp;sort=&amp;numac_search=1978070303&amp;cn_search=1978070303&amp;caller=&amp;&amp;view_numac=1978070303fr">https://www.ejustice.just.fgov.be/cgi_loi/article.pl?language=fr&amp;lg_txt=f&amp;type=&amp;sort=&amp;numac_search=1978070303&amp;cn_search=1978070303&amp;caller=&amp;&amp;view_numac=1978070303fr</a>.&#160;<a class="footnote-backref" href="#fnref:c6-l78" title="Jump back to footnote 10 in the text">&#8617;</a></p>
+</li>
+<li id="fn:c6-end">
+<p>ONSS, end of the employment contract: <a href="https://www.socialsecurity.be/employer/instructions/dmfa/fr/latest/instructions/salary/particularcases/end_of_contract.html">https://www.socialsecurity.be/employer/instructions/dmfa/fr/latest/instructions/salary/particularcases/end_of_contract.html</a>.&#160;<a class="footnote-backref" href="#fnref:c6-end" title="Jump back to footnote 11 in the text">&#8617;</a></p>
+</li>
+<li id="fn:c6-tf">
+<p>ONSS, special contribution on dismissal indemnities: <a href="https://www.socialsecurity.be/employer/instructions/dmfa/fr/latest/instructions/special_contributions/other_specialcontributions/terminationfeecontribution.html">https://www.socialsecurity.be/employer/instructions/dmfa/fr/latest/instructions/special_contributions/other_specialcontributions/terminationfeecontribution.html</a>.&#160;<a class="footnote-backref" href="#fnref:c6-tf" title="Jump back to footnote 12 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></section><nav class='pager' aria-label='Previous and next chapter'><a class='pager-prev' rel='prev' href='chapter-05-time-proration-and-overtime.html'><small>Previous · Chapter 5</small><span>Time, proration and overtime</span></a><a class='pager-next' rel='next' href='chapter-07-declarations-and-the-compliance-calendar.html'><small>Next · Chapter 7</small><span>Declarations and the compliance calendar</span></a></nav>
+</main>
+</div>
+<script src="js/site.js"></script>
+
+</body>
+</html>

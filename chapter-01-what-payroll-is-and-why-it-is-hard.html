@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter 1: What payroll is, and why it is hard · Payroll, from Theory to Odoo Localization</title>
+<meta name="description" content="Gross-to-net in any country, the Odoo salary engine, and how to design, build and review a payroll localization.">
+<link rel="stylesheet" href="css/book.css">
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body class="chapter-page">
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+<button class="nav-toggle" type="button" aria-controls="sidebar" aria-expanded="false"><span aria-hidden="true">&#9776;</span> Contents</button>
+<a class="top-brand" href="index.html">Payroll, from Theory to Odoo Localization</a>
+</header>
+<div class="layout">
+<nav id="sidebar" class="sidebar" aria-label="Book contents">
+<a class="side-brand" href="index.html">Payroll, from Theory to Odoo Localization</a>
+<div class="search" role="search">
+<label for="search-input" class="sr-only">Search the book</label>
+<input id="search-input" type="search" placeholder="Search the book  ( / )" autocomplete="off" spellcheck="false" aria-controls="search-results">
+<div id="search-results" class="search-results" aria-live="polite"></div>
+</div>
+<ol class="nav"><li class='nav-part'><span class='nav-part-title'>Front matter</span><ol><li><a href='preface-before-you-start.html'><span class='nav-num'></span><span>Before you start</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part I · Payroll theory</span><ol><li class='current' aria-current='page'><a href='chapter-01-what-payroll-is-and-why-it-is-hard.html'><span class='nav-num'>1.</span><span>What payroll is, and why it is hard</span></a><ol class='nav-sections'><li><a href='#what-payroll-is'>What payroll is</a></li><li><a href='#the-parties-and-the-money'>The parties and the money</a></li><li><a href='#the-payroll-cycle'>The payroll cycle</a></li><li><a href='#the-rhythm-event-month-quarter-year'>The rhythm: event, month, quarter, year</a></li><li><a href='#why-payroll-is-hard'>Why payroll is hard</a></li><li><a href='#summary'>Summary</a></li></ol></li><li><a href='chapter-02-gross-to-net.html'><span class='nav-num'>2.</span><span>Gross to net</span></a></li><li><a href='chapter-03-contributions-employee-and-employer.html'><span class='nav-num'>3.</span><span>Contributions: employee and employer</span></a></li><li><a href='chapter-04-withholding-tax.html'><span class='nav-num'>4.</span><span>Withholding tax</span></a></li><li><a href='chapter-05-time-proration-and-overtime.html'><span class='nav-num'>5.</span><span>Time, proration and overtime</span></a></li><li><a href='chapter-06-irregular-pay-corrections-and-leavers.html'><span class='nav-num'>6.</span><span>Irregular pay, corrections and leavers</span></a></li><li><a href='chapter-07-declarations-and-the-compliance-calendar.html'><span class='nav-num'>7.</span><span>Declarations and the compliance calendar</span></a></li><li><a href='chapter-08-accounting-for-payroll.html'><span class='nav-num'>8.</span><span>Accounting for payroll</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part II · Localization theory</span><ol><li><a href='chapter-09-what-varies-between-countries-and-what-doesnt.html'><span class='nav-num'>9.</span><span>What varies between countries, and what doesn&#x27;t</span></a></li><li><a href='chapter-10-researching-a-new-country.html'><span class='nav-num'>10.</span><span>Researching a new country</span></a></li><li><a href='chapter-11-laws-that-change-over-time.html'><span class='nav-num'>11.</span><span>Laws that change over time</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part III · Odoo payroll, hands-on</span><ol><li><a href='chapter-12-tour-and-setup.html'><span class='nav-num'>12.</span><span>Tour and setup</span></a></li><li><a href='chapter-13-employees-and-versions.html'><span class='nav-num'>13.</span><span>Employees and versions</span></a></li><li><a href='chapter-14-time-schedules-time-off-worked-days.html'><span class='nav-num'>14.</span><span>Time: schedules, time off, worked days</span></a></li><li><a href='chapter-15-pay-runs-and-payslips.html'><span class='nav-num'>15.</span><span>Pay runs and payslips</span></a></li><li><a href='chapter-16-accounting-and-payment.html'><span class='nav-num'>16.</span><span>Accounting and payment</span></a></li><li><a href='chapter-17-reports-declarations-and-a-leaver.html'><span class='nav-num'>17.</span><span>Reports, declarations and a leaver</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part IV · How the payroll engine works</span><ol><li><a href='chapter-18-the-engine-in-one-picture.html'><span class='nav-num'>18.</span><span>The engine in one picture</span></a></li><li><a href='chapter-19-structures-and-rules.html'><span class='nav-num'>19.</span><span>Structures and rules</span></a></li><li><a href='chapter-20-categories-how-rules-talk-to-each-other.html'><span class='nav-num'>20.</span><span>Categories: how rules talk to each other</span></a></li><li><a href='chapter-21-parameters-updates-and-safe-extensions.html'><span class='nav-num'>21.</span><span>Parameters, updates and safe extensions</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part V · Building a localization</span><ol><li><a href='chapter-22-a-template-for-any-localization-and-how-to-review-one.html'><span class='nav-num'>22.</span><span>A template for any localization, and how to review one</span></a></li></ol></li></ol>
+<a class="nav-pdf" href="payroll_book.pdf" download>Download the PDF</a>
+</nav>
+<div class="backdrop" hidden></div>
+<main id="main" class="content">
+<section class='chapter' id='c-11_ch01'><div class='opener'><div class='opener-band'><span class='opener-num'>Chapter 1</span><span class='opener-part'>Part I · Payroll theory</span></div><h1>What payroll is, and why it is hard</h1><p class='opener-sub'>Several parties, one monthly cycle, and rules that change during the year</p><div class='opener-goals'><div class='goals-title'>After this chapter you can</div><ul><li>Name the parties of any payroll and the money that flows between them</li><li>Walk through the six steps of the payroll cycle and the event, monthly, quarterly and yearly rhythm of the authorities</li><li>Explain why a payroll error is costly, and who finds it</li><li>Place the cycle in the Odoo models before you meet them in Part III</li></ul></div></div><p>Early in November, MyVidangeCompany transfers 2,614.26 € to Mélanie for October. Her contract says 4,000.00 €, and the company spends 5,004.80 € on her. Nothing is lost: 1,385.74 € is owed to the social security office and the tax administration, and 1,004.80 € is the employer's own contribution. Payroll is getting every split right, on time, for every employee, in a way an inspector can reproduce.<sup id="fnref:c1-calc"><a class="footnote-ref" href="#fn:c1-calc">1</a></sup></p>
+<h2 id="what-payroll-is">What payroll is</h2>
+<p><strong>Payroll</strong> is the work an employer does every pay period to pay its employees: compute each one's pay from the contract and the time worked, pay the net to the employee, and pass the amounts it kept back on to the authorities, with the reports that prove them. The word also names the list of employees and amounts for one period (<em>the October payroll</em>). Other names: <em>payroll processing</em>, <em>salary administration</em>, <em>pay run</em>.</p>
+<p>Three things follow from that definition:</p>
+<ul>
+<li><strong>It never stops.</strong> The same computation runs every period for every employee, with new inputs each time: a hire, a sick day, a rate that changes in July.</li>
+<li><strong>Much of the money is not the employee's to keep.</strong> Part of the salary goes to social security and to the tax office; the employer collects it and is liable for it (next section, and Chapter 2).</li>
+<li><strong>Someone checks it.</strong> The authorities receive the money and the reports on their own calendar, and can recompute any payslip.</li>
+</ul>
+<figure>
+<p><img alt="One year of payroll: a monthly cycle and the authorities' clocks" src="assets/charts/gen_ch1_payroll_year.svg" /></p>
+<figcaption>Illustrative calendar. Every month the payroll is computed and the net is paid. The tax withheld is filed and paid the next month, the contributions after each quarter, a certificate per employee after the year, and a hire or an exit is notified when it happens. Dates differ by country; the four clocks are almost universal.</figcaption>
+</figure>
+<h2 id="the-parties-and-the-money">The parties and the money</h2>
+<p>In every country, payroll moves money from one payer to several receivers. The names change; the shape does not.</p>
+<div class="hub" markdown="0">
+<div class="hpayer"><div class="hn">Employer</div><div class="hrole">the only payer</div><ul><li>computes every payslip</li><li>keeps back tax and contributions</li><li>pays everyone</li><li>declares it all, and is liable if it is wrong</li></ul><div class="hcost">pays the <b>total employer cost</b></div></div>
+<div class="harr c-net"><span>net pay</span></div><div class="hrec c-net"><b>Employee</b><div class="hgets">the net pay, on their bank account</div><i>for the work done; what is left after deductions</i></div>
+<div class="harr c-ded"><span>contributions</span></div><div class="hrec c-ded"><b>Social security</b><div class="hgets">the employee’s and the employer’s contributions</div><i>one fund or many; finances pensions, health, unemployment</i></div>
+<div class="harr c-tax"><span>tax withheld</span></div><div class="hrec c-tax"><b>Tax authority</b><div class="hgets">the income tax withheld from the employee</div><i>an advance on the employee’s yearly tax, with the returns that prove it</i></div>
+<div class="harr c-earn"><span>their share</span></div><div class="hrec c-earn"><b>Third parties</b><div class="hgets">pension funds, meal-voucher issuers, a court-ordered creditor</div><i>money the contract or a court sends elsewhere</i></div>
+<div class="hfoot">The <b>bank</b> only carries the transfers. A <b>payroll provider</b>, if the company uses one, computes and files on its behalf, but the employer stays responsible.</div>
+</div>
+
+<div class="admonition key">
+<p class="admonition-title">Key idea</p>
+<p>The employer is an <strong>unpaid collection agent</strong> for the state: it deducts, pays and reports for the employee, and is liable if it does not. In many countries, Belgium included, a contribution the employer forgot to deduct cannot be claimed back from the worker later.<sup id="fnref:c1-general"><a class="footnote-ref" href="#fn:c1-general">3</a></sup></p>
+</div>
+<h3 id="case-study-myvidangecompany-one-month">Case study: MyVidangeCompany, one month</h3>
+<p>MyVidangeCompany pays five people. In Belgium the social security office is the <strong>ONSS</strong> (one office collects every contribution) and the tax administration is <strong>SPF Finances</strong>. Marie gets meal vouchers, so a voucher issuer is paid too.</p>
+<figure>
+<p><img alt="Where one month of employer cost goes" src="assets/charts/be_ch1_money_flows.svg" /></p>
+<figcaption>MyVidangeCompany, October 2026, five employees. Barely half of the employer cost reaches the employees' bank accounts. Numbers from the independent calculator.</figcaption>
+</figure>
+<div class="admonition example">
+<p class="admonition-title">Worked example: MyVidangeCompany, October 2026</p>
+<p>The five regular payslips:<sup id="fnref3:c1-calc"><a class="footnote-ref" href="#fn:c1-calc">1</a></sup></p>
+<table>
+<thead>
+<tr>
+<th>Destination</th>
+<th style="text-align: right;">Amount (€)</th>
+<th style="text-align: right;">Share of cost</th>
+</tr>
+</thead>
+<tbody>
+<tr class='net'>
+<td><span class='pill net'>NET</span> Employees' bank accounts</td>
+<td style="text-align: right;">14,917.31</td>
+<td style="text-align: right;">53.56 %</td>
+</tr>
+<tr class='ded'>
+<td><span class='pill ded'>ONSS</span> social security: employee and employer contributions</td>
+<td style="text-align: right;">8,065.22</td>
+<td style="text-align: right;">28.96 %</td>
+</tr>
+<tr class='tax'>
+<td><span class='pill tax'>P.P</span> Tax administration: withholding tax</td>
+<td style="text-align: right;">4,646.49</td>
+<td style="text-align: right;">16.68 %</td>
+</tr>
+<tr class='earn'>
+<td><span class='pill earn'>MEAL</span> Meal-voucher issuer</td>
+<td style="text-align: right;">220.00</td>
+<td style="text-align: right;">0.79 %</td>
+</tr>
+<tr>
+<td><strong>Total = employer cost</strong></td>
+<td style="text-align: right;"><strong>27,849.02</strong></td>
+<td style="text-align: right;">100.00 %</td>
+</tr>
+</tbody>
+</table>
+<p>Gross salaries are 22,400.00 €; the employer adds its own contributions and voucher share.</p>
+</div>
+<p><strong>In Odoo.</strong> Part I uses an independent calculator that follows the law; later parts use the payslips Odoo computed on the demo database. Odoo's October pay run shows 28,192.34 € of employer cost, a little more, because it includes Emma's pro-rata sector bonus (Chapter 6) and some small employer funds (Chapter 3).<sup id="fnref:c1-odoo"><a class="footnote-ref" href="#fn:c1-odoo">2</a></sup> Chapter 10 explains how to read such differences.</p>
+<div class="admonition world">
+<p class="admonition-title">Around the world</p>
+<p>The same diagram, with different boxes filled in:</p>
+<ul>
+<li><strong>United States</strong>: federal taxes, plus a second layer per state and sometimes per city.</li>
+<li><strong>Switzerland</strong>: many separate insurers (old age, unemployment, accident, pension…) and a cantonal source tax.</li>
+<li><strong>United Arab Emirates</strong>: no income tax; a pension fund for nationals only; salaries paid through the monitored Wage Protection System.</li>
+<li><strong>Hong Kong</strong>: no withholding; the employer reports salaries and each employee pays his own tax.</li>
+<li><strong>Australia</strong>: no employee contribution; the employer pays superannuation into each employee's chosen fund.</li>
+</ul>
+</div>
+<h2 id="the-payroll-cycle">The payroll cycle</h2>
+<p>Every pay period, the same six steps, in a loop: the next period starts as soon as the last one is booked.</p>
+<div class="ring" markdown="0">
+<div class="rs c-odoo"><b><span class="n">1</span>Collect</b>Gather what changed since last period: hires, leavers, time off, overtime, new rates.<i>MyVidangeCompany: Yannick joins mid-month, Jurgen is off sick a day</i></div>
+<div class="ra">→</div>
+<div class="rs c-earn"><b><span class="n">2</span>Compute</b>Turn each contract, the time worked and the legal rules into a payslip.<i>Odoo: the Compute button runs the salary rules of each payslip</i></div>
+<div class="ra">→</div>
+<div class="rs c-law"><b><span class="n">3</span>Validate</b>Check warnings and outliers (a negative net, a jump), then lock the payslips.<i>Odoo: once validated, a payslip is locked</i></div>
+<div class="ra">↑</div>
+<div class="rmid">↻ every pay period</div>
+<div class="ra">↓</div>
+<div class="rs c-emp"><b><span class="n">6</span>Account</b>Book the cost, and the debts to the employees and the authorities.<i>Odoo: a journal entry built from the payslip lines</i></div>
+<div class="ra">←</div>
+<div class="rs c-tax"><b><span class="n">5</span>Declare</b>Report the tax and contributions withheld, and pay them over.<i>MyVidangeCompany: monthly tax return, quarterly social security return</i></div>
+<div class="ra">←</div>
+<div class="rs c-net"><b><span class="n">4</span>Pay</b>Send each net to the employee's bank account by the legal date.<i>Odoo: one bank file for the whole pay run</i></div>
+</div>
+
+<p>Software automates step 2; teams spend their time on steps 1, 3 and 5.</p>
+<p><strong>In Odoo.</strong> The cycle is the life of a payslip: <span class='pill odoo'>hr.payslip</span> goes <code>draft</code> → <code>validated</code> → <code>paid</code> (or <code>cancel</code>). A pay run (<span class='pill odoo'>hr.payslip.run</span>) groups the payslips of one structure and one period. Chapter 15 runs it by hand.</p>
+<h2 id="the-rhythm-event-month-quarter-year">The rhythm: event, month, quarter, year</h2>
+<p>The four clocks of the opening figure, with MyVidangeCompany's dates:</p>
+<table>
+<thead>
+<tr>
+<th>Rhythm</th>
+<th>Typical obligation</th>
+<th>MyVidangeCompany (Belgium)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Event</td>
+<td>notify a hire before work starts, and an exit</td>
+<td>"Dimona" hire and exit notice to the social security office<sup id="fnref2:c1-dimona"><a class="footnote-ref" href="#fn:c1-dimona">6</a></sup></td>
+</tr>
+<tr>
+<td>Every pay period</td>
+<td>pay the net by a legal date</td>
+<td>by the 4<sup>th</sup> working day after the month<sup id="fnref:c1-paydate"><a class="footnote-ref" href="#fn:c1-paydate">5</a></sup></td>
+</tr>
+<tr>
+<td>Monthly or quarterly</td>
+<td>file and pay the tax withheld; file and pay contributions</td>
+<td>monthly withholding return; quarterly social security return<sup id="fnref:c1-cal"><a class="footnote-ref" href="#fn:c1-cal">4</a></sup><sup>,</sup><sup id="fnref:c1-dmfa"><a class="footnote-ref" href="#fn:c1-dmfa">7</a></sup></td>
+</tr>
+<tr>
+<td>Yearly</td>
+<td>give each employee and the tax authority an annual certificate</td>
+<td>annual tax slip per employee, by 28 February<sup id="fnref:c1-belcotax"><a class="footnote-ref" href="#fn:c1-belcotax">8</a></sup></td>
+</tr>
+</tbody>
+</table>
+<p>Chapter 7 puts MyVidangeCompany's filings on one calendar.</p>
+<h2 id="why-payroll-is-hard">Why payroll is hard</h2>
+<div class='figure'><pre class='mermaid'>mindmap
+  root((Payroll is hard))
+    Law changes
+      new tax formula on 1 Jan
+      and sometimes mid-year
+      thresholds indexed
+    Many parties
+      tax office, funds, bank
+      different formats and deadlines
+    Exact money
+      rounding at every step
+      returns must match payslips
+    Time
+      proration of joiners
+      sickness, overtime, holidays
+    Exceptions
+      leavers and indemnities
+      corrections after payment</pre></div>
+<p>Three properties make payroll unforgiving, in every country.</p>
+<ol>
+<li><strong>It is law, not preference.</strong> A forgotten hire notice is a criminal offence in Belgium.<sup id="fnref:c1-dimona"><a class="footnote-ref" href="#fn:c1-dimona">6</a></sup></li>
+<li><strong>It cannot be undone once paid.</strong> You correct on a later payslip (Chapter 6).</li>
+<li><strong>It is checked from outside.</strong> The authorities cross-check returns, payments, yearly certificates and the employee's own tax return.</li>
+</ol>
+<h3 id="rules-that-move-during-the-year">Rules that move during the year</h3>
+<p>A payroll rule is a value with a start date. Most countries change rates and tax tables on 1 January; many also change something mid-year. Belgium changed its withholding formula on 1 January and again on 1 November 2026.<sup id="fnref:c1-hist"><a class="footnote-ref" href="#fn:c1-hist">9</a></sup></p>
+<p>With the same gross, the November change lowers Mélanie's, Jurgen's and Yannick's withholding by 8.47 € a month but <strong>raises</strong> Marie's by 28.86 €: the new formula gives less relief to a married couple with one income.<sup id="fnref2:c1-calc"><a class="footnote-ref" href="#fn:c1-calc">1</a></sup> Chapter 4 explains why; Chapter 11 shows how Odoo stores both formulas.</p>
+<div class="admonition example">
+<p class="admonition-title">Worked example: what a forgotten update costs</p>
+<p>Keep the January formula in November: Mélanie, Jurgen and Yannick are over-withheld 8.47 € a month and get it back a year later; Marie is under-withheld 28.86 € a month and pays at her assessment. Neither error shows on the day, and every monthly return is wrong until the fix.</p>
+</div>
+<div class="admonition pitfall">
+<p class="admonition-title">Common pitfall</p>
+<p>Treating payroll as "salary minus a few percentages". The percentages come with caps, low-wage reductions, family relief, special bonus rates and effective dates. Each is a bug waiting in a naive implementation; the next seven chapters take them one at a time.</p>
+</div>
+<div class="admonition practice">
+<p class="admonition-title">In practice</p>
+<p>Odoo customers often still use an accountant or payroll bureau for some filings. When you scope a project, ask early: <strong>who files the social security return, who files the tax return, who pays the net?</strong></p>
+</div>
+<h2 id="summary">Summary</h2>
+<ul>
+<li>The parties are always the same kinds: employer, employee, social security, tax authority, third parties, bank. Countries differ in how many funds and layers there are.</li>
+<li>The employer is a collection agent, liable for what it fails to deduct.</li>
+<li>MyVidangeCompany spends 27,849.02 € in October 2026 for 22,400.00 € of gross; 14,917.31 € is net pay.</li>
+<li>Six steps a period: collect, compute, validate, pay, declare, account. The authorities add event, monthly/quarterly and yearly deadlines.</li>
+<li>Rules change during the year, sometimes mid-year, so every rule needs an effective date.</li>
+<li>In Odoo the cycle is the life of <span class='pill odoo'>hr.payslip</span> (<code>draft</code>, <code>validated</code>, <code>paid</code>), batched in <span class='pill odoo'>hr.payslip.run</span>.</li>
+</ul>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:c1-calc">
+<p>All cast numbers in Part I come from the independent calculator (<code>scripts/be_calc.py</code>, written to <code>research/numbers_be_calc.md</code>), built from the official sources cited in each chapter.&#160;<a class="footnote-backref" href="#fnref:c1-calc" title="Jump back to footnote 1 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:c1-calc" title="Jump back to footnote 1 in the text">&#8617;</a><a class="footnote-backref" href="#fnref3:c1-calc" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:c1-odoo">
+<p>Payslips computed by Odoo master on the demo database, <code>research/numbers_be.md</code>, section 6 (October 2026 monthly pay run); differences listed in <code>research/odoo_vs_calc.md</code>.&#160;<a class="footnote-backref" href="#fnref:c1-odoo" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:c1-general">
+<p>ONSS, administrative instructions 2026/3, general rule on the payment of contributions: <a href="https://www.socialsecurity.be/employer/instructions/dmfa/fr/latest/instructions/obligations/obligations_nsso/contributionpayment_obligations_periodicity/generalrule.html">https://www.socialsecurity.be/employer/instructions/dmfa/fr/latest/instructions/obligations/obligations_nsso/contributionpayment_obligations_periodicity/generalrule.html</a>.&#160;<a class="footnote-backref" href="#fnref:c1-general" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:c1-cal">
+<p>SPF Finances, withholding tax calendar 2026 (including the dates for social secretariats): <a href="https://finances.belgium.be/fr/entreprises/personnel_et_remuneration/precompte_professionnel/calendrier">https://finances.belgium.be/fr/entreprises/personnel_et_remuneration/precompte_professionnel/calendrier</a>.&#160;<a class="footnote-backref" href="#fnref:c1-cal" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+<li id="fn:c1-paydate">
+<p>SPF Emploi, time and date of payment of the salary: <a href="https://emploi.belgique.be/fr/themes/remuneration/protection-de-la-remuneration/epoque-et-date-de-paiement">https://emploi.belgique.be/fr/themes/remuneration/protection-de-la-remuneration/epoque-et-date-de-paiement</a>.&#160;<a class="footnote-backref" href="#fnref:c1-paydate" title="Jump back to footnote 5 in the text">&#8617;</a></p>
+</li>
+<li id="fn:c1-dimona">
+<p>ONSS, Dimona, general and declarations: <a href="https://www.socialsecurity.be/employer/instructions/dmfa/fr/latest/instructions/obligations/obligations_nsso/dimona/general.html">https://www.socialsecurity.be/employer/instructions/dmfa/fr/latest/instructions/obligations/obligations_nsso/dimona/general.html</a> and <a href="https://www.socialsecurity.be/employer/instructions/dmfa/fr/latest/instructions/obligations/obligations_nsso/dimona/declarations_modifications_cancellations.html">https://www.socialsecurity.be/employer/instructions/dmfa/fr/latest/instructions/obligations/obligations_nsso/dimona/declarations_modifications_cancellations.html</a>.&#160;<a class="footnote-backref" href="#fnref:c1-dimona" title="Jump back to footnote 6 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:c1-dimona" title="Jump back to footnote 6 in the text">&#8617;</a></p>
+</li>
+<li id="fn:c1-dmfa">
+<p>ONSS, DmfA general: <a href="https://www.socialsecurity.be/employer/instructions/dmfa/fr/latest/instructions/obligations/obligations_nsso/dmfa/general.html">https://www.socialsecurity.be/employer/instructions/dmfa/fr/latest/instructions/obligations/obligations_nsso/dmfa/general.html</a>.&#160;<a class="footnote-backref" href="#fnref:c1-dmfa" title="Jump back to footnote 7 in the text">&#8617;</a></p>
+</li>
+<li id="fn:c1-belcotax">
+<p>SPF Finances, Belcotax-on-web deadlines: <a href="https://finances.belgium.be/fr/E-services/Belcotaxonweb/delais-de-rentree-des-fiches">https://finances.belgium.be/fr/E-services/Belcotaxonweb/delais-de-rentree-des-fiches</a>.&#160;<a class="footnote-backref" href="#fnref:c1-belcotax" title="Jump back to footnote 8 in the text">&#8617;</a></p>
+</li>
+<li id="fn:c1-hist">
+<p>Withholding: Annex III AR/CIR 92, version history: <a href="https://www.minfin.fgov.be/myminfin-web/pages/public/fisconet/document/439228c6-67bb-4e75-a9e1-4cabe4dc62ec">https://www.minfin.fgov.be/myminfin-web/pages/public/fisconet/document/439228c6-67bb-4e75-a9e1-4cabe4dc62ec</a>. Work bonus: ONSS instructions 2026/1, 2026/2 and latest: <a href="https://www.socialsecurity.be/employer/instructions/dmfa/fr/latest/instructions/deductions/workers_reductions/workbonus.html">https://www.socialsecurity.be/employer/instructions/dmfa/fr/latest/instructions/deductions/workers_reductions/workbonus.html</a>.&#160;<a class="footnote-backref" href="#fnref:c1-hist" title="Jump back to footnote 9 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></section><nav class='pager' aria-label='Previous and next chapter'><a class='pager-prev' rel='prev' href='preface-before-you-start.html'><small>Previous · Preface</small><span>Before you start</span></a><a class='pager-next' rel='next' href='chapter-02-gross-to-net.html'><small>Next · Chapter 2</small><span>Gross to net</span></a></nav>
+</main>
+</div>
+<script src="js/site.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js" integrity="sha384-rbtjAdnIQE/aQJGEgXrVUlMibdfTSa4PQju4HDhN3sR2PmaKFzhEafuePsl9H/9I" crossorigin="anonymous"></script>
+<script>
+(async () => {
+  mermaid.initialize({
+    startOnLoad: false, theme: "base", securityLevel: "loose",
+    flowchart: { htmlLabels: true, curve: "basis", useMaxWidth: true },
+    sequence: { useMaxWidth: true, mirrorActors: false },
+    er: { useMaxWidth: true },
+    themeVariables: {
+      fontFamily: "Helvetica Neue, Helvetica, Arial", fontSize: "13px",
+      primaryColor: "#E9EDF2", primaryBorderColor: "#475569", primaryTextColor: "#1E293B",
+      lineColor: "#64748B", secondaryColor: "#F6F0F5", tertiaryColor: "#F8FAFC",
+      noteBkgColor: "#FFFAEB", noteBorderColor: "#C99A0E", actorBkg: "#E9EDF2", actorBorder: "#475569"
+    }
+  });
+  const nodes = Array.from(document.querySelectorAll("pre.mermaid"));
+  let i = 0;
+  for (const el of nodes) {
+    const src = el.textContent;
+    try {
+      const { svg } = await mermaid.render("m" + (i++), src);
+      el.outerHTML = svg;
+    } catch (e) {
+      el.outerHTML = `<div class="mermaid-error" data-src="${src.replace(/"/g, "'")}">Mermaid error: ${e.message}\n${src}</div>`;
+    }
+  }
+  window.__mermaidDone = true;
+})();
+</script>
+</body>
+</html>

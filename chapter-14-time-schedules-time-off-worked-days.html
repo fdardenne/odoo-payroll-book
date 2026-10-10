@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter 14: Time: schedules, time off, worked days · Payroll, from Theory to Odoo Localization</title>
+<meta name="description" content="Gross-to-net in any country, the Odoo salary engine, and how to design, build and review a payroll localization.">
+<link rel="stylesheet" href="css/book.css">
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body class="chapter-page">
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+<button class="nav-toggle" type="button" aria-controls="sidebar" aria-expanded="false"><span aria-hidden="true">&#9776;</span> Contents</button>
+<a class="top-brand" href="index.html">Payroll, from Theory to Odoo Localization</a>
+</header>
+<div class="layout">
+<nav id="sidebar" class="sidebar" aria-label="Book contents">
+<a class="side-brand" href="index.html">Payroll, from Theory to Odoo Localization</a>
+<div class="search" role="search">
+<label for="search-input" class="sr-only">Search the book</label>
+<input id="search-input" type="search" placeholder="Search the book  ( / )" autocomplete="off" spellcheck="false" aria-controls="search-results">
+<div id="search-results" class="search-results" aria-live="polite"></div>
+</div>
+<ol class="nav"><li class='nav-part'><span class='nav-part-title'>Front matter</span><ol><li><a href='preface-before-you-start.html'><span class='nav-num'></span><span>Before you start</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part I · Payroll theory</span><ol><li><a href='chapter-01-what-payroll-is-and-why-it-is-hard.html'><span class='nav-num'>1.</span><span>What payroll is, and why it is hard</span></a></li><li><a href='chapter-02-gross-to-net.html'><span class='nav-num'>2.</span><span>Gross to net</span></a></li><li><a href='chapter-03-contributions-employee-and-employer.html'><span class='nav-num'>3.</span><span>Contributions: employee and employer</span></a></li><li><a href='chapter-04-withholding-tax.html'><span class='nav-num'>4.</span><span>Withholding tax</span></a></li><li><a href='chapter-05-time-proration-and-overtime.html'><span class='nav-num'>5.</span><span>Time, proration and overtime</span></a></li><li><a href='chapter-06-irregular-pay-corrections-and-leavers.html'><span class='nav-num'>6.</span><span>Irregular pay, corrections and leavers</span></a></li><li><a href='chapter-07-declarations-and-the-compliance-calendar.html'><span class='nav-num'>7.</span><span>Declarations and the compliance calendar</span></a></li><li><a href='chapter-08-accounting-for-payroll.html'><span class='nav-num'>8.</span><span>Accounting for payroll</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part II · Localization theory</span><ol><li><a href='chapter-09-what-varies-between-countries-and-what-doesnt.html'><span class='nav-num'>9.</span><span>What varies between countries, and what doesn&#x27;t</span></a></li><li><a href='chapter-10-researching-a-new-country.html'><span class='nav-num'>10.</span><span>Researching a new country</span></a></li><li><a href='chapter-11-laws-that-change-over-time.html'><span class='nav-num'>11.</span><span>Laws that change over time</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part III · Odoo payroll, hands-on</span><ol><li><a href='chapter-12-tour-and-setup.html'><span class='nav-num'>12.</span><span>Tour and setup</span></a></li><li><a href='chapter-13-employees-and-versions.html'><span class='nav-num'>13.</span><span>Employees and versions</span></a></li><li class='current' aria-current='page'><a href='chapter-14-time-schedules-time-off-worked-days.html'><span class='nav-num'>14.</span><span>Time: schedules, time off, worked days</span></a><ol class='nav-sections'><li><a href='#how-time-becomes-pay'>How time becomes pay</a></li><li><a href='#working-schedules'>Working schedules</a></li><li><a href='#time-types'>Time types</a></li><li><a href='#time-off'>Time off</a></li><li><a href='#work-entries-are-generated-not-stored'>Work entries are generated, not stored</a></li><li><a href='#from-work-entries-to-worked-days'>From work entries to worked days</a></li><li><a href='#overtime-is-a-time-type-too'>Overtime is a time type too</a></li><li><a href='#missions'>Missions</a></li><li><a href='#summary'>Summary</a></li></ol></li><li><a href='chapter-15-pay-runs-and-payslips.html'><span class='nav-num'>15.</span><span>Pay runs and payslips</span></a></li><li><a href='chapter-16-accounting-and-payment.html'><span class='nav-num'>16.</span><span>Accounting and payment</span></a></li><li><a href='chapter-17-reports-declarations-and-a-leaver.html'><span class='nav-num'>17.</span><span>Reports, declarations and a leaver</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part IV · How the payroll engine works</span><ol><li><a href='chapter-18-the-engine-in-one-picture.html'><span class='nav-num'>18.</span><span>The engine in one picture</span></a></li><li><a href='chapter-19-structures-and-rules.html'><span class='nav-num'>19.</span><span>Structures and rules</span></a></li><li><a href='chapter-20-categories-how-rules-talk-to-each-other.html'><span class='nav-num'>20.</span><span>Categories: how rules talk to each other</span></a></li><li><a href='chapter-21-parameters-updates-and-safe-extensions.html'><span class='nav-num'>21.</span><span>Parameters, updates and safe extensions</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part V · Building a localization</span><ol><li><a href='chapter-22-a-template-for-any-localization-and-how-to-review-one.html'><span class='nav-num'>22.</span><span>A template for any localization, and how to review one</span></a></li></ol></li></ol>
+<a class="nav-pdf" href="payroll_book.pdf" download>Download the PDF</a>
+</nav>
+<div class="backdrop" hidden></div>
+<main id="main" class="content">
+<section class='chapter' id='c-33_ch14'><div class='opener'><div class='opener-band'><span class='opener-num'>Chapter 14</span><span class='opener-part'>Part III · Odoo payroll, hands-on</span></div><h1>Time: schedules, time off, worked days</h1><p class='opener-sub'>How a calendar and a leave request become paid and unpaid days on a payslip</p><div class='opener-goals'><div class='goals-title'>After this chapter you can</div><ul><li>Read a working schedule and compute the hours of a month from it</li><li>Explain what a time type is and which of its fields change pay</li><li>Follow time off and public holidays into generated work entries, then into worked-days lines</li><li>Explain how a localization values an absence, with Jurgen's April as the example</li><li>Record sick days, unpaid days, leave and overtime so that the payslip is right without typing a number</li></ul></div></div><p>Jurgen was ill on 14 April and took an unpaid day on 24 April; April also has Easter Monday. His payslip must show 19 days of work, a paid sick day, an unpaid day and a paid holiday, and nobody types those numbers. They come from his <strong>schedule</strong> (what he was expected to work), his <strong>time off</strong> (what he did not) and the <strong>time types</strong> that say how each hour is paid.</p>
+<h2 id="how-time-becomes-pay">How time becomes pay</h2>
+<p>A monthly salary is not paid "for the month": Odoo pays it <strong>day by day</strong>, according to what each day was. This chapter follows one month, Jurgen's April 2026, through the three steps below.</p>
+<div class="tflow" markdown="0">
+<div class="tcol">
+<div class="tstep"><span class="nn">1</span>What Odoo knows</div>
+<div class="tin c-odoo"><b>Working schedule</b>Monday to Friday, 7.6 hours a day</div>
+<div class="tin c-law"><b>Public holidays</b>Easter Monday, 6 April</div>
+<div class="tin c-ded"><b>Approved time off</b>sick on 14 April<br>unpaid day on 24 April</div>
+</div>
+<div class="tarrow">→</div>
+<div class="tcol wide">
+<div class="tstep"><span class="nn">2</span>One work entry per working day</div>
+<div class="tcal"><div class="th">Mon</div><div class="th">Tue</div><div class="th">Wed</div><div class="th">Thu</div><div class="th">Fri</div><div class="tc empty"></div><div class="tc empty"></div><div class="tc work">1</div><div class="tc work">2</div><div class="tc work">3</div><div class="tc hol">6</div><div class="tc work">7</div><div class="tc work">8</div><div class="tc work">9</div><div class="tc work">10</div><div class="tc work">13</div><div class="tc sick">14</div><div class="tc work">15</div><div class="tc work">16</div><div class="tc work">17</div><div class="tc work">20</div><div class="tc work">21</div><div class="tc work">22</div><div class="tc work">23</div><div class="tc unp">24</div><div class="tc work">27</div><div class="tc work">28</div><div class="tc work">29</div><div class="tc work">30</div><div class="tc empty"></div></div>
+<div class="tlegend"><span class="sw work"></span>worked <span class="sw hol"></span>public holiday <span class="sw sick"></span>sick <span class="sw unp"></span>unpaid</div>
+<div class="tnote">computed when needed, never stored</div>
+</div>
+<div class="tarrow">→</div>
+<div class="tcol">
+<div class="tstep"><span class="nn">3</span>Worked days on the payslip</div>
+<div class="tline work"><b>Attendance</b>19 days · 1,981.54</div>
+<div class="tline hol"><b>Public holiday</b>1 day · 106.15</div>
+<div class="tline sick"><b>Sick</b>1 day · 106.15</div>
+<div class="tline unp"><b>Unpaid</b>1 day · 0.00</div>
+<div class="ttotal">Basic salary<b>2,193.84</b></div>
+</div>
+</div>
+
+<ol>
+<li><strong>What Odoo knows.</strong> The working schedule says which days and hours were expected. Public holidays and approved time off say what happened instead.</li>
+<li><strong>Work entries.</strong> For each expected day, Odoo derives one <em>work entry</em> with a <strong>time type</strong>: worked, public holiday, sick, unpaid. Nobody types them, and they are not stored: Odoo computes them again whenever a payslip needs them, so a late change of time off is never forgotten.</li>
+<li><strong>Worked days.</strong> The payslip groups the entries by type into <em>worked-days</em> lines. Each type says whether it is paid, so the unpaid day is worth 0, and the total of the lines is the basic salary. The rules then compute everything else from it.</li>
+</ol>
+<h2 id="working-schedules">Working schedules</h2>
+<p>A <strong>working schedule</strong> (<span class='pill odoo'>resource.calendar</span>) lists the weekly attendance slots. It says which hours were expected, and is the denominator when a wage is cut into hours. MyVidangeCompany's <em>Standard 38 hours/week</em> runs Monday to Friday, 8:00–12:00 and 12:30–16:06: 7.6 hours a day, so 167.2 expected hours in April 2026 (22 weekdays, Easter Monday included).</p>
+<p>Public holidays are <em>closure days</em>: leaves of the whole company, with the time type <em>Public Holiday</em>.</p>
+<h2 id="time-types">Time types</h2>
+<p>Every hour of the month has a <strong>kind</strong>: worked, sick, holiday, unpaid. A <strong>time type</strong> (<span class='pill odoo'>hr.work.entry.type</span>) names that kind and says how it is paid. Time off types and schedules point to it, and each worked-days line of the payslip is one time type.</p>
+<div class="ttype" markdown="0">
+<div class="ttcard">
+<div class="tthead">Sick Time Off<span>LEAVE110</span></div>
+<div class="ttprop"><b>Code</b><span>the key rules read it with: <code>worked_days['LEAVE110']</code></span></div>
+<div class="ttprop"><b>Considered as</b><span><i>absence</i>: its hours come from the schedule (7.6 h a day), not from a clock</span></div>
+<div class="ttprop"><b>Pay rate</b><span>100 %: the day is paid. Unpaid leave is 0 %, overtime can be 150 %</span></div>
+<div class="ttprop"><b>Salary categories</b><span>which totals of the payslip the line adds to</span></div>
+</div>
+<div class="ttchips">
+<div class="ttlabel">Jurgen's April uses four:</div>
+<div class="ttchip work"><b>Attendance</b>WORK100 · 100 %</div>
+<div class="ttchip hol"><b>Public Holiday</b>LEAVE500 · 100 %</div>
+<div class="ttchip sick"><b>Sick Time Off</b>LEAVE110 · 100 %</div>
+<div class="ttchip unp"><b>Unpaid</b>LEAVE90 · 0 %</div>
+</div>
+</div>
+
+<figure>
+<p><img alt="Time types" src="assets/screenshots/be_work_entry_types.png" style="width:70%" /></p>
+<figcaption>Configuration &gt; Time Management &gt; Time Types: name, code, considered as (absence or working time), unit.</figcaption>
+</figure>
+<div class="admonition pitfall">
+<p class="admonition-title">Common pitfall: the same name twice</p>
+<p><em>Paid Time Off</em>, <em>Sick Time Off</em>, <em>Unpaid</em> and <em>Public Holiday</em> each appear twice: one generic row, one Belgian. Before you edit one, add the <em>Country</em> column to the list and pick your company's country.</p>
+</div>
+<h2 id="time-off">Time off</h2>
+<p>Payroll only uses the result of the Time Off app: an approved request becomes a leave on the employee's calendar, with its time type. Paid leave consumes an <em>allocation</em> (20 days a year at MyVidangeCompany); sick and unpaid days do not.</p>
+<div class='figure'><pre class='mermaid'>stateDiagram-v2
+    [*] --&gt; normal : approved
+    normal --&gt; done : a regular payslip used it
+    normal --&gt; blocked : its month is already validated
+    blocked --&gt; normal : the payslip is corrected or refunded
+    done --&gt; [*]</pre></div>
+<p>The payroll status of a leave (<span class='pill odoo'>payslip_state</span>) protects validated months. A leave approved after its month was validated is <strong>blocked</strong>: a dashboard card says <em>Time Off missing from period's payslip</em>, the <em>Deferred Time Off</em> responsible (Chapter 12) is warned, and you correct that month's payslip (Mission 15.2).</p>
+<h2 id="work-entries-are-generated-not-stored">Work entries are generated, not stored</h2>
+<p>A <strong>work entry</strong> is "this employee, this day, this time type, this many hours". Odoo does not store them: <span class='pill odoo'>hr.version</span> generates them whenever a payslip needs its worked days.</p>
+<div class="wgrid" markdown="0">
+<div class="wlbl"></div><div class="wday">Mon 13</div><div class="wday">Tue 14</div><div class="wday">Wed 15</div><div class="wday">Thu 16</div><div class="wday">Fri 17</div>
+<div class="wlbl"><span class="nn">1</span>The schedule expects</div><div class="wc sched">7.6 h</div><div class="wc sched">7.6 h</div><div class="wc sched">7.6 h</div><div class="wc sched">7.6 h</div><div class="wc sched">7.6 h</div>
+<div class="wlbl"><span class="nn">2</span>Approved time off</div><div class="wc none"></div><div class="wc sickl">sick, full day</div><div class="wc none"></div><div class="wc none"></div><div class="wc none"></div>
+<div class="wlbl"><span class="nn">3</span>Work entries</div><div class="wc work">Attendance<br>7.6 h</div><div class="wc sick">Sick<br>7.6 h</div><div class="wc work">Attendance<br>7.6 h</div><div class="wc work">Attendance<br>7.6 h</div><div class="wc work">Attendance<br>7.6 h</div>
+</div>
+
+<p>One week of Jurgen's April. Odoo starts from what the schedule expects (1), lays the approved time off and public holidays over it (2), and what remains is attendance (3). Each day gets one entry per kind of time, with its hours.</p>
+<ul>
+<li><strong>An absence counts the scheduled hours</strong>, not the clock: a full sick day on a 38-hour week is 7.6 hours.</li>
+<li><strong>Overlaps have a winner.</strong> A public holiday beats a personal leave on the same day, unless the localization lists the leave as taking precedence (in Belgium: long sickness, parental leave, unpaid…).</li>
+</ul>
+<p>Because nothing is stored, a draft payslip always follows today's data. Only validated payslips are frozen.</p>
+<h2 id="from-work-entries-to-worked-days">From work entries to worked days</h2>
+<p>The payslip groups the entries by time type, converts hours to days with the schedule, and writes one <strong>worked-days line</strong> (<span class='pill odoo'>hr.payslip.worked_days</span>) per type, with an amount.</p>
+<figure>
+<p><img alt="Jurgen's April worked days" src="assets/screenshots/be_slip_worked_days.png" /></p>
+<figcaption>Jurgen, April 2026, <i>Worked Days</i> tab. ① the sick day: 1 day, 7 h 36 min, paid 106.15 €. ② the unpaid day: 1 day, 0.00 €. ③ Easter Monday, paid 106.15 €. Attendance shows 19 days and 1,981.54 €. The total is 22 days and 2,193.84 €, which becomes the basic salary.</figcaption>
+</figure>
+<table class='payslip'>
+<thead>
+<tr>
+<th>Line</th>
+<th style="text-align: right;">Days</th>
+<th style="text-align: right;">Hours</th>
+<th style="text-align: right;">Amount (€)</th>
+</tr>
+</thead>
+<tbody>
+<tr class='earn'>
+<td><span class='pill earn'>WORK100</span> Attendance</td>
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">144.4</td>
+<td style="text-align: right;">1,981.54</td>
+</tr>
+<tr class='earn'>
+<td><span class='pill earn'>LEAVE110</span> Sick Time Off</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">7.6</td>
+<td style="text-align: right;">106.15</td>
+</tr>
+<tr class='ded'>
+<td><span class='pill ded'>LEAVE90</span> Unpaid</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">7.6</td>
+<td style="text-align: right;">0.00</td>
+</tr>
+<tr class='earn'>
+<td><span class='pill earn'>LEAVE500</span> Public Holiday</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">7.6</td>
+<td style="text-align: right;">106.15</td>
+</tr>
+<tr>
+<td><strong>Basic salary</strong></td>
+<td style="text-align: right;">22</td>
+<td style="text-align: right;">167.2</td>
+<td style="text-align: right;"><strong>2,193.84</strong></td>
+</tr>
+</tbody>
+</table>
+
+<p>The generic engine values each line at <em>wage ÷ hours of the month × hours × pay rate</em>. A localization may replace that convention. The Belgian one values every non-attendance line at a fixed hourly rate and gives attendance the rest of the wage, so one missing day always costs the same.</p>
+<div class="admonition be">
+<p class="admonition-title">In Belgium</p>
+<p>The fixed hourly rate is wage × 3 ÷ (13 × weekly hours): 2,300 × 3 ÷ (13 × 38) = 13.97 € for Jurgen, so 7.6 hours are worth 106.15 € and his basic salary is 2,300.00 − 106.16 = 2,193.84 €. Chapter 5 compares the proration methods.</p>
+</div>
+<p>Yannick's March works the same way: the 8 days before his start become an unpaid <code>OUT</code> line (<em>Out of Contract</em>).</p>
+<h2 id="overtime-is-a-time-type-too">Overtime is a time type too</h2>
+<p>Overtime is a working-time type with a pay rate above 100 %, here <em>Voluntary Overtime (150%)</em> (<code>VOLOT150</code>), entered as a <em>time off</em> request of that type. It reads oddly, but it is the same mechanism.</p>
+<figure>
+<p><img alt="Jurgen's May worked days with overtime" src="assets/screenshots/be_slip_overtime.png" /></p>
+<figcaption>Jurgen, May 2026 (demo database, before any raise). ① 4 hours of voluntary overtime at 150 %: 0 days, 4 h, 83.81 €. The line feeds the salary rule <code>VOLOT150</code>, which adds it to gross pay.</figcaption>
+</figure>
+<figure>
+<p><img alt="Jurgen's overtime request" src="assets/screenshots/be_overtime_timeoff.png" /></p>
+<figcaption>The request behind the overtime line, approved. ① type <i>Voluntary Overtime (150%)</i>. ② 20 May 2026, 4:30 PM → 8:30 PM. ③ duration 4 h: the type is counted in hours, so the form asks for a start and an end time.</figcaption>
+</figure>
+<div class="admonition world">
+<p class="admonition-title">Around the world</p>
+<ul>
+<li><strong>Belgium</strong>: 143 time types, because each absence has its own social security code.</li>
+<li><strong>Philippines</strong>: 50 (night shifts, rest days, holiday premiums).</li>
+<li><strong>Australia, Switzerland</strong>: 31 and 25.</li>
+<li><strong>United States</strong>: 12.</li>
+<li><strong>Netherlands, India, France</strong>: about 10 each.</li>
+</ul>
+</div>
+<div class="admonition practice">
+<p class="admonition-title">In practice: fix time at the source</p>
+<p>If a worked-days line is wrong, fix the leave, the schedule or the version and refresh the draft. A hand-edited line stops Odoo from recomputing the worked days, so later changes will not reach it.</p>
+</div>
+<h2 id="missions">Missions</h2>
+<div class="admonition mission">
+<p class="admonition-title">Mission 14.1 · Paid leave for 2026 ★</p>
+<p><strong>Situation.</strong> Mélanie, Jurgen, Marie and Emma each earned 20 days of paid leave for 2026. Yannick, hired in 2026, earned none.</p>
+<p><strong>Your goal.</strong> Give the four their 2026 paid leave, valid from 1 January to 31 December 2026.</p>
+<p><strong>Check.</strong> Four approved allocations of <strong>20 days</strong> of <em>Paid Time Off</em>; each employee's <em>Time Off</em> smart button shows <strong>21/21 Days</strong>.</p>
+<details class="hint" open="open">
+<summary>Hint</summary>
+<p>Leave rights are <em>allocations</em>, not requests. The 21<sup>st</sup> day is Odoo's compensation for 15 August 2026, a Saturday.</p>
+</details>
+</div>
+<div class="admonition mission">
+<p class="admonition-title">Mission 14.2 · Jurgen's sick day and unpaid day ★</p>
+<p><strong>Situation.</strong> Jurgen is sick on Tuesday 14 April 2026 (flu) and takes an unpaid day on Friday 24 April for personal reasons.</p>
+<p><strong>Your goal.</strong> Record both absences so that April's payslip reflects them.</p>
+<p><strong>Check.</strong> Both requests are <strong>approved</strong>, each <strong>1 day (7.6 hours)</strong>; Jurgen's counter still shows <strong>21/21 Days</strong>.</p>
+<details class="hint" open="open">
+<summary>Hint</summary>
+<p>Pick the time types whose codes are <code>LEAVE110</code> and <code>LEAVE90</code>.</p>
+</details>
+</div>
+<div class="admonition mission">
+<p class="admonition-title">Mission 14.3 · Preview April before the pay run ★★</p>
+<p><strong>Situation.</strong> Before April's pay run, your manager wants to see what Jurgen's absences do to his pay, and how Yannick's first month looks.</p>
+<p><strong>Your goal.</strong> Create draft payslips for Jurgen (April 2026) and Yannick (March 2026), read their worked days and net, then delete both drafts.</p>
+<p><strong>Check.</strong> Jurgen, April: attendance <strong>19 days, 1,981.54 €</strong>; sick <strong>106.15 €</strong>; unpaid <strong>0.00 €</strong>; public holiday <strong>1 day</strong>; net <strong>2,040.54 €</strong>. Yannick, March: attendance <strong>14 days, 2,270.77 €</strong>, out of contract <strong>8 days</strong>; net <strong>1,818.11 €</strong>.</p>
+<details class="hint" open="open">
+<summary>Hint</summary>
+<p><em>Payslips &gt; Payslips &gt; New</em>: an employee and a period are enough; <em>Compute Sheet</em> gives the net.</p>
+</details>
+</div>
+<div class="admonition mission">
+<p class="admonition-title">Mission 14.4 · Emma's summer holiday ★</p>
+<p><strong>Situation.</strong> Emma books her summer holiday from Monday 3 to Friday 14 August 2026.</p>
+<p><strong>Your goal.</strong> Record the holiday against her 2026 legal leave.</p>
+<p><strong>Check.</strong> The request is approved for <strong>10 days</strong>; Emma's counter shows <strong>11/21 Days</strong>.</p>
+<details class="hint" open="open">
+<summary>Hint</summary>
+<p>Paid Time Off needs an allocation, so the request shows the balance while you type.</p>
+</details>
+</div>
+<h2 id="summary">Summary</h2>
+<ul>
+<li>The schedule says which hours were expected; MyVidangeCompany's has 7.6 hours a day, 167.2 hours in April 2026.</li>
+<li>A time type is the single record behind leave types, schedule slots and worked-days lines; its code, pay rate and categories decide the money.</li>
+<li>Approved time off and public holidays become leaves on the calendar; a leave that arrives after its month was validated is blocked until the payslip is corrected.</li>
+<li>Work entries are generated on demand and never stored; absences count scheduled hours; overlaps follow a precedence.</li>
+<li>Worked-days lines carry days, hours and amounts; a localization decides how absences are valued (Belgium: a fixed 3/13 hourly rate).</li>
+<li>Fix time at its source and refresh the draft; never hand-edit a worked-days amount.</li>
+</ul></section><nav class='pager' aria-label='Previous and next chapter'><a class='pager-prev' rel='prev' href='chapter-13-employees-and-versions.html'><small>Previous · Chapter 13</small><span>Employees and versions</span></a><a class='pager-next' rel='next' href='chapter-15-pay-runs-and-payslips.html'><small>Next · Chapter 15</small><span>Pay runs and payslips</span></a></nav>
+</main>
+</div>
+<script src="js/site.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js" integrity="sha384-rbtjAdnIQE/aQJGEgXrVUlMibdfTSa4PQju4HDhN3sR2PmaKFzhEafuePsl9H/9I" crossorigin="anonymous"></script>
+<script>
+(async () => {
+  mermaid.initialize({
+    startOnLoad: false, theme: "base", securityLevel: "loose",
+    flowchart: { htmlLabels: true, curve: "basis", useMaxWidth: true },
+    sequence: { useMaxWidth: true, mirrorActors: false },
+    er: { useMaxWidth: true },
+    themeVariables: {
+      fontFamily: "Helvetica Neue, Helvetica, Arial", fontSize: "13px",
+      primaryColor: "#E9EDF2", primaryBorderColor: "#475569", primaryTextColor: "#1E293B",
+      lineColor: "#64748B", secondaryColor: "#F6F0F5", tertiaryColor: "#F8FAFC",
+      noteBkgColor: "#FFFAEB", noteBorderColor: "#C99A0E", actorBkg: "#E9EDF2", actorBorder: "#475569"
+    }
+  });
+  const nodes = Array.from(document.querySelectorAll("pre.mermaid"));
+  let i = 0;
+  for (const el of nodes) {
+    const src = el.textContent;
+    try {
+      const { svg } = await mermaid.render("m" + (i++), src);
+      el.outerHTML = svg;
+    } catch (e) {
+      el.outerHTML = `<div class="mermaid-error" data-src="${src.replace(/"/g, "'")}">Mermaid error: ${e.message}\n${src}</div>`;
+    }
+  }
+  window.__mermaidDone = true;
+})();
+</script>
+</body>
+</html>

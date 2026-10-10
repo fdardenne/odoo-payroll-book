@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter 15: Pay runs and payslips · Payroll, from Theory to Odoo Localization</title>
+<meta name="description" content="Gross-to-net in any country, the Odoo salary engine, and how to design, build and review a payroll localization.">
+<link rel="stylesheet" href="css/book.css">
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body class="chapter-page">
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+<button class="nav-toggle" type="button" aria-controls="sidebar" aria-expanded="false"><span aria-hidden="true">&#9776;</span> Contents</button>
+<a class="top-brand" href="index.html">Payroll, from Theory to Odoo Localization</a>
+</header>
+<div class="layout">
+<nav id="sidebar" class="sidebar" aria-label="Book contents">
+<a class="side-brand" href="index.html">Payroll, from Theory to Odoo Localization</a>
+<div class="search" role="search">
+<label for="search-input" class="sr-only">Search the book</label>
+<input id="search-input" type="search" placeholder="Search the book  ( / )" autocomplete="off" spellcheck="false" aria-controls="search-results">
+<div id="search-results" class="search-results" aria-live="polite"></div>
+</div>
+<ol class="nav"><li class='nav-part'><span class='nav-part-title'>Front matter</span><ol><li><a href='preface-before-you-start.html'><span class='nav-num'></span><span>Before you start</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part I · Payroll theory</span><ol><li><a href='chapter-01-what-payroll-is-and-why-it-is-hard.html'><span class='nav-num'>1.</span><span>What payroll is, and why it is hard</span></a></li><li><a href='chapter-02-gross-to-net.html'><span class='nav-num'>2.</span><span>Gross to net</span></a></li><li><a href='chapter-03-contributions-employee-and-employer.html'><span class='nav-num'>3.</span><span>Contributions: employee and employer</span></a></li><li><a href='chapter-04-withholding-tax.html'><span class='nav-num'>4.</span><span>Withholding tax</span></a></li><li><a href='chapter-05-time-proration-and-overtime.html'><span class='nav-num'>5.</span><span>Time, proration and overtime</span></a></li><li><a href='chapter-06-irregular-pay-corrections-and-leavers.html'><span class='nav-num'>6.</span><span>Irregular pay, corrections and leavers</span></a></li><li><a href='chapter-07-declarations-and-the-compliance-calendar.html'><span class='nav-num'>7.</span><span>Declarations and the compliance calendar</span></a></li><li><a href='chapter-08-accounting-for-payroll.html'><span class='nav-num'>8.</span><span>Accounting for payroll</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part II · Localization theory</span><ol><li><a href='chapter-09-what-varies-between-countries-and-what-doesnt.html'><span class='nav-num'>9.</span><span>What varies between countries, and what doesn&#x27;t</span></a></li><li><a href='chapter-10-researching-a-new-country.html'><span class='nav-num'>10.</span><span>Researching a new country</span></a></li><li><a href='chapter-11-laws-that-change-over-time.html'><span class='nav-num'>11.</span><span>Laws that change over time</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part III · Odoo payroll, hands-on</span><ol><li><a href='chapter-12-tour-and-setup.html'><span class='nav-num'>12.</span><span>Tour and setup</span></a></li><li><a href='chapter-13-employees-and-versions.html'><span class='nav-num'>13.</span><span>Employees and versions</span></a></li><li><a href='chapter-14-time-schedules-time-off-worked-days.html'><span class='nav-num'>14.</span><span>Time: schedules, time off, worked days</span></a></li><li class='current' aria-current='page'><a href='chapter-15-pay-runs-and-payslips.html'><span class='nav-num'>15.</span><span>Pay runs and payslips</span></a><ol class='nav-sections'><li><a href='#the-pay-run'>The pay run</a></li><li><a href='#reading-a-payslip'>Reading a payslip</a></li><li><a href='#warnings-before-you-validate'>Warnings before you validate</a></li><li><a href='#validation-and-what-it-starts'>Validation, and what it starts</a></li><li><a href='#corrections'>Corrections</a></li><li><a href='#missions'>Missions</a></li><li><a href='#summary'>Summary</a></li></ol></li><li><a href='chapter-16-accounting-and-payment.html'><span class='nav-num'>16.</span><span>Accounting and payment</span></a></li><li><a href='chapter-17-reports-declarations-and-a-leaver.html'><span class='nav-num'>17.</span><span>Reports, declarations and a leaver</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part IV · How the payroll engine works</span><ol><li><a href='chapter-18-the-engine-in-one-picture.html'><span class='nav-num'>18.</span><span>The engine in one picture</span></a></li><li><a href='chapter-19-structures-and-rules.html'><span class='nav-num'>19.</span><span>Structures and rules</span></a></li><li><a href='chapter-20-categories-how-rules-talk-to-each-other.html'><span class='nav-num'>20.</span><span>Categories: how rules talk to each other</span></a></li><li><a href='chapter-21-parameters-updates-and-safe-extensions.html'><span class='nav-num'>21.</span><span>Parameters, updates and safe extensions</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part V · Building a localization</span><ol><li><a href='chapter-22-a-template-for-any-localization-and-how-to-review-one.html'><span class='nav-num'>22.</span><span>A template for any localization, and how to review one</span></a></li></ol></li></ol>
+<a class="nav-pdf" href="payroll_book.pdf" download>Download the PDF</a>
+</nav>
+<div class="backdrop" hidden></div>
+<main id="main" class="content">
+<section class='chapter' id='c-34_ch15'><div class='opener'><div class='opener-band'><span class='opener-num'>Chapter 15</span><span class='opener-part'>Part III · Odoo payroll, hands-on</span></div><h1>Pay runs and payslips</h1><p class='opener-sub'>Generate, compute, review, validate, and correct without breaking the audit trail</p><div class='opener-goals'><div class='goals-title'>After this chapter you can</div><ul><li>Follow a pay run through its states and say what each button does</li><li>Read a payslip tab by tab: worked days, inputs, computation, other info</li><li>Use warnings to decide whether a run can be validated</li><li>Pick the right tool for a mistake: recompute, cancel, correct, or an off-cycle payslip</li><li>Run January to May 2026 for MyVidangeCompany, including a late correction and overtime</li></ul></div></div><p>End of January 2026: four employees, no payslip yet, and the bank wants a file by the 28<sup>th</sup>. This chapter is the monthly routine: open a pay run, let Odoo build the payslips, review, validate, and correct a payslip after it was validated.</p>
+<h2 id="the-pay-run">The pay run</h2>
+<p>A <strong>pay run</strong> (<span class='pill odoo'>hr.payslip.run</span>) is one batch of payslips: everyone paid on the same structure for the same period, for example <em>Monthly Pay, February 2026</em>. You work on the run instead of on fifty payslips one by one.</p>
+<p>You never set a run's status yourself. It <strong>follows its payslips</strong>, and tells you at a glance where the month stands:</p>
+<div class="status" markdown="0">
+<div class="st c-odoo"><b>Draft</b>some employees have no payslip yet</div>
+<div class="sarrow">→</div>
+<div class="st c-tax"><b>Ready</b>every employee has a payslip; some are still drafts</div>
+<div class="sarrow">→</div>
+<div class="st c-emp"><b>Done</b>every payslip is validated</div>
+<div class="sarrow">→</div>
+<div class="st c-net"><b>Paid</b>every payslip is paid</div>
+</div>
+
+<p>(If every payslip is cancelled, the run is <em>Cancelled</em>.)</p>
+<figure>
+<p><img alt="Pay runs" src="assets/screenshots/be_payruns.png" /></p>
+<figcaption>Payslips &gt; Pay Runs on the full demo database. ① the October run is <b>Done</b>: validated, not paid yet. ② the January run is <b>Paid</b>. ③ <b>Pay</b> opens the payment wizard (Chapter 16). ④ <b>Total Cost</b>, the employer cost of the run.</figcaption>
+</figure>
+<p>When you create a run, Odoo finds the <strong>valid versions</strong> (running in the period, on the structure's pay category, not already paid in another regular run) and creates one draft payslip per version, with its worked days (Chapter 14). The salary lines come with <em>Compute</em>.</p>
+<figure>
+<p><img alt="The February run" src="assets/screenshots/be_payrun.png" /></p>
+<figcaption>The February 2026 run, one row per payslip. ① Marie's payslip. The footer sums the run: 23,246.73 € total cost, 18,800.00 € basic wage.</figcaption>
+</figure>
+<h2 id="reading-a-payslip">Reading a payslip</h2>
+<p>A payslip has four tabs, in the order of the calculation: <strong>Worked Days</strong> (Chapter 14), <strong>Salary Inputs</strong> (values typed for this payslip, or brought by adjustments), <strong>Salary Computation</strong> (the lines the rules computed, <span class='pill odoo'>hr.payslip.line</span>) and <strong>Other Info</strong> (accounting date, journal).</p>
+<figure>
+<p><img alt="Mélanie's February payslip" src="assets/screenshots/be_slip_sophie.png" /></p>
+<figcaption>Mélanie, February 2026, <i>Salary Computation</i>. ① basic salary 4,000.00 €. ② employee social security, 13.07 % of 4,000.00. ③ taxable salary. ④ withholding tax. ⑤ special social security contribution. ⑥ net salary 2,614.27 €. <i>Show all</i> reveals the hidden helper and employer lines.</figcaption>
+</figure>
+<div class="admonition example">
+<p class="admonition-title">Worked example: Mélanie, February 2026</p>
+<table>
+<thead>
+<tr>
+<th>Line</th>
+<th>Code</th>
+<th style="text-align: right;">Amount (€)</th>
+</tr>
+</thead>
+<tbody>
+<tr class='earn'>
+<td><span class='pill earn'>Basic salary</span></td>
+<td><code>BASIC</code></td>
+<td style="text-align: right;">4,000.00</td>
+</tr>
+<tr class='ded'>
+<td><span class='pill ded'>Employee social security</span> 13.07 %</td>
+<td><code>ONSS</code></td>
+<td style="text-align: right;">−522.80</td>
+</tr>
+<tr class='tax'>
+<td><span class='pill tax'>Taxable salary</span></td>
+<td><code>GROSS</code></td>
+<td style="text-align: right;">3,477.20</td>
+</tr>
+<tr class='tax'>
+<td><span class='pill tax'>Withholding tax</span></td>
+<td><code>P.P</code></td>
+<td style="text-align: right;">−826.69</td>
+</tr>
+<tr class='ded'>
+<td><span class='pill ded'>Special social security contribution</span></td>
+<td><code>M.ONSS</code></td>
+<td style="text-align: right;">−36.24</td>
+</tr>
+<tr class='net'>
+<td><span class='pill net'>Net salary</span></td>
+<td><code>NET</code></td>
+<td style="text-align: right;">2,614.27</td>
+</tr>
+<tr class='emp'>
+<td><span class='pill emp'>Employer social security</span> (hidden line)</td>
+<td><code>ONSSEMPLOYER</code></td>
+<td style="text-align: right;">1,032.00</td>
+</tr>
+</tbody>
+</table>
+<p>Hidden lines (<em>Show all</em>) are intermediate steps and employer lines, which only accounting reads. Chapter 2 explains the bases, Chapter 19 the rules.</p>
+</div>
+<p>Marie's payslip adds what her version holds: the car and the meal vouchers.</p>
+<figure>
+<p><img alt="Marie's February payslip" src="assets/screenshots/be_slip_marie.png" /></p>
+<figcaption>Marie, February 2026. ① basic salary 7,500.00 €. ② the car's benefit in kind, 136.77 €, added to the taxable base. ③ withholding tax −1,742.31 €, lowered by her family situation. ④ the same benefit removed again before net. ⑤ her meal-voucher share, 20 × 1.09 € = −21.80 €. ⑥ net 4,694.70 €.</figcaption>
+</figure>
+<p><em>Compute</em> deletes the draft lines and runs the structure's rules in sequence (Chapter 19). Drafts also refresh by themselves when a wage changes or a leave is approved.</p>
+<h2 id="warnings-before-you-validate">Warnings before you validate</h2>
+<p>Each payslip shows its problems as a banner and a badge: <strong>red</strong> (blocked) or <strong>orange</strong> (read it first). Validation also refuses if a dashboard warning marked <em>block payslips</em> concerns these payslips.</p>
+<div class="admonition pitfall">
+<p class="admonition-title">Common pitfall: a banner that is not an error</p>
+<p>Emma's termination payslip shows "Payslip period does not match payrun": it covers 31 October only. That is expected for exit payslips (Chapter 17). Read each warning; do not try to make every banner disappear.</p>
+</div>
+<h2 id="validation-and-what-it-starts">Validation, and what it starts</h2>
+<p><strong>Validate</strong> is the point of no return of a payroll month. Before it, payslips are drafts that change with the data. After it, they are the official record of what each employee was paid: the amounts are frozen, and three things start.</p>
+<div class="gate" markdown="0">
+<div class="gcheck"><b>Validate</b>Any blocking warning or error?<div class="gno">yes → refused, with the list of warnings to fix</div></div>
+<div class="sarrow">→</div>
+<div class="gouts">
+<div class="gout c-emp"><b>A journal entry</b> is created in draft, ready to post (Chapter 16)</div>
+<div class="gout c-net"><b>The payslip PDFs</b> are generated and sent to employees, if the company setting says so</div>
+<div class="gout c-tax"><b>The Pay button</b> appears, to pay the net by bank file (Chapter 16)</div>
+</div>
+</div>
+
+<p>A validated payslip is never recomputed. If its data changes later, Odoo flags it as <em>outdated</em> and offers a correction.</p>
+<h2 id="corrections">Corrections</h2>
+<p>A payslip needs a correction when what it says is no longer true. That happens more often than mistakes in the rules:</p>
+<ul>
+<li><strong>information came late</strong>: a sick day or an unpaid day approved after the month was validated;</li>
+<li><strong>a change was backdated</strong>: a raise agreed in March, effective from 1 January;</li>
+<li><strong>the data was wrong</strong>: a wrong wage, a forgotten input, the wrong pay category;</li>
+<li><strong>the law changed retroactively</strong>: a new rate published in July, valid from January (Chapter 11).</li>
+</ul>
+<p>A validated payslip has already been sent to the employee, booked in the accounts and counted in the declarations, so payroll never edits it. It cancels it with a negative copy and issues the right one; only the difference between the two is still to pay or to recover.</p>
+<div class="corr" markdown="0">
+<div class="clane c-odoo"><div class="ch">Still a draft?</div>Fix the data and press <b>Compute</b> again. Nothing was sent yet, so nothing needs undoing.</div>
+<div class="clane c-ded"><div class="ch">Already validated or paid?</div>Press <b>Correct</b>. Odoo creates a correction run with two payslips:
+<div class="cslips">
+<div class="cslip neg"><b>Refund</b>the original, negated<span>−2,614.27</span></div>
+<div class="cop">+</div>
+<div class="cslip pos"><b>Correction</b>recomputed with the right data<span>2,537.30</span></div>
+<div class="cop">=</div>
+<div class="cslip diff"><b>Difference</b>still to settle<span>−76.97</span></div>
+</div>
+<i>Mélanie's January, after a late unpaid day (Mission 15.2)</i></div>
+</div>
+
+<p>Three other tools exist for other situations: <strong>delete</strong> a draft payslip that should not exist; <strong>cancel</strong> a validated one that should never have existed (payroll managers only; its entry is reversed); and use an <strong>off-cycle payslip</strong> on another structure for a payment outside the regular month, such as a 13<sup>th</sup> month, holiday pay, an advance or a leaver's exit pay.</p>
+<figure>
+<p><img alt="The payslip correction wizard" src="assets/screenshots/be_correction_wizard.png" /></p>
+<figcaption>The <i>Payslip Correction</i> wizard, opened from the <i>Manage Payslip</i> link of Mélanie's January payslip. ① the payslips affected by the change. ② <b>Correct</b>: a refund of the original and a recomputed payslip. ③ <b>Revert only</b>: the refund alone. ④ <b>Keep it as is</b>: Odoo stops flagging this payslip as outdated.</figcaption>
+</figure>
+<div class="admonition example">
+<p class="admonition-title">Worked example: Mélanie's late unpaid day (Mission 15.2)</p>
+<p>Mélanie's unpaid day of 23 January is approved after January was validated. Her payslip shows an issue with a <em>Manage Payslip</em> link, and <em>Correct</em> creates a run <em>Correction (01/26) Monthly Pay (BE)</em>:</p>
+<table>
+<thead>
+<tr>
+<th>Payslip</th>
+<th style="text-align: right;">Net (€)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Refund: Mélanie, January (the original, negated)</td>
+<td style="text-align: right;">−2,614.27</td>
+</tr>
+<tr>
+<td>Correction: Mélanie, January (with the unpaid day)</td>
+<td style="text-align: right;">2,537.30</td>
+</tr>
+<tr>
+<td><strong>Difference</strong></td>
+<td style="text-align: right;"><strong>−76.97</strong></td>
+</tr>
+</tbody>
+</table>
+<p>The unpaid day removes one day at the fixed hourly rate (Chapter 14): basic 3,815.39 €.</p>
+</div>
+<figure>
+<p><img alt="The correction run" src="assets/screenshots/be_correction_run.png" /></p>
+<figcaption>The run that <i>Correct</i> created. ① its name, <i>Correction (01/26) Monthly Pay (BE)</i>. ② the correction payslip: 21 paid days, basic 3,815.39 €. ③ it carries the issue until it is validated. ④ the refund: −22 days, −4,000.00 € basic. The footer is the net effect: −184.61 € of basic wage.</figcaption>
+</figure>
+<div class="admonition pitfall">
+<p class="admonition-title">Common pitfall: validating a Belgian correction run</p>
+<p>The Belgian localization marks a payslip with a negative net as <em>Paid</em> at once, so <em>Validate</em> on the correction run fails with "You can't create a journal entry for a paid payslip". Validate the correction payslip itself.</p>
+</div>
+<div class="admonition world">
+<p class="admonition-title">Around the world</p>
+<ul>
+<li><strong>Belgium</strong>: ten structures (monthly pay, double holiday pay, 13<sup>th</sup> month, termination fees, exit holiday pay…).</li>
+<li><strong>Luxembourg</strong>: a gratification and a 13<sup>th</sup> month.</li>
+<li><strong>Mexico</strong>: a Christmas bonus.</li>
+<li><strong>Saudi Arabia</strong>: a salary advance and loan structure.</li>
+<li><strong>Most others</strong>: one regular structure.</li>
+</ul>
+</div>
+<div class="admonition practice">
+<p class="admonition-title">In practice: three checks before Validate</p>
+<ol>
+<li><strong>Headcount</strong>: one payslip per person you expect (Yannick from March, Emma's exit payslips in October).</li>
+<li><strong>Delta</strong>: compare net and total cost with last month; explain every difference by an event.</li>
+<li><strong>Issues</strong>: open every orange or red badge and read it.</li>
+</ol>
+</div>
+<h2 id="missions">Missions</h2>
+<div class="admonition mission">
+<p class="admonition-title">Mission 15.1 · Run January ★</p>
+<p><strong>Situation.</strong> End of January 2026: MyVidangeCompany's first pay run in Odoo.</p>
+<p><strong>Your goal.</strong> Create, compute and validate the January pay run on <em>Monthly Pay (BE)</em>.</p>
+<p><strong>Check.</strong> <strong>4 payslips</strong>, net <strong>12,441.96 €</strong>, total cost <strong>23,082.89 €</strong>, state <strong>Done</strong>.</p>
+<details class="hint" open="open">
+<summary>Hint</summary>
+<p>Odoo proposes the current month: set 1–31 January 2026.</p>
+</details>
+</div>
+<div class="admonition mission">
+<p class="admonition-title">Mission 15.2 · A late unpaid day ★★★</p>
+<p><strong>Situation.</strong> On 5 February, HR remembers that Mélanie took Friday 23 January off, unpaid, for a family matter. January is already validated.</p>
+<p><strong>Your goal.</strong> Record the leave and correct Mélanie's January pay, keeping the original payslip.</p>
+<p><strong>Check.</strong> A run <strong>Correction (01/26) Monthly Pay (BE)</strong> holds a refund of <strong>−2,614.27 €</strong> and a correction of <strong>2,537.30 €</strong> net, both validated; the January run stays <strong>Done</strong> at 12,441.96 €.</p>
+<details class="hint" open="open">
+<summary>Hint</summary>
+<p>After approval, Mélanie's January payslip offers a way to the correction wizard. Read the pitfall above before you validate.</p>
+</details>
+</div>
+<div class="admonition mission">
+<p class="admonition-title">Mission 15.3 · February to April, with Yannick ★★</p>
+<p><strong>Situation.</strong> Three ordinary months, except that Yannick joins on 12 March and Jurgen is absent twice in April (Mission 14.2).</p>
+<p><strong>Your goal.</strong> Run, compute and validate February, March and April.</p>
+<p><strong>Check.</strong> February net <strong>12,450.89 €</strong> (4 payslips); March <strong>14,258.99 €</strong> (5 payslips, Yannick <strong>1,818.11 €</strong>); April <strong>14,839.30 €</strong> (Jurgen <strong>2,040.54 €</strong>).</p>
+<details class="hint" open="open">
+<summary>Hint</summary>
+<p>If Yannick is missing from March, check his contract start (Mission 13.4), not the pay run.</p>
+</details>
+</div>
+<div class="admonition mission">
+<p class="admonition-title">Mission 15.4 · Overtime in May ★★</p>
+<p><strong>Situation.</strong> On Wednesday 20 May Jurgen stays from 16:30 to 20:30 to clear a ticket backlog: 4 hours of voluntary overtime at 150 %, in his first month at 2,500.00 € (Mission 13.4).</p>
+<p><strong>Your goal.</strong> Record the overtime and run May.</p>
+<p><strong>Check.</strong> Jurgen's May payslip: basic <strong>2,500.00 €</strong>, <code>VOLOT150</code> <strong>4 hours, 91.09 €</strong>, net <strong>2,196.55 €</strong>; the May run's net is <strong>14,995.96 €</strong>.</p>
+<details class="hint" open="open">
+<summary>Hint</summary>
+<p>Overtime is a request of type <em>Voluntary Overtime (150%)</em> with a start and end time (Chapter 14). Why is it more than the 83.81 € of Chapter 14's screenshot?</p>
+</details>
+</div>
+<h2 id="summary">Summary</h2>
+<ul>
+<li>A pay run is a period, a structure and a list of versions; its state follows its payslips (Draft, Ready, Done, Paid).</li>
+<li>Generating creates one draft payslip per valid version, with worked days; Compute adds the lines; Validate locks them and creates the journal entry.</li>
+<li>Issues and blocking warnings decide whether a payslip can be validated; banners are information, not always errors.</li>
+<li>A validated payslip is never edited: <em>Correct</em> creates a refund and a recomputed payslip in a correction run.</li>
+<li>Holiday pay, bonuses, advances and exit pay are off-cycle payslips on their own structures.</li>
+</ul></section><nav class='pager' aria-label='Previous and next chapter'><a class='pager-prev' rel='prev' href='chapter-14-time-schedules-time-off-worked-days.html'><small>Previous · Chapter 14</small><span>Time: schedules, time off, worked days</span></a><a class='pager-next' rel='next' href='chapter-16-accounting-and-payment.html'><small>Next · Chapter 16</small><span>Accounting and payment</span></a></nav>
+</main>
+</div>
+<script src="js/site.js"></script>
+
+</body>
+</html>

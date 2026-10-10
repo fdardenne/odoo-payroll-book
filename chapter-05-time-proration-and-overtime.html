@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter 5: Time, proration and overtime · Payroll, from Theory to Odoo Localization</title>
+<meta name="description" content="Gross-to-net in any country, the Odoo salary engine, and how to design, build and review a payroll localization.">
+<link rel="stylesheet" href="css/book.css">
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body class="chapter-page">
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+<button class="nav-toggle" type="button" aria-controls="sidebar" aria-expanded="false"><span aria-hidden="true">&#9776;</span> Contents</button>
+<a class="top-brand" href="index.html">Payroll, from Theory to Odoo Localization</a>
+</header>
+<div class="layout">
+<nav id="sidebar" class="sidebar" aria-label="Book contents">
+<a class="side-brand" href="index.html">Payroll, from Theory to Odoo Localization</a>
+<div class="search" role="search">
+<label for="search-input" class="sr-only">Search the book</label>
+<input id="search-input" type="search" placeholder="Search the book  ( / )" autocomplete="off" spellcheck="false" aria-controls="search-results">
+<div id="search-results" class="search-results" aria-live="polite"></div>
+</div>
+<ol class="nav"><li class='nav-part'><span class='nav-part-title'>Front matter</span><ol><li><a href='preface-before-you-start.html'><span class='nav-num'></span><span>Before you start</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part I · Payroll theory</span><ol><li><a href='chapter-01-what-payroll-is-and-why-it-is-hard.html'><span class='nav-num'>1.</span><span>What payroll is, and why it is hard</span></a></li><li><a href='chapter-02-gross-to-net.html'><span class='nav-num'>2.</span><span>Gross to net</span></a></li><li><a href='chapter-03-contributions-employee-and-employer.html'><span class='nav-num'>3.</span><span>Contributions: employee and employer</span></a></li><li><a href='chapter-04-withholding-tax.html'><span class='nav-num'>4.</span><span>Withholding tax</span></a></li><li class='current' aria-current='page'><a href='chapter-05-time-proration-and-overtime.html'><span class='nav-num'>5.</span><span>Time, proration and overtime</span></a><ol class='nav-sections'><li><a href='#what-proration-is'>What proration is</a></li><li><a href='#time-the-inputs'>Time: the inputs</a></li><li><a href='#proration-the-denominator-is-a-policy'>Proration: the denominator is a policy</a></li><li><a href='#absences-who-pays'>Absences: who pays?</a></li><li><a href='#overtime'>Overtime</a></li><li><a href='#how-time-reaches-the-payslip'>How time reaches the payslip</a></li><li><a href='#summary'>Summary</a></li></ol></li><li><a href='chapter-06-irregular-pay-corrections-and-leavers.html'><span class='nav-num'>6.</span><span>Irregular pay, corrections and leavers</span></a></li><li><a href='chapter-07-declarations-and-the-compliance-calendar.html'><span class='nav-num'>7.</span><span>Declarations and the compliance calendar</span></a></li><li><a href='chapter-08-accounting-for-payroll.html'><span class='nav-num'>8.</span><span>Accounting for payroll</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part II · Localization theory</span><ol><li><a href='chapter-09-what-varies-between-countries-and-what-doesnt.html'><span class='nav-num'>9.</span><span>What varies between countries, and what doesn&#x27;t</span></a></li><li><a href='chapter-10-researching-a-new-country.html'><span class='nav-num'>10.</span><span>Researching a new country</span></a></li><li><a href='chapter-11-laws-that-change-over-time.html'><span class='nav-num'>11.</span><span>Laws that change over time</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part III · Odoo payroll, hands-on</span><ol><li><a href='chapter-12-tour-and-setup.html'><span class='nav-num'>12.</span><span>Tour and setup</span></a></li><li><a href='chapter-13-employees-and-versions.html'><span class='nav-num'>13.</span><span>Employees and versions</span></a></li><li><a href='chapter-14-time-schedules-time-off-worked-days.html'><span class='nav-num'>14.</span><span>Time: schedules, time off, worked days</span></a></li><li><a href='chapter-15-pay-runs-and-payslips.html'><span class='nav-num'>15.</span><span>Pay runs and payslips</span></a></li><li><a href='chapter-16-accounting-and-payment.html'><span class='nav-num'>16.</span><span>Accounting and payment</span></a></li><li><a href='chapter-17-reports-declarations-and-a-leaver.html'><span class='nav-num'>17.</span><span>Reports, declarations and a leaver</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part IV · How the payroll engine works</span><ol><li><a href='chapter-18-the-engine-in-one-picture.html'><span class='nav-num'>18.</span><span>The engine in one picture</span></a></li><li><a href='chapter-19-structures-and-rules.html'><span class='nav-num'>19.</span><span>Structures and rules</span></a></li><li><a href='chapter-20-categories-how-rules-talk-to-each-other.html'><span class='nav-num'>20.</span><span>Categories: how rules talk to each other</span></a></li><li><a href='chapter-21-parameters-updates-and-safe-extensions.html'><span class='nav-num'>21.</span><span>Parameters, updates and safe extensions</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part V · Building a localization</span><ol><li><a href='chapter-22-a-template-for-any-localization-and-how-to-review-one.html'><span class='nav-num'>22.</span><span>A template for any localization, and how to review one</span></a></li></ol></li></ol>
+<a class="nav-pdf" href="payroll_book.pdf" download>Download the PDF</a>
+</nav>
+<div class="backdrop" hidden></div>
+<main id="main" class="content">
+<section class='chapter' id='c-15_ch05'><div class='opener'><div class='opener-band'><span class='opener-num'>Chapter 5</span><span class='opener-part'>Part I · Payroll theory</span></div><h1>Time, proration and overtime</h1><p class='opener-sub'>Partial months, absences, and what an hour is worth</p><div class='opener-goals'><div class='goals-title'>After this chapter you can</div><ul><li>Prorate a monthly salary with the common methods and explain why they differ</li><li>Compute a mid-month joiner's first payslip, and test thresholds on a full-month equivalent</li><li>Classify absences as paid by the employer, paid by a fund, or unpaid</li><li>Compute an hourly rate and an overtime premium</li><li>Describe how Odoo turns time into payslip lines</li></ul></div></div><p>Yannick joins MyVidangeCompany on Thursday 12 March 2026 at 3,600.00 € a month. How much does he earn for March? Four payroll teams, four answers: 2,270.77 €, 2,290.91 €, 2,322.58 € or 2,326.15 €. All four are defensible. This chapter is about choosing a denominator, and about everything else that turns time into money.</p>
+<h2 id="what-proration-is">What proration is</h2>
+<p>A monthly salary pays for a full month. When the employee is paid for only part of it (he joins or leaves mid-month, or takes unpaid days), the payroll pays the same share of the salary. That is <strong>proration</strong> (<em>pro rata</em>, <em>prorating</em>, <em>partial-period pay</em>):</p>
+<div class="formula">Prorated salary = Monthly salary × paid time ÷ time in the period</div>
+
+<p>The <strong>paid time</strong> is the part of the period the employer pays for: days worked, plus paid days off such as public holidays or paid leave.</p>
+<p>Three things follow from that definition:</p>
+<ul>
+<li><strong>Time only matters when the month is incomplete.</strong> A monthly employee gets the same salary every full month, whatever the number of days in it.</li>
+<li><strong>The denominator is a choice.</strong> Working days, calendar days, a fixed 30 days: each gives a different amount for the same absence.</li>
+<li><strong>Every absence needs an answer to "who pays?"</strong> A paid day stays in the paid time; an unpaid day leaves it, and a day paid by a fund leaves the payslip too.</li>
+</ul>
+<figure>
+<p><img alt="Proration: paid days over days in the period" src="assets/charts/gen_ch5_proration.svg" /></p>
+<figcaption>Illustrative numbers: 3,000 a month, 20 working days in the month, the working-days method. A joiner on day 6 is paid 15 days; two unpaid days cost 2/20 of the salary.</figcaption>
+</figure>
+<h2 id="time-the-inputs">Time: the inputs</h2>
+<p>Three inputs decide how time becomes money:</p>
+<ul>
+<li><strong>The work schedule</strong>: hours per day, days per week. The cast works 38 hours, Monday to Friday (<code>UNVERIFIED</code> as the sector's working time).</li>
+<li><strong>Public holidays</strong>: paid days off. Belgium has ten.<sup id="fnref:c5-hol"><a class="footnote-ref" href="#fn:c5-hol">2</a></sup></li>
+<li><strong>The pay basis</strong>: monthly, or hourly and daily, where every hour or day worked is paid.</li>
+</ul>
+<h2 id="proration-the-denominator-is-a-policy">Proration: the denominator is a policy</h2>
+<figure>
+<p><img alt="Yannick's March calendar" src="assets/charts/be_ch5_lucas_calendar.svg" /></p>
+<figcaption>March 2026: 22 working days. Yannick is under contract for 14 of them (and 20 of the 31 calendar days).</figcaption>
+</figure>
+<table class='payslip'>
+<thead>
+<tr>
+<th>Method</th>
+<th>Formula</th>
+<th style="text-align: right;">Yannick, March 2026</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Working days</td>
+<td>3,600.00 × 14 / 22</td>
+<td style="text-align: right;">2,290.91</td>
+</tr>
+<tr>
+<td>Calendar days</td>
+<td>3,600.00 × 20 / 31</td>
+<td style="text-align: right;">2,322.58</td>
+</tr>
+<tr>
+<td>Fixed daily rate × days worked</td>
+<td>3,600.00 × 3/13 ÷ 5 × 14</td>
+<td style="text-align: right;">2,326.15</td>
+</tr>
+<tr>
+<td>Full month − missing days at a fixed daily rate</td>
+<td>3,600.00 − 3,600.00 × 3/13 ÷ 5 × 8</td>
+<td style="text-align: right;">2,270.77</td>
+</tr>
+</tbody>
+</table>
+
+<figure>
+<p><img alt="Four proration methods" src="assets/charts/be_ch5_proration_methods.svg" /></p>
+<figcaption>The same contract and the same start date give four March salaries.</figcaption>
+</figure>
+<p>The "fixed daily rate" is a Belgian convention: a week is worth monthly × 3/13 (a quarter has 3 months and 13 weeks), a day a fifth of that.<sup id="fnref:c5-l78"><a class="footnote-ref" href="#fn:c5-l78">3</a></sup> Other countries use a 30-day month, 30.4 days, or a 12-month average.</p>
+<div class="admonition key">
+<p class="admonition-title">Key idea</p>
+<p>Proration is a ratio, and the <strong>denominator is a policy</strong>. Belgian law sets no method for a monthly employee's incomplete month (<code>UNVERIFIED</code>: practice, not law). Choose one, write it down, and use it for joiners, leavers and unpaid days alike.</p>
+</div>
+<div class="admonition world">
+<p class="admonition-title">Around the world</p>
+<ul>
+<li><strong>Saudi Arabia</strong>: real calendar days or a fixed 30-day month.</li>
+<li><strong>Switzerland</strong>: a company option for the 30-day method.</li>
+<li><strong>Mexico</strong>: 30.4 days per month for tax.</li>
+<li><strong>Hong Kong</strong>: leave pay uses the average daily wage of the last 12 months.</li>
+<li><strong>Philippines</strong>: a daily wage on the contract, converted between pay frequencies.</li>
+</ul>
+</div>
+<h3 id="case-study-yannick-a-mid-month-joiner">Case study: Yannick, a mid-month joiner</h3>
+<div class="admonition example">
+<p class="admonition-title">Worked example: Yannick, March 2026 (working-days method)</p>
+<table>
+<thead>
+<tr>
+<th>Line</th>
+<th style="text-align: right;">Amount (€)</th>
+</tr>
+</thead>
+<tbody>
+<tr class='earn'>
+<td><span class='pill earn'>SALARY</span> Gross 3,600.00 × 14/22</td>
+<td style="text-align: right;">2,290.91</td>
+</tr>
+<tr class='ded'>
+<td><span class='pill ded'>ONSS</span> Employee contributions 13.07 %</td>
+<td style="text-align: right;">−299.42</td>
+</tr>
+<tr class='ded'>
+<td><span class='pill ded'>Low-wage reduction</span> (reference wage 3,600.08, above the ceiling)</td>
+<td style="text-align: right;">0.00</td>
+</tr>
+<tr class='tax'>
+<td><span class='pill tax'>GROSS</span> Taxable base</td>
+<td style="text-align: right;">1,991.49</td>
+</tr>
+<tr class='tax'>
+<td><span class='pill tax'>P.P</span> Withholding (January formula)</td>
+<td style="text-align: right;">−163.37</td>
+</tr>
+<tr class='ded'>
+<td><span class='pill ded'>M.ONSS</span> Special contribution (quarter base too low)</td>
+<td style="text-align: right;">0.00</td>
+</tr>
+<tr class='net'>
+<td><span class='pill net'>NET</span> Net pay</td>
+<td style="text-align: right;">1,828.12</td>
+</tr>
+<tr class='emp'>
+<td><span class='pill emp'>Employer contributions</span> (Q1 rate 25.13 %)</td>
+<td style="text-align: right;">575.71</td>
+</tr>
+<tr>
+<td><strong>Employer cost</strong></td>
+<td style="text-align: right;"><strong>2,866.62</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>A partial month sets a second trap: Yannick's 2,290.91 € <strong>looks</strong> like a low wage. Compare it with the low-wage threshold and every joiner gets a reduction. Scale back to a full-month equivalent first: (2,290.91 / 14) × 22 = 3,600.08 €, above the 3,336.98 € ceiling. No reduction.<sup id="fnref:c5-wb"><a class="footnote-ref" href="#fn:c5-wb">4</a></sup></p>
+<p><strong>In Odoo.</strong> Yannick's March payslip uses the fourth method: 2,270.77 € gross and 1,818.11 € net. Neither is wrong; the method is a policy to confirm with the customer (Chapter 10).<sup id="fnref:c5-odoo"><a class="footnote-ref" href="#fn:c5-odoo">6</a></sup></p>
+<h2 id="absences-who-pays">Absences: who pays?</h2>
+<p>The payroll question is not "is he absent?" but "who pays for this day?"</p>
+<div class='figure'><pre class='mermaid'>flowchart TB
+    A[&quot;A day not worked&quot;] --&gt; E[&quot;Paid by the employer&lt;br/&gt;holiday, public holiday,&lt;br/&gt;first days of sickness&quot;]
+    A --&gt; F[&quot;Paid by a fund&lt;br/&gt;long sickness, maternity,&lt;br/&gt;temporary unemployment&quot;]
+    A --&gt; U[&quot;Unpaid&lt;br/&gt;unpaid leave, unjustified absence&quot;]
+    E --&gt; G1[&quot;Gross unchanged&quot;]
+    F --&gt; G2[&quot;Gross reduced;&lt;br/&gt;the fund pays the employee&quot;]
+    U --&gt; G3[&quot;Gross reduced&quot;]
+    classDef earn fill:#E3F4EA,stroke:#2E9E5B,stroke-width:2px,color:#1E293B;
+classDef ded fill:#FBE5E5,stroke:#D64545,stroke-width:2px,color:#1E293B;
+classDef emp fill:#EEE8F6,stroke:#7B5EA7,stroke-width:2px,color:#1E293B;
+classDef tax fill:#E2ECF8,stroke:#2F6DB5,stroke-width:2px,color:#1E293B;
+classDef net fill:#FBF3D9,stroke:#C99A0E,stroke-width:2px,color:#1E293B;
+classDef odoo fill:#E9EDF2,stroke:#475569,stroke-width:2px,color:#1E293B;
+classDef law fill:#FDF0E1,stroke:#B45309,stroke-width:2px,color:#1E293B;
+classDef neutral fill:#F4F6F8,stroke:#64748B,stroke-width:2px,color:#1E293B;
+    class A neutral;
+    class E,G1 earn;
+    class F law;
+    class U,G2,G3 ded;</pre></div>
+<p><strong>An unpaid day</strong> is a proration in the other direction. Jurgen takes one unpaid day in October 2026.</p>
+<table class='payslip'>
+<thead>
+<tr>
+<th>Jurgen, October 2026, 1 unpaid day</th>
+<th style="text-align: right;">Amount (€)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Daily rate 2,300.00 × 3/13 ÷ 5</td>
+<td style="text-align: right;">106.15</td>
+</tr>
+<tr class='earn'>
+<td><span class='pill earn'>Gross</span>, 2,300.00 − one day</td>
+<td style="text-align: right;">2,193.85</td>
+</tr>
+<tr class='ded'>
+<td><span class='pill ded'>Employee contributions after the low-wage reduction</span></td>
+<td style="text-align: right;">−2.19</td>
+</tr>
+<tr class='tax'>
+<td><span class='pill tax'>P.P</span> Withholding</td>
+<td style="text-align: right;">−105.95</td>
+</tr>
+<tr class='ded'>
+<td><span class='pill ded'>M.ONSS</span> Special contribution</td>
+<td style="text-align: right;">−10.37</td>
+</tr>
+<tr class='net'>
+<td><span class='pill net'>NET</span> Net pay</td>
+<td style="text-align: right;">2,075.34</td>
+</tr>
+</tbody>
+</table>
+
+<p>His usual net is 2,143.05 €. The unpaid day also scales his low-wage reduction by 21/22.<sup id="fnref2:c5-wb"><a class="footnote-ref" href="#fn:c5-wb">4</a></sup></p>
+<p><strong>A sick day</strong> is usually paid by the employer for a first period, then by a fund. In Belgium a white-collar employee keeps his full salary for the first 30 days (the "guaranteed salary").<sup id="fnref2:c5-l78"><a class="footnote-ref" href="#fn:c5-l78">3</a></sup> If Jurgen is ill for a day, his gross stays 2,300.00 €; only the day's type changes, and with it per-day benefits such as meal vouchers.</p>
+<div class="admonition pitfall">
+<p class="admonition-title">Common pitfall</p>
+<p>Mixing methods gives two values of "a day" in one company: Jurgen's day is worth 104.55 € by working days and 106.15 € at the fixed rate.<sup id="fnref:c5-calc"><a class="footnote-ref" href="#fn:c5-calc">5</a></sup> Pick one and use it everywhere.</p>
+</div>
+<h2 id="overtime">Overtime</h2>
+<p>Overtime is time above a daily or weekly limit, paid at a premium and often taxed specially.</p>
+<div class="formula">Overtime pay = hours × hourly rate × (100 % + premium)</div>
+
+<p>The hourly rate is again a convention; in Belgium, monthly × 3 / 13 / weekly hours. Belgian law sets a premium of at least 50 % (100 % on Sundays and holidays).<sup id="fnref:c5-l71"><a class="footnote-ref" href="#fn:c5-l71">1</a></sup></p>
+<div class="admonition example">
+<p class="admonition-title">Worked example: Jurgen, 4 hours at 150 %</p>
+<table>
+<thead>
+<tr>
+<th>Line</th>
+<th style="text-align: right;">Amount (€)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Hourly rate 2,300.00 × 3 / 13 / 38</td>
+<td style="text-align: right;">13.97</td>
+</tr>
+<tr class='earn'>
+<td><span class='pill earn'>Overtime</span> 4 h × 13.97 × 150 %</td>
+<td style="text-align: right;">83.82</td>
+</tr>
+</tbody>
+</table>
+<p>The hourly-rate convention is common practice, <code>UNVERIFIED</code> as a legal rule.<sup id="fnref2:c5-calc"><a class="footnote-ref" href="#fn:c5-calc">5</a></sup> Odoo pays 83.81 €: it does not round the hourly rate first.<sup id="fnref2:c5-odoo"><a class="footnote-ref" href="#fn:c5-odoo">6</a></sup></p>
+</div>
+<div class="admonition world">
+<p class="admonition-title">Around the world</p>
+<ul>
+<li><strong>Switzerland</strong>: 125 %, 150 % or 200 %.</li>
+<li><strong>Morocco</strong>: 25 %, 50 % or 100 %.</li>
+<li><strong>United States</strong>: 150 % as a work entry; a federal deduction for overtime, capped year to date.</li>
+<li><strong>UAE</strong>: weekday and rest-day overtime, each at its work-entry rate.</li>
+<li><strong>Kenya, Netherlands, India</strong>: no overtime rule in the module.</li>
+</ul>
+</div>
+<div class="admonition be">
+<p class="admonition-title">In Belgium</p>
+<p>Some overtime hours are free of contributions or carry a tax reduction, but only up to a yearly number of hours.<sup id="fnref:c5-vol"><a class="footnote-ref" href="#fn:c5-vol">7</a></sup><sup>,</sup><sup id="fnref:c5-a3"><a class="footnote-ref" href="#fn:c5-a3">8</a></sup> The same four hours can be treated three ways, so the payroll needs an hour counter per employee and year.</p>
+</div>
+<h2 id="how-time-reaches-the-payslip">How time reaches the payslip</h2>
+<p>Every payroll system, Odoo included, turns time into money in four moves. Illustrative month: 3,000 a month, 20 working days, of which 17 worked, a public holiday, a sick day paid by the employer and an unpaid day.</p>
+<div class="steps" markdown="0">
+<div class="step c-odoo"><b><span class="n">1</span>What is known</b>The work schedule: which days and hours are expected.<br>The public holidays.<br>The approved time off.</div>
+<div class="sarrow">→</div>
+<div class="step c-law"><b><span class="n">2</span>Each day gets a type</b><div class="daystrip"><div class="tc work"></div><div class="tc work"></div><div class="tc work"></div><div class="tc hol"></div><div class="tc work"></div><div class="tc work"></div><div class="tc work"></div><div class="tc work"></div><div class="tc work"></div><div class="tc work"></div><div class="tc sick"></div><div class="tc work"></div><div class="tc work"></div><div class="tc work"></div><div class="tc work"></div><div class="tc work"></div><div class="tc unp"></div><div class="tc work"></div><div class="tc work"></div><div class="tc work"></div></div><i>one colour per type, as in step 3; the type says who pays the day</i></div>
+<div class="sarrow">→</div>
+<div class="step c-tax"><b><span class="n">3</span>One line per type</b><div class="tline work">Worked · 17 days · paid</div><div class="tline hol">Public holiday · 1 · paid</div><div class="tline sick">Sick · 1 · paid</div><div class="tline unp">Unpaid · 1 · not paid</div></div>
+<div class="sarrow">→</div>
+<div class="step c-earn"><b><span class="n">4</span>Rules turn it into money</b>Salary = 3,000 × 19 paid days ÷ 20<br><span class="big">2,850</span><i>contributions and tax are then computed on it</i></div>
+</div>
+
+<p><strong>In Odoo.</strong> Work entries are generated from the employee's version (<span class='pill odoo'>hr.version</span>), its calendar and the time off, then summed into <span class='pill odoo'>hr.payslip.worked_days</span> lines, one per work entry type; the type says whether the day is paid. The <strong>localization</strong> decides how a line becomes money: Belgium values non-attendance lines at the 3/13 rate and gives the attendance line the rest, so a full month always pays the full salary. Chapter 14 walks through it in Odoo.</p>
+<div class="admonition practice">
+<p class="admonition-title">In practice</p>
+<p>Before configuring, write the time policy on one page: proration method, daily and hourly rates, who pays each absence, how overtime is counted. Have the customer's accountant confirm it. Most disputes about joiners and leavers are disputes about this page.</p>
+</div>
+<h2 id="summary">Summary</h2>
+<ul>
+<li>A monthly employee earns the same salary every full month; time matters for joiners, leavers, absences and overtime.</li>
+<li>Proration's denominator is a policy: Yannick's March is 2,270.77 € to 2,326.15 € depending on the method.</li>
+<li>Thresholds tested on monthly pay must use a full-month equivalent, or every joiner looks like a low earner.</li>
+<li>Every absence is paid by the employer, paid by a fund, or unpaid. An unpaid day lowers Jurgen's net from 2,143.05 € to 2,075.34 €; a short sick day leaves his gross unchanged.</li>
+<li>Overtime = hours × hourly rate × (1 + premium); the hourly rate is also a convention.</li>
+<li>In Odoo, time becomes worked-days lines per work entry type; the localization decides how they become money.</li>
+</ul>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:c5-l71">
+<p>Labour Law of 16 March 1971, art. 19, 26bis, 29 (Justel): <a href="https://www.ejustice.just.fgov.be/cgi_loi/article.pl?language=fr&amp;lg_txt=f&amp;type=&amp;sort=&amp;numac_search=1971031602&amp;cn_search=1971031602&amp;caller=&amp;&amp;view_numac=1971031602fr">https://www.ejustice.just.fgov.be/cgi_loi/article.pl?language=fr&amp;lg_txt=f&amp;type=&amp;sort=&amp;numac_search=1971031602&amp;cn_search=1971031602&amp;caller=&amp;&amp;view_numac=1971031602fr</a>.&#160;<a class="footnote-backref" href="#fnref:c5-l71" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:c5-hol">
+<p>SPF Emploi, public holidays: <a href="https://emploi.belgique.be/fr/themes/jours-feries-et-conges/jours-feries">https://emploi.belgique.be/fr/themes/jours-feries-et-conges/jours-feries</a>.&#160;<a class="footnote-backref" href="#fnref:c5-hol" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:c5-l78">
+<p>Law of 3 July 1978 on employment contracts, art. 39 §1 (3/13) and art. 70 (guaranteed salary) (Justel): <a href="https://www.ejustice.just.fgov.be/cgi_loi/article.pl?language=fr&amp;lg_txt=f&amp;type=&amp;sort=&amp;numac_search=1978070303&amp;cn_search=1978070303&amp;caller=&amp;&amp;view_numac=1978070303fr">https://www.ejustice.just.fgov.be/cgi_loi/article.pl?language=fr&amp;lg_txt=f&amp;type=&amp;sort=&amp;numac_search=1978070303&amp;cn_search=1978070303&amp;caller=&amp;&amp;view_numac=1978070303fr</a>.&#160;<a class="footnote-backref" href="#fnref:c5-l78" title="Jump back to footnote 3 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:c5-l78" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:c5-wb">
+<p>ONSS, work bonus (incomplete months, S = (W / J) × D, P = R × J / D): <a href="https://www.socialsecurity.be/employer/instructions/dmfa/fr/latest/instructions/deductions/workers_reductions/workbonus.html">https://www.socialsecurity.be/employer/instructions/dmfa/fr/latest/instructions/deductions/workers_reductions/workbonus.html</a>.&#160;<a class="footnote-backref" href="#fnref:c5-wb" title="Jump back to footnote 4 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:c5-wb" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+<li id="fn:c5-calc">
+<p>Independent calculator, <code>research/numbers_be_calc.md</code>, sections 4 and 10.8 to 10.11.&#160;<a class="footnote-backref" href="#fnref:c5-calc" title="Jump back to footnote 5 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:c5-calc" title="Jump back to footnote 5 in the text">&#8617;</a></p>
+</li>
+<li id="fn:c5-odoo">
+<p>Payslips computed by Odoo master on the demo database, <code>research/numbers_be.md</code>, sections 2 (Yannick, March 2026) and 3 (Jurgen, April and May 2026).&#160;<a class="footnote-backref" href="#fnref:c5-odoo" title="Jump back to footnote 6 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:c5-odoo" title="Jump back to footnote 6 in the text">&#8617;</a></p>
+</li>
+<li id="fn:c5-vol">
+<p>ONSS, voluntary overtime (law of 18 May 2026, AR of 9 July 2026): <a href="https://www.socialsecurity.be/employer/instructions/dmfa/fr/latest/instructions/salary/salary_exclusions/voluntary_overtime.html">https://www.socialsecurity.be/employer/instructions/dmfa/fr/latest/instructions/salary/salary_exclusions/voluntary_overtime.html</a>.&#160;<a class="footnote-backref" href="#fnref:c5-vol" title="Jump back to footnote 7 in the text">&#8617;</a></p>
+</li>
+<li id="fn:c5-a3">
+<p>SPF Finances, Annex III consolidated, n° 45 (overtime reduction): <a href="https://www.minfin.fgov.be/myminfin-web/pages/public/fisconet/document/0c174ec5-448b-4d1e-983b-fc457e5e7e28">https://www.minfin.fgov.be/myminfin-web/pages/public/fisconet/document/0c174ec5-448b-4d1e-983b-fc457e5e7e28</a>.&#160;<a class="footnote-backref" href="#fnref:c5-a3" title="Jump back to footnote 8 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></section><nav class='pager' aria-label='Previous and next chapter'><a class='pager-prev' rel='prev' href='chapter-04-withholding-tax.html'><small>Previous · Chapter 4</small><span>Withholding tax</span></a><a class='pager-next' rel='next' href='chapter-06-irregular-pay-corrections-and-leavers.html'><small>Next · Chapter 6</small><span>Irregular pay, corrections and leavers</span></a></nav>
+</main>
+</div>
+<script src="js/site.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js" integrity="sha384-rbtjAdnIQE/aQJGEgXrVUlMibdfTSa4PQju4HDhN3sR2PmaKFzhEafuePsl9H/9I" crossorigin="anonymous"></script>
+<script>
+(async () => {
+  mermaid.initialize({
+    startOnLoad: false, theme: "base", securityLevel: "loose",
+    flowchart: { htmlLabels: true, curve: "basis", useMaxWidth: true },
+    sequence: { useMaxWidth: true, mirrorActors: false },
+    er: { useMaxWidth: true },
+    themeVariables: {
+      fontFamily: "Helvetica Neue, Helvetica, Arial", fontSize: "13px",
+      primaryColor: "#E9EDF2", primaryBorderColor: "#475569", primaryTextColor: "#1E293B",
+      lineColor: "#64748B", secondaryColor: "#F6F0F5", tertiaryColor: "#F8FAFC",
+      noteBkgColor: "#FFFAEB", noteBorderColor: "#C99A0E", actorBkg: "#E9EDF2", actorBorder: "#475569"
+    }
+  });
+  const nodes = Array.from(document.querySelectorAll("pre.mermaid"));
+  let i = 0;
+  for (const el of nodes) {
+    const src = el.textContent;
+    try {
+      const { svg } = await mermaid.render("m" + (i++), src);
+      el.outerHTML = svg;
+    } catch (e) {
+      el.outerHTML = `<div class="mermaid-error" data-src="${src.replace(/"/g, "'")}">Mermaid error: ${e.message}\n${src}</div>`;
+    }
+  }
+  window.__mermaidDone = true;
+})();
+</script>
+</body>
+</html>

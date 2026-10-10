@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter 10: Researching a new country · Payroll, from Theory to Odoo Localization</title>
+<meta name="description" content="Gross-to-net in any country, the Odoo salary engine, and how to design, build and review a payroll localization.">
+<link rel="stylesheet" href="css/book.css">
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body class="chapter-page">
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+<button class="nav-toggle" type="button" aria-controls="sidebar" aria-expanded="false"><span aria-hidden="true">&#9776;</span> Contents</button>
+<a class="top-brand" href="index.html">Payroll, from Theory to Odoo Localization</a>
+</header>
+<div class="layout">
+<nav id="sidebar" class="sidebar" aria-label="Book contents">
+<a class="side-brand" href="index.html">Payroll, from Theory to Odoo Localization</a>
+<div class="search" role="search">
+<label for="search-input" class="sr-only">Search the book</label>
+<input id="search-input" type="search" placeholder="Search the book  ( / )" autocomplete="off" spellcheck="false" aria-controls="search-results">
+<div id="search-results" class="search-results" aria-live="polite"></div>
+</div>
+<ol class="nav"><li class='nav-part'><span class='nav-part-title'>Front matter</span><ol><li><a href='preface-before-you-start.html'><span class='nav-num'></span><span>Before you start</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part I · Payroll theory</span><ol><li><a href='chapter-01-what-payroll-is-and-why-it-is-hard.html'><span class='nav-num'>1.</span><span>What payroll is, and why it is hard</span></a></li><li><a href='chapter-02-gross-to-net.html'><span class='nav-num'>2.</span><span>Gross to net</span></a></li><li><a href='chapter-03-contributions-employee-and-employer.html'><span class='nav-num'>3.</span><span>Contributions: employee and employer</span></a></li><li><a href='chapter-04-withholding-tax.html'><span class='nav-num'>4.</span><span>Withholding tax</span></a></li><li><a href='chapter-05-time-proration-and-overtime.html'><span class='nav-num'>5.</span><span>Time, proration and overtime</span></a></li><li><a href='chapter-06-irregular-pay-corrections-and-leavers.html'><span class='nav-num'>6.</span><span>Irregular pay, corrections and leavers</span></a></li><li><a href='chapter-07-declarations-and-the-compliance-calendar.html'><span class='nav-num'>7.</span><span>Declarations and the compliance calendar</span></a></li><li><a href='chapter-08-accounting-for-payroll.html'><span class='nav-num'>8.</span><span>Accounting for payroll</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part II · Localization theory</span><ol><li><a href='chapter-09-what-varies-between-countries-and-what-doesnt.html'><span class='nav-num'>9.</span><span>What varies between countries, and what doesn&#x27;t</span></a></li><li class='current' aria-current='page'><a href='chapter-10-researching-a-new-country.html'><span class='nav-num'>10.</span><span>Researching a new country</span></a><ol class='nav-sections'><li><a href='#the-research-loop'>The research loop</a></li><li><a href='#the-source-hierarchy'>The source hierarchy</a></li><li><a href='#the-research-template'>The research template</a></li><li><a href='#handling-an-unverified-item'>Handling an UNVERIFIED item</a></li><li><a href='#questions-for-a-payroll-expert'>Questions for a payroll expert</a></li><li><a href='#golden-payslips'>Golden payslips</a></li><li><a href='#summary'>Summary</a></li></ol></li><li><a href='chapter-11-laws-that-change-over-time.html'><span class='nav-num'>11.</span><span>Laws that change over time</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part III · Odoo payroll, hands-on</span><ol><li><a href='chapter-12-tour-and-setup.html'><span class='nav-num'>12.</span><span>Tour and setup</span></a></li><li><a href='chapter-13-employees-and-versions.html'><span class='nav-num'>13.</span><span>Employees and versions</span></a></li><li><a href='chapter-14-time-schedules-time-off-worked-days.html'><span class='nav-num'>14.</span><span>Time: schedules, time off, worked days</span></a></li><li><a href='chapter-15-pay-runs-and-payslips.html'><span class='nav-num'>15.</span><span>Pay runs and payslips</span></a></li><li><a href='chapter-16-accounting-and-payment.html'><span class='nav-num'>16.</span><span>Accounting and payment</span></a></li><li><a href='chapter-17-reports-declarations-and-a-leaver.html'><span class='nav-num'>17.</span><span>Reports, declarations and a leaver</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part IV · How the payroll engine works</span><ol><li><a href='chapter-18-the-engine-in-one-picture.html'><span class='nav-num'>18.</span><span>The engine in one picture</span></a></li><li><a href='chapter-19-structures-and-rules.html'><span class='nav-num'>19.</span><span>Structures and rules</span></a></li><li><a href='chapter-20-categories-how-rules-talk-to-each-other.html'><span class='nav-num'>20.</span><span>Categories: how rules talk to each other</span></a></li><li><a href='chapter-21-parameters-updates-and-safe-extensions.html'><span class='nav-num'>21.</span><span>Parameters, updates and safe extensions</span></a></li></ol></li><li class='nav-part'><span class='nav-part-title'>Part V · Building a localization</span><ol><li><a href='chapter-22-a-template-for-any-localization-and-how-to-review-one.html'><span class='nav-num'>22.</span><span>A template for any localization, and how to review one</span></a></li></ol></li></ol>
+<a class="nav-pdf" href="payroll_book.pdf" download>Download the PDF</a>
+</nav>
+<div class="backdrop" hidden></div>
+<main id="main" class="content">
+<section class='chapter' id='c-22_ch10'><div class='opener'><div class='opener-band'><span class='opener-num'>Chapter 10</span><span class='opener-part'>Part II · Localization theory</span></div><h1>Researching a new country</h1><p class='opener-sub'>From the official gazette to a golden payslip: a source hierarchy, a template and a list of questions</p><div class='opener-goals'><div class='goals-title'>After this chapter you can</div><ul><li>Rank payroll sources in any country and know which one wins</li><li>Fill the research template for a country and map each row to an Odoo target</li><li>Run the template backwards on an existing module to find gaps and risks</li><li>Handle an UNVERIFIED item: write it down, pick a default, ask, and keep it visible</li><li>Build golden payslips from an independent calculation, and read the differences</li></ul></div></div><p>Sales says: "We need payroll for country X by January." Nobody has read its tax code. Code from a provider's blog and you will discover in October that the tables change on 1 November and the tax office wants one signed file per payslip. Research is not a phase you finish; it is a loop that ends in numbers you can test.</p>
+<h2 id="the-research-loop">The research loop</h2>
+<p>Researching a country is a loop of four steps, run again every time the numbers disagree. The rest of the chapter takes them one by one.</p>
+<div class="cycle" markdown="0">
+<div class="cyc c-law"><b>1 · Read the sources</b>Official texts first: the law, then the administration's guides and files.<span class="out">ranked sources</span></div>
+<div class="carrow">→</div>
+<div class="cyc c-tax"><b>2 · Write it down</b>One row per topic: the rule, its source, where it goes in Odoo.<span class="out">the research template</span></div>
+<div class="carrow">↑</div>
+<div class="ccenter">repeat until<br>the numbers<br>match</div>
+<div class="carrow">↓</div>
+<div class="cyc c-emp"><b>4 · Ask the expert</b>Where the text is silent, ask a local payroll expert, with a default answer ready.<span class="out">answers and defaults</span></div>
+<div class="carrow">←</div>
+<div class="cyc c-net"><b>3 · Check with numbers</b>Compute real payslips outside Odoo and compare them with Odoo's.<span class="out">golden payslips</span></div>
+</div>
+
+<p>The examples come from this book's own loop on Belgium.</p>
+<h2 id="the-source-hierarchy">The source hierarchy</h2>
+<p>When two sources disagree, the higher one wins. Always write down which level a number comes from.</p>
+<div class="prio" markdown="0">
+<div class="parrow"><span>wins</span><div class="bar"></div><span>loses</span></div>
+<div class="pstack">
+<div class="pl c-law" style="margin:0 16mm"><div class="pn">1 · Law<small>official gazette</small></div><div class="pb">the rule and its start date<i>e.g. the start date of every dated parameter</i></div></div>
+<div class="pl c-tax" style="margin:0 12mm"><div class="pn">2 · Administration<small>tax office, social security</small></div><div class="pb">rates, thresholds, calculation methods<i>e.g. the US percentage method, quoted in the <code>FIT</code> rule</i></div></div>
+<div class="pl c-earn" style="margin:0 8mm"><div class="pn">3 · Official tools and data<small>calculators, rate files, APIs</small></div><div class="pb">checking a calculation; data a module can load<i>e.g. Swiss tax tariffs, Belgian rate files, the Saudi GOSI API</i></div></div>
+<div class="pl c-emp" style="margin:0 4mm"><div class="pn">4 · Professionals<small>accountants, federations</small></div><div class="pb">practice, what the text does not say<i>e.g. sector premiums known only from a federation's guide</i></div></div>
+<div class="pl c-odoo" style="margin:0 0mm"><div class="pn">5 · Press<small>news, blogs</small></div><div class="pb">learning that something changed<i>e.g. never a number</i></div></div>
+</div>
+</div>
+
+<p>Level 3 deserves attention: an official file or API can be loaded by the module instead of copied by a developer (Chapter 11), and a file specification is a legal source in its own right. Belgium's tax office publishes a version history of its withholding rules, listing every amending decree.<sup id="fnref:c10-hist"><a class="footnote-ref" href="#fn:c10-hist">2</a></sup></p>
+<div class="admonition pitfall">
+<p class="admonition-title">Common pitfall</p>
+<p>Treating the text as the whole truth. A rule for "income paid from 1 August" does not say what to do with a July salary paid on 3 August. Separate <strong>what the text says</strong> from <strong>what practice does</strong>, and note which one each number comes from.</p>
+</div>
+<h2 id="the-research-template">The research template</h2>
+<p>Copy this table for each country, one row per axis of Chapter 9 (frequencies, earnings, time, payment and the others follow the same pattern). The last two columns turn research into work: where it goes in Odoo, and how much to trust it.</p>
+<table class='payslip'>
+<thead>
+<tr>
+<th>Topic</th>
+<th>Question to answer</th>
+<th>Typical Odoo target</th>
+<th>Source level</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Structures</td>
+<td>which payments need their own payslip</td>
+<td><code>hr.payroll.structure</code> records</td>
+<td>1–2</td>
+</tr>
+<tr>
+<td>Contributions</td>
+<td>funds, rates, bases, caps</td>
+<td>rules + dated parameters</td>
+<td>2–3</td>
+</tr>
+<tr>
+<td>Income tax</td>
+<td>method, tables, family situation</td>
+<td>rules + parameters, version fields</td>
+<td>2–3</td>
+</tr>
+<tr>
+<td>Leavers</td>
+<td>notice, severance, final pay</td>
+<td>structure + departure flow</td>
+<td>1–2</td>
+</tr>
+<tr>
+<td>Declarations</td>
+<td>each filing, period, deadline, format</td>
+<td>declaration model, export</td>
+<td>2–3</td>
+</tr>
+</tbody>
+</table>
+
+<p>Two examples: one filled from the law, one filled backwards from an existing module.</p>
+<div class="admonition example">
+<p class="admonition-title">Example 1: Belgium, filled from the law (excerpt)</p>
+<table>
+<thead>
+<tr>
+<th>Topic</th>
+<th>Rule (2026)</th>
+<th>Source (level)</th>
+<th>Odoo target</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Employee social security</td>
+<td>13.07 %</td>
+<td>social-security instructions (2)</td>
+<td>downloaded rate parameter</td>
+<td>VERIFIED</td>
+</tr>
+<tr>
+<td>Withholding method</td>
+<td>annualise, flat expenses, scale, reductions, ÷ 12</td>
+<td>tax office's key formula (2)</td>
+<td>rule chain + helpers</td>
+<td>VERIFIED</td>
+</tr>
+<tr>
+<td>Proration of a joiner's month</td>
+<td>no statutory method</td>
+<td>none (practice)</td>
+<td>worked-days valuation</td>
+<td><strong>UNVERIFIED</strong></td>
+</tr>
+<tr>
+<td>Sector end-of-year premium</td>
+<td>one monthly salary, pro rata</td>
+<td>accountants' federation (4) only</td>
+<td>separate structure</td>
+<td><strong>UNVERIFIED</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Example 2: Mexico, run backwards from <code>l10n_mx_hr_payroll</code></p>
+<p>Here the module exists and the question is "where does it do this?". The status column says what the code shows; the law itself was not checked for this book.</p>
+<table>
+<thead>
+<tr>
+<th>Topic</th>
+<th>What the module does</th>
+<th>Odoo target</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Frequencies</td>
+<td>seven, from daily to bi-monthly</td>
+<td><code>_get_selection_schedule_pay</code></td>
+<td>in module</td>
+</tr>
+<tr>
+<td>Contributions</td>
+<td>on the integrated daily wage, capped at 25 × UMA</td>
+<td><code>SBC</code> rule</td>
+<td>in module; the cap is hard-coded (see below)</td>
+</tr>
+<tr>
+<td>Income tax</td>
+<td>period tables</td>
+<td><code>ISR</code>, <code>l10n_mx_isr_tables</code></td>
+<td>in module</td>
+</tr>
+<tr>
+<td>Leavers</td>
+<td>severance and final settlement</td>
+<td>—</td>
+<td><strong>gap</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Running the template backwards found one gap (no severance flow) and one risk: the module declares a parameter for the 25 × UMA cap but the <code>SBC</code> rule writes <code>25</code> in its code, so the parameter is never read.</p>
+</div>
+<div class="admonition practice">
+<p class="admonition-title">In practice</p>
+<p>Run the template backwards on a module before you review or extend it. An empty "Odoo target" cell is a gap; an UNVERIFIED status is a risk.</p>
+</div>
+<h2 id="handling-an-unverified-item">Handling an UNVERIFIED item</h2>
+<p>The Belgian research ended with sixteen UNVERIFIED items,<sup id="fnref:c10-law"><a class="footnote-ref" href="#fn:c10-law">3</a></sup> which is normal. What matters is how each is handled.</p>
+<table class='payslip'>
+<thead>
+<tr>
+<th>Item</th>
+<th>Default chosen</th>
+<th>What happened next</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Closure-fund rate (web page unreadable)</td>
+<td>left out of the calculation</td>
+<td>Odoo imports it from the official rate file: a machine-readable file answered what a web page could not</td>
+</tr>
+<tr>
+<td>Proration of Yannick's March (no statutory method)</td>
+<td>working days</td>
+<td>Odoo uses a third method: question for the expert</td>
+</tr>
+</tbody>
+</table>
+
+<div class="admonition key">
+<p class="admonition-title">Key idea</p>
+<p>An UNVERIFIED item is not a failure; a hidden one is. Give each a default, mark it wherever the number is used (docs, comments, tests), and tie it to a question with an owner. None should block the build; all should block the release.</p>
+</div>
+<h2 id="questions-for-a-payroll-expert">Questions for a payroll expert</h2>
+<p>Research ends where the text is silent. Collect the questions, each with a <strong>default</strong> and a <strong>design consequence</strong>, so the answer changes data, not architecture. The same families come up everywhere:</p>
+<table class='payslip'>
+<thead>
+<tr>
+<th>Question family</th>
+<th>Example</th>
+<th>If the answer differs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Which proration method?</td>
+<td>working days or a fixed daily rate?</td>
+<td>another worked-days valuation</td>
+</tr>
+<tr>
+<td>Which date decides?</td>
+<td>does a July salary paid in August get the August rate?</td>
+<td>the rule passes the payment date to the lookup (Chapter 11)</td>
+</tr>
+<tr>
+<td>What enters a base?</td>
+<td>is the pro-rata premium in the indemnity base?</td>
+<td>one category added to a base</td>
+</tr>
+<tr>
+<td>How is it rounded?</td>
+<td>half-up at every step, or down?</td>
+<td>one <code>float_round</code>; one cent on many payslips</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="golden-payslips">Golden payslips</h2>
+<p>A test needs an <strong>expected value</strong>. If that value comes from Odoo itself, the test only proves that Odoo agrees with Odoo. A <strong>golden payslip</strong> is a payslip whose every line was computed <strong>outside Odoo</strong>, from the law, by something that does not share Odoo's code. When Odoo's payslip matches it line by line, the localization is right for that case; when it does not, one of the two is wrong, and you know exactly which line to look at.</p>
+<p>How to get one:</p>
+<div class="steps" markdown="0">
+<div class="step c-law"><b><span class="n">1</span>Build a calculator</b>A spreadsheet or a small script, written from the law and the research template. No Odoo code.</div>
+<div class="sarrow">→</div>
+<div class="step c-tax"><b><span class="n">2</span>Prove it</b>It must reproduce the administration's own worked examples, to the cent.<i>The book's Belgian script matched the tax office's simulator first.</i></div>
+<div class="sarrow">→</div>
+<div class="step c-net"><b><span class="n">3</span>Compute the cast</b>Run it for a few employees that cover the cases: low and high pay, a joiner, a leaver.</div>
+<div class="sarrow">→</div>
+<div class="step c-odoo"><b><span class="n">4</span>Compare with Odoo</b>Same employees, same month in Odoo. Compare line by line, then freeze the expected lines in a test.</div>
+</div>
+<div class="outcomes" markdown="0">
+<div class="outcome c-earn"><b>Same amount:</b> the line is right. It becomes a test that protects it from future changes.</div>
+<div class="outcome c-ded"><b>Different amount:</b> find the cause. Odoo has a bug, the calculator has one, or the law is unclear: a question for the expert.</div>
+</div>
+
+<div class="admonition example">
+<p class="admonition-title">Worked example: Mélanie and Marie, calculator against Odoo</p>
+<table>
+<thead>
+<tr>
+<th>Line</th>
+<th style="text-align: right;">Mélanie, calculator</th>
+<th style="text-align: right;">Mélanie, Odoo</th>
+<th style="text-align: right;">Marie, calculator</th>
+<th style="text-align: right;">Marie, Odoo</th>
+</tr>
+</thead>
+<tbody>
+<tr class='earn'>
+<td><span class='pill earn'>Gross salary</span></td>
+<td style="text-align: right;">4,000.00</td>
+<td style="text-align: right;">4,000.00</td>
+<td style="text-align: right;">7,500.00</td>
+<td style="text-align: right;">7,500.00</td>
+</tr>
+<tr class='ded'>
+<td><span class='pill ded'>Employee social security</span></td>
+<td style="text-align: right;">522.80</td>
+<td style="text-align: right;">522.80</td>
+<td style="text-align: right;">980.25</td>
+<td style="text-align: right;">980.25</td>
+</tr>
+<tr class='earn'>
+<td><span class='pill earn'>Car benefit in kind</span></td>
+<td style="text-align: right;">—</td>
+<td style="text-align: right;">—</td>
+<td style="text-align: right;">148.57</td>
+<td style="text-align: right;">151.42</td>
+</tr>
+<tr class='tax'>
+<td><span class='pill tax'>Taxable salary</span></td>
+<td style="text-align: right;">3,477.20</td>
+<td style="text-align: right;">3,477.20</td>
+<td style="text-align: right;">6,668.32</td>
+<td style="text-align: right;">6,671.17</td>
+</tr>
+<tr class='tax'>
+<td><span class='pill tax'>Withholding tax</span></td>
+<td style="text-align: right;">826.70</td>
+<td style="text-align: right;">826.69</td>
+<td style="text-align: right;">1,770.92</td>
+<td style="text-align: right;">1,750.15</td>
+</tr>
+<tr class='net'>
+<td><span class='pill net'>Net</span></td>
+<td style="text-align: right;">2,614.26</td>
+<td style="text-align: right;">2,614.27</td>
+<td style="text-align: right;">4,663.91</td>
+<td style="text-align: right;">4,684.68</td>
+</tr>
+</tbody>
+</table>
+<p>October 2026 payslips.<sup id="fnref:c10-calc"><a class="footnote-ref" href="#fn:c10-calc">4</a></sup><sup>,</sup><sup id="fnref:c10-odoo"><a class="footnote-ref" href="#fn:c10-odoo">5</a></sup> Where both agree, the payslip is correct. Where they differ, find the cause and take it to the expert: Odoo rounds the monthly tax down where the official formula rounds half up (Mélanie's cent),<sup id="fnref:c10-kf"><a class="footnote-ref" href="#fn:c10-kf">1</a></sup> spreads the car benefit by days (Chapter 2), and deducts a transport exemption (Chapter 4).</p>
+</div>
+<figure>
+<p><img alt="Mélanie's payslip, all lines" src="assets/screenshots/be_slip_lines.png" /></p>
+<figcaption>Mélanie, February 2026, with *Show all* on. ① basic salary 4,000.00. ② social security −13.07 %. ③ taxable salary 3,477.20, equal to the calculator. ④ withholding −826.69, one cent below the calculator; the cent is already visible in the yearly tax line. ⑤ net 2,614.27.</figcaption>
+</figure>
+<div class="admonition pitfall">
+<p class="admonition-title">Common pitfall</p>
+<p>Generating the "expected" values by running Odoo and pasting the output into the test. That test can never fail for a wrong rule, only for a changed one. The <strong>first</strong> snapshot of each case must be checked against an independent source (Chapter 21).</p>
+</div>
+<div class="admonition world">
+<p class="admonition-title">Around the world</p>
+<ul>
+<li><strong>MX</strong>: tests write the hand computation in a comment next to each expected value.</li>
+<li><strong>US</strong>: the <code>FIT</code> rule quotes the tax office's worksheet in its comments.</li>
+<li><strong>BE</strong>: JSON snapshots hold the expected lines of large payslips.</li>
+<li><strong>NL</strong>: no test reaches the upper tax bands.</li>
+</ul>
+</div>
+<h2 id="summary">Summary</h2>
+<ul>
+<li>Research is a loop: scope, read, fill the template, list the UNVERIFIED items, ask, compute golden payslips, build, compare.</li>
+<li>Rank sources: law, administration, official tools and data, professionals, press. The higher level wins; official files and APIs are sources a module can load.</li>
+<li>One template row per topic, with its source level, its Odoo target and a status. Run it forwards from the law, or backwards on an existing module to find gaps and risks.</li>
+<li>An UNVERIFIED item gets a default, stays visible wherever it is used, and is tied to a question with an owner.</li>
+<li>Expert questions fall into families (proration, deciding date, base, rounding), each with a default and a design consequence.</li>
+<li>Golden values come from an independent calculation that first reproduces official examples.</li>
+</ul>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:c10-kf">
+<p>SPF Finances (Belgian tax office), key formula from 1 January 2026 (n° 3: every amount rounded to the cent): <a href="https://www.minfin.fgov.be/myminfin-web/pages/public/fisconet/document/389035ca-432e-422b-859d-2d32fbdaa4cf">https://www.minfin.fgov.be/myminfin-web/pages/public/fisconet/document/389035ca-432e-422b-859d-2d32fbdaa4cf</a>.&#160;<a class="footnote-backref" href="#fnref:c10-kf" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:c10-hist">
+<p>SPF Finances, Annex III AR/CIR 92 version history: <a href="https://www.minfin.fgov.be/myminfin-web/pages/public/fisconet/document/439228c6-67bb-4e75-a9e1-4cabe4dc62ec">https://www.minfin.fgov.be/myminfin-web/pages/public/fisconet/document/439228c6-67bb-4e75-a9e1-4cabe4dc62ec</a>.&#160;<a class="footnote-backref" href="#fnref:c10-hist" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:c10-law">
+<p>Research notes <code>research/belgium_law.md</code>, sections 11 (UNVERIFIED items) and 12 (open questions).&#160;<a class="footnote-backref" href="#fnref:c10-law" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:c10-calc">
+<p>Independent calculator, <code>research/numbers_be_calc.md</code>, sections 2, 4 and 10.8.&#160;<a class="footnote-backref" href="#fnref:c10-calc" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+<li id="fn:c10-odoo">
+<p>Payslips computed by Odoo master on the demo database, <code>research/numbers_be.md</code>, sections 1 and 2.&#160;<a class="footnote-backref" href="#fnref:c10-odoo" title="Jump back to footnote 5 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></section><nav class='pager' aria-label='Previous and next chapter'><a class='pager-prev' rel='prev' href='chapter-09-what-varies-between-countries-and-what-doesnt.html'><small>Previous · Chapter 9</small><span>What varies between countries, and what doesn&#x27;t</span></a><a class='pager-next' rel='next' href='chapter-11-laws-that-change-over-time.html'><small>Next · Chapter 11</small><span>Laws that change over time</span></a></nav>
+</main>
+</div>
+<script src="js/site.js"></script>
+
+</body>
+</html>
